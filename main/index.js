@@ -1,8 +1,6 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
-const url = require('url')
-const path = require('path')
-
+require('dotenv').load();
 
 
 ipcMain.on('update-notify-value', function (event, arg) {
@@ -22,7 +20,7 @@ function createWindow () {
   });
 
 
-  win.loadURL('http://localhost:3000'); // <--- (3) Loading react
+  win.loadURL(process.env.ELECTRON_LOAD_URL || 'http://localhost:3000'); // <--- (3) Loading react
   //  win.loadURL(url.format({
   //   pathname: path.join(__dirname, '../src/TABS/main.html'),
   //   protocol: 'file:',
