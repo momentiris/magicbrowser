@@ -1,7 +1,7 @@
 
 
-export const UPDATE_USER = 'users:updateUser'
-export const SHOW_ERROR = 'users:showError'
+export const UPDATE_USER = 'users:updateUser';
+export const SHOW_ERROR = 'users:showError';
 
 export function updateUser(newUser) {
   return {
@@ -9,7 +9,7 @@ export function updateUser(newUser) {
     payload: {
       user: newUser
     }
-  }
+  };
 }
 
 export function showError() {
@@ -18,7 +18,7 @@ export function showError() {
     payload: {
       user: 'ERROR!'
     }
-  }
+  };
 }
 
 
