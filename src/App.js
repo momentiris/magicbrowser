@@ -3,12 +3,15 @@ import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { fetchPeople } from './actions/user-actions';
+import { bindActionCreators } from 'redux';
+
+import { createSelector } from 'reselect';
+
 const electron = window.electron;
 const { ipcRenderer } = electron;
-//
-// const TabGroup = require('electron-tabs');
-//
-// const dragula = require('dragula');
+
+
 ipcRenderer.send('update-notify-value', 'test');
 
 ipcRenderer.on('targetPriceVal', function (event, arg) {
@@ -18,69 +21,52 @@ ipcRenderer.on('targetPriceVal', function (event, arg) {
 
 class App extends Component {
   componentDidMount() {
-//     var tabGroup = new TabGroup({
-//     ready: function (tabGroup) {
-//         dragula([tabGroup.tabContainer], {
-//             direction: "horizontal"
-//         });
-//     }
-// });
-//     let tab = tabGroup.addTab({
-//         title: "Electron",
-//         src: "http://electron.atom.io",
-//         visible: true
-//     });
-//     let tab2 = tabGroup.addTab({
-//         title: "Electron",
-//         src: "http://electron.atom.io",
-//         visible: true
-//     });
-//     let tab4 = tabGroup.addTab({
-//         title: 'Home',
-//         src: './app.html',
-//         webviewAttributes: {
-//             'nodeintegration': true
-//         },
-//         icon: 'fa fa-home',
-//         visible: true,
-//         closable: false,
-//         active: true,
-//         ready: tab => {
-//             // Open dev tools for webview
-//             let webview = tab.webview;
-//             if (!!webview) {
-//                 webview.addEventListener('dom-ready', () => {
-//                     webview.openDevTools();
-//                 })
-//             }
-//         }
-//     });
-    // require('./TABS/main.js');
+
   }
 
+
+
+  clickHandler = () => {
+    this.props.fetchPeople();
+  };
+
   render() {
-
     return (
-
       <div className="App">
+        <button onClick={this.clickHandler}></button>
+
+
 
         <Link to="/test">route me!</Link>
-      
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    products: state.products,
-    user: state.user,
-    userPlusProps : `${state.user} ${props.randomProps}`
-  };
+const userSelector = createSelector(
+  state => state.people,
+  people => people
+);
+
+const mapStateToProps = createSelector(
+  userSelector,
+  people => ({
+    people,
+  })
+);
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    fetchPeople: fetchPeople,
+  }, dispatch);
 };
 
-const mapActionsToProps = {
-
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  return Object.assign({}, ownProps, {
+    people: stateProps.people,
+    fetchPeople: () => dispatchProps.fetchPeople()
+  });
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(App);
+
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(App);
