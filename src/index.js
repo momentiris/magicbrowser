@@ -5,7 +5,7 @@ import './index.css';
 import '../node_modules/electron-tabs/electron-tabs.css';
 import '../node_modules/dragula/dist/dragula.css';
 
-import { store, persistor } from './store';
+import { store, persistor } from './state/store';
 import Root from './Root';
 
 import * as serviceWorker from './serviceWorker';

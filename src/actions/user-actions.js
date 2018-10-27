@@ -22,7 +22,7 @@ export function showError() {
 
 export const fetchPeople = () => {
   return dispatch => {
-    fetch('https://randomuer.me/api/?resus=5')
+    fetch('https://randomuser.me/api/?results=5')
       .then(res => {
         return res.json();
       })

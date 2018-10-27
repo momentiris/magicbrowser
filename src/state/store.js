@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import productsReducer from './reducers/productsReducer';
-import userReducer from './reducers/userReducer';
+import productsReducer from '../reducers/productsReducer';
+import userReducer from '../reducers/userReducer';
 import logger from 'redux-logger';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -23,8 +23,6 @@ const allStoreEnhancers = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-export const store = createStore(persistedReducer,{
-  people: [{ name: 'placeholder'}],
-}, allStoreEnhancers);
+export const store = createStore(persistedReducer, allStoreEnhancers);
 
 export const persistor = persistStore(store);

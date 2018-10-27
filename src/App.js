@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,  } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,10 @@ import { bindActionCreators } from 'redux';
 
 import { createSelector } from 'reselect';
 
+import TabContainer from './TabContainer/TabContainer';
 const electron = window.electron;
 const { ipcRenderer } = electron;
+
 
 
 ipcRenderer.send('update-notify-value', 'test');
@@ -25,7 +27,9 @@ class App extends Component {
   }
 
 
-
+  handleWebview = () => {
+    console.log('hej');
+  }
   clickHandler = () => {
     this.props.fetchPeople();
   };
@@ -33,8 +37,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <TabContainer></TabContainer>
         <button onClick={this.clickHandler}></button>
-
+        <webview ref={this.myRef}  source="https://www.tutorialspoint.com/" style={{width: 400, height: 400}}/>
 
 
         <Link to="/test">route me!</Link>

@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 require('dotenv').load();
 
@@ -12,6 +12,7 @@ function createWindow () {
   console.log('log definately working');
 
   win = new BrowserWindow({
+    titleBarStyle: 'hiddenInset',
     width: 1000, height: 700, transparent: false,
     webPreferences: { // <--- (1) Additional preferences
       nodeIntegration: false,
@@ -27,7 +28,7 @@ function createWindow () {
   //   slashes: true
   // }))
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
 
   win.on('closed', () => {
@@ -51,6 +52,7 @@ app.on('ready', () => {
 
   createWindow();
 
+
 });
 
 app.on('window-all-closed', () => {
@@ -64,3 +66,21 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+function setMainMenu() {
+  const template = [
+    {
+      label: 'Filter',
+      submenu: [
+        {
+          label: 'Hello',
+          accelerator: 'Shift+CmdOrCtrl+H',
+          click() {
+              console.log('Oh, hi there!')
+          }
+        }
+      ]
+    }
+  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
