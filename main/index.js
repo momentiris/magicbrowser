@@ -1,6 +1,8 @@
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 require('dotenv').load();
+// const url = require('url');
+// const path = require('path');
 
 
 ipcMain.on('update-notify-value', function (event, arg) {
@@ -15,21 +17,12 @@ function createWindow () {
     titleBarStyle: 'hiddenInset',
     width: 1000, height: 700, transparent: false,
     webPreferences: { // <--- (1) Additional preferences
-      nodeIntegration: false,
+      nodeIntegration: true,
       preload: __dirname + '/preload.js' // <--- (2) Preload script
     }
   });
 
-
   win.loadURL(process.env.ELECTRON_LOAD_URL || 'http://localhost:3000'); // <--- (3) Loading react
-  //  win.loadURL(url.format({
-  //   pathname: path.join(__dirname, '../src/TABS/main.html'),
-  //   protocol: 'file:',
-  //   slashes: true
-  // }))
-
-  // win.webContents.openDevTools();
-
 
   win.on('closed', () => {
     win = null;

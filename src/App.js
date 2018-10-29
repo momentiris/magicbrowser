@@ -8,10 +8,13 @@ import { bindActionCreators } from 'redux';
 
 import { createSelector } from 'reselect';
 
-import TabContainer from './TabContainer/TabContainer';
+
+import TabHandler from './TabHandler/TabHandler';
 const electron = window.electron;
 const { ipcRenderer } = electron;
+const TabGroup = require('electron-tabs');
 
+const dragula = require('dragula');
 
 
 ipcRenderer.send('update-notify-value', 'test');
@@ -37,12 +40,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TabContainer></TabContainer>
-        <button onClick={this.clickHandler}></button>
-        <webview ref={this.myRef}  source="https://www.tutorialspoint.com/" style={{width: 400, height: 400}}/>
+        <TabHandler/>
 
+
+        <div className="etabs-views"></div>
+        <button onClick={this.clickHandler}></button>
 
         <Link to="/test">route me!</Link>
+
       </div>
     );
   }
