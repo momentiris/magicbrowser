@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import UrlBar from './urlbar';
 
 const KeyCodes = require('../common/keyCodes');
 
-
 class NavHandler extends Component {
-
   constructor (props) {
     super(props);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   state = {
@@ -16,7 +14,7 @@ class NavHandler extends Component {
   };
 
   onKeyDown = (e) => {
-    let location = this.state.searchValue;
+    const location = this.state.searchValue;
     switch (e.keyCode) {
     case KeyCodes.SHIFT:
       break;
@@ -27,15 +25,18 @@ class NavHandler extends Component {
     }
   }
 
-  searchQuery = async (query) => {
-    await this.setState({searchValue: query});
+  handleChange = (e) => {
+    this.setState({searchValue: e.target.value});
+    console.log(e.target.value);
   };
 
   render() {
     return (
       <div>
-        <UrlBar onKeyDown={this.onKeyDown} handlesearch={this.searchQuery} query={this.state.searchValue}/>
-        <button onKeyDown={this.onKeyDown}>GO</button>
+        <input
+          onKeyDown={this.onKeyDown}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
