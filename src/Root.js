@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 import App from './App';
 
 import { PersistGate } from 'redux-persist/integration/react';
+const Workspace = () => (
+  <div>workspace</div>
+);
 
 
 const Root = ({ store, persistor }) => (
@@ -11,7 +14,9 @@ const Root = ({ store, persistor }) => (
     <PersistGate loading={null} persistor={persistor}>
       <Router>
         <Fragment>
-          <Route path="/" component={App} />
+          <Route exact path="/" component={App} />
+          <Route exact path="/workspace" component={Workspace} />
+
         </Fragment>
       </Router>
     </PersistGate>

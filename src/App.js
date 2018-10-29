@@ -11,17 +11,18 @@ import { createSelector } from 'reselect';
 
 import TabHandler from './TabHandler/TabHandler';
 const electron = window.electron;
-const { ipcRenderer } = electron;
+// const { ipcRenderer } = electron;
+const ipcRenderer = electron.ipcRenderer;
 const TabGroup = require('electron-tabs');
 
 const dragula = require('dragula');
 
 
-ipcRenderer.send('update-notify-value', 'test');
-
-ipcRenderer.on('targetPriceVal', function (event, arg) {
-  console.log(arg);
-});
+// ipcRenderer.send('update-notify-value', 'test');
+//
+// ipcRenderer.on('targetPriceVal', function (event, arg) {
+//   console.log(arg);
+// });
 
 
 class App extends Component {
