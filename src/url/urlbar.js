@@ -5,13 +5,13 @@ class UrlBar extends Component {
 
 
 handleChange = (e) => {
-  this.props.handleSearch(e.target.value);
+  this.props.handlesearch(e.target.value);
 };
 
 render() {
   return (
     <div>
-      <input onKeyUp={this.handleChange} type="text" />
+      <input {...this.props} type="text" />
     </div>
   );
 }

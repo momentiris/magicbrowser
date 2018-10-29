@@ -6,8 +6,11 @@ import TabHandler from './TabHandler/TabHandler';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { fetchPeople } from './actions/user-actions';
+import NavHandler from './url/navigationHandler';
+
 const electron = window.electron;
 const { ipcRenderer } = electron;
+
 
 
 // ipcRenderer.send('update-notify-value', 'test');
@@ -34,6 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <TabHandler/>
+        <NavHandler/>
 
 
         <div className="etabs-views"></div>

@@ -34,7 +34,7 @@ class NavHandler extends Component {
   render() {
     return (
       <div>
-        <UrlBar onKeyDown={this.onKeyDown} handleSearch={this.searchQuery} query={this.state.searchValue}/>
+        <UrlBar onKeyDown={this.onKeyDown} handlesearch={this.searchQuery} query={this.state.searchValue}/>
         <button onKeyDown={this.onKeyDown}>GO</button>
       </div>
     );
