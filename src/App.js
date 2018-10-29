@@ -2,12 +2,12 @@ import React, { Component,  } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import TabHandler from './TabHandler/TabHandler';
+import { createSelector } from 'reselect';
+import { bindActionCreators } from 'redux';
+import { fetchPeople } from './actions/user-actions';
 const electron = window.electron;
-// const { ipcRenderer } = electron;
-const ipcRenderer = electron.ipcRenderer;
-const TabGroup = require('electron-tabs');
-
-const dragula = require('dragula');
+const { ipcRenderer } = electron;
 
 
 // ipcRenderer.send('update-notify-value', 'test');
