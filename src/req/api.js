@@ -5,4 +5,4 @@ export const req = () => {
   return axios.get('https://randomuser.me/api/')
 
 
-}
+};

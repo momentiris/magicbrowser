@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 const electron = window.electron;
 const { ipcRenderer } = electron;
 //
@@ -61,11 +60,8 @@ class App extends Component {
   render() {
 
     return (
-
       <div className="App">
-
         <Link to="/test">route me!</Link>
-      
       </div>
     );
   }
@@ -75,6 +71,7 @@ const mapStateToProps = (state, props) => {
   return {
     products: state.products,
     user: state.user,
+    api: state.results,
     userPlusProps : `${state.user} ${props.randomProps}`
   };
 };

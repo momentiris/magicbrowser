@@ -31,7 +31,7 @@ export const store = createStore(
   {
     products: [{ name: 'iPhone'}],
     user: 'Andreas',
-    api: []
+    api: [{}]
   },
   allStoreEnhancers
 );
