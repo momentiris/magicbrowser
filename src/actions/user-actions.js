@@ -1,40 +1,35 @@
 
 
-export const UPDATE_USER = 'users:updateUser';
+export const UPDATE_PEOPLE = 'users:updatePeople';
 export const SHOW_ERROR = 'users:showError';
 
-export function updateUser(newUser) {
+export const FETCHING_USERS = 'FETCHING_USERS';
+
+export function updatePeople(people) {
   return {
-    type: UPDATE_USER,
+    type: UPDATE_PEOPLE,
     payload: {
-      user: newUser
+      people: people
     }
   };
 }
 
 export function showError() {
   return {
-    type: SHOW_ERROR,
-    payload: {
-      user: 'ERROR!'
-    }
+    type: SHOW_ERROR
   };
 }
 
-
-// export function apiRequest() {
-//   return dispatch => {
-//
-//     // $.ajax({
-//     //   url: 'http://google.com',
-//     //   success() {
-//     //     console.log('Success!')
-//     //
-//     //   },
-//       // error() {
-//       //   console.log('Error');
-//       //   dispatch(showError())
-//       // }
-//     })
-//   }
-// }
+export const fetchPeople = () => {
+  return dispatch => {
+    fetch('https://randomuser.me/api/?results=5')
+      .then(res => {
+        return res.json();
+      })
+      .then(({ results }) => dispatch(updatePeople(results)))
+      .catch(err => {
+        console.log(err);
+        dispatch(showError());
+      });
+  };
+};
