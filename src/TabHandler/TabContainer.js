@@ -8,6 +8,7 @@ const TabContainer = ({ tabs, removeSelectedTab, addOneTab }) => {
       {
         tabs && tabs.map((tab, i) => <Tab key={i} removeSelectedTab={() => removeSelectedTab(i)} />)
       }
+      <button onClick={addOneTab}>Add one tab</button>
     </Mainwrap>
   );
 

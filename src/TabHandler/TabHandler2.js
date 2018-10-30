@@ -4,13 +4,11 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
 
-
 import { addOneTab, removeSelectedTab } from './actions';
 
 class TabHandler2 extends Component {
   constructor(props) {
     super(props);
-
   }
 
   componentDidMount() {
@@ -36,19 +34,15 @@ class TabHandler2 extends Component {
           removeSelectedTab={this.removeSelectedTab}
           addOneTab={this.addOneTab}
         />
-        <button onClick={this.addOneTab}>Add one tab</button>
-
       </Fragment>
     );
   }
-
 }
 
 const tabsSelector = createSelector(
   state => state.tabs,
   tabs => tabs
 );
-
 
 const mapStateToProps = createSelector(
   tabsSelector,
