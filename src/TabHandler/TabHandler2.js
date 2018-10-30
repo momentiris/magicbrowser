@@ -26,7 +26,6 @@ class TabHandler2 extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
   }
 
   addTab = () => {

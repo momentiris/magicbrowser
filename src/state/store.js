@@ -1,11 +1,14 @@
+// Redux
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+
+// Reducers
 import productsReducer from '../reducers/productsReducer';
 import userReducer from '../reducers/userReducer';
-
+import searchQueryReducer from '../url/reducer';
 import tabReducer from '../TabHandler/reducers';
 
 const persistConfig = {
@@ -15,7 +18,8 @@ const persistConfig = {
 
 const allReducers = combineReducers({
   people: userReducer,
-  tabs: tabReducer
+  tabs: tabReducer,
+  searchQuery: searchQueryReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

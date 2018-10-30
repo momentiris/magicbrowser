@@ -11,8 +11,8 @@ class GuestInstanceSpawner extends Component {
   }
 
 
+
   componentDidMount() {
-    console.log(this.props.tabs[1]);
   }
 
   render() {

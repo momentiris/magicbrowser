@@ -38,9 +38,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TabHandler2></TabHandler2>
+        <TabHandler2>asdads</TabHandler2>
+        <NavHandler />
         <GuestInstance></GuestInstance>
-
       </div>
     );
   }

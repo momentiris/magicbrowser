@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import UrlBarSuggestions from './urlBarSuggestions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createSelector } from 'reselect';
+import { addSearchQuery } from './actions';
 
 const KeyCodes = require('../common/keyCodes');
 
@@ -10,8 +15,8 @@ class NavHandler extends Component {
   }
 
   state = {
-    searchValue: '',
-  };
+    searchValue: ''
+  }
 
   onKeyDown = (e) => {
     const location = this.state.searchValue;
@@ -20,7 +25,7 @@ class NavHandler extends Component {
       break;
     case KeyCodes.ENTER:
       e.preventDefault();
-      this.setState({searchValue: location});
+      this.props.addSearchQuery(location);
       console.log(`www.${location}.com`);
     }
   }
@@ -30,6 +35,10 @@ class NavHandler extends Component {
     console.log(e.target.value);
   };
 
+  addQuery = (searchValue) => {
+    this.props.addSearchQuery(searchValue);
+  }
+
   render() {
     return (
       <div>
@@ -37,9 +46,38 @@ class NavHandler extends Component {
           onKeyDown={this.onKeyDown}
           onChange={this.handleChange}
         />
+        <UrlBarSuggestions />
+        <button onClick={this.addQuery}>add</button>
       </div>
     );
   }
 }
 
-export default NavHandler;
+
+const searchQuerySelector = createSelector(
+  state => state.searchQuery,
+  searchQuery => searchQuery
+);
+
+
+const mapStateToProps = createSelector(
+  searchQuerySelector,
+  searchQuery => ({
+    searchQuery
+  })
+);
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    addSearchQuery: addSearchQuery,
+  }, dispatch);
+};
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  return Object.assign({}, ownProps, {
+    searchQuery: stateProps.searchQuery,
+    addSearchQuery: arg => dispatchProps.addSearchQuery(arg)
+  });
+};
+
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(NavHandler);
