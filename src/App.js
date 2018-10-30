@@ -2,11 +2,13 @@ import React, { Component,  } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import TabHandler from './TabHandler/TabHandler';
+import TabHandler2 from './TabHandler/TabHandler2';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { fetchPeople } from './actions/user-actions';
 import NavHandler from './url/navigationHandler';
+
+import Webview from './GuestInstance/Webview';
 
 const electron = window.electron;
 const { ipcRenderer } = electron;
@@ -36,14 +38,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TabHandler/>
-        <NavHandler/>
+        <TabHandler2></TabHandler2>
 
 
-        <div className="etabs-views"></div>
-        <button onClick={this.clickHandler}></button>
 
-        <Link to="/test">route me!</Link>
+
 
       </div>
     );

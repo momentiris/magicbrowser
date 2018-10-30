@@ -1,4 +1,5 @@
 import { UPDATE_PEOPLE, SHOW_ERROR } from '../actions/user-actions';
+import { createReducer } from '../state/utils/createReducer';
 
 export default function userReducer(state = [], { type, payload }) {
   switch (type) {
