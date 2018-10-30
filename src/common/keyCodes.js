@@ -17,6 +17,6 @@ const KeyCodes = {
   NUMPAD_MINUS: 109,
   TAB: 9,
   PRINT_SCREEN: 44
-}
+};
 
-module.exports = KeyCodes
+module.exports = KeyCodes;
