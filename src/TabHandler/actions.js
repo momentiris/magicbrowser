@@ -1,11 +1,19 @@
-import { ADD_ONE_TAB, REMOVE_ONE_TAB } from './types';
+import { ADD_ONE_TAB, REMOVE_SELECTED_TAB } from './types';
 
-export function addOneTab(tabs) {
-  console.log('action: ' + ADD_ONE_TAB);
+export const addOneTab = tab => {
   return {
     type: ADD_ONE_TAB,
     payload: {
-      tabs: tabs
+      tabs: tab
     }
   };
-}
+};
+
+export const removeSelectedTab = id => {
+  return {
+    type: REMOVE_ONE_TAB,
+    payload: {
+      id: id
+    }
+  };
+};

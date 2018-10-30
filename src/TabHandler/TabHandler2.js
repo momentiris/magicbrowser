@@ -2,43 +2,37 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
+import TabContainer from './TabContainer';
 
 
-import { Mainwrap } from './styles';
 import { addOneTab } from './actions';
 
 class TabHandler2 extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tabs: [
-        {
-          src: 'http://google.se'
-        },
-        {
-          src: 'http://google.se'
-        },
-        {
-          src: 'http://google.se'
-        },
-      ]
-    };
+
   }
 
   componentDidMount() {
-    console.log(this.props);
+
   }
 
-  addTab = () => {
+  addOneTab = () => {
     console.log('add tab please');
     this.props.addOneTab(1);
   }
 
+  removeSelectedTab = id => {
+    this.props.removeSelectedTab(id);
+  }
+
   render() {
+    const { tabs } = this.props;
     return (
       <Fragment>
-        <Mainwrap></Mainwrap>
-        <button onClick={this.addTab}>Add tab</button>
+        <TabContainer tabs={tabs}></TabContainer>
+        <button onClick={this.addOneTab}>Add one tab</button>
+
       </Fragment>
     );
   }
