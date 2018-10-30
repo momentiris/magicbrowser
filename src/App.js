@@ -2,7 +2,7 @@ import React, { Component,  } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import TabHandler2 from './TabHandler/TabHandler2';
+import TabHandler from './TabHandler/TabHandler';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { fetchPeople } from './actions/user-actions';
@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TabHandler2>asdads</TabHandler2>
+        <TabHandler>asdads</TabHandler>
         <NavHandler />
         <GuestInstance></GuestInstance>
       </div>

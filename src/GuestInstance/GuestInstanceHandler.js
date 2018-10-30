@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 
-class GuestInstanceSpawner extends Component {
+class GuestInstanceHandler extends Component {
   constructor(props){
     super(props);
 
@@ -45,4 +45,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   });
 };
 
-export default connect(mapStateToProps, null, mergeProps)(GuestInstanceSpawner);
+export default connect(mapStateToProps, null, mergeProps)(GuestInstanceHandler);
