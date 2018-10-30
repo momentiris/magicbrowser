@@ -12,10 +12,12 @@ class NavHandler extends Component {
     super(props);
     this.onKeyDown = this.onKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   state = {
-    searchValue: ''
+    searchValue: '',
+    data: false,
   }
 
   onKeyDown = (e) => {
@@ -27,7 +29,12 @@ class NavHandler extends Component {
       e.preventDefault();
       this.props.addSearchQuery(location);
       console.log(`www.${location}.com`);
+      this.setState({data: !this.state.data});
     }
+  }
+
+  onClick = () => {
+    this.setState({data: !this.state.data });
   }
 
   handleChange = (e) => {
@@ -39,10 +46,14 @@ class NavHandler extends Component {
     return (
       <div>
         <input
+          onClick={this.onClick}
           onKeyDown={this.onKeyDown}
           onChange={this.handleChange}
         />
-        <UrlBarSuggestions />
+        {this.state.data ?
+          <UrlBarSuggestions />
+          : null
+        }
       </div>
     );
   }
