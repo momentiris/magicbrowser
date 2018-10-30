@@ -35,10 +35,6 @@ class NavHandler extends Component {
     console.log(e.target.value);
   };
 
-  addQuery = (searchValue) => {
-    this.props.addSearchQuery(searchValue);
-  }
-
   render() {
     return (
       <div>
@@ -47,7 +43,6 @@ class NavHandler extends Component {
           onChange={this.handleChange}
         />
         <UrlBarSuggestions />
-        <button onClick={this.addQuery}>add</button>
       </div>
     );
   }

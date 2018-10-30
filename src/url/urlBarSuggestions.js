@@ -10,17 +10,26 @@ class UrlBarSuggestions extends Component {
     console.log(this.props);
   }
 
+  generateAllItems = () => {
+    const items = this.props.searchQuery;
+    const addToItems = (items) => {
+      if (items.length > 0) {
+        items.push(<li>
+          {items}
+        </li>);
+      }
+    };
+    return items;
+  }
+
   render() {
     const items = this.props.searchQuery;
-    
+
     return (
       <div>
         <ul>
           {
-            this.props.searchQuery
-              ?
-              <li>{items}</li>
-              : ''
+            this.generateAllItems()
           }
         </ul>
       </div>
@@ -31,7 +40,6 @@ const searchQuerySelector = createSelector(
   state => state.searchQuery,
   searchQuery => searchQuery
 );
-
 
 const mapStateToProps = createSelector(
   searchQuerySelector,
