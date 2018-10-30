@@ -7,7 +7,7 @@ import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { fetchPeople } from './actions/user-actions';
 import NavHandler from './url/navigationHandler';
-
+import GuestInstance from'./GuestInstance/GuestInstanceHandler';
 import Webview from './GuestInstance/Webview';
 
 const electron = window.electron;
@@ -39,10 +39,7 @@ class App extends Component {
     return (
       <div className="App">
         <TabHandler2></TabHandler2>
-
-
-
-
+        <GuestInstance></GuestInstance>
 
       </div>
     );
