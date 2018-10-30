@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
 
 
-import { addOneTab } from './actions';
+import { addOneTab, removeSelectedTab } from './actions';
 
 class TabHandler2 extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class TabHandler2 extends Component {
   }
 
   removeSelectedTab = id => {
+    console.log('remove tab please' + id);
     this.props.removeSelectedTab(id);
   }
 
@@ -30,7 +31,11 @@ class TabHandler2 extends Component {
     const { tabs } = this.props;
     return (
       <Fragment>
-        <TabContainer tabs={tabs}></TabContainer>
+        <TabContainer
+          tabs={tabs}
+          removeSelectedTab={this.removeSelectedTab}
+          addOneTab={this.addOneTab}
+        />
         <button onClick={this.addOneTab}>Add one tab</button>
 
       </Fragment>
@@ -55,13 +60,15 @@ const mapStateToProps = createSelector(
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     addOneTab: addOneTab,
+    removeSelectedTab: removeSelectedTab
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     tabs: stateProps.tabs,
-    addOneTab: arg => dispatchProps.addOneTab(arg)
+    addOneTab: arg => dispatchProps.addOneTab(arg),
+    removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg)
   });
 };
 

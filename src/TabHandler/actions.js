@@ -4,14 +4,14 @@ export const addOneTab = tab => {
   return {
     type: ADD_ONE_TAB,
     payload: {
-      tabs: tab
+      tab: tab
     }
   };
 };
 
 export const removeSelectedTab = id => {
   return {
-    type: REMOVE_ONE_TAB,
+    type: REMOVE_SELECTED_TAB,
     payload: {
       id: id
     }

@@ -15,7 +15,7 @@ function createWindow () {
 
   win = new BrowserWindow({
     titleBarStyle: 'hiddenInset',
-    width: 1000, height: 700, transparent: false,
+    width: 1200, height: 800, transparent: false,
     webPreferences: { // <--- (1) Additional preferences
       nodeIntegration: true,
       preload: __dirname + '/preload.js' // <--- (2) Preload script

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Tab from './Tab';
 import { Mainwrap } from './styles';
 
-const TabContainer = ({ tabs }, ...rest) => {
+const TabContainer = ({ tabs, removeSelectedTab, addOneTab }) => {
   return (
-    <Mainwrap {...rest}>
+    <Mainwrap>
       {
-        tabs && tabs.map((tab, i) => <Tab key={i}/>)
+        tabs && tabs.map((tab, i) => <Tab key={i} removeSelectedTab={() => removeSelectedTab(i)} />)
       }
     </Mainwrap>
   );

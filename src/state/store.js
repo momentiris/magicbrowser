@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import productsReducer from '../reducers/productsReducer';
 import userReducer from '../reducers/userReducer';
 
-import tabReducer from '../TabHandler/reducers';
+import { tabReducer } from '../TabHandler/reducers';
 
 const persistConfig = {
   key: 'root',

@@ -11,9 +11,30 @@ export const Mainwrap = styled.section`
   align-items: flex-end;
 `;
 
-export const SingleTab = styled.div`
-  width: 75px;
+export const SingleTabContainer = styled.div`
+  width: 200px;
+  height: 30px;
+  border: 1px solid black;
+  display: flex;
+  overflow-x: hidden;
+  align-items: center;
+
+  justify-content: space-between;
+`;
+
+export const TabTitle = styled.span`
+
+`;
+
+export const FavIcon = styled.img`
+  display: inline;
+  min-width: 25px;
   height: 25px;
   border: 1px solid black;
-  display: inline-block;
+`;
+
+export const CloseButton = styled.button`
+  min-width: 27px;
+  height: 27px;
+  border: 1px solid black;
 `;
