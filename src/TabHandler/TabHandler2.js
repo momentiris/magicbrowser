@@ -9,9 +9,13 @@ import { addOneTab, removeSelectedTab } from './actions';
 class TabHandler2 extends Component {
   constructor(props) {
     super(props);
+    this.myRef = React.createRef();
   }
 
   componentDidMount() {
+    this.myRef.current.addEventListener('will-navigate', (e) => {
+      console.log(e);
+    });
 
   }
 
@@ -34,6 +38,7 @@ class TabHandler2 extends Component {
           removeSelectedTab={this.removeSelectedTab}
           addOneTab={this.addOneTab}
         />
+        <webview ref={this.myRef}src="https://www.google.se" style={{height: '100%', width: '100%'}}/>
       </Fragment>
     );
   }
