@@ -16,17 +16,17 @@ class TabHandler extends Component {
 
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
 
   }
 
   addOneTab = (e) => {
-    console.log('add tab please');
+    // console.log('add tab please');
     this.props.addOneTab({src: ''});
   }
 
   removeSelectedTab = id => {
-    console.log('remove tab please' + id);
+    // console.log('remove tab please' + id);
     this.props.removeSelectedTab(id);
   }
 

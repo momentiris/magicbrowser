@@ -34,9 +34,6 @@ class GuestInstanceHandler extends Component {
     });
   }
 
-  onDomReady = e => {
-    console.log(e);
-  }
 
   render() {
     const tabs = this.props.tabs;
@@ -47,6 +44,7 @@ class GuestInstanceHandler extends Component {
     );
   }
 }
+
 
 const tabsSelector = createSelector(
   state => state.tabs,

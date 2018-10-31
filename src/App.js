@@ -7,9 +7,9 @@ import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { fetchPeople } from './actions/user-actions';
 import NavHandler from './url/navigationHandler';
-import GuestInstance from'./GuestInstance/GuestInstanceHandler';
+// import GuestInstance from'./GuestInstance/GuestInstanceHandler';
 import Webview from './GuestInstance/Webview';
-
+import WorkspaceHandler from './Workspace/WorkspaceHandler';
 const electron = window.electron;
 const { ipcRenderer } = electron;
 
@@ -38,9 +38,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TabHandler>asdads</TabHandler>
         <NavHandler />
-        <GuestInstance></GuestInstance>
+        <WorkspaceHandler></WorkspaceHandler>
+
       </div>
     );
   }
