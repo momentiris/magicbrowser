@@ -3,23 +3,42 @@ import Webview from './Webview';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
+import { webviewEvents } from './webviewEvents';
+
 
 class GuestInstanceHandler extends Component {
-  constructor(props){
+
+  constructor(props) {
     super(props);
 
   }
 
 
+  eventHandlers = {
+    onDomReady: e => {
+      console.log(e);
+    },
+    onWillNavigate: e => {
+      console.log(e);
+    }
+  }
 
-  componentDidMount() {
+  addEvents = webview => {
+    Object.entries(webviewEvents).forEach(inst => {
+      webview.addEventListener(inst[0], this.eventHandlers[inst[1]]);
+    });
+  }
+
+  onDomReady = e => {
+    console.log(e);
   }
 
   render() {
     const tabs = this.props.tabs;
     return (
       <div>
-        {tabs.map((tab, i) => <Webview key={i}> {tab} </Webview>)}
+        <Webview addEvents={this.addEvents} src="http://google.se" style={{width: '100%', height: '100%'}}></Webview>
+
       </div>
     );
   }
