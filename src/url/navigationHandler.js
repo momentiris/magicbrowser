@@ -20,6 +20,11 @@ class NavHandler extends Component {
     data: false,
   }
 
+  //Change location name, remove https from visible bar
+  //const hasTitle = location !== location.replace(/^https?:\/\//, '');
+
+
+
   onKeyDown = (e) => {
     const location = this.state.searchValue;
     switch (e.keyCode) {
@@ -32,7 +37,8 @@ class NavHandler extends Component {
       this.setState({data: !this.state.data});
     }
   }
-
+  
+  // TODO: remove local state and apply redux state on the suggestionBar
   onClick = () => {
     this.setState({data: !this.state.data });
   }
@@ -40,7 +46,7 @@ class NavHandler extends Component {
   handleChange = (e) => {
     this.setState({searchValue: e.target.value});
     console.log(e.target.value);
-  };
+  }
 
   render() {
     return (
