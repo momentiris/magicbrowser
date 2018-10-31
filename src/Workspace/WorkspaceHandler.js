@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import GuestInstance from'../GuestInstance/GuestInstanceHandler';
 import TabHandler from '../TabHandler/TabHandler';
+import { addWorkspace } from './actions';
 
 class WorkspaceHandler extends Component {
   constructor(props) {
@@ -11,9 +12,11 @@ class WorkspaceHandler extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    console.log(this.props.workspaces);
+    this.props.addWorkspace('test');
   }
   render() {
+
     return (
       <Fragment>
         <TabHandler></TabHandler>
@@ -23,29 +26,35 @@ class WorkspaceHandler extends Component {
   }
 
 }
-
+// const tabsSelector = createSelector(
+//   state => state.tabs,
+//   tabs => tabs,
+// );
 const workspaceSelector = createSelector(
   state => state.workspaces,
   workspaces => workspaces,
 );
 
-
 const mapStateToProps = createSelector(
   workspaceSelector,
+
   workspaces => ({
     workspaces
-  })
+  }),
 );
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     switchWorkspaces: () => console.log('switchWorkspaces inside mapactionstoprops'),
+    addWorkspace: addWorkspace
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
   return Object.assign({}, ownProps, {
     workspaces: stateProps.workspaces,
+    addWorkspace: arg => dispatchProps.addWorkspace(arg),
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
   });
 };

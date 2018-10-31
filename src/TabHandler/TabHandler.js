@@ -34,11 +34,7 @@ class TabHandler extends Component {
     const { tabs } = this.props;
     return (
       <Fragment>
-        <TabContainer
-          tabs={tabs}
-          removeSelectedTab={this.removeSelectedTab}
-          addOneTab={this.addOneTab}
-        />
+      
 
       </Fragment>
     );

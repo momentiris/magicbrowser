@@ -6,6 +6,8 @@ import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab } from '../TabHandler/actions';
 
+
+
 class GuestInstanceHandler extends Component {
 
   constructor(props) {
@@ -39,7 +41,6 @@ class GuestInstanceHandler extends Component {
     const tabs = this.props.tabs;
     return (
       <div>
-        {tabs.map((tab, i) => <Webview key={i} addEvents={this.addEvents} src="http://google.se" style={{width: '100%', height: '100%'}}></Webview>)}
       </div>
     );
   }
