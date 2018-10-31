@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
-
 import { addOneTab, removeSelectedTab } from './actions';
+
+// Common
+const KeyCodes = require('../common/keyCodes');
 
 class TabHandler extends Component {
   constructor(props) {
@@ -12,14 +14,15 @@ class TabHandler extends Component {
     this.myRef = React.createRef();
   }
 
-  componentDidMount() {
 
+  componentDidMount() {
+    console.log(this.props);
 
   }
 
-  addOneTab = () => {
+  addOneTab = (e) => {
     console.log('add tab please');
-    this.props.addOneTab(1);
+    this.props.addOneTab({src: ''});
   }
 
   removeSelectedTab = id => {

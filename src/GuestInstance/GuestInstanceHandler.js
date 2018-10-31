@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
-
+import { addOneTab } from '../TabHandler/actions';
 
 class GuestInstanceHandler extends Component {
 
@@ -13,13 +13,18 @@ class GuestInstanceHandler extends Component {
 
   }
 
+  componentDidMount() {
+    //console.log(this.props.addOneTab);
+  }
+
 
   eventHandlers = {
     onDomReady: e => {
-      console.log(e);
+      //console.log(e);
     },
     onWillNavigate: e => {
-      console.log(e);
+      //console.log(e);
+      this.props.addOneTab({src: e.url});
     }
   }
 
@@ -37,12 +42,10 @@ class GuestInstanceHandler extends Component {
     const tabs = this.props.tabs;
     return (
       <div>
-        <Webview addEvents={this.addEvents} src="http://google.se" style={{width: '100%', height: '100%'}}></Webview>
-
+        {tabs.map((tab, i) => <Webview key={i} addEvents={this.addEvents} src="http://google.se" style={{width: '100%', height: '100%'}}></Webview>)}
       </div>
     );
   }
-
 }
 
 const tabsSelector = createSelector(
@@ -58,10 +61,17 @@ const mapStateToProps = createSelector(
   })
 );
 
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    addOneTab: addOneTab,
+  }, dispatch);
+};
+
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     tabs: stateProps.tabs,
+    addOneTab: arg => dispatchProps.addOneTab(arg),
   });
 };
 
-export default connect(mapStateToProps, null, mergeProps)(GuestInstanceHandler);
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(GuestInstanceHandler);
