@@ -1,12 +1,5 @@
-import { ADD_WORKSPACE, SWITCH_WORKSPACE } from './types';
+import { ADD_WORKSPACE, SWITCH_WORKSPACES } from './types';
 
-const instantiateNewWorkspace = name => {
-  return {
-    [name]: {
-      tabs: [],
-    }
-  };
-};
 
 export const addWorkspace = (workspace) => {
   return (dispatch, getState) => {
@@ -16,11 +9,10 @@ export const addWorkspace = (workspace) => {
     }, getState);
   };
 };
-export const saveWorkspace = workspace => {
+
+export const switchWorkspaces = workspace => {
   return {
-    type: ADD_WORKSPACE,
-    payload: {
-      workspace: workspace
-    }
+    type: SWITCH_WORKSPACES,
+    payload: workspace
   };
 };

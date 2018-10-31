@@ -1,5 +1,0 @@
-<TabContainer
-  tabs={tabs}
-  removeSelectedTab={this.removeSelectedTab}
-  addOneTab={this.addOneTab}
-/>

@@ -9,23 +9,16 @@ import { addOneTab } from '../TabHandler/actions';
 
 
 class GuestInstanceHandler extends Component {
-
   constructor(props) {
     super(props);
 
   }
 
-  componentDidMount() {
-    //console.log(this.props.addOneTab);
-  }
-
-
   eventHandlers = {
     onDomReady: e => {
-      //console.log(e);
     },
+
     onWillNavigate: e => {
-      //console.log(e);
       this.props.addOneTab({src: e.url});
     }
   }
@@ -36,11 +29,18 @@ class GuestInstanceHandler extends Component {
     });
   }
 
+  removeEvents = webview => {
+    Object.entries(webviewEvents).forEach(inst => {
+      webview.removeEventListener(inst[0], this.eventHandlers[inst[1]]);
+    });
+  }
 
   render() {
     const tabs = this.props.tabs;
     return (
       <div>
+        {tabs.map((tab, i) => <Webview key={i} addEvents={this.addEvents} removeEvents={this.removeEvents} src="http://google.se" style={{width: '100%', height: '100%'}}></Webview>)}
+
       </div>
     );
   }
@@ -48,15 +48,15 @@ class GuestInstanceHandler extends Component {
 
 
 const tabsSelector = createSelector(
-  state => state.tabs,
-  tabs => tabs,
+  state => state.workspaces,
+  workspaces => workspaces
 );
 
 
 const mapStateToProps = createSelector(
   tabsSelector,
-  tabs => ({
-    tabs
+  workspaces => ({
+    workspaces
   })
 );
 
@@ -66,11 +66,15 @@ const mapActionsToProps = (dispatch, props) => {
   }, dispatch);
 };
 
+
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
-    tabs: stateProps.tabs,
-    addOneTab: arg => dispatchProps.addOneTab(arg),
+    // ok wtf??
+    tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
+    // addOneTab: arg => dispatchProps.addOneTab(arg),
+    // removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg)
   });
 };
+
 
 export default connect(mapStateToProps, mapActionsToProps, mergeProps)(GuestInstanceHandler);

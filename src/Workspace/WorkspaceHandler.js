@@ -4,32 +4,38 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import GuestInstance from'../GuestInstance/GuestInstanceHandler';
 import TabHandler from '../TabHandler/TabHandler';
-import { addWorkspace } from './actions';
+import { addWorkspace, switchWorkspaces } from './actions';
 
 class WorkspaceHandler extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      temptoggle: true,
+    };
   }
 
   componentDidMount() {
-    console.log(this.props.workspaces);
+
     this.props.addWorkspace('test');
+  }
+
+  switchWorkspaces = () => {
+    this.props.switchWorkspaces(this.state.temptoggle ? 'test' : 'unsavedWorkspace');
+    this.setState({temptoggle: !this.state.temptoggle});
   }
   render() {
 
     return (
       <Fragment>
         <TabHandler></TabHandler>
+        <button onClick={this.switchWorkspaces}>switch workspaces</button>
         <GuestInstance></GuestInstance>
       </Fragment>
     );
   }
 
 }
-// const tabsSelector = createSelector(
-//   state => state.tabs,
-//   tabs => tabs,
-// );
+
 const workspaceSelector = createSelector(
   state => state.workspaces,
   workspaces => workspaces,
@@ -45,7 +51,7 @@ const mapStateToProps = createSelector(
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    switchWorkspaces: () => console.log('switchWorkspaces inside mapactionstoprops'),
+    switchWorkspaces: switchWorkspaces,
     addWorkspace: addWorkspace
   }, dispatch);
 };
@@ -55,7 +61,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     workspaces: stateProps.workspaces,
     addWorkspace: arg => dispatchProps.addWorkspace(arg),
-    switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
+    switchWorkspaces: arg2 => dispatchProps.switchWorkspaces(arg2),
   });
 };
 

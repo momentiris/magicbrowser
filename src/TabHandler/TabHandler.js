@@ -14,19 +14,15 @@ class TabHandler extends Component {
     this.myRef = React.createRef();
   }
 
-
   componentDidMount() {
-    // console.log(this.props);
-
+    console.log(this.props);
   }
 
   addOneTab = (e) => {
-    // console.log('add tab please');
     this.props.addOneTab({src: ''});
   }
 
   removeSelectedTab = id => {
-    // console.log('remove tab please' + id);
     this.props.removeSelectedTab(id);
   }
 
@@ -34,22 +30,25 @@ class TabHandler extends Component {
     const { tabs } = this.props;
     return (
       <Fragment>
-      
-
+        <TabContainer
+          tabs={tabs}
+          removeSelectedTab={this.removeSelectedTab}
+          addOneTab={this.addOneTab}
+        />
       </Fragment>
     );
   }
 }
 
 const tabsSelector = createSelector(
-  state => state.tabs,
-  tabs => tabs
+  state => state.workspaces,
+  workspaces => workspaces
 );
 
 const mapStateToProps = createSelector(
   tabsSelector,
-  tabs => ({
-    tabs
+  workspaces => ({
+    workspaces
   })
 );
 
@@ -62,7 +61,8 @@ const mapActionsToProps = (dispatch, props) => {
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
-    tabs: stateProps.tabs,
+    // ok wtf??
+    tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg)
   });
