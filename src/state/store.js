@@ -18,15 +18,12 @@ const persistConfig = {
 };
 
 const allReducers = combineReducers({
-  workspaces: {
-    workspace: combineReducers({
-      workspace: combineReducers({
-        tabs: tabReducer,
-      }),
-
+  workspaces:
+    combineReducers({
+      tabReducer,
+      workspaceReducer,
     }),
 
-  },
   people: userReducer,
   tabs: tabReducer,
   searchQuery: searchQueryReducer
