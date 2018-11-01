@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
-import { addOneTab } from '../TabHandler/actions';
+import { addOneTab } from '../Workspace/actions';
 
 
 
@@ -46,12 +46,10 @@ class GuestInstanceHandler extends Component {
   }
 }
 
-
 const tabsSelector = createSelector(
   state => state.workspaces,
   workspaces => workspaces
 );
-
 
 const mapStateToProps = createSelector(
   tabsSelector,
@@ -65,7 +63,6 @@ const mapActionsToProps = (dispatch, props) => {
     addOneTab: addOneTab,
   }, dispatch);
 };
-
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {

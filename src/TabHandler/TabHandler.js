@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
-import { addOneTab, removeSelectedTab } from './actions';
+import { addOneTab, removeSelectedTab } from '../Workspace/actions';
 
 // Common
 const KeyCodes = require('../common/keyCodes');

@@ -10,7 +10,6 @@ import productsReducer from '../reducers/productsReducer';
 import userReducer from '../reducers/userReducer';
 import { workspacesReducer as workspaces } from '../Workspace/reducers';
 import searchQueryReducer from '../url/reducer';
-import { tabReducer as tabs } from '../TabHandler/reducers';
 
 const persistConfig = {
   key: 'root',
@@ -19,7 +18,6 @@ const persistConfig = {
 
 const allReducers = combineReducers({
   workspaces
-
 });
 
 

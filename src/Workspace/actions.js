@@ -1,4 +1,4 @@
-import { ADD_WORKSPACE, SWITCH_WORKSPACES } from './types';
+import { ADD_WORKSPACE, SWITCH_WORKSPACES, ADD_ONE_TAB, REMOVE_SELECTED_TAB } from './types';
 
 
 export const addWorkspace = (workspace) => {
@@ -14,5 +14,23 @@ export const switchWorkspaces = workspace => {
   return {
     type: SWITCH_WORKSPACES,
     payload: workspace
+  };
+};
+
+export const addOneTab = tab => {
+  return {
+    type: ADD_ONE_TAB,
+    payload: {
+      tab: tab
+    }
+  };
+};
+
+export const removeSelectedTab = id => {
+  return {
+    type: REMOVE_SELECTED_TAB,
+    payload: {
+      id: id
+    }
   };
 };
