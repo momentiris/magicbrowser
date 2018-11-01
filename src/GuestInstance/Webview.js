@@ -11,6 +11,11 @@ class Webview extends Component {
     this.props.addEvents(current);
   }
 
+  componentWillUnmount() {
+    const { current } = this.elem;
+    this.props.removeEvents(current);
+  }
+
   render() {
     return (
       <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'auto', height: '100vh'}}>

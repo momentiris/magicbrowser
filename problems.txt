@@ -1,3 +1,5 @@
 web view and devtools
 Spawning webviews and making them fast and how do we control them?
 How do we improve type security?
+
+How do we work with dynamic and conditional reducers, depending on other reducers that controls different part of state?
