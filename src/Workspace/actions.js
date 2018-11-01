@@ -1,5 +1,17 @@
-import { ADD_WORKSPACE, SWITCH_WORKSPACES, ADD_ONE_TAB, REMOVE_SELECTED_TAB } from './types';
+import {
+  ADD_WORKSPACE,
+  SWITCH_WORKSPACES,
+  ADD_ONE_TAB,
+  REMOVE_SELECTED_TAB,
+  RENAME_CURRENT_WORKSPACE,
+  INIT_EMPTY_WORKSPACE
+} from './types';
 
+export const initEmptyWorkspace = () => {
+  return {
+    type: INIT_EMPTY_WORKSPACE
+  };
+};
 
 export const addWorkspace = (workspace) => {
   return (dispatch, getState) => {
@@ -7,6 +19,13 @@ export const addWorkspace = (workspace) => {
       type: ADD_WORKSPACE,
       payload: workspace
     }, getState);
+  };
+};
+
+export const renameWorkspace = (workspace) => {
+  return {
+    type: RENAME_CURRENT_WORKSPACE,
+    payload: workspace
   };
 };
 

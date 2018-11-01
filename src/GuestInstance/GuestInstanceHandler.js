@@ -6,12 +6,9 @@ import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab } from '../Workspace/actions';
 
-
-
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
-
   }
 
   eventHandlers = {

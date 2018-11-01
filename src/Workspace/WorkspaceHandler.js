@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import GuestInstance from'../GuestInstance/GuestInstanceHandler';
 import TabHandler from '../TabHandler/TabHandler';
-import { addWorkspace, switchWorkspaces } from './actions';
+import { addWorkspace, switchWorkspaces, renameWorkspace, initEmptyWorkspace } from './actions';
 
 class WorkspaceHandler extends Component {
   constructor(props) {
@@ -15,20 +15,51 @@ class WorkspaceHandler extends Component {
   }
 
   componentDidMount() {
-
-    this.props.addWorkspace('test');
+    this.props.initEmptyWorkspace();
   }
 
-  switchWorkspaces = () => {
-    this.props.switchWorkspaces(this.state.temptoggle ? 'test' : 'unsavedWorkspace');
-    this.setState({temptoggle: !this.state.temptoggle});
+  switchWorkspaces = value => {
+    this.props.switchWorkspaces(value);
   }
+
+  addWorkspace = e => {
+    e.preventDefault();
+    this.props.addWorkspace(this.state.workspacename);
+  }
+
+  renameWorkspace = e => {
+    e.preventDefault();
+    console.log(this.state.workspacename);
+    this.props.renameWorkspace(this.state.workspacename);
+  }
+
+  handleChange = e => {
+    this.switchWorkspaces(e.target.value);
+  }
+
+  handleInputChange = e => {
+    this.setState({ workspacename: e.target.value });
+  }
+
   render() {
 
     return (
       <Fragment>
         <TabHandler></TabHandler>
-        <button onClick={this.switchWorkspaces}>switch workspaces</button>
+
+        <select onChange={this.handleChange} value={this.props.current} name="workspaces">
+          { this.props.workspaces.map((ws, i) => <option key={i} value={ws}>{ws}</option> )}
+        </select>
+
+        <form onSubmit={this.addWorkspace}>
+          <input onChange={this.handleInputChange} type="text"/>
+          <input type="submit" value="add new workspace"/>
+        </form>
+        <form onSubmit={this.renameWorkspace}>
+          <input onChange={this.handleInputChange} type="text"/>
+          <input type="submit" value="rename current workspace"/>
+        </form>
+
         <GuestInstance></GuestInstance>
       </Fragment>
     );
@@ -43,7 +74,6 @@ const workspaceSelector = createSelector(
 
 const mapStateToProps = createSelector(
   workspaceSelector,
-
   workspaces => ({
     workspaces
   }),
@@ -52,16 +82,22 @@ const mapStateToProps = createSelector(
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     switchWorkspaces: switchWorkspaces,
-    addWorkspace: addWorkspace
+    addWorkspace: addWorkspace,
+    renameWorkspace: renameWorkspace,
+    initEmptyWorkspace: initEmptyWorkspace,
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const withoutCurrent = Object.keys(stateProps.workspaces).filter(inst => inst !== 'current');
 
   return Object.assign({}, ownProps, {
-    workspaces: stateProps.workspaces,
+    current: stateProps.workspaces.current,
+    workspaces: withoutCurrent,
     addWorkspace: arg => dispatchProps.addWorkspace(arg),
-    switchWorkspaces: arg2 => dispatchProps.switchWorkspaces(arg2),
+    renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
+    switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
+    initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace()
   });
 };
 
