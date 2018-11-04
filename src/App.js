@@ -6,8 +6,8 @@ import TabHandler from './Tabs/TabHandler';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 
-import GuestInstance from'./GuestInstance/GuestInstanceHandler';
-import NavigationHandler from './Navigation/NavigationHandler';
+
+import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 
 import UrlBar from './Url/UrlBar';
 import Webview from './GuestInstance/Webview';
@@ -31,8 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <WorkspaceHandler />
-        <NavigationHandler/>
-        <GuestInstance />
+        <UserNavigationHandler/>
       </div>
     );
   }

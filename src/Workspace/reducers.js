@@ -62,24 +62,34 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       });
 
     case ADD_ONE_TAB:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         [state.current]: {
+          ...state[state.current],
           tabs: [...state[state.current].tabs, payload]
         }
-      });
+      };
 
     case REMOVE_SELECTED_TAB:
+
       return Object.assign({}, state, {
         [state.current]: {
           tabs: state[state.current].tabs
-            .filter((tab, i) => i !== payload.id)
+            .filter((tab, i) => i !== payload.id),
+          active: state[state.current].active >= state[state.current].tabs.length - 1 ?
+            state[state.current].active - 1 :
+            state[state.current].active
         }
       });
 
     case SET_TAB_ACTIVE:
-      console.log(state);
-      return state;
-
+      return {
+        ...state,
+        [state.current]: {
+          ...state[state.current],
+          active: payload
+        }
+      };
 
     default:
       return state;
