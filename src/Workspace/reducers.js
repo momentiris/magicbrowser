@@ -5,14 +5,21 @@ import {
   ADD_ONE_TAB,
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
-  INIT_EMPTY_WORKSPACE
+  INIT_EMPTY_WORKSPACE,
+  SET_TAB_ACTIVE
 } from './types';
 
 const initialState = {
   current: 'unsavedWorkspace',
   unsavedWorkspace: {
-    tabs: []
+    tabs: [],
+    active: 0
   }
+};
+
+const workspaceTemplate = {
+  tabs: [],
+  active: 0
 };
 
 export const workspacesReducer = (state = initialState, { type, payload }) => {
@@ -30,9 +37,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
     case ADD_WORKSPACE:
       return Object.assign({}, {
         ...state,
-        [payload]: {
-          tabs: []
-        }
+        [payload]: workspaceTemplate
       });
 
     case RENAME_CURRENT_WORKSPACE:
@@ -70,6 +75,11 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
             .filter((tab, i) => i !== payload.id)
         }
       });
+
+    case SET_TAB_ACTIVE:
+      console.log(state);
+      return state;
+
 
     default:
       return state;

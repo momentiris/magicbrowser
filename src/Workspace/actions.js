@@ -4,7 +4,8 @@ import {
   ADD_ONE_TAB,
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
-  INIT_EMPTY_WORKSPACE
+  INIT_EMPTY_WORKSPACE,
+  SET_TAB_ACTIVE
 } from './types';
 
 export const initEmptyWorkspace = () => {
@@ -51,5 +52,12 @@ export const removeSelectedTab = id => {
     payload: {
       id: id
     }
+  };
+};
+
+export const setTabActive = id => {
+  return {
+    type: SET_TAB_ACTIVE,
+    payload: id
   };
 };

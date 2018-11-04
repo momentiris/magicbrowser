@@ -2,9 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import GuestInstance from'../GuestInstance/GuestInstanceHandler';
-import TabHandler from '../TabHandler/TabHandler';
-import { addWorkspace, switchWorkspaces, renameWorkspace, initEmptyWorkspace } from './actions';
+import TabHandler from '../Tabs/TabHandler';
+import {
+  addWorkspace,
+  switchWorkspaces,
+  renameWorkspace,
+  initEmptyWorkspace
+} from './actions';
 
 class WorkspaceHandler extends Component {
   constructor(props) {
@@ -60,7 +64,6 @@ class WorkspaceHandler extends Component {
           <input type="submit" value="rename current workspace"/>
         </form>
 
-        <GuestInstance></GuestInstance>
       </Fragment>
     );
   }
@@ -85,6 +88,7 @@ const mapActionsToProps = (dispatch, props) => {
     addWorkspace: addWorkspace,
     renameWorkspace: renameWorkspace,
     initEmptyWorkspace: initEmptyWorkspace,
+
   }, dispatch);
 };
 

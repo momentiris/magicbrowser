@@ -8,7 +8,6 @@ const Workspace = () => (
   <div>workspace</div>
 );
 
-
 const Root = ({ store, persistor }) => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
