@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 
-import UrlBar from './Url/UrlBar';
+import UrlBar from './url/UrlBar';
 import Webview from './GuestInstance/Webview';
 import WorkspaceHandler from './Workspace/WorkspaceHandler';
 const electron = window.electron;
