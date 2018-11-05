@@ -3,72 +3,78 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
-import { addOneTab, removeSelectedTab } from './actions';
+import {
+  addOneTab,
+  removeSelectedTab,
+  setTabActive
+} from '../Workspace/actions';
 
-// Common
-const KeyCodes = require('../common/keyCodes');
+// // Common
+// const KeyCodes = require('../common/keyCodes');
 
 class TabHandler extends Component {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
   }
 
-
   componentDidMount() {
-    // console.log(this.props);
-
+    console.log(this.props);
   }
 
   addOneTab = (e) => {
-    // console.log('add tab please');
     this.props.addOneTab({src: ''});
   }
 
   removeSelectedTab = id => {
-    // console.log('remove tab please' + id);
     this.props.removeSelectedTab(id);
+  }
+
+  setActive = tab => {
+
+    this.props.setTabActive(tab);
   }
 
   render() {
     const { tabs } = this.props;
     return (
       <Fragment>
-        <TabContainer
+        <TabContainer setActive={this.setActive}
           tabs={tabs}
           removeSelectedTab={this.removeSelectedTab}
           addOneTab={this.addOneTab}
         />
-
       </Fragment>
     );
   }
 }
 
 const tabsSelector = createSelector(
-  state => state.tabs,
-  tabs => tabs
+  state => state.workspaces,
+  workspaces => workspaces
 );
 
 const mapStateToProps = createSelector(
   tabsSelector,
-  tabs => ({
-    tabs
+  workspaces => ({
+    workspaces
   })
 );
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     addOneTab: addOneTab,
-    removeSelectedTab: removeSelectedTab
+    removeSelectedTab: removeSelectedTab,
+    setTabActive: setTabActive
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
-    tabs: stateProps.tabs,
+    // ok wtf??
+    tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     addOneTab: arg => dispatchProps.addOneTab(arg),
-    removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg)
+    removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
+    setTabActive: arg => dispatchProps.setTabActive(arg)
   });
 };
 

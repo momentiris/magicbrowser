@@ -2,31 +2,23 @@ import React, { Component,  } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import TabHandler from './TabHandler/TabHandler';
+import TabHandler from './Tabs/TabHandler';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
-import { fetchPeople } from './actions/user-actions';
-import NavHandler from './url/navigationHandler';
-// import GuestInstance from'./GuestInstance/GuestInstanceHandler';
+
+
+import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
+
+import UrlBar from './Url/UrlBar';
 import Webview from './GuestInstance/Webview';
 import WorkspaceHandler from './Workspace/WorkspaceHandler';
 const electron = window.electron;
 const { ipcRenderer } = electron;
 
-
-
-// ipcRenderer.send('update-notify-value', 'test');
-//
-// ipcRenderer.on('targetPriceVal', function (event, arg) {
-//   console.log(arg);
-// });
-
-
 class App extends Component {
   componentDidMount() {
 
   }
-
 
   handleWebview = () => {
     console.log('hej');
@@ -38,9 +30,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavHandler />
-        <WorkspaceHandler></WorkspaceHandler>
-
+        <WorkspaceHandler />
+        <UserNavigationHandler/>
       </div>
     );
   }
@@ -60,14 +51,14 @@ const mapStateToProps = createSelector(
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    fetchPeople: fetchPeople,
+
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     people: stateProps.people,
-    fetchPeople: () => dispatchProps.fetchPeople()
+
   });
 };
 

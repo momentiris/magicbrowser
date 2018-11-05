@@ -6,11 +6,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // Reducers
-import productsReducer from '../reducers/productsReducer';
-import userReducer from '../reducers/userReducer';
-import { workspaceReducer } from '../Workspace/reducers';
-import searchQueryReducer from '../url/reducer';
-import { tabReducer } from '../TabHandler/reducers';
+
+import { workspacesReducer as workspaces } from '../Workspace/reducers';
+import searchQueryReducer from '../Url/reducer';
 
 const persistConfig = {
   key: 'root',
@@ -18,16 +16,9 @@ const persistConfig = {
 };
 
 const allReducers = combineReducers({
-  workspaces:
-    combineReducers({
-      tabReducer,
-      workspaceReducer,
-    }),
-
-  people: userReducer,
-  tabs: tabReducer,
-  searchQuery: searchQueryReducer
+  workspaces
 });
+
 
 const persistedReducer = persistReducer(persistConfig, allReducers);
 
