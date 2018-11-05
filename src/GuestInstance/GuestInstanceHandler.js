@@ -54,8 +54,10 @@ class GuestInstanceHandler extends Component {
                 src={tab.src}
                 style={{width: '100%', height: '100%'}}
               />
-            ) :
+            ) : (
               <Dashboard key={i}/>
+            )
+
             ;
           })
         }
