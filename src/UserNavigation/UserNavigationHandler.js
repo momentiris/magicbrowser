@@ -10,23 +10,35 @@ import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 // update
 class NavigationHandler extends Component {
 
-  navigateForwards = webview => {
+  constructor(props) {
+    super(props);
 
   }
+  componentDidMount() {
+
+  }
+
+  navigateForwards =  webview => {
+
+  };
 
   navigateBackwards = webview => {
 
-  }
+  };
 
   navigateToUrl = url => {
 
-  }
+  };
+
+  updateWebview = webview => {
+
+  };
 
   render() {
 
     return (
       <Fragment>
-        <UrlBar/>
+        <UrlBar />
         <GuestInstanceHandler />
       </Fragment>
     );
