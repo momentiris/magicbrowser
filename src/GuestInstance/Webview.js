@@ -11,7 +11,17 @@ class Webview extends Component {
     const { current } = this.elem;
 
     this.props.addEvents(current);
+
   }
+
+  componentWillUnmount() {
+    const { current } = this.elem;
+    this.props.removeEvents(current);
+  }
+  handleFocus = e => {
+    console.log(e);
+  }
+
 
   componentWillUnmount() {
     const { current } = this.elem;

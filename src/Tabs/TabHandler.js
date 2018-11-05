@@ -18,11 +18,10 @@ class TabHandler extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
   }
 
   addOneTab = (e) => {
-    this.props.addOneTab({src: ''});
+    this.props.addOneTab({src: 'http://facebook.com'});
   }
 
   removeSelectedTab = id => {

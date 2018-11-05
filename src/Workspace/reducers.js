@@ -6,7 +6,8 @@ import {
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
-  SET_TAB_ACTIVE
+  SET_TAB_ACTIVE,
+  ADD_SEARCH_QUERY
 } from './types';
 
 const initialState = {
@@ -90,6 +91,22 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           active: payload
         }
       };
+
+    case ADD_SEARCH_QUERY:
+      const test = {
+        ...state,
+        [state.current]: {
+          tabs: state[state.current].tabs.map((tab, i) => {
+            tab.src = state[state.current].active === i ? payload : tab.src;
+            return tab;
+          }),
+          active: state[state.current].active
+        }
+
+      };
+      return test;
+      // return state
+
 
     default:
       return state;

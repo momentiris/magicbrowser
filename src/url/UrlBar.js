@@ -32,10 +32,10 @@ class UrlBar extends Component {
         break;
       case KeyCodes.ENTER:
         e.preventDefault();
-        this.props.addSearchQuery(location);
+        this.props.addSearchQuery(`http://www.${location}.com`);
         console.log(`www.${location}.com`);
         this.setState({data: !this.state.data});
-    } 
+    }
   }
 
   // TODO: remove local state and apply redux state on the suggestionBar
@@ -45,7 +45,6 @@ class UrlBar extends Component {
 
   handleChange = (e) => {
     this.setState({searchValue: e.target.value});
-    console.log(e.target.value);
   }
 
   render() {
@@ -67,15 +66,15 @@ class UrlBar extends Component {
 
 
 const searchQuerySelector = createSelector(
-  state => state.searchQuery,
-  searchQuery => searchQuery
+  state => state.workspaces,
+  workspaces => workspaces
 );
 
 
 const mapStateToProps = createSelector(
   searchQuerySelector,
-  searchQuery => ({
-    searchQuery
+  workspaces => ({
+    workspaces
   })
 );
 
