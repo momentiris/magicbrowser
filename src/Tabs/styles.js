@@ -4,7 +4,7 @@ export const Mainwrap = styled.section`
   width: 100vw;
   min-height: 38px;
   max-height: 38px;
-  background: rgb(208, 208, 208);
+  background: ${props => props.theme.darkgrey};
   -webkit-app-region: drag;
   padding-left: 5rem;
   display: flex;
@@ -12,14 +12,15 @@ export const Mainwrap = styled.section`
 `;
 
 export const SingleTabContainer = styled.div`
-  width: 200px;
-  height: 30px;
+  width: 294px;
+  height: 32px;
   border: 1px solid black;
   display: flex;
   overflow-x: hidden;
   align-items: center;
-
   justify-content: space-between;
+  border-radius: 5px 5px 0 0;
+  background: ${props => props.isActive ? props.theme.lightgrey : 'none'};
 `;
 
 export const TabTitle = styled.span`
