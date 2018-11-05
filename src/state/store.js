@@ -16,7 +16,7 @@ const persistConfig = {
 };
 
 const allReducers = combineReducers({
-  workspaces
+  workspaces,
 });
 
 

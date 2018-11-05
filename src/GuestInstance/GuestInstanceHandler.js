@@ -9,20 +9,21 @@ import { addOneTab } from '../Workspace/actions';
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
-    this.views = React.createRef();
+
   }
 
   componentDidMount() {
-    console.log(this.views.current);
+
   }
 
   eventHandlers = {
     onDomReady: e => {
-      console.log(e.target.getWebContents());
+      // e.target.loadURL('http://facebook.com');
+      // e.target.removeEventListener('dom-ready', this.eventHandlers.onDomReady);
     },
 
     onWillNavigate: e => {
-      this.props.addOneTab({src: e.url});
+      // this.props.addOneTab({src: e.url});
     }
   }
 
@@ -40,9 +41,10 @@ class GuestInstanceHandler extends Component {
 
   render() {
     const tabs = this.props.tabs;
+
     return (
-      <div ref={this.views}>
-        {tabs.map((tab, i) => <Webview id={i} key={i} addEvents={this.addEvents} removeEvents={this.removeEvents} src="http://google.se" style={{width: '100%', height: '100%'}}></Webview>)}
+      <div>
+        {tabs.map((tab, i) => <Webview id={i} key={i} addEvents={this.addEvents} removeEvents={this.removeEvents} src={tab.src} style={{width: '100%', height: '100%'}}></Webview>)}
 
       </div>
     );

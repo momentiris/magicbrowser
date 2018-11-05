@@ -11,6 +11,7 @@ class Webview extends Component {
     const { current } = this.elem;
 
     this.props.addEvents(current);
+
   }
 
   componentWillUnmount() {

@@ -18,7 +18,7 @@ class NavigationHandler extends Component {
 
   }
 
-  navigateForwards =  webview => {
+  navigateForwards = webview => {
 
   };
 

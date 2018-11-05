@@ -40,9 +40,8 @@ export const switchWorkspaces = workspace => {
 export const addOneTab = tab => {
   return {
     type: ADD_ONE_TAB,
-    payload: {
-      tab: tab
-    }
+    payload: tab
+
   };
 };
 
