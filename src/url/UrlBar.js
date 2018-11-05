@@ -7,7 +7,7 @@ import { addSearchQuery } from './actions';
 
 const KeyCodes = require('../common/keyCodes');
 
-class NavHandler extends Component {
+class UrlBar extends Component {
   constructor (props) {
     super(props);
     this.onKeyDown = this.onKeyDown.bind(this);
@@ -28,16 +28,16 @@ class NavHandler extends Component {
   onKeyDown = (e) => {
     const location = this.state.searchValue;
     switch (e.keyCode) {
-    case KeyCodes.SHIFT:
-      break;
-    case KeyCodes.ENTER:
-      e.preventDefault();
-      this.props.addSearchQuery(location);
-      console.log(`www.${location}.com`);
-      this.setState({data: !this.state.data});
-    }
+      case KeyCodes.SHIFT:
+        break;
+      case KeyCodes.ENTER:
+        e.preventDefault();
+        this.props.addSearchQuery(location);
+        console.log(`www.${location}.com`);
+        this.setState({data: !this.state.data});
+    } 
   }
-  
+
   // TODO: remove local state and apply redux state on the suggestionBar
   onClick = () => {
     this.setState({data: !this.state.data });
@@ -92,4 +92,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   });
 };
 
-export default connect(mapStateToProps, mapActionsToProps, mergeProps)(NavHandler);
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(UrlBar);

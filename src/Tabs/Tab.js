@@ -1,9 +1,10 @@
 import React from 'react';
 import { SingleTabContainer, TabTitle, FavIcon, CloseButton } from './styles';
 
-const Tab = ({ removeSelectedTab }) => {
+const Tab = ({ removeSelectedTab, setActive}) => {
+
   return (
-    <SingleTabContainer>
+    <SingleTabContainer onClick={setActive}>
       <FavIcon/>
       <TabTitle>title</TabTitle>
       <CloseButton onClick={removeSelectedTab} />

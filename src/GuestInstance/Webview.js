@@ -7,7 +7,9 @@ class Webview extends Component {
   }
 
   componentDidMount() {
+
     const { current } = this.elem;
+
     this.props.addEvents(current);
   }
 
@@ -15,6 +17,10 @@ class Webview extends Component {
     const { current } = this.elem;
     this.props.removeEvents(current);
   }
+  handleFocus = e => {
+    console.log(e);
+  }
+
 
   render() {
     return (

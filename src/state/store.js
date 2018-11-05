@@ -6,10 +6,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // Reducers
-import productsReducer from '../reducers/productsReducer';
-import userReducer from '../reducers/userReducer';
+
 import { workspacesReducer as workspaces } from '../Workspace/reducers';
-import searchQueryReducer from '../url/reducer';
+import searchQueryReducer from '../Url/reducer';
 
 const persistConfig = {
   key: 'root',
