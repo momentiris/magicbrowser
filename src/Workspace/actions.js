@@ -5,7 +5,8 @@ import {
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
-  SET_TAB_ACTIVE
+  SET_TAB_ACTIVE,
+  OPEN_DASHBOARD
 } from './types';
 
 export const initEmptyWorkspace = () => {
@@ -42,6 +43,12 @@ export const addOneTab = tab => {
     type: ADD_ONE_TAB,
     payload: tab
 
+  };
+};
+
+export const openDashBoard = () => {
+  return {
+    type: OPEN_DASHBOARD,
   };
 };
 

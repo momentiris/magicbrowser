@@ -7,7 +7,8 @@ import {
   RENAME_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
-  ADD_SEARCH_QUERY
+  ADD_SEARCH_QUERY,
+  OPEN_DASHBOARD
 } from './types';
 
 const initialState = {
@@ -105,7 +106,16 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
 
       };
       return test;
-      // return state
+
+    case OPEN_DASHBOARD:
+      return {
+        ...state,
+        [state.current]: {
+          ...state[state.current],
+          tabs: [...state[state.current].tabs, {src: 'dashboard'}]
+        }
+      };
+
 
 
     default:

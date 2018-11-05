@@ -39,7 +39,6 @@ class NavigationHandler extends Component {
     return (
       <Fragment>
         <UrlBar />
-        <GuestInstanceHandler />
       </Fragment>
     );
   }

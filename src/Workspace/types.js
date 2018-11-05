@@ -9,3 +9,4 @@ export const REMOVE_SELECTED_TAB = 'tabs:removeSelectedTab';
 export const SET_TAB_ACTIVE = 'tabs:setTabActive';
 
 export const ADD_SEARCH_QUERY = 'searchQuery:addSearchQuery';
+export const OPEN_DASHBOARD = 'dashboard:openDashboard';

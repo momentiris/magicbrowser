@@ -5,15 +5,15 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab } from '../Workspace/actions';
-
+import Dashboard from '../Dashboard/Dashboard';
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
-    this.views = React.createRef();
+
   }
 
   componentDidMount() {
-    console.log(this.views.current);
+
   }
 
   eventHandlers = {
@@ -43,8 +43,22 @@ class GuestInstanceHandler extends Component {
 
     return (
       <div>
-        {tabs.map((tab, i) => <Webview id={i} key={i} addEvents={this.addEvents} removeEvents={this.removeEvents} src={tab.src} style={{width: '100%', height: '100%'}}></Webview>)}
-
+        {
+          tabs.map((tab, i) => {
+            return tab.src !== 'dashboard' ? (
+              <Webview
+                id={i}
+                key={i}
+                addEvents={this.addEvents}
+                removeEvents={this.removeEvents}
+                src={tab.src}
+                style={{width: '100%', height: '100%'}}
+              />
+            ) :
+              <Dashboard key={i}/>
+            ;
+          })
+        }
       </div>
     );
   }

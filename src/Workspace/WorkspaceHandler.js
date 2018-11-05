@@ -7,8 +7,10 @@ import {
   addWorkspace,
   switchWorkspaces,
   renameWorkspace,
-  initEmptyWorkspace
+  initEmptyWorkspace,
+  openDashBoard
 } from './actions';
+
 
 class WorkspaceHandler extends Component {
   constructor(props) {
@@ -45,6 +47,10 @@ class WorkspaceHandler extends Component {
     this.setState({ workspacename: e.target.value });
   }
 
+  goToDashBoard = () => {
+    this.props.openDashBoard({src: 'dashboard'});
+  }
+
   render() {
 
     return (
@@ -54,6 +60,7 @@ class WorkspaceHandler extends Component {
         <select onChange={this.handleChange} value={this.props.current} name="workspaces">
           { this.props.workspaces.map((ws, i) => <option key={i} value={ws}>{ws}</option> )}
         </select>
+        <button onClick={this.goToDashBoard}>go to dashboard</button>
 
         <form onSubmit={this.addWorkspace}>
           <input onChange={this.handleInputChange} type="text"/>
@@ -88,6 +95,7 @@ const mapActionsToProps = (dispatch, props) => {
     addWorkspace: addWorkspace,
     renameWorkspace: renameWorkspace,
     initEmptyWorkspace: initEmptyWorkspace,
+    openDashBoard: openDashBoard
 
   }, dispatch);
 };
@@ -101,7 +109,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     addWorkspace: arg => dispatchProps.addWorkspace(arg),
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
-    initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace()
+    initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace(),
+    openDashBoard: () => dispatchProps.openDashBoard()
   });
 };
 
