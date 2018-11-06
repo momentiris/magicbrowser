@@ -25,7 +25,7 @@ class Dashboard extends Component {
     this.switchWorkspaces(e.target.value);
   }
 
-  // TODO: fix the error with swapping between workspaces
+  // TODO: Move the Button and hover to own components, to make different states
   //       More styling
   //       fix the flex-wrap correct
 
