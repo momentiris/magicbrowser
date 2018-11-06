@@ -3,9 +3,11 @@ import UrlBarSuggestions from './urlBarSuggestions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { addSearchQuery } from './actions';
+import {
+  UrlBarInput
+} from './styles';
 
-const KeyCodes = require('../common/keyCodes');
+const KeyCodes = require('../../common/keyCodes');
 
 class UrlBar extends Component {
   constructor (props) {
@@ -23,8 +25,6 @@ class UrlBar extends Component {
   //Change location name, remove https from visible bar
   //const hasTitle = location !== location.replace(/^https?:\/\//, '');
 
-
-
   onKeyDown = (e) => {
     const location = this.state.searchValue;
     switch (e.keyCode) {
@@ -32,7 +32,7 @@ class UrlBar extends Component {
         break;
       case KeyCodes.ENTER:
         e.preventDefault();
-        this.props.addSearchQuery(`http://www.${location}.com`);
+        this.props.navigateToUrl(`http://www.${location}.com`);
         console.log(`www.${location}.com`);
         this.setState({data: !this.state.data});
     }
@@ -49,46 +49,18 @@ class UrlBar extends Component {
 
   render() {
     return (
-      <div>
-        <input
-          onClick={this.onClick}
-          onKeyDown={this.onKeyDown}
-          onChange={this.handleChange}
-        />
-        {this.state.data ?
-          <UrlBarSuggestions />
-          : null
-        }
-      </div>
+      <UrlBarInput
+        onClick={this.onClick}
+        onKeyDown={this.onKeyDown}
+        onChange={this.handleChange}
+      >
+
+
+      </UrlBarInput>
     );
   }
 }
 
 
-const searchQuerySelector = createSelector(
-  state => state.workspaces,
-  workspaces => workspaces
-);
 
-
-const mapStateToProps = createSelector(
-  searchQuerySelector,
-  workspaces => ({
-    workspaces
-  })
-);
-
-const mapActionsToProps = (dispatch, props) => {
-  return bindActionCreators({
-    addSearchQuery: addSearchQuery,
-  }, dispatch);
-};
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  return Object.assign({}, ownProps, {
-    searchQuery: stateProps.searchQuery,
-    addSearchQuery: arg => dispatchProps.addSearchQuery(arg)
-  });
-};
-
-export default connect(mapStateToProps, mapActionsToProps, mergeProps)(UrlBar);
+export default UrlBar;

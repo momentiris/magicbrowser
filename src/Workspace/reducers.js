@@ -7,7 +7,7 @@ import {
   RENAME_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
-  ADD_SEARCH_QUERY,
+  NAVIGATE_TO_URL,
   OPEN_DASHBOARD,
   UPDATE_TAB_META
 } from './types';
@@ -99,7 +99,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         }
       };
 
-    case ADD_SEARCH_QUERY:
+    case NAVIGATE_TO_URL:
       const test = {
         ...state,
         [state.current]: {

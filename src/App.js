@@ -11,9 +11,11 @@ import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 
 import UrlBar from './Url/UrlBar';
 import Webview from './GuestInstance/Webview';
-import WorkspaceHandler from './Workspace/WorkspaceHandler';
+
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 import Dashboard from './Dashboard/Dashboard';
+
+
 
 const electron = window.electron;
 const { ipcRenderer } = electron;
@@ -28,7 +30,7 @@ class App extends Component {
       <div className="App">
         <Router>
         <>
-        <WorkspaceHandler/>
+        <TabHandler></TabHandler>
         <UserNavigationHandler />
           <Route exact path="/" component={GuestInstanceHandler}/>
           <Route exact path="/dashboard" component={Dashboard}/>

@@ -18,7 +18,7 @@ class GuestInstanceHandler extends Component {
   }
 
   componentDidMount() {
-  
+
 
   }
 
@@ -76,8 +76,8 @@ class GuestInstanceHandler extends Component {
                 src={tab.src}
               />
             ) : (
-              <DashboardWrap>
-                <Dashboard key={i}/>
+              <DashboardWrap key={i}>
+                <Dashboard id={i}/>
               </DashboardWrap>
             );
           })
