@@ -1,12 +1,12 @@
 import React from 'react';
 import { SingleTabContainer, TabTitle, FavIcon, CloseButton } from './styles';
 
-const Tab = ({ removeSelectedTab, setActive, isActive}) => {
+const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id }) => {
 
   return (
-    <SingleTabContainer isActive={isActive} onMouseDown={setActive}>
-      <FavIcon/>
-      <TabTitle>title</TabTitle>
+    <SingleTabContainer id={id} isActive={isActive} onMouseDown={setActive}>
+      <FavIcon src={favicon || 'false'}/>
+      <TabTitle>{title}</TabTitle>
       <CloseButton onClick={removeSelectedTab} />
     </SingleTabContainer>
   );
