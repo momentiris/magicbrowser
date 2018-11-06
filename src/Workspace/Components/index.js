@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { Container, Column, Ul, Li, ItemLink, Ua, UaHeader, WsItems, WsWrapper } from './styles';
+import { Container, Column, Ul, Li, ItemLink, Ua, UaHeader, TabItems, TabWrapper } from './styles';
 import {
   addWorkspace,
   switchWorkspaces
@@ -41,24 +41,24 @@ class Dashboard extends Component {
 
             { workspaces.map((ws, i) => <Li key={i} value={ws} > <button onClick={this.handleClick}>{ws}</button></Li> )}
           </Ul>
-          <WsWrapper >
-            { tabs.map((tab, i) => <WsItems id={i} key={i}> {tab.src} </WsItems> )}
-          </WsWrapper>
+          <TabWrapper >
+            { tabs.map((tab, i) => <TabItems id={i} key={i}> {tab.src} </TabItems> )}
+          </TabWrapper>
         </Column>
         <hr></hr>
         <Column>
           <Ul>
             { workspaces.map((ws, i) => <Li key={i} value={ws}> <ItemLink to='/'> {ws} </ItemLink> </Li> )}
           </Ul>
-          <WsWrapper>
-            <WsItems></WsItems>
-            <WsItems></WsItems>
-            <WsItems></WsItems>
-            <WsItems></WsItems>
-            <WsItems></WsItems>
-            <WsItems></WsItems>
-            <WsItems></WsItems>
-          </WsWrapper>
+          <TabWrapper>
+            <TabItems></TabItems>
+            <TabItems></TabItems>
+            <TabItems></TabItems>
+            <TabItems></TabItems>
+            <TabItems></TabItems>
+            <TabItems></TabItems>
+            <TabItems></TabItems>
+          </TabWrapper>
         </Column>
       </Container>
     );

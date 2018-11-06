@@ -10,16 +10,17 @@ export const Container = styled.div`
 
 export const Column = styled.div`
   display: flex;
+  width: 100%;
 `;
 
-export const WsWrapper = styled.div`
+export const TabWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  flex-direction: row-reverse;
-
 `;
-export const WsItems = styled.div`
+
+
+export const TabItems = styled.div`
   width: 196px;
   height: 110px;
   background: red;
@@ -40,7 +41,7 @@ export const UaHeader = styled.h1`
 
 // Ws all
 export const Ul = styled.ul`
-
+  margin-right: auto;
 `;
 
 export const Li = styled.li`
