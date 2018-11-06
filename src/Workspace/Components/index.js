@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { Container, Column, Ul, Li, ItemLink, Ua, UaHeader, TabItems, TabWrapper } from './styles';
+import { Container, Column, Ul, Li, ItemLink, Ua, UaHeader, TabItems, TabWrapper, Button, Hover } from './styles';
 import {
   addWorkspace,
   switchWorkspaces
@@ -11,7 +11,9 @@ import {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.tabs[1]);
+    // this.state = {
+    //   hover: false,
+    // };
   }
 
 
@@ -38,8 +40,7 @@ class Dashboard extends Component {
         </Ua>
         <Column>
           <Ul name="workspaces">
-
-            { workspaces.map((ws, i) => <Li key={i} value={ws} > <button onClick={this.handleClick}>{ws}</button></Li> )}
+            { workspaces.map((ws, i) => <Li key={i}> <Button onClick={this.handleClick} value={ws}><Hover></Hover> {ws}</Button></Li> )}
           </Ul>
           <TabWrapper >
             { tabs.map((tab, i) => <TabItems id={i} key={i}> {tab.src} </TabItems> )}
@@ -48,16 +49,9 @@ class Dashboard extends Component {
         <hr></hr>
         <Column>
           <Ul>
-            { workspaces.map((ws, i) => <Li key={i} value={ws}> <ItemLink to='/'> {ws} </ItemLink> </Li> )}
+
           </Ul>
           <TabWrapper>
-            <TabItems></TabItems>
-            <TabItems></TabItems>
-            <TabItems></TabItems>
-            <TabItems></TabItems>
-            <TabItems></TabItems>
-            <TabItems></TabItems>
-            <TabItems></TabItems>
           </TabWrapper>
         </Column>
       </Container>
