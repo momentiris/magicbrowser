@@ -24,9 +24,9 @@ function createWindow () {
 
 
 
-  win.loadURL(process.env.ELECTRON_LOAD_URL || 'http://localhost:3000/dashboard'); // <--- (3) Loading react
+  // win.loadURL(process.env.ELECTRON_LOAD_URL || 'http://localhost:3000'); // <--- (3) Loading react
 
-  // win.loadURL('http://localhost:3000/dashboard'); // <--- (3) Loading react
+  win.loadURL('http://localhost:3000/dashboard'); // <--- (3) Loading react
 
   win.on('closed', () => {
     win = null;

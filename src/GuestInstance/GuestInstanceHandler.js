@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab } from '../Workspace/actions';
-import Dashboard from '../Dashboard/Dashboard';
+import Dashboard from '../Workspace/Components/';
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
