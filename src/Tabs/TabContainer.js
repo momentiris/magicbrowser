@@ -18,6 +18,7 @@ const TabContainer = ({ tabs, removeSelectedTab, addOneTab, setActive, active })
               removeSelectedTab={() => removeSelectedTab(i)}
               favicon={tab.favicon}
               title={tab.title}
+              src={tab.src}
 
             />
           ) ;

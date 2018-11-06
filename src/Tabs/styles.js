@@ -26,20 +26,7 @@ export const SingleTabContainer = styled.div`
       background: rgba(234,234,234, 0.5);
     }
   `}
-  &:before {
 
-    content: "";
-    display: block;
-    width: 100%
-    height: 100%;
-    position: absolute;
-    top:0;
-    bottom:0;
-    background: none;
-
-    right:0;
-
-  }
   &:after {
     content: "";
     display: block;
@@ -74,5 +61,8 @@ export const CloseButton = styled.button`
     content: "X";
     display: block;
     color: black;
+  }
+  &:focus {
+    outline: none;
   }
 `;
