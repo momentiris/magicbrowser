@@ -8,13 +8,20 @@ import {
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
   ADD_SEARCH_QUERY,
-  OPEN_DASHBOARD
+  OPEN_DASHBOARD,
+  UPDATE_TAB_META
 } from './types';
 
 const initialState = {
   current: 'unsavedWorkspace',
   unsavedWorkspace: {
-    tabs: [],
+    tabs: [
+      {
+        src: 'http://google.se',
+        title: false,
+        favicon: false,
+      }
+    ],
     active: 0
   }
 };
@@ -73,7 +80,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_SELECTED_TAB:
-
       return Object.assign({}, state, {
         [state.current]: {
           tabs: state[state.current].tabs
@@ -103,8 +109,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           }),
           active: state[state.current].active
         }
-
       };
+
       return test;
 
     case OPEN_DASHBOARD:
@@ -116,7 +122,19 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         }
       };
 
-
+    case UPDATE_TAB_META:
+      return {
+        ...state,
+        [state.current]: {
+          tabs: state[state.current].tabs.map((tab, i) => {
+            tab[payload.type] = i === parseInt(payload.id) ?
+              payload.data :
+              tab[payload.type];
+            return tab;
+          }),
+          active: state[state.current].active
+        }
+      };
 
     default:
       return state;

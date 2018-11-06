@@ -6,7 +6,7 @@ import TabContainer from './TabContainer';
 import {
   addOneTab,
   removeSelectedTab,
-  setTabActive
+  setTabActive,
 } from '../Workspace/actions';
 
 // // Common
@@ -18,7 +18,7 @@ class TabHandler extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+
   }
 
   addOneTab = (e) => {
@@ -64,7 +64,7 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     addOneTab: addOneTab,
     removeSelectedTab: removeSelectedTab,
-    setTabActive: setTabActive
+    setTabActive: setTabActive,
   }, dispatch);
 };
 
@@ -75,7 +75,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
-    setTabActive: arg => dispatchProps.setTabActive(arg)
+    setTabActive: arg => dispatchProps.setTabActive(arg),
+
   });
 };
 

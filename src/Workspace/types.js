@@ -7,6 +7,7 @@ export const INIT_EMPTY_WORKSPACE = 'workspaces:initEmptyWorkspace';
 export const ADD_ONE_TAB = 'tabs:addOneTab';
 export const REMOVE_SELECTED_TAB = 'tabs:removeSelectedTab';
 export const SET_TAB_ACTIVE = 'tabs:setTabActive';
+export const UPDATE_TAB_META = 'tabs:updateMeta';
 
 export const ADD_SEARCH_QUERY = 'searchQuery:addSearchQuery';
 export const OPEN_DASHBOARD = 'dashboard:openDashboard';

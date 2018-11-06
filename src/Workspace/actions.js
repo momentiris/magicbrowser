@@ -6,7 +6,8 @@ import {
   RENAME_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
-  OPEN_DASHBOARD
+  OPEN_DASHBOARD,
+  UPDATE_TAB_META
 } from './types';
 
 export const initEmptyWorkspace = () => {
@@ -65,5 +66,12 @@ export const setTabActive = id => {
   return {
     type: SET_TAB_ACTIVE,
     payload: id
+  };
+};
+
+export const updateTabMeta = data => {
+  return {
+    type: UPDATE_TAB_META,
+    payload: data
   };
 };

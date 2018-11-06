@@ -23,7 +23,8 @@ const allReducers = combineReducers({
 const persistedReducer = persistReducer(persistConfig, allReducers);
 
 const allStoreEnhancers = compose(
-  applyMiddleware(thunk, logger),
+  // applyMiddleware(thunk, logger),
+  applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

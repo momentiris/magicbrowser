@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
-import { addOneTab } from '../Workspace/actions';
+import { addOneTab, updateTabMeta } from '../Workspace/actions';
 import Dashboard from '../Dashboard/Dashboard';
 
 import {
@@ -15,20 +15,36 @@ import {
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
-
   }
 
   componentDidMount() {
-    console.log(this.props);
+  
+
   }
 
   eventHandlers = {
-    onDomReady: e => {
-      console.log(e.target.getWebContents());
+    onDomReady: ({ target, target: { dataset: { id } } }) => {
+      const title = target.getTitle();
+      this.props.updateTabMeta({
+        type: 'title',
+        data: title,
+        id
+      });
+
+      target.removeEventListener('dom-ready', this.eventHandlers.onDomReady);
     },
 
     onWillNavigate: e => {
       this.props.addOneTab({src: e.url});
+    },
+
+    onPageFaviconUpdated: ({ favicons, target: { dataset: { id } }}) => {
+
+      this.props.updateTabMeta({
+        type: 'favicon',
+        data: favicons[0],
+        id
+      });
     }
   }
 
@@ -52,6 +68,7 @@ class GuestInstanceHandler extends Component {
           tabs.map((tab, i) => {
             return tab.src !== 'dashboard' ? (
               <Webview
+                id={i}
                 isActive={i === active}
                 key={i}
                 addEvents={this.addEvents}
@@ -85,6 +102,7 @@ const mapStateToProps = createSelector(
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     addOneTab: addOneTab,
+    updateTabMeta: updateTabMeta,
   }, dispatch);
 };
 
@@ -93,6 +111,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
+    updateTabMeta: arg => dispatchProps.updateTabMeta(arg),
+    workspaces: stateProps.workspaces
 
   });
 };
