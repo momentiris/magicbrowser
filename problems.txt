@@ -3,3 +3,6 @@ Spawning webviews and making them fast and how do we control them?
 How do we improve type security?
 
 How do we work with dynamic and conditional reducers, depending on other reducers that controls different part of state?
+Right now we are loading new urls to the tab by altering the redux store instead of using loadURL of the webview element api.
+We do this because we have architectural/structural problems. Our idea of the structure does for us not seem to match the inherit
+suggested structure of react with siblings and children dependence. This is mainly for function calls its a problem.

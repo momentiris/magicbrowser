@@ -5,7 +5,13 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab } from '../Workspace/actions';
-import Dashboard from '../Workspace/Components/';
+import Dashboard from '../Dashboard/Dashboard';
+
+import {
+  WebviewContainerWrap,
+  DashboardWrap
+} from './styles';
+
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +19,7 @@ class GuestInstanceHandler extends Component {
   }
 
   componentDidMount() {
-
+    console.log(this.props);
   }
 
   eventHandlers = {
@@ -39,29 +45,27 @@ class GuestInstanceHandler extends Component {
   }
 
   render() {
-    const tabs = this.props.tabs;
-
+    const { tabs, active } = this.props;
     return (
-      <div>
+      <WebviewContainerWrap>
         {
           tabs.map((tab, i) => {
             return tab.src !== 'dashboard' ? (
               <Webview
-                id={i}
+                isActive={i === active}
                 key={i}
                 addEvents={this.addEvents}
                 removeEvents={this.removeEvents}
                 src={tab.src}
-                style={{width: '100%', height: '100%'}}
               />
             ) : (
-              <Dashboard key={i}/>
-            )
-
-            ;
+              <DashboardWrap>
+                <Dashboard key={i}/>
+              </DashboardWrap>
+            );
           })
         }
-      </div>
+      </WebviewContainerWrap>
     );
   }
 }
@@ -87,7 +91,9 @@ const mapActionsToProps = (dispatch, props) => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
+    active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
+
   });
 };
 

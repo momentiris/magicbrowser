@@ -1,6 +1,7 @@
-.App {
-  width: 100vw;
+#root {
   height: 100vh;
+}
 
-
+.App {
+  height: 100%;
 }

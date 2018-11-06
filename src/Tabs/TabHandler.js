@@ -18,6 +18,7 @@ class TabHandler extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
   }
 
   addOneTab = (e) => {
@@ -34,10 +35,10 @@ class TabHandler extends Component {
   }
 
   render() {
-    const { tabs } = this.props;
+    const { tabs, active } = this.props;
     return (
       <Fragment>
-        <TabContainer setActive={this.setActive}
+        <TabContainer active={active} setActive={this.setActive}
           tabs={tabs}
           removeSelectedTab={this.removeSelectedTab}
           addOneTab={this.addOneTab}
@@ -71,6 +72,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     // ok wtf??
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
+    active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     setTabActive: arg => dispatchProps.setTabActive(arg)
