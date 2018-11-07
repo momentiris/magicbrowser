@@ -10,6 +10,7 @@ export const UrlBarInput = styled.input`
   padding: 0;
   margin: 0 8px 0 8px;
   padding-left: 16px;
+  
   &:focus {
     outline: none;
   }

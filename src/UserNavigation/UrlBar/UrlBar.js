@@ -33,7 +33,7 @@ class UrlBar extends Component {
       case KeyCodes.ENTER:
         e.preventDefault();
         this.props.navigateToUrl(`http://www.${location}.com`);
-        console.log(`www.${location}.com`);
+
         this.setState({data: !this.state.data});
     }
   }

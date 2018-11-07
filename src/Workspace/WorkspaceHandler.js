@@ -47,7 +47,7 @@ class WorkspaceHandler extends Component {
     this.setState({ workspacename: e.target.value });
   }
 
-  goToDashBoard = () => {
+  goToDashboard = () => {
     this.props.openDashBoard({src: 'dashboard'});
   }
 
@@ -67,7 +67,7 @@ class WorkspaceHandler extends Component {
   render() {
     const { workspaces, current } = this.props;
     return (
-      <WorkspaceNavUI workspaces={workspaces} current={current}/>
+      <WorkspaceNavUI goToDashboard={this.goToDashboard} workspaces={workspaces} current={current}/>
 
     );
   }

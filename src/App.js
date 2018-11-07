@@ -9,21 +9,18 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 
-import UrlBar from './Url/UrlBar';
 import Webview from './GuestInstance/Webview';
 
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 import Dashboard from './Dashboard/Dashboard';
 
-
-
 const electron = window.electron;
 const { ipcRenderer } = electron;
+
 class App extends Component {
   componentDidMount() {
 
   }
-  // <Route exact path="/dashboard" component={Dashboard}/>
 
   render() {
     return (
