@@ -4,7 +4,7 @@ export const UserNavigationContainer = styled.div`
   height: 40px;
   display: flex;
   align-items: center;
-  background: ${props => props.theme.lightgrey};
+  background: ${props => props.theme.lightergrey};
 `;
 
 export const PageNavigationContainer = styled.div`

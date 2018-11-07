@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Mainwrap = styled.section`
   min-height: 38px;
   max-height: 38px;
-  background: ${props => props.theme.darkgrey};
+  background: ${props => props.theme.mediumgrey};
   -webkit-app-region: drag;
   padding-left: 5rem;
   display: flex;

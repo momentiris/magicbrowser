@@ -23,9 +23,12 @@ export const NewWsButton = styled.button`
   background: ${props => props.theme.lightgrey};
   border-radius: ${props => props.theme.br};
   padding: 0;
-
+  border: none;
   &:focus {
     outline: none;
+  }
+  &:active {
+    border: none;
   }
   &::after {
     content: "+";
@@ -48,7 +51,7 @@ export const WsItem = styled.div`
   border-radius: ${props => props.theme.br};
   display: flex;
   margin-left: ${props => props.current ? 0 : '8px'};
-  background: ${props => props.current ? props.theme.darkgrey : 'none'};
+  background: ${props => props.current ? props.theme.lightgrey : 'none'};
   cursor: pointer;
 
   &:hover {
