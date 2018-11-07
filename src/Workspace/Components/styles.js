@@ -17,7 +17,6 @@ export const Wrapper = styled.div`
 export const Column = styled.div`
   display: flex;
   width: 100%;
-  transition: all .5s ease;
 `;
 
 // Tabs and items
@@ -25,7 +24,7 @@ export const TabWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  transition: all .5s ease;
+  width: 100%;
 `;
 
 export const TabItems = styled.div`
@@ -175,7 +174,7 @@ export const Ul = styled.ul`
   flex-direction: column;
   padding: 0px;
   width: 20%;
-  margin: 0px 181px 87px 0;
+  margin: 0px 140px 87px 0;
 `;
 
 export const Hover = styled.div`
