@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import rightarrowsvg from '../../common/assets/icons/rightarrow.svg';
+import leftarrowsvg from '../../common/assets/icons/leftarrow.svg';
+import addiconsvg from '../../common/assets/icons/add.svg';
 // Common
 export const Container = styled.div`
-  height: 100%;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -74,6 +75,8 @@ export const AnimateForm = styled.div`
 `;
 
 export const NewWsHover = styled.div`
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 32%;
   transform: ${props => props.isActive ? 'translateX(-152px)' : 'translateX(-235px)'};
@@ -110,8 +113,9 @@ export const NewWsButton = styled.button`
   outline: none;
   display: inline-block;
   font-size: ${props => props.theme.medium};
-  transition: all 0.1s ease-in;
+  transition: all .2s ease-in;
   &:hover {
+    transform: scale(1.1);
     font-weight: bold;
   }
   &:hover ${NewWsHover} {
@@ -120,7 +124,7 @@ export const NewWsButton = styled.button`
 `;
 
 export const CreateButton = styled.button`
-  background-color: ${props => props.theme.bluepurple};
+  background: ${props => props.theme.bluepurple};
   border: none;
   color: ${props => props.theme.white};
   padding: ${props => props.theme.paddingbutton};
@@ -130,21 +134,37 @@ export const CreateButton = styled.button`
   box-sizing: border-box;
   display: inline-block;
   margin-right: 12px;
+  transition: all .2s ease;
+  cursor: pointer;
   font-size: ${props => props.theme.medium};
+  &:hover{
+    background ${props => props.theme.bluebuttonhover};
+  }
+  &:active{
+    background ${props => props.theme.bluebuttonactive};
+  }
 `;
 
 export const CancelButton = styled.button`
-  background-color: ${props => props.theme.lightgrey};
+  background: ${props => props.theme.lightgrey};
   color: ${props => props.theme.black};
-  padding: 5px 22px;
-  border: 1px solid #5A5A5A;
+  padding: ${props => props.theme.paddingbutton};
+  border: none;
   box-sizing: border-box;
   border-radius: ${props => props.theme.br};
   text-decoration: none;
   outline: none;
   box-sizing: border-box;
   display: inline-block;
+  transition: all .2s ease;
+  cursor: pointer;
   font-size: ${props => props.theme.medium};
+  &:hover{
+    background ${props => props.theme.greybuttonhover};
+  }
+  &:active{
+    background ${props => props.theme.greybuttonactive};
+  }
 `;
 
 
@@ -158,22 +178,9 @@ export const Ul = styled.ul`
   margin: 0px 181px 87px 0;
 `;
 
-export const Li = styled.li`
-  list-style: none;
-  padding: 0px;
-  margin: 33px 0px 0px 0px;
-  &:nth-child(1) {
-    margin-top: 0px;
-  }
-`;
-
-export const TabLength = styled.p`
-  font-size: ${props => props.theme.small};
-  color: ${props => props.theme.black};
-  margin: 0;
-`;
-
 export const Hover = styled.div`
+  display: flex;
+  align-items: center;
   position: absolute;
   transform: translateX(-182px);
   width: 62px;
@@ -192,14 +199,74 @@ export const Button = styled.button`
   text-decoration: none;
   outline: none;
   display: inline-block;
+  cursor: pointer;
+  transition: all .2s ease;
   font-size: ${props => props.theme.medium};
-  &:hover {
-    font-weight: bold;
 
+`;
+
+export const RightArrowNewWs = styled.svg`
+  background-image: url(${rightarrowsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 16px;
+  width: 16px;
+  margin-left: 36px;
+`;
+
+export const RightArrow = styled.svg`
+  background-image: url(${rightarrowsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 16px;
+  width: 16px;
+  margin-left: 36px;
+  transition: all .2s ease;
+  opacity: 0;
+`;
+
+export const Li = styled.li`
+  list-style: none;
+  padding: 0px;
+  margin: 33px 0px 0px 0px;
+  &:nth-child(1) {
+    margin-top: 0px;
+  }
+  &:hover ${Button} {
+    font-weight: bold;
   }
   &:hover ${Hover} {
     transform: translateX(-152px);
   }
+  &:hover ${RightArrow}{
+    opacity: 1;
+  }
+`;
+
+export const TabLength = styled.p`
+  font-size: ${props => props.theme.small};
+  color: ${props => props.theme.black};
+  margin: 0;
+`;
+
+export const LeftArrow = styled.svg`
+  position: absolute;
+  background-image: url(${leftarrowsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 13px;
+  width: 13px;
+  margin: 3px 0 0 -22px;
+`;
+
+export const Add = styled.svg`
+  position: absolute;
+  background-image: url(${addiconsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+  margin: 0 0 0 -25px;
 `;
 
 

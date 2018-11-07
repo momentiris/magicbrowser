@@ -26,6 +26,10 @@ import {
   TabLength,
   ColorBox,
   ColorItem,
+  RightArrow,
+  RightArrowNewWs,
+  LeftArrow,
+  Add,
 } from './styles';
 
 import {
@@ -82,13 +86,13 @@ class Dashboard extends Component {
     return (
       <Container>
         <AddNewWs>
-          <NewWsButton>Back</NewWsButton>
+          <NewWsButton><LeftArrow />Back</NewWsButton>
           <br />
-          <NewWsButton onClick={this.onToggle}>New space</NewWsButton>
+          <NewWsButton onClick={this.onToggle}><Add />New space</NewWsButton>
           <br />
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-              <NewWsHover isActive={this.state.workspaceToggle}/>
+              <NewWsHover isActive={this.state.workspaceToggle}><RightArrowNewWs /></NewWsHover>
               <Input
                 onChange={this.handleInputChange}
                 active={this.state.isActive}
@@ -99,7 +103,7 @@ class Dashboard extends Component {
                 <ColorItem />
               </ColorBox>
               <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
-              <CancelButton onClick={this.onToggle}>Cancel</CancelButton>
+              <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
             </form>
           </AnimateForm>
         </AddNewWs>
@@ -109,7 +113,7 @@ class Dashboard extends Component {
               workspaces.map((ws, i) =>
                 <Li key={i}>
                   <Button onClick={this.handleClick} value={ws}>
-                    <Hover />
+                    <Hover> <RightArrow /> </Hover>
                     {ws}
                   </Button>
                   <br />
