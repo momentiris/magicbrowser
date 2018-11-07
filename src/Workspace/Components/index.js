@@ -15,10 +15,14 @@ import {
   TabWrapper,
   Button,
   Hover,
+  NewWsHover,
   AddNewWs,
   Input,
   CreateButton,
-  CancelButton
+  CancelButton,
+  NewWsButton,
+  AnimateForm,
+  SavedLinks,
 } from './styles';
 
 import {
@@ -30,10 +34,11 @@ import {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.hover);
     this.state = {
       toggle: false,
-      workspacename: 'Change me'
+      workspaceToggle: false,
+      workspacename: 'Change me',
+      isActive: true,
     };
   }
 
@@ -41,7 +46,7 @@ class Dashboard extends Component {
   }
 
   onToggle = () => {
-    this.setState({ toggle: !this.state.toggle });
+    this.setState({ workspaceToggle: !this.state.workspaceToggle });
   }
 
   switchWorkspaces = value => {
@@ -56,7 +61,7 @@ class Dashboard extends Component {
     e.preventDefault();
     this.props.initEmptyWorkspace();
     this.props.addWorkspace(this.state.workspacename);
-    this.setState({ toggle: !this.state.toggle });
+    // this.setState({ toggle: !this.state.toggle });
   }
 
   handleInputChange = e => {
@@ -73,19 +78,23 @@ class Dashboard extends Component {
     return (
       <Container>
         <AddNewWs>
-          <Button onClick={this.onToggle}>New space</Button>
+          <NewWsButton>Back</NewWsButton>
           <br />
-          {
-            this.state.toggle ?
-              <form onSubmit={this.addWorkspace}>
-                <Hover />
-                <Input onChange={this.handleInputChange} type="text" placeholder="Name your workspace"/>
-                <br />
-                <CreateButton type="submit">Create</CreateButton>
-                <CancelButton>Cancel</CancelButton>
-              </form>
-              : null
-          }
+          <NewWsButton onClick={this.onToggle}>New space</NewWsButton>
+          <br />
+          <AnimateForm isActive={this.state.workspaceToggle}>
+            <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
+              <NewWsHover isActive={this.state.workspaceToggle}/>
+              <Input
+                onChange={this.handleInputChange}
+                active={this.state.isActive}
+                type="text"
+                placeholder="Name your workspace"/>
+              <br />
+              <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
+              <CancelButton onClick={this.onToggle}>Cancel</CancelButton>
+            </form>
+          </AnimateForm>
         </AddNewWs>
         <Column>
           <Ul name="workspaces">
@@ -103,14 +112,14 @@ class Dashboard extends Component {
             { tabs.map((tab, i) => <TabItems id={i} key={i}> {tab.src} </TabItems> )}
           </TabWrapper>
         </Column>
-        <hr></hr>
-        <Column>
+        <SavedLinks>
           <Ul>
 
           </Ul>
           <TabWrapper>
           </TabWrapper>
-        </Column>
+        </SavedLinks>
+
       </Container>
     );
   }
