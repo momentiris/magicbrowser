@@ -4,7 +4,7 @@ import { SingleTabContainer,
   FavIcon,
   CloseButton
 } from './styles';
-
+import { TabLoader } from '../common/tabloader';
 
 const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src }) => {
 
