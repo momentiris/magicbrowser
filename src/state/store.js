@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 // Reducers
 
 import { workspacesReducer as workspaces } from '../Workspace/reducers';
-import searchQueryReducer from '../Url/reducer';
+
 
 const persistConfig = {
   key: 'root',

@@ -13,7 +13,7 @@ class Webview extends Component {
   componentDidMount() {
 
     const { current } = this.elem;
-
+    
     this.props.addEvents(current);
 
   }

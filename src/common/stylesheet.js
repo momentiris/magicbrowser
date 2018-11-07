@@ -1,5 +1,8 @@
 export const stylesheet = {
-  darkgrey: '#C4C4C4',
+  darkgrey: '#CDD0D6',
+  mediumdarkgrey: '#E0E0E0',
   mediumgrey: '#EAEAEA',
   lightgrey: '#F5F5F5',
+  br: '4px',
+
 };

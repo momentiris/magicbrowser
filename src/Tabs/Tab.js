@@ -1,5 +1,10 @@
 import React from 'react';
-import { SingleTabContainer, TabTitle, FavIcon, CloseButton } from './styles';
+import { SingleTabContainer,
+  TabTitle,
+  FavIcon,
+  CloseButton
+} from './styles';
+import { TabLoader } from '../common/TabLoader';
 
 const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src }) => {
 

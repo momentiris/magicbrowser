@@ -1,6 +1,17 @@
 import React, { Component, Fragment } from 'react';
-import UrlBar from '../Url/UrlBar';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createSelector } from 'reselect';
+import { navigateToUrl } from './actions';
+import UrlBar from './UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
+import WorkspaceHandler from '../Workspace/WorkspaceHandler';
+
+import {
+  UserNavigationContainer,
+  PageNavigationContainer,
+} from './styles';
+
 
 // todo:
 // 1. target current webview
@@ -33,16 +44,44 @@ class NavigationHandler extends Component {
   updateWebview = webview => {
 
   };
-
   render() {
-
+    const { navigateToUrl } = this.props;
     return (
-      <Fragment>
-        <UrlBar />
-      </Fragment>
+      <UserNavigationContainer>
+        <PageNavigationContainer/>
+        <WorkspaceHandler/>
+        <UrlBar navigateToUrl={navigateToUrl}/>
+
+      </UserNavigationContainer>
     );
   }
 
 }
 
-export default NavigationHandler;
+const workspacesSelector = createSelector(
+  state => state.workspaces,
+  workspaces => workspaces
+);
+
+
+const mapStateToProps = createSelector(
+  workspacesSelector,
+  workspaces => ({
+    workspaces
+  })
+);
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    navigateToUrl: navigateToUrl,
+  }, dispatch);
+};
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  return Object.assign({}, ownProps, {
+    searchQuery: stateProps.searchQuery,
+    navigateToUrl: arg => dispatchProps.navigateToUrl(arg)
+  });
+};
+
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(NavigationHandler);
