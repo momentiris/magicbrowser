@@ -70,19 +70,33 @@ export const Input = styled.input`
 export const AnimateForm = styled.div`
   transition: height .2s ease-in;
   overflow-y: hidden;
-  height: 100%;
-  height: ${props => props.isActive ? '130px' : '0px'};
+  height: ${props => props.isActive ? '180px' : '0px'};
 `;
 
 export const NewWsHover = styled.div`
   position: absolute;
-  top: 25%;
+  top: 32%;
   transform: ${props => props.isActive ? 'translateX(-152px)' : 'translateX(-235px)'};
   width: 62px;
   height: 42px;
   background: red;
   border-radius: 50px;
   transition: all 0.2s ease-in;
+`;
+
+export const ColorBox = styled.div`
+  margin: 0 0 30px 0;
+`;
+
+export const ColorItem = styled.div`
+  width: 24px;
+  height: 24px;
+  background: #A259FF;
+  border-radius: 50%;
+  &:active{
+    border: 3px solid #DDDFE3;
+    box-sizing: border-box;
+  }
 `;
 
 export const NewWsButton = styled.button`
@@ -151,6 +165,12 @@ export const Li = styled.li`
   &:nth-child(1) {
     margin-top: 0px;
   }
+`;
+
+export const TabLength = styled.p`
+  font-size: ${props => props.theme.small};
+  color: ${props => props.theme.black};
+  margin: 0;
 `;
 
 export const Hover = styled.div`

@@ -23,6 +23,9 @@ import {
   NewWsButton,
   AnimateForm,
   SavedLinks,
+  TabLength,
+  ColorBox,
+  ColorItem,
 } from './styles';
 
 import {
@@ -74,6 +77,7 @@ class Dashboard extends Component {
 
   render() {
     const tabs = this.props.tabs;
+    const tabsLength = this.props.tabs.map((item, i) => <Fragment>{item}</Fragment>).length;
     const workspaces = [].concat(this.props.workspaces).sort((a, b) => a.item - b.item);
     return (
       <Container>
@@ -91,6 +95,9 @@ class Dashboard extends Component {
                 type="text"
                 placeholder="Name your workspace"/>
               <br />
+              <ColorBox>
+                <ColorItem />
+              </ColorBox>
               <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
               <CancelButton onClick={this.onToggle}>Cancel</CancelButton>
             </form>
@@ -105,6 +112,8 @@ class Dashboard extends Component {
                     <Hover />
                     {ws}
                   </Button>
+                  <br />
+                  <TabLength>{tabsLength} Tabs</TabLength>
                 </Li>
               )}
           </Ul>
