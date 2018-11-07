@@ -6,15 +6,19 @@ class WsButton extends Component {
     clicked: false,
   }
 
+  componentDidMount(){
+    console.log(this.props);
+  }
+
   handleClick = () => {
     this.setState({clicked: !this.state.clicked});
   }
 
   render() {
     return (
-      <div>
-        <WsButton isClicked={this.state.clicked}></WsButton>
-      </div>
+      <Fragment>
+        <Button> {this.props.ok}</Button>
+      </Fragment>
     );
   }
 }

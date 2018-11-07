@@ -12,9 +12,9 @@ class WsHover extends Component {
 
   render() {
     return (
-      <div>
-        <WsHover isHover={this.state.hover}></WsHover>
-      </div>
+      <Fragment>
+        <Hover isHover={this.state.hover}></Hover>
+      </Fragment>
     );
   }
 }
