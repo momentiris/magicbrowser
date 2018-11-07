@@ -25,6 +25,7 @@ class WorkspaceHandler extends Component {
   }
 
   switchWorkspaces = value => {
+    console.log(value);
     this.props.switchWorkspaces(value);
   }
 
@@ -35,7 +36,7 @@ class WorkspaceHandler extends Component {
 
   renameWorkspace = e => {
     e.preventDefault();
-    console.log(this.state.workspacename);
+
     this.props.renameWorkspace(this.state.workspacename);
   }
 
@@ -67,8 +68,11 @@ class WorkspaceHandler extends Component {
   render() {
     const { workspaces, current } = this.props;
     return (
-      <WorkspaceNavUI goToDashboard={this.goToDashboard} workspaces={workspaces} current={current}/>
-
+      <WorkspaceNavUI goToDashboard={this.goToDashboard}
+        workspaces={workspaces}
+        current={current}
+        switchWorkspaces={this.switchWorkspaces}
+      />
     );
   }
 
@@ -98,8 +102,14 @@ const mapActionsToProps = (dispatch, props) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const withoutCurrent = Object.keys(stateProps.workspaces).filter(inst => inst !== 'current');
+  // const withoutCurrent = Object.keys(stateProps.workspaces).filter(inst => inst !== 'current');
 
+  const removeCurrent = (obj, prop) => {
+    let {[prop]: omit, ...res} = obj;
+    return res;
+  };
+
+  const withoutCurrent = Object.entries(removeCurrent(stateProps.workspaces, 'current'));
   return Object.assign({}, ownProps, {
     current: stateProps.workspaces.current,
     workspaces: withoutCurrent.reverse(),

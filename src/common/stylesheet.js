@@ -15,3 +15,18 @@ export const stylesheet = {
   paddingbutton: '6px 22px',
   br: '4px'
 };
+
+export const iconColors = [
+  '#F22B1E',
+  '#F2D01E',
+  '#1E40F2',
+  '#1EF28C',
+  '#1ABCFE',
+  '#F24E1E',
+  '#FDA015',
+  '#1EF28C',
+  '#A259FF',
+  '#F24E1E',
+  '#1E40F2',
+  '#F21EC3'
+];

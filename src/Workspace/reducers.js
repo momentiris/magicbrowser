@@ -22,13 +22,15 @@ const initialState = {
         favicon: false,
       }
     ],
-    active: 0
+    active: 0,
+    color: 'white'
   }
 };
 
 const workspaceTemplate = {
   tabs: [],
-  active: 0
+  active: 0,
+  color: 'white'
 };
 
 export const workspacesReducer = (state = initialState, { type, payload }) => {
@@ -132,7 +134,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
               tab[payload.type];
             return tab;
           }),
-          active: state[state.current].active
+          active: state[state.current].active,
+          color: state[state.current].color
         }
       };
 
