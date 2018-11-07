@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 
-import UrlBar from './Url/UrlBar';
 import Webview from './GuestInstance/Webview';
 import WorkspaceHandler from './Workspace/WorkspaceHandler';
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
