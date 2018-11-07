@@ -28,7 +28,13 @@ const initialState = {
 };
 
 const workspaceTemplate = {
-  tabs: [],
+  tabs: [
+    {
+      src: 'http://google.se',
+      title: false,
+      favicon: false,
+    }
+  ],
   active: 0,
   color: 'white'
 };
@@ -88,7 +94,9 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
             .filter((tab, i) => i !== payload.id),
           active: state[state.current].active >= state[state.current].tabs.length - 1 ?
             state[state.current].active - 1 :
-            state[state.current].active
+            state[state.current].active,
+          color: state[state.current].color
+
         }
       });
 

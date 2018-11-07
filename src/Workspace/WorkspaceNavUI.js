@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { DotIcon } from '../common/assets/DotIcon';
+import NavNewWs from './NavNewWs';
+import {
+  DotIcon,
+} from '../common/assets/icons';
 import {
   WorkspaceToggleWrap,
   WsItem,
   WsItemIcon,
   WsRestContainer,
-  NewWsButton
+  NewWsContainer
 } from './styles';
 
 class WorkspaceNavUI extends Component {
@@ -15,7 +18,9 @@ class WorkspaceNavUI extends Component {
 
     this.state = {
       isWsToggleActive: false,
-      restActive: false
+      restActive: false,
+      isNewWsActive: false,
+      overflow: false
     };
   }
 
@@ -24,6 +29,7 @@ class WorkspaceNavUI extends Component {
       startwidth: this.workspacetoggle.current.clientWidth + 'px',
       width: this.workspacetoggle.current.clientWidth + 'px',
     });
+
     setTimeout(this.setState({
       restActive: true,
     }), 200);
@@ -39,41 +45,61 @@ class WorkspaceNavUI extends Component {
     });
   }
 
-  handleToggle = () => {
-    this.setState({
+  handleToggle = async () => {
+    await this.setState({
       isWsToggleActive: !this.state.isWsToggleActive,
       width: !this.state.isWsToggleActive ? '100%' : this.state.startwidth,
     });
+    await this.toggleOverflow();
   }
 
   handleNewWorkspace = () => {
     console.log('hej');
   }
 
+  toggleOverflow = () => {
+    setTimeout(this.setState({overflow: !this.state.overflow}), 200);
+  }
+
   render() {
     const { current, workspaces, goToDashboard, switchWorkspaces } = this.props;
+
     const firstInst = workspaces
-      .filter((inst,i) => inst[0] === current )
-      .map((inst,i) => <WsItem onClick={this.handleToggle} current key={i}><DotIcon color={inst[1].color}/><span>{inst[0]}</span></WsItem>);
+      .filter((inst,i) => inst[0] === current)
+      .map((inst,i) => (
+        <WsItem
+          onClick={this.handleToggle}
+          current
+          clicked={this.state.isWsToggleActive}
+          key={i}
+        >
+          <DotIcon color={inst[1].color}/>
+          <span>{inst[0]}</span>
+        </WsItem>
+      ));
 
     const restInst = workspaces
       .filter((inst,i) => inst[0] !== current )
-      .map((inst,i) => <WsItem onClick={({ target }) => this.handleSwitchWorkspace(inst[0], target)} key={i + 1}><DotIcon color={inst[1].color}/><span>{inst[0]}</span></WsItem>);
-
-    const RestIntContainer = () =>  <WsRestContainer> {restInst} <NewWsButton onClick={this.handleNewWorkspace} /></WsRestContainer>;
+      .map((inst,i) => (
+        <WsItem
+          onClick={({ target }) => this.handleSwitchWorkspace(inst[0], target)}
+          key={i + 1}
+        >
+          <DotIcon color={inst[1].color}/>
+          <span>{inst[0]}</span>
+        </WsItem>
+      ));
 
     return (
 
-      <WorkspaceToggleWrap ref={this.workspacetoggle} width={this.state.width}>
-        {
-          firstInst
-        }
-        {
-          this.state.restActive && <RestIntContainer/>
-        }
-
-
-
+      <WorkspaceToggleWrap open={this.state.overflow} ref={this.workspacetoggle} width={this.state.width}>
+        { firstInst }
+        { this.state.restActive && (
+          <WsRestContainer>
+            {restInst}
+            <NavNewWs open={this.state.overflow}/>
+          </WsRestContainer>
+        ) }
       </WorkspaceToggleWrap>
     );
   }

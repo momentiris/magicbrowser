@@ -11,7 +11,7 @@ export const Mainwrap = styled.section`
 `;
 
 export const SingleTabContainer = styled.div`
-  width: 294px;
+  width: 282px;
   height: 32px;
   display: flex;
   overflow-x: hidden;

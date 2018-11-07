@@ -68,7 +68,8 @@ class WorkspaceHandler extends Component {
   render() {
     const { workspaces, current } = this.props;
     return (
-      <WorkspaceNavUI goToDashboard={this.goToDashboard}
+      <WorkspaceNavUI
+        goToDashboard={this.goToDashboard}
         workspaces={workspaces}
         current={current}
         switchWorkspaces={this.switchWorkspaces}
