@@ -4,7 +4,8 @@ import {
   WorkspaceToggleWrap,
   WsItem,
   WsItemIcon,
-  WsRestContainer
+  WsRestContainer,
+  NewWsButton
 } from './styles';
 
 class WorkspaceNavUI extends Component {
@@ -43,7 +44,10 @@ class WorkspaceNavUI extends Component {
       isWsToggleActive: !this.state.isWsToggleActive,
       width: !this.state.isWsToggleActive ? '100%' : this.state.startwidth,
     });
+  }
 
+  handleNewWorkspace = () => {
+    console.log('hej');
   }
 
   render() {
@@ -56,17 +60,19 @@ class WorkspaceNavUI extends Component {
       .filter((inst,i) => inst[0] !== current )
       .map((inst,i) => <WsItem onClick={({ target }) => this.handleSwitchWorkspace(inst[0], target)} key={i + 1}><DotIcon color={inst[1].color}/><span>{inst[0]}</span></WsItem>);
 
+    const RestIntContainer = () =>  <WsRestContainer> {restInst} <NewWsButton onClick={this.handleNewWorkspace} /></WsRestContainer>;
+
     return (
 
       <WorkspaceToggleWrap ref={this.workspacetoggle} width={this.state.width}>
         {
           firstInst
         }
-        <WsRestContainer>
         {
-          this.state.restActive &&  restInst
+          this.state.restActive && <RestIntContainer/>
         }
-        </WsRestContainer>
+
+
 
       </WorkspaceToggleWrap>
     );

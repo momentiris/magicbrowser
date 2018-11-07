@@ -17,6 +17,27 @@ export const WsRestContainer = styled.div`
   display: flex;
 `;
 
+export const NewWsButton = styled.button`
+  width: 26px;
+  height: 32px;
+  background: ${props => props.theme.lightgrey};
+  border-radius: ${props => props.theme.br};
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+  &::after {
+    content: "+";
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
 export const WsItem = styled.div`
   flex-shrink: 0;
   display: inline;
