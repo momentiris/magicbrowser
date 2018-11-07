@@ -32,7 +32,7 @@ class UrlBar extends Component {
         break;
       case KeyCodes.ENTER:
         e.preventDefault();
-        this.props.addSearchQuery(`http://www.${location}.com`);
+        this.props.addSearchQuery(`${location}`);
         console.log(`www.${location}.com`);
         this.setState({data: !this.state.data});
     }

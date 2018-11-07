@@ -13,7 +13,7 @@ import UrlBar from './Url/UrlBar';
 import Webview from './GuestInstance/Webview';
 import WorkspaceHandler from './Workspace/WorkspaceHandler';
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
-import Dashboard from './Dashboard/Dashboard';
+import Dashboard from './Workspace/Components/';
 
 const electron = window.electron;
 const { ipcRenderer } = electron;

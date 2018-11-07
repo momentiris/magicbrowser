@@ -2,7 +2,22 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { Container, Column, Ul, Li, ItemLink, Ua, UaHeader, TabItems, TabWrapper, Button, Hover } from './styles';
+import WsButton from './WorkSpaceButton/wsbutton';
+import WsHover from './WorkSpaceButton/wshover';
+import {
+  Container,
+  Column,
+  Ul,
+  Li,
+  ItemLink,
+  Ua,
+  UaHeader,
+  TabItems,
+  TabWrapper,
+  Button,
+  Hover,
+} from './styles';
+
 import {
   addWorkspace,
   switchWorkspaces
@@ -11,11 +26,11 @@ import {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   hover: false,
-    // };
+    console.log(this.props.hover);
   }
 
+  componentDidMount(){
+  }
 
   switchWorkspaces = value => {
     this.props.switchWorkspaces(value);
@@ -40,7 +55,7 @@ class Dashboard extends Component {
         </Ua>
         <Column>
           <Ul name="workspaces">
-            { workspaces.map((ws, i) => <Li key={i}> <Button onClick={this.handleClick} value={ws}><Hover></Hover> {ws}</Button></Li> )}
+            { workspaces.map((ws, i) => <Li key={i}> <Button onClick={this.handleClick} value={ws}> <Hover></Hover> {ws}</Button></Li> )}
           </Ul>
           <TabWrapper >
             { tabs.map((tab, i) => <TabItems id={i} key={i}> {tab.src} </TabItems> )}
