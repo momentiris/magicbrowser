@@ -12,7 +12,7 @@ import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 import Webview from './GuestInstance/Webview';
 
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
-import Dashboard from './Workspace/Components/';
+import Dashboard from './Workspace/Components/DashBoard';
 
 const electron = window.electron;
 const { ipcRenderer } = electron;

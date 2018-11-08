@@ -42,6 +42,8 @@ export const TabWrapper = styled.div`
 `;
 
 export const TabItems = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 193px
   height: 109px;
   background: ${props => props.theme.white};
@@ -49,6 +51,7 @@ export const TabItems = styled.div`
   margin: 6px 6px 6px 6px;
   transition: all .1s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
+  cursor: pointer;
   &:hover {
     transform: scale(1.05);
   }
@@ -66,6 +69,7 @@ export const AddNewTab = styled.div`
   border: 1px solid ${props => props.theme.semiblack};
   transition: all .1s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
+  cursor: pointer;
   &:hover {
     transform: scale(1.05);
   }
@@ -79,7 +83,7 @@ export const AddNewWs = styled.div`
 `;
 
 export const Input = styled.input`
-  margin: 25px 0 24px 0px;
+  margin: 30px 0 24px 0px;
   background: none;
   width: 242px;
   height: 32px;
@@ -188,8 +192,6 @@ export const CancelButton = styled.button`
   display: inline-block;
   transition: all .1s ease;
   cursor: pointer;
-
-
   font-size: ${props => props.theme.medium};
   &:hover{
     background ${props => props.theme.lightgrey};
@@ -299,11 +301,42 @@ export const Add = styled.svg`
   width: 20px;
   transform: ${props => props.isActive ? 'rotate(45deg)' : 'rotate(0deg)'};
   margin: 0 0 0 -25px;
-  transition: all .4s cubic-bezier(0,.72,.5,.99);
+  transition: all .3s cubic-bezier(0,.72,.5,.99);
+`;
+
+export const Close = styled.svg`
+  background-image: url(${closeiconsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 4px;
+  height: 14px;
+  width: 14px;
+  transition: all .2s cubic-bezier(0,.72,.5,.99);
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.4);
+  }
 `;
 
 // Saved links
 export const SavedLinks = styled.div`
   border-top: 1px solid ${props => props.theme.darkgrey};
   padding-top: 44px;
+`;
+
+export const SavedLinksWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  width: 325px;
+  margin: 0px 100px 0px 0;
+`;
+
+export const SavedLinksHeader = styled.h3`
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 24px;
+  margin: 0;
+  color: ${props => props.theme.semiblack}
 `;
