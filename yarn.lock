@@ -8215,6 +8215,11 @@ react-scripts@2.0.5:
   optionalDependencies:
     fsevents "1.2.4"
 
+react-thumbnail@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-thumbnail/-/react-thumbnail-1.0.0.tgz#58581d680d82295502bf646384fab4d3c2d79180"
+  integrity sha1-WFgdaA2CKVUCv2RjhPq008LXkYA=
+
 react@^16.5.2:
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.6.0.tgz#b34761cfaf3e30f5508bc732fb4736730b7da246"
