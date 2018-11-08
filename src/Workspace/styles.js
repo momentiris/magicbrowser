@@ -89,7 +89,6 @@ export const ColorPickerContainer = styled.div`
     overflow: hidden;
     border-radius: 0 0 ${props => props.theme.br} ${props => props.theme.br};
   }
-
 `;
 
 export const InnerColorPickerContainer = styled.div`
@@ -101,6 +100,13 @@ justify-content: space-between;
 align-items: space-between;
 
 flex-flow: column wrap;
+div {
+  transition: transform 100ms ease;
+  &:hover {
+    transform: scale(1.2);
+  }
+
+}
 svg {
   margin: 4px 4px 0 4px;
 }
@@ -123,6 +129,7 @@ export const NewWsColorDisplay = styled.div`
   height: 24px;
   width: 24px;
   border-right: 2px solid ${props => props.theme.borderradiuscolor};
+  background: ${props => props.color};
 `;
 export const NewWsColorInputWrapper = styled.div`
   width: 90px;
