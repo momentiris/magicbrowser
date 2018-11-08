@@ -10,14 +10,27 @@ export const Container = styled.div`
   background: ${props => props.theme.dashboardgrey};
 `;
 
-export const Wrapper = styled.div`
-
+export const InnerColorPickerContainer = styled.div`
+  width: 164px;
+  flex-shrink: 0;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+  flex-flow: column wrap;
+  svg {
+    margin: 4px 4px 0 4px;
+  }
 `;
 
+export const ColorPickerContainer = styled.div`
+  margin: 0px 0px 24px -3px;
+`;
 
 export const Column = styled.div`
   display: flex;
   width: 100%;
+  padding-bottom: 88px;
 `;
 
 // Tabs and items
@@ -50,7 +63,7 @@ export const AddNewTab = styled.div`
   background: ${props => props.theme.dashboardgrey};
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;
-  border: 1px solid #5A5A5A;
+  border: 1px solid ${props => props.theme.semiblack};
   transition: all .1s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   &:hover {
@@ -61,12 +74,12 @@ export const AddNewTab = styled.div`
 // Back / Create New space
 
 export const AddNewWs = styled.div`
-  margin: 0px 0 33px 0;
-  opacity: ${props => props.toggle ? '0' : '1'};
+  margin: 0px;
+  padding-bottom: 32px;
 `;
 
 export const Input = styled.input`
-  margin: 30px 0 24px 0px;
+  margin: 25px 0 24px 0px;
   background: none;
   width: 242px;
   height: 32px;
@@ -85,9 +98,10 @@ export const Input = styled.input`
 `;
 
 export const AnimateForm = styled.div`
-  transition: height .5s cubic-bezier(0,.72,.5,.99);
+  transition: all .3s cubic-bezier(0,.72,.5,.99);
   overflow-y: hidden;
-  height: ${props => props.isActive ? '180px' : '0px'};
+  opacity: ${props => props.isActive ? '1' : '0'}
+  height: ${props => props.isActive ? '215px' : '0px'};
 `;
 
 export const NewWsHover = styled.div`
@@ -98,9 +112,9 @@ export const NewWsHover = styled.div`
   transform: ${props => props.isActive ? 'translateX(-152px)' : 'translateX(-235px)'};
   width: 62px;
   height: 42px;
-  background: red;
+  background: ${props => props.color};
   border-radius: 50px;
-  transition: all 0.5s cubic-bezier(0,.72,.5,.99);
+  transition: all 0.3s cubic-bezier(0,.72,.5,.99);
 `;
 
 export const ColorBox = styled.div`
@@ -121,7 +135,7 @@ export const ColorItem = styled.div`
 export const NewWsButton = styled.button`
   background: none;
   border: none;
-  color: #000000;
+  color:  ${props => props.theme.semiblack};;
   padding: 6px 0px;
   margin: 6px 0 6px 0;
   text-align: left;
@@ -130,8 +144,9 @@ export const NewWsButton = styled.button`
   display: inline-block;
   font-size: ${props => props.theme.medium};
   transition: all .1s ease;
+  cursor: pointer;
   &:hover {
-    font-weight: bold;
+    color: ${props => props.theme.black};
   }
   &:hover ${NewWsHover} {
     transform: translateX(-200px);
@@ -164,7 +179,7 @@ export const CancelButton = styled.button`
   background: ${props => props.theme.dashboardgrey};
   color: ${props => props.theme.black};
   padding: ${props => props.theme.paddingbutton};
-  box-shadow: inset 0 0 0 1px #5A5A5A;
+  box-shadow: inset 0 0 0 1px ${props => props.theme.semiblack};
   border: none;
   border-radius: ${props => props.theme.br};
   text-decoration: none;
@@ -184,15 +199,13 @@ export const CancelButton = styled.button`
   }
 `;
 
-
-
 // Ws all
 export const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0px;
   width: 325px;
-  margin: 0px 118px 87px 0;
+  margin: 0px 100px 0px 0;
 `;
 
 export const Hover = styled.div`
@@ -203,14 +216,14 @@ export const Hover = styled.div`
   width: 62px;
   height: 42px;
   border-radius: 50px;
-  background: red;
+  background: ${props => props.color};
   transition: all .2s ease-in;
 `;
 
 export const Button = styled.button`
   background: none;
   border: none;
-  color: #000000;
+  color: ${props => props.theme.semiblack};
   padding: 6px 0px;
   text-align: left;
   text-decoration: none;
@@ -251,7 +264,7 @@ export const Li = styled.li`
     margin-top: 0px;
   }
   &:hover ${Button} {
-    font-weight: bold;
+    color: ${props => props.theme.black};
   }
   &:hover ${Hover} {
     transform: translateX(-152px);
@@ -289,9 +302,8 @@ export const Add = styled.svg`
   transition: all .4s cubic-bezier(0,.72,.5,.99);
 `;
 
-
 // Saved links
-
 export const SavedLinks = styled.div`
-  border-top: 1px solid #C4C4C4;
+  border-top: 1px solid ${props => props.theme.darkgrey};
+  padding-top: 44px;
 `;

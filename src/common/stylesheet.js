@@ -8,10 +8,12 @@ export const stylesheet = {
   bluepurple: '#4738F9',
   white: '#FFFFFF',
   black: '#000000',
+  semiblack: '#5A5A5A',
   // Font sizes
   small: '12px',
   medium: '16px',
   large: '24px',
+
   // Button config
   paddingbutton: '6px 22px',
   br: '4px',

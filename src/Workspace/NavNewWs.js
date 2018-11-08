@@ -87,7 +87,7 @@ class NavNewWs extends Component {
         <ColorPickerContainer toggleDropdown={toggleDropdown}>
           <InnerColorPickerContainer>
             {
-              iconColors && iconColors.map((c, i) => <div key={i} onClick={() => this.handlePickColor(c)} color={c}><DotIcon  color={c} /></div> )
+              iconColors && iconColors.map((c, i) => <div key={i} onClick={() => this.handlePickColor(c)} color={c}><DotIcon color={c} /></div> )
             }
 
           </InnerColorPickerContainer>

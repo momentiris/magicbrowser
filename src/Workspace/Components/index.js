@@ -2,15 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-// import WsButton from './WorkSpaceButton/wsbutton';
+import WsColor from './WsColors/';
 // import WsHover from './WorkSpaceButton/wshover';
 import {
   Container,
   Column,
   Ul,
   Li,
-  ItemLink,
-  Ua,
   TabItems,
   TabWrapper,
   Button,
@@ -24,14 +22,11 @@ import {
   AnimateForm,
   SavedLinks,
   TabLength,
-  ColorBox,
-  ColorItem,
   RightArrow,
   RightArrowNewWs,
   LeftArrow,
   Add,
   AddNewTab,
-  AddBig,
 } from './styles';
 
 import {
@@ -49,10 +44,16 @@ class Dashboard extends Component {
       workspaceToggle: false,
       workspacename: 'Change me',
       isActive: true,
+      wsButtonColor: '',
+      newWorkspace: {
+        name: '',
+        color: ''
+      }
     };
   }
 
   componentDidMount(){
+    console.log(this.props);
   }
 
   onToggle = () => {
@@ -69,17 +70,35 @@ class Dashboard extends Component {
 
   addWorkspace = e => {
     e.preventDefault();
-    this.props.initEmptyWorkspace();
-    this.props.addWorkspace(this.state.workspacename);
+    console.log(this.state.newWorkspace);
+    this.props.addWorkspace(this.state.newWorkspace);
     // this.setState({ toggle: !this.state.toggle });
   }
 
   handleInputChange = e => {
-    this.setState({ workspacename: e.target.value });
+    console.log(e.target.value);
+    this.setState({
+      workspacename: e.target.value,
+      newWorkspace: {
+        name: e.target.value,
+        color: this.state.newWorkspace.color,
+      }
+    });
   }
 
   addOneTab = (e) => {
     this.props.addOneTab({src: 'http://facebook.com'});
+  }
+
+  updateWsColor = (color) => {
+    this.setState({
+      wsButtonColor: color,
+      newWorkspace: {
+        color: color,
+        name: this.state.newWorkspace.name
+      }
+    });
+    console.log(color);
   }
 
   // TODO: Move the Button and hover to own components, to make different states
@@ -88,27 +107,22 @@ class Dashboard extends Component {
 
   render() {
     const tabs = this.props.tabs;
-    const tabsLength = this.props.tabs.map((item, i) => <Fragment>{item}</Fragment>).length;
-    const workspaces = [].concat(this.props.workspaces).sort((a, b) => a.item - b.item);
+    const workspaces = this.props.workspaces;
     return (
       <Container>
         <AddNewWs>
           <NewWsButton><LeftArrow />Back</NewWsButton>
           <br />
           <NewWsButton onClick={this.onToggle}><Add isActive={this.state.workspaceToggle}/>New space</NewWsButton>
-          <br />
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-              <NewWsHover isActive={this.state.workspaceToggle}><RightArrowNewWs /></NewWsHover>
+              <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}><RightArrowNewWs /></NewWsHover>
               <Input
                 onChange={this.handleInputChange}
                 active={this.state.isActive}
                 type="text"
                 placeholder="Name your workspace"/>
-              <br />
-              <ColorBox>
-                <ColorItem />
-              </ColorBox>
+              <WsColor updateWsColor={this.updateWsColor}/>
               <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
               <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
             </form>
@@ -117,29 +131,37 @@ class Dashboard extends Component {
         <Column>
           <Ul name="workspaces">
             {
-              workspaces.map((ws, i) =>
+              workspaces.map((ws, i) => (
                 <Li key={i}>
-                  <Button onClick={this.handleClick} value={ws}>
-                    <Hover> <RightArrow /> </Hover>
-                    {ws}
+                  <Button onClick={this.handleClick} value={ws[0]}>
+                    <Hover color={ws[1].color || '#5C4EFF'}> <RightArrow /> </Hover>
+                    {ws[0]}
                   </Button>
                   <br />
-                  <TabLength>{tabsLength} Tabs</TabLength>
+                  <TabLength>
+                    {`${ws[1].tabs.length} ${ws[1].tabs.length > 1 ? 'Tabs' : 'Tab'}`}
+                  </TabLength>
                 </Li>
-              )}
+              ))
+            }
           </Ul>
           <TabWrapper >
-            { tabs.map((tab, i) => <TabItems id={i} key={i}> {tab.src} </TabItems> )}<AddNewTab onClick={this.addOneTab}><Add style={{margin: '0px', height: '24px', width: '24px'}}/></AddNewTab>
+            {
+              tabs.map((tab, i) =>
+                <TabItems id={i} key={i}> {tab.src}
+                </TabItems>
+              )
+            }
+            <AddNewTab onClick={this.addOneTab}>
+              <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
+            </AddNewTab>
           </TabWrapper>
         </Column>
         <SavedLinks>
-          <Ul>
+          <Column>
 
-          </Ul>
-          <TabWrapper>
-          </TabWrapper>
+          </Column>
         </SavedLinks>
-
       </Container>
     );
   }
@@ -167,7 +189,13 @@ const mapActionsToProps = (dispatch, props) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const withoutCurrent = Object.keys(stateProps.workspaces).filter(inst => inst !== 'current');
+  const removeCurrent = (obj, prop) => {
+    let {[prop]: omit, ...res} = obj;
+    return res;
+  };
+
+  const withoutCurrent = Object.entries(removeCurrent(stateProps.workspaces, 'current'));
+
   return Object.assign({}, ownProps, {
     current: stateProps.workspaces.current,
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,

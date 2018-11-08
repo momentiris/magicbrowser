@@ -54,9 +54,11 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
     case ADD_WORKSPACE:
       return Object.assign({}, {
         ...state,
-        [payload]: workspaceTemplate
+        [payload.name]: {
+          ...workspaceTemplate,
+          color: payload.color
+        }
       });
-
     case RENAME_CURRENT_WORKSPACE:
       const renameProp = (
         oldProp,
