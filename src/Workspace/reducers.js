@@ -117,7 +117,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
             tab.src = state[state.current].active === i ? payload : tab.src;
             return tab;
           }),
-          active: state[state.current].active
+          active: state[state.current].active,
+          color: state[state.current].color
         }
       };
 

@@ -63,6 +63,7 @@ class WorkspaceNavUI extends Component {
 
   render() {
     const { current, workspaces, goToDashboard, switchWorkspaces } = this.props;
+    const { isWsToggleActive, overflow, width } = this.state;
 
     const firstInst = workspaces
       .filter((inst,i) => inst[0] === current)
@@ -70,7 +71,7 @@ class WorkspaceNavUI extends Component {
         <WsItem
           onClick={this.handleToggle}
           current
-          clicked={this.state.isWsToggleActive}
+          clicked={isWsToggleActive}
           key={i}
         >
           <DotIcon color={inst[1].color}/>
@@ -92,12 +93,12 @@ class WorkspaceNavUI extends Component {
 
     return (
 
-      <WorkspaceToggleWrap open={this.state.overflow} ref={this.workspacetoggle} width={this.state.width}>
+      <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width}>
         { firstInst }
         { this.state.restActive && (
           <WsRestContainer>
             {restInst}
-            <NavNewWs open={this.state.overflow}/>
+            <NavNewWs isWsToggleActive={isWsToggleActive} open={overflow}/>
           </WsRestContainer>
         ) }
       </WorkspaceToggleWrap>

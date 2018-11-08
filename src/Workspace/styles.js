@@ -17,7 +17,7 @@ export const WsRestContainer = styled.div`
   display: flex;
 `;
 export const NewWsButtonContainer = styled.div`
-  padding: 0 16px 0 8px;
+  padding: 0 12px 0 8px;
 `;
 export const NewWsContainer = styled.div`
   position: relative;
@@ -39,9 +39,7 @@ export const NewWsContainer = styled.div`
   &:hover {
     background: ${props => props.toggleOpen ? props.theme.lightgrey : props.theme.lightgrey};
   }
-  svg {
-    flex-shrink: 0;
-  }
+
 `;
 export const InnerNewWsContainer = styled.div`
 
@@ -57,39 +55,97 @@ export const NewWsArrowContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: ${props => props.open ? 'rotate(180deg)' : 'none'};
-  margin-right: 16px;
+  transform: ${props => props.open ? 'rotateX(180deg)' : 'none'};
+  margin-right: 15px;
   margin-top: 2px;
+  margin-left: 9px;
 `;
 
 export const ColorPickerContainer = styled.div`
   position: absolute;
-  background: ${props => props.theme.lightgrey};
+  background: white;
   height: ${props => props.toggleDropdown ? '116px' : 0};
   width: 209px;
+  opacity: ${props => props.toggleDropdown ? 1 : 0};
   bottom: 0;
   border-radius: 0 0 ${props => props.theme.br} ${props => props.theme.br};
   transform: translateY(100%);
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  background: ${props => props.theme.lightgrey};
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+  flex-flow: column nowrap;
   &::before {
-    border-radius: 0 0 ${props => props.theme.br} ${props => props.theme.br};
-    background: white;
-    margin: 0 auto;
     content: "";
     width: 97%;
-    height: 97%;
-    display: block;
+    height: 96%;
+    position: absolute;
+    background: white;
+    margin: 0 auto;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: 0 0 ${props => props.theme.br} ${props => props.theme.br};
+  }
+
+`;
+
+export const InnerColorPickerContainer = styled.div`
+width: 164px;
+flex-shrink: 0;
+height: 48px;
+display: flex;
+justify-content: space-between;
+align-items: space-between;
+
+flex-flow: column wrap;
+svg {
+  margin: 4px 4px 0 4px;
+}
+
+`;
+
+export const NewWsColorInput = styled.input`
+  border: none;
+  width: 100%;
+  padding: 0;
+  padding-left: 4px;
+  color: #848484;
+
+  &:focus {
+    outline: none;
   }
 `;
 
+export const NewWsColorDisplay = styled.div`
+  height: 24px;
+  width: 24px;
+  border-right: 2px solid ${props => props.theme.borderradiuscolor};
+`;
+export const NewWsColorInputWrapper = styled.div`
+  width: 90px;
+  height: 24px;
+  border: 2px solid ${props => props.theme.borderradiuscolor};
+  border-radius: ${props => props.theme.br};
+  flex-shrink: 0;
+  display: flex;
+  align-self: flex-start;
+  margin-left: 10px;
+  margin-top: 12px;
+`;
 export const NewWsInput = styled.input`
-  width: 132px;
-  border: 1px solid black;
+  width: 124px;
+  box-sizing: border-box;
+  border: none;
   height: 20px;
   background: none;
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 4px;
+  padding-right: 4px;
   ::placeholder {
-    font-size: 14px;
+    font-size: 12px;
   }
   :focus {
     outline: none;
