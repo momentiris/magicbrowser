@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import rightarrowsvg from '../../common/assets/icons/rightarrow.svg';
 import leftarrowsvg from '../../common/assets/icons/leftarrow.svg';
 import addiconsvg from '../../common/assets/icons/add.svg';
+import closeiconsvg from '../../common/assets/icons/close.svg';
 // Common
 export const Container = styled.div`
   padding: 70px 135px 0px 135px;
@@ -40,6 +41,23 @@ export const TabItems = styled.div`
   }
 `;
 
+export const AddNewTab = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 192px
+  height: 108px;
+  background: ${props => props.theme.dashboardgrey};
+  border-radius: ${props => props.theme.br};
+  margin: 6px 6px 6px 6px;
+  border: 1px solid #5A5A5A;
+  transition: all .1s ease;
+  box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
 // Back / Create New space
 
 export const AddNewWs = styled.div`
@@ -62,13 +80,12 @@ export const Input = styled.input`
   &:focus {
     transition: all 0.4s ease;
     margin: 30px 0 23px 0px;
-
     border-bottom: 1px solid rgba(91, 91, 91, 0.52);
   }
 `;
 
 export const AnimateForm = styled.div`
-  transition: height .2s ease-in;
+  transition: height .5s cubic-bezier(0,.72,.5,.99);
   overflow-y: hidden;
   height: ${props => props.isActive ? '180px' : '0px'};
 `;
@@ -83,7 +100,7 @@ export const NewWsHover = styled.div`
   height: 42px;
   background: red;
   border-radius: 50px;
-  transition: all 0.2s ease-in;
+  transition: all 0.5s cubic-bezier(0,.72,.5,.99);
 `;
 
 export const ColorBox = styled.div`
@@ -112,9 +129,8 @@ export const NewWsButton = styled.button`
   outline: none;
   display: inline-block;
   font-size: ${props => props.theme.medium};
-  transition: all .2s ease-in;
+  transition: all .1s ease;
   &:hover {
-    transform: scale(1.1);
     font-weight: bold;
   }
   &:hover ${NewWsHover} {
@@ -133,7 +149,7 @@ export const CreateButton = styled.button`
   box-sizing: border-box;
   display: inline-block;
   margin-right: 12px;
-  transition: all .2s ease;
+  transition: all .1s ease;
   cursor: pointer;
   font-size: ${props => props.theme.medium};
   &:hover{
@@ -145,24 +161,26 @@ export const CreateButton = styled.button`
 `;
 
 export const CancelButton = styled.button`
-  background: ${props => props.theme.lightgrey};
+  background: ${props => props.theme.dashboardgrey};
   color: ${props => props.theme.black};
   padding: ${props => props.theme.paddingbutton};
+  box-shadow: inset 0 0 0 1px #5A5A5A;
   border: none;
-  box-sizing: border-box;
   border-radius: ${props => props.theme.br};
   text-decoration: none;
   outline: none;
   box-sizing: border-box;
   display: inline-block;
-  transition: all .2s ease;
+  transition: all .1s ease;
   cursor: pointer;
+
+
   font-size: ${props => props.theme.medium};
   &:hover{
-    background ${props => props.theme.greybuttonhover};
+    background ${props => props.theme.lightgrey};
   }
   &:active{
-    background ${props => props.theme.greybuttonactive};
+    background ${props => props.theme.mediumgrey};
   }
 `;
 
@@ -173,8 +191,8 @@ export const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0px;
-  width: 20%;
-  margin: 0px 140px 87px 0;
+  width: 325px;
+  margin: 0px 118px 87px 0;
 `;
 
 export const Hover = styled.div`
@@ -198,9 +216,10 @@ export const Button = styled.button`
   text-decoration: none;
   outline: none;
   display: inline-block;
+  word-break: break-all;
   cursor: pointer;
-  transition: all .2s ease;
-  font-size: ${props => props.theme.medium};
+  transition: all .1s ease;
+  font-size: ${props => props.theme.large};
 
 `;
 
@@ -220,8 +239,8 @@ export const RightArrow = styled.svg`
   height: 16px;
   width: 16px;
   margin-left: 36px;
-  transition: all .2s ease;
-  opacity: 0;
+  transition: all .4s ease-out;
+  transform: translateX(-15px)
 `;
 
 export const Li = styled.li`
@@ -238,7 +257,7 @@ export const Li = styled.li`
     transform: translateX(-152px);
   }
   &:hover ${RightArrow}{
-    opacity: 1;
+    transform: translateX(0px);
   }
 `;
 
@@ -265,7 +284,9 @@ export const Add = styled.svg`
   background-size: contain;
   height: 20px;
   width: 20px;
+  transform: ${props => props.isActive ? 'rotate(45deg)' : 'rotate(0deg)'};
   margin: 0 0 0 -25px;
+  transition: all .4s cubic-bezier(0,.72,.5,.99);
 `;
 
 
