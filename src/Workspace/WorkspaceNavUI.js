@@ -15,7 +15,7 @@ class WorkspaceNavUI extends Component {
   constructor(props) {
     super(props);
     this.workspacetoggle = React.createRef();
-
+    this.WsRestContainer = React.createRef();
     this.state = {
       isWsToggleActive: false,
       restActive: false,
@@ -35,15 +35,16 @@ class WorkspaceNavUI extends Component {
     }), 200);
   }
 
-  handleSwitchWorkspace = (ws, elem) => {
+  handleSwitchWorkspace = async (ws, elem) => {
     this.props.switchWorkspaces(ws);
-    console.log(elem);
-    this.setState({
+    console.log(ws);
+    await this.setState({
       startwidth: elem.clientWidth + 'px',
-      isWsToggleActive: !this.state.isWsToggleActive,
       width: elem.clientWidth + 'px',
     });
+    await this.handleToggle();
   }
+
 
   handleToggle = async () => {
     await this.setState({
@@ -51,18 +52,23 @@ class WorkspaceNavUI extends Component {
       width: !this.state.isWsToggleActive ? '100%' : this.state.startwidth,
     });
     await this.toggleOverflow();
+    this.measureWsRestContainer();
+  }
+
+  measureWsRestContainer = () => {
+    console.log(this.WsRestContainer.current.clientWidth);
   }
 
   handleNewWorkspace = () => {
     console.log('hej');
   }
 
-  toggleOverflow = () => {
-    setTimeout(this.setState({overflow: !this.state.overflow}), 200);
+  toggleOverflow = async () => {
+    await setTimeout(() => this.setState({overflow: !this.state.overflow}), !this.state.overflow ? 300 : 0);
   }
 
   render() {
-    const { current, workspaces, goToDashboard, switchWorkspaces } = this.props;
+    const { current, workspaces, goToDashboard, switchWorkspaces, addWorkspace } = this.props;
     const { isWsToggleActive, overflow, width } = this.state;
 
     const firstInst = workspaces
@@ -96,9 +102,9 @@ class WorkspaceNavUI extends Component {
       <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width}>
         { firstInst }
         { this.state.restActive && (
-          <WsRestContainer>
+          <WsRestContainer ref={this.WsRestContainer}>
             {restInst}
-            <NavNewWs isWsToggleActive={isWsToggleActive} open={overflow}/>
+            <NavNewWs handleToggle={this.handleToggle} isWsToggleActive={isWsToggleActive} addWorkspace={addWorkspace} open={overflow}/>
           </WsRestContainer>
         ) }
       </WorkspaceToggleWrap>

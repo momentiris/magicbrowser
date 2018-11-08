@@ -29,9 +29,8 @@ class WorkspaceHandler extends Component {
     this.props.switchWorkspaces(value);
   }
 
-  addWorkspace = e => {
-    e.preventDefault();
-    this.props.addWorkspace(this.state.workspacename);
+  addWorkspace = ws => {
+    this.props.addWorkspace(ws);
   }
 
   renameWorkspace = e => {
@@ -73,6 +72,7 @@ class WorkspaceHandler extends Component {
         workspaces={workspaces}
         current={current}
         switchWorkspaces={this.switchWorkspaces}
+        addWorkspace={this.addWorkspace}
       />
     );
   }
