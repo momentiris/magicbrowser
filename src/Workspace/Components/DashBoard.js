@@ -29,7 +29,8 @@ import {
   AddNewTab,
   Close,
   SavedLinksHeader,
-  SavedLinksWrapper
+  SavedLinksWrapper,
+  RenameEdit,
 } from './styles';
 
 import {
@@ -144,6 +145,7 @@ class Dashboard extends Component {
                   <Button onClick={this.handleClick} value={ws[0]}>
                     <Hover color={ws[1].color || '#5C4EFF'}> <RightArrow /> </Hover>
                     {ws[0]}
+                    <RenameEdit />
                   </Button>
                   <br />
                   <TabLength>
