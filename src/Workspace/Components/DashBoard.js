@@ -27,6 +27,10 @@ import {
   LeftArrow,
   Add,
   AddNewTab,
+  Close,
+  SavedLinksHeader,
+  SavedLinksWrapper,
+  RenameEdit,
 } from './styles';
 
 import {
@@ -34,6 +38,7 @@ import {
   switchWorkspaces,
   initEmptyWorkspace,
   addOneTab,
+  removeSelectedTab
 } from '../actions';
 
 class Dashboard extends Component {
@@ -42,7 +47,6 @@ class Dashboard extends Component {
     this.state = {
       toggle: false,
       workspaceToggle: false,
-      workspacename: 'Change me',
       isActive: true,
       wsButtonColor: '',
       newWorkspace: {
@@ -88,6 +92,11 @@ class Dashboard extends Component {
 
   addOneTab = (e) => {
     this.props.addOneTab({src: 'http://facebook.com'});
+  }
+
+  removeSelectedTab = id => {
+    this.props.removeSelectedTab(id);
+    console.log(this.props.removeSelectedTab);
   }
 
   updateWsColor = (color) => {
@@ -136,6 +145,7 @@ class Dashboard extends Component {
                   <Button onClick={this.handleClick} value={ws[0]}>
                     <Hover color={ws[1].color || '#5C4EFF'}> <RightArrow /> </Hover>
                     {ws[0]}
+                    <RenameEdit />
                   </Button>
                   <br />
                   <TabLength>
@@ -148,7 +158,11 @@ class Dashboard extends Component {
           <TabWrapper >
             {
               tabs.map((tab, i) =>
-                <TabItems id={i} key={i}> {tab.src}
+                <TabItems
+                  id={i}
+                  key={i}>
+                  {tab.src}
+                  <Close onClick={() => this.removeSelectedTab(i)} />
                 </TabItems>
               )
             }
@@ -159,7 +173,26 @@ class Dashboard extends Component {
         </Column>
         <SavedLinks>
           <Column>
-
+            <SavedLinksWrapper>
+              <SavedLinksHeader>
+                Saved Links
+              </SavedLinksHeader>
+            </SavedLinksWrapper>
+            <TabWrapper >
+              {
+                tabs.map((tab, i) =>
+                  <TabItems
+                    id={i}
+                    key={i}>
+                    {tab.src}
+                    <Close onClick={() => this.removeSelectedTab(i)} />
+                  </TabItems>
+                )
+              }
+              <AddNewTab onClick={this.addOneTab}>
+                <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
+              </AddNewTab>
+            </TabWrapper>
           </Column>
         </SavedLinks>
       </Container>
@@ -183,8 +216,8 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     switchWorkspaces: switchWorkspaces,
     addWorkspace: addWorkspace,
-    initEmptyWorkspace: initEmptyWorkspace,
     addOneTab: addOneTab,
+    removeSelectedTab: removeSelectedTab,
   }, dispatch);
 };
 
@@ -202,9 +235,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     workspaces: withoutCurrent,
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     addWorkspace: arg => dispatchProps.addWorkspace(arg),
-    initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace(),
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     addOneTab: arg => dispatchProps.addOneTab(arg),
+    removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
   });
 };
 
