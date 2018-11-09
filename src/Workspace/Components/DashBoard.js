@@ -33,6 +33,7 @@ import {
   RenameEdit,
 } from './styles';
 
+
 import {
   addWorkspace,
   switchWorkspaces,
@@ -111,8 +112,8 @@ class Dashboard extends Component {
   }
 
   // TODO: Move the Button and hover to own components, to make different states
-  //       More styling
-  //       fix the flex-wrap correct
+  //       Drag n' drop the individual tab.
+  //       complete the edit/rename workspace dropdown
 
   render() {
     const tabs = this.props.tabs;
@@ -120,12 +121,18 @@ class Dashboard extends Component {
     return (
       <Container>
         <AddNewWs>
-          <NewWsButton><LeftArrow />Back</NewWsButton>
+          <NewWsButton>
+            <LeftArrow />Back
+          </NewWsButton>
           <br />
-          <NewWsButton onClick={this.onToggle}><Add isActive={this.state.workspaceToggle}/>New space</NewWsButton>
+          <NewWsButton onClick={this.onToggle}>
+            <Add isActive={this.state.workspaceToggle}/>New space
+          </NewWsButton>
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-              <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}><RightArrowNewWs /></NewWsHover>
+              <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                <RightArrowNewWs />
+              </NewWsHover>
               <Input
                 onChange={this.handleInputChange}
                 active={this.state.isActive}
@@ -178,21 +185,6 @@ class Dashboard extends Component {
                 Saved Links
               </SavedLinksHeader>
             </SavedLinksWrapper>
-            <TabWrapper >
-              {
-                tabs.map((tab, i) =>
-                  <TabItems
-                    id={i}
-                    key={i}>
-                    {tab.src}
-                    <Close onClick={() => this.removeSelectedTab(i)} />
-                  </TabItems>
-                )
-              }
-              <AddNewTab onClick={this.addOneTab}>
-                <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
-              </AddNewTab>
-            </TabWrapper>
           </Column>
         </SavedLinks>
       </Container>

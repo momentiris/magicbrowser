@@ -13,6 +13,7 @@ import Webview from './GuestInstance/Webview';
 
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 import Dashboard from './Workspace/Components/DashBoard';
+import ActiveDashboard from './Workspace/Components/ActiveDashboard/ActiveDashboard';
 
 const electron = window.electron;
 const { ipcRenderer } = electron;
@@ -30,8 +31,8 @@ class App extends Component {
         <TabHandler></TabHandler>
         <UserNavigationHandler />
           <Route exact path="/" component={GuestInstanceHandler}/>
+          <Route exact path="/dashboard/:id" component={ActiveDashboard}/>
           <Route exact path="/dashboard" component={Dashboard}/>
-
         </>
         </Router>
       </div>

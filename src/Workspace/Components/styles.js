@@ -106,7 +106,7 @@ export const AnimateForm = styled.div`
   transition: all .3s cubic-bezier(0,.72,.5,.99);
   overflow-y: hidden;
   opacity: ${props => props.isActive ? '1' : '0'}
-  height: ${props => props.isActive ? '215px' : '0px'};
+  height: ${props => props.isActive ? '260px' : '0px'};
 `;
 
 export const NewWsHover = styled.div`
