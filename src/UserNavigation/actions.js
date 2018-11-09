@@ -1,4 +1,7 @@
-import { NAVIGATE_TO_URL } from './types';
+import {
+  NAVIGATE_TO_URL,
+  TOGGLE_WORKSPACES,
+} from './types';
 
 export function navigateToUrl(url) {
   return {
@@ -7,3 +10,12 @@ export function navigateToUrl(url) {
 
   };
 }
+
+export const toggleWorkspaces = (arg) => {
+  return (dispatch, getState) => {
+    return dispatch({
+      type: TOGGLE_WORKSPACES,
+      payload: arg
+    }, getState);
+  };
+};

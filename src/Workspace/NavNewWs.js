@@ -30,21 +30,43 @@ class NavNewWs extends Component {
       colorpickValue: '',
       newWorkspace: {
         name: '',
-        color: ''
+        color: '',
+        import: false,
       }
     };
   }
 
   handleToggleNewWorkspace = async () => {
-    this.setState({
-      toggleOpen: !this.state.toggleOpen
+    await this.setState({
+      toggleOpen: !this.state.toggleOpen,
     });
+
+    this.state.toggleOpen && this.setRandomSuggestedColor();
+    this.state.toggleDropdown && this.handleToggleDropdown(false);
+    this.handleToggleDropdown();
     await this.toggleOverflow();
   }
 
-  handleToggleDropdown = all => {
+  setRandomSuggestedColor = () => {
+    const wsColors = this.props.workspaces.map(ws => ws[1].color);
+    const filteredColors = iconColors.filter(ic => {
+      return !wsColors.includes(ic);
+    });
+
     this.setState({
-      toggleDropdown: all ? false : !this.state.toggleDropdown
+      newWorkspace: {
+        name: this.state.newWorkspace.name,
+        color: filteredColors[Math.floor(Math.random()*filteredColors.length)],
+        import: this.state.newWorkspace.import,
+      }
+    });
+
+  }
+
+  handleToggleDropdown = arg => {
+
+    this.setState({
+      toggleDropdown: arg,
     });
   }
 
@@ -54,69 +76,89 @@ class NavNewWs extends Component {
     }), !this.state.overflow ? 100 : 0);
   }
 
-  handleNewWsColorInput = ({ target }) => {
+  handleNewWsImport = ({ target }) => {
     this.setState({
-      newWsColorInput: target.value === '' ? '#' : target.value,
-    });
-  }
-
-  handlePickColor = async color => {
-    await this.setState({
-      newWorkspace : {
-        color: color,
-        name: this.state.newWorkspace.name
+      newWorkspace: {
+        name: this.state.newWorkspace.name,
+        color: this.state.newWorkspace.color,
+        import: target.value
       }
     });
-
-    this.props.addWorkspace(this.state.newWorkspace);
-
-
-    this.resetToggle();
   }
 
-  resetToggle = async () => {
+  resetToggleClean = async () => {
     await this.setState({
       newWsColorInput: '#',
       newWorkspace: {
         name: '',
-        color: ''
+        color: '',
+        import: false
       }
     });
 
     this.handleToggleDropdown();
     this.handleToggleNewWorkspace();
-    
+
   }
 
   handlePressEnter = ({ keyCode }) => {
     if (keyCode !== 13) return;
-    this.props.addWorkspace(this.state.newWorkspace);
+    // this.handleSubmit();
+    console.log('submit');
   }
 
   handleNewWsNameInput = ({ target }) => {
     this.setState({
       newWorkspace: {
         name: target.value,
-        color: this.state.newWorkspace.color
+        color: this.state.newWorkspace.color,
+        import: this.state.newWorkspace.import
       }
     });
   }
 
+  handlePickColor = color => {
+    this.setState({
+      newWorkspace : {
+        color: color,
+        name: this.state.newWorkspace.name,
+        import: this.state.newWorkspace.import
+      }
+    });
+  }
+
+  handleSubmit = async () => {
+    await this.setState({
+      newWorkspace : {
+        color: this.state.newWorkspace.color,
+        name: this.state.newWorkspace.name,
+        import: this.state.newWorkspace.import
+      }
+    });
+
+    this.props.addWorkspace(this.state.newWorkspace);
+
+
+    this.resetToggleClean();
+  }
+
   render() {
     const { toggleOpen, toggleDropdown, overflow, newWsColorInput  } = this.state;
-    const { isWsToggleActive} = this.props;
+    const { isWsToggleActive, workspaces } = this.props;
 
     return (
-      <NewWsContainer open={ overflow} toggleOpen={toggleOpen} >
+
+      <NewWsContainer open={overflow} toggleOpen={toggleOpen} onKeyDown={this.handlePressEnter}>
         <InnerNewWsContainer >
           <NewWsButtonContainer onClick={this.handleToggleNewWorkspace}>
             <AddTabIcon tilt={toggleOpen}/>
           </NewWsButtonContainer>
-          <DotIcon color={this.state.newWorkspace.color || 'white'}/>
-          <NewWsArrowContainer onClick={() => this.handleToggleDropdown()} open={toggleDropdown}>
-            <ArrowIcon/>
-          </NewWsArrowContainer>
-          <NewWsInput value={this.state.newWorkspace.name} onChange={this.handleNewWsNameInput} placeholder="Name workspace..."/>
+          <DotIcon color={this.state.newWorkspace.color}/>
+          <NewWsInput
+            onMouseDown={() => this.handleToggleDropdown(true)}
+            value={this.state.newWorkspace.name}
+            onChange={this.handleNewWsNameInput}
+            placeholder="Name workspace..."/>
         </InnerNewWsContainer>
         <ColorPickerContainer toggleDropdown={toggleDropdown}>
           <InnerColorPickerContainer>
@@ -126,11 +168,16 @@ class NavNewWs extends Component {
 
           </InnerColorPickerContainer>
           <NewWsColorInputWrapper>
-            <NewWsColorDisplay color={newWsColorInput || 'white'}/>
-            <NewWsColorInput value={this.state.newWsColorInput} onKeyDown={this.handlePressEnter} onChange={this.handleNewWsColorInput}/>
+            <span>Import tabs from</span>
+            <NewWsColorInput onChange={this.handleNewWsImport}>
+              <option value="false">Don't import</option>
+              { workspaces.map((ws, i) => <option key={i} value={ws[0]}>{ws[0]}</option> )}
+            </NewWsColorInput>
           </NewWsColorInputWrapper>
+          <span onClick={this.handleSubmit} style={{cursor: 'pointer', alignSelf: 'flex-start'}}>Create</span>
         </ColorPickerContainer>
       </NewWsContainer>
+
     );
   }
 

@@ -20,7 +20,8 @@ class WorkspaceNavUI extends Component {
       isWsToggleActive: false,
       restActive: false,
       isNewWsActive: false,
-      overflow: false
+      overflow: false,
+      closeChildren: false
     };
   }
 
@@ -50,6 +51,7 @@ class WorkspaceNavUI extends Component {
     await this.setState({
       isWsToggleActive: !this.state.isWsToggleActive,
       width: !this.state.isWsToggleActive ? '100%' : this.state.startwidth,
+      closeChildren: !this.state.closeChildren ? true : false,
     });
     await this.toggleOverflow();
     this.measureWsRestContainer();
@@ -104,7 +106,7 @@ class WorkspaceNavUI extends Component {
         { this.state.restActive && (
           <WsRestContainer ref={this.WsRestContainer}>
             {restInst}
-            <NavNewWs handleToggle={this.handleToggle} isWsToggleActive={isWsToggleActive} addWorkspace={addWorkspace} open={overflow}/>
+            <NavNewWs closeChildren={this.state.closeChildren} workspaces={workspaces} handleToggle={this.handleToggle} isWsToggleActive={isWsToggleActive} addWorkspace={addWorkspace} open={overflow}/>
           </WsRestContainer>
         ) }
       </WorkspaceToggleWrap>

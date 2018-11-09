@@ -13,8 +13,8 @@ import {
 } from './types';
 
 const initialState = {
-  current: 'unsavedWorkspace',
-  unsavedWorkspace: {
+  current: 'default',
+  default: {
     tabs: [
       {
         src: 'http://google.se',
@@ -44,7 +44,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case INIT_EMPTY_WORKSPACE:
       return Object.assign({},
-        state.unsavedWorkspace ? {
+        state.default ? {
           ...state
         } : {
           ...state,
@@ -52,14 +52,15 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         });
 
     case ADD_WORKSPACE:
-
       return Object.assign({}, {
         ...state,
         [payload.name]: {
           ...workspaceTemplate,
+          tabs: payload.import ? [...state[payload.import].tabs] : [...workspaceTemplate.tabs],
           color: payload.color
         }
       });
+
     case RENAME_CURRENT_WORKSPACE:
       const renameProp = (
         oldProp,

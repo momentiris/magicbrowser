@@ -6,8 +6,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // Reducers
-
 import { workspacesReducer as workspaces } from '../Workspace/reducers';
+import { userNavigationReducer as userNavigation } from '../UserNavigation/reducers';
+
 
 
 const persistConfig = {
@@ -17,6 +18,7 @@ const persistConfig = {
 
 const allReducers = combineReducers({
   workspaces,
+  userNavigation
 });
 
 

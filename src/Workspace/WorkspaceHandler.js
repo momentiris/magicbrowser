@@ -12,6 +12,10 @@ import {
   openDashBoard
 } from './actions';
 
+import {
+  toggleWorkspaces,
+} from '../UserNavigation/actions';
+
 
 
 class WorkspaceHandler extends Component {
@@ -22,6 +26,7 @@ class WorkspaceHandler extends Component {
 
   componentDidMount() {
     this.props.initEmptyWorkspace();
+    console.log(this.props);
   }
 
   switchWorkspaces = value => {
@@ -50,20 +55,7 @@ class WorkspaceHandler extends Component {
   goToDashboard = () => {
     this.props.openDashBoard({src: 'dashboard'});
   }
-
-  // <select onChange={this.handleChange} value={this.props.current} name="workspaces">
-  // { this.props.workspaces.map((ws, i) => <option key={i} value={ws}>{ws}</option> )}
-  // </select>
-  // <button onClick={this.goToDashBoard}>go to dashboard</button>
-  //
-  // <form onSubmit={this.addWorkspace}>
-  // <input onChange={this.handleInputChange} type="text"/>
-  // <input type="submit" value="add new workspace"/>
-  // </form>
-  // <form onSubmit={this.renameWorkspace}>
-  // <input onChange={this.handleInputChange} type="text"/>
-  // <input type="submit" value="rename current workspace"/>
-  // </form>
+  
   render() {
     const { workspaces, current } = this.props;
     return (
@@ -84,12 +76,21 @@ const workspaceSelector = createSelector(
   workspaces => workspaces,
 );
 
+const userNavSelector = createSelector(
+  state => state.userNavigation,
+  userNavigation => userNavigation,
+);
+
+
 const mapStateToProps = createSelector(
   workspaceSelector,
-  workspaces => ({
-    workspaces
+  userNavSelector,
+  (workspaces, userNavigation) => ({
+    workspaces,
+    userNavigation
   }),
 );
+
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
@@ -103,12 +104,12 @@ const mapActionsToProps = (dispatch, props) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  // const withoutCurrent = Object.keys(stateProps.workspaces).filter(inst => inst !== 'current');
 
   const removeCurrent = (obj, prop) => {
     let {[prop]: omit, ...res} = obj;
     return res;
   };
+
 
   const withoutCurrent = Object.entries(removeCurrent(stateProps.workspaces, 'current'));
   return Object.assign({}, ownProps, {
@@ -118,7 +119,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace(),
-    openDashBoard: () => dispatchProps.openDashBoard()
+    openDashBoard: () => dispatchProps.openDashBoard(),
+    userNavigation: stateProps.userNavigation,
+    toggleWorkspaces: toggleWorkspaces
   });
 };
 

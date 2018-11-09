@@ -40,5 +40,9 @@ export const iconColors = [
   '#A259FF',
   '#F24E1E',
   '#1E40F2',
-  '#F21EC3'
+  '#F21EC3',
+  '#F22B1E',
+  '#F2D01E',
+  '#1E40F2',
+  '#1EF28C',
 ];

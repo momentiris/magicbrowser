@@ -15,6 +15,7 @@ export const WorkspaceToggleWrap = styled.div`
 
 export const WsRestContainer = styled.div`
   display: flex;
+
 `;
 export const NewWsButtonContainer = styled.div`
   padding: 0 12px 0 8px;
@@ -22,7 +23,7 @@ export const NewWsButtonContainer = styled.div`
 export const NewWsContainer = styled.div`
   position: relative;
   transition: width 100ms ease;
-  width: ${props => props.toggleOpen ? '209px' : '26px'};
+  width: ${props => props.toggleOpen ? '280px' : '26px'};
   height: 32px;
   border-radius: ${props => props.theme.br} ${props => props.theme.br} 0 0;
   background: ${props => props.toggleOpen ? props.theme.lightgrey : 'none'};
@@ -42,8 +43,6 @@ export const NewWsContainer = styled.div`
 
 `;
 export const InnerNewWsContainer = styled.div`
-
-  position: absolute;
   display: flex;
   align-items: center;
 
@@ -64,8 +63,8 @@ export const NewWsArrowContainer = styled.div`
 export const ColorPickerContainer = styled.div`
   position: absolute;
   background: white;
-  height: ${props => props.toggleDropdown ? '116px' : 0};
-  width: 209px;
+  height: ${props => props.toggleDropdown ? '140px' : 0};
+  width: 280px;
   opacity: ${props => props.toggleDropdown ? 1 : 0};
   bottom: 0;
   border-radius: 0 0 ${props => props.theme.br} ${props => props.theme.br};
@@ -92,7 +91,7 @@ export const ColorPickerContainer = styled.div`
 `;
 
 export const InnerColorPickerContainer = styled.div`
-width: 164px;
+width: 224px;
 flex-shrink: 0;
 height: 48px;
 display: flex;
@@ -113,37 +112,35 @@ svg {
 
 `;
 
-export const NewWsColorInput = styled.input`
-  border: none;
-  width: 100%;
+export const NewWsColorInput = styled.select`
+  border: 1px solid black;
+  border-radius: ${props => props.theme.br};
+  width: 117px;
   padding: 0;
-  padding-left: 4px;
   color: #848484;
+  height: 100%;
+  font-size: 14px;
 
   &:focus {
     outline: none;
   }
 `;
 
-export const NewWsColorDisplay = styled.div`
-  height: 24px;
-  width: 24px;
-  border-right: 2px solid ${props => props.theme.borderradiuscolor};
-  background: ${props => props.color};
-`;
+
 export const NewWsColorInputWrapper = styled.div`
-  width: 90px;
-  height: 24px;
-  border: 2px solid ${props => props.theme.borderradiuscolor};
-  border-radius: ${props => props.theme.br};
+  height: 32px;
+  width: 248px;
+  margin-top:16px;
+  align-items: center;
   flex-shrink: 0;
   display: flex;
-  align-self: flex-start;
-  margin-left: 10px;
-  margin-top: 12px;
+  justify-content: space-between;
+  ${'' /* margin-left: 10px;
+  margin-top: 12px; */}
+
 `;
 export const NewWsInput = styled.input`
-  width: 124px;
+  width: 117px;
   box-sizing: border-box;
   border: none;
   height: 20px;
@@ -151,6 +148,7 @@ export const NewWsInput = styled.input`
   font-size: 12px;
   padding-left: 4px;
   padding-right: 4px;
+  margin-left: 8px;
   ::placeholder {
     font-size: 12px;
   }
