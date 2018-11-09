@@ -4,6 +4,7 @@ import rightarrowsvg from '../../common/assets/icons/rightarrow.svg';
 import leftarrowsvg from '../../common/assets/icons/leftarrow.svg';
 import addiconsvg from '../../common/assets/icons/add.svg';
 import closeiconsvg from '../../common/assets/icons/close.svg';
+import renameoreditsvg from '../../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   padding: 70px 135px 0px 135px;
@@ -238,6 +239,21 @@ export const Button = styled.button`
 
 `;
 
+export const RenameEdit = styled.svg`
+  background-image: url(${renameoreditsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+  transform: translateX(0px);
+  opacity: 0;
+  margin: 0 0 0 0;
+  transition: all .2s cubic-bezier(0,.72,.5,.99);
+  &:hover {
+    transform: scale(1.5);
+  }
+`;
+
 export const RightArrowNewWs = styled.svg`
   background-image: url(${rightarrowsvg});
   background-repeat: no-repeat;
@@ -273,6 +289,11 @@ export const Li = styled.li`
   }
   &:hover ${RightArrow}{
     transform: translateX(0px);
+  }
+  &:hover ${RenameEdit}{
+    margin: 0 0 0 25px;
+    opacity: 1;
+
   }
 `;
 
