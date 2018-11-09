@@ -14,6 +14,7 @@ import { userNavigationReducer as userNavigation } from '../UserNavigation/reduc
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['userNavigation']
 };
 
 const allReducers = combineReducers({

@@ -9,22 +9,19 @@ import {
   InnerColorPickerContainer,
   NewWsColorInput,
   NewWsColorInputWrapper,
-  NewWsColorDisplay
 } from './styles';
 import {
   DotIcon,
   AddTabIcon,
   CloseTabIcon,
   ArrowIcon
-} from '../common/assets/icons';
-import { iconColors } from '../common/stylesheet';
+} from '../../../common/assets/icons';
+import { iconColors } from '../../../common/stylesheet';
 
 class NavNewWs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggleOpen: false,
-      toggleDropdown: false,
       overflow: false,
       newWsColorInput: '#',
       colorpickValue: '',
@@ -37,13 +34,10 @@ class NavNewWs extends Component {
   }
 
   handleToggleNewWorkspace = async () => {
-    await this.setState({
-      toggleOpen: !this.state.toggleOpen,
-    });
-
-    this.state.toggleOpen && this.setRandomSuggestedColor();
-    this.state.toggleDropdown && this.handleToggleDropdown(false);
-    this.handleToggleDropdown();
+    await this.props.handleToggleNewWorkspace();
+    const { toggleNewWorkspace } = this.props.userNavigation;
+    toggleNewWorkspace && this.setRandomSuggestedColor();
+    toggleNewWorkspace && this.handleToggleDropdown(false);
     await this.toggleOverflow();
   }
 
@@ -64,10 +58,7 @@ class NavNewWs extends Component {
   }
 
   handleToggleDropdown = arg => {
-
-    this.setState({
-      toggleDropdown: arg,
-    });
+    this.props.handleToggleDropdown(arg);
   }
 
   toggleOverflow = all => {
@@ -143,15 +134,15 @@ class NavNewWs extends Component {
   }
 
   render() {
-    const { toggleOpen, toggleDropdown, overflow, newWsColorInput  } = this.state;
-    const { isWsToggleActive, workspaces } = this.props;
+    const {  toggleDropdown, overflow, newWsColorInput  } = this.state;
+    const { isWsToggleActive, workspaces, userNavigation } = this.props;
 
     return (
 
-      <NewWsContainer open={overflow} toggleOpen={toggleOpen} onKeyDown={this.handlePressEnter}>
+      <NewWsContainer open={overflow} toggleOpen={userNavigation.toggleNewWorkspace} onKeyDown={this.handlePressEnter}>
         <InnerNewWsContainer >
           <NewWsButtonContainer onClick={this.handleToggleNewWorkspace}>
-            <AddTabIcon tilt={toggleOpen}/>
+            <AddTabIcon tilt={userNavigation.toggleNewWorkspace}/>
           </NewWsButtonContainer>
           <DotIcon color={this.state.newWorkspace.color}/>
           <NewWsInput
@@ -160,10 +151,17 @@ class NavNewWs extends Component {
             onChange={this.handleNewWsNameInput}
             placeholder="Name workspace..."/>
         </InnerNewWsContainer>
-        <ColorPickerContainer toggleDropdown={toggleDropdown}>
+        <ColorPickerContainer toggleDropdown={userNavigation.toggleDropdown}>
           <InnerColorPickerContainer>
             {
-              iconColors && iconColors.map((c, i) => <div key={i} onClick={() => this.handlePickColor(c)} color={c}><DotIcon color={c} /></div> )
+              iconColors && iconColors.map((c, i) =>
+                <div
+                  key={i}
+                  onClick={() => this.handlePickColor(c)}
+                  color={c}>
+                  <DotIcon color={c} />
+                </div>
+              )
             }
 
           </InnerColorPickerContainer>

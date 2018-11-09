@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabHandler from '../Tabs/TabHandler';
-import WorkspaceNavUI from './WorkspaceNavUI';
+import WorkspaceNavUI from './Components/WorkspaceNavUI/WorkspaceNavUI';
 import {
   addWorkspace,
   switchWorkspaces,
@@ -11,10 +11,6 @@ import {
   initEmptyWorkspace,
   openDashBoard
 } from './actions';
-
-import {
-  toggleWorkspaces,
-} from '../UserNavigation/actions';
 
 
 
@@ -26,11 +22,9 @@ class WorkspaceHandler extends Component {
 
   componentDidMount() {
     this.props.initEmptyWorkspace();
-    console.log(this.props);
   }
 
   switchWorkspaces = value => {
-    console.log(value);
     this.props.switchWorkspaces(value);
   }
 
@@ -55,9 +49,10 @@ class WorkspaceHandler extends Component {
   goToDashboard = () => {
     this.props.openDashBoard({src: 'dashboard'});
   }
-  
+
+
   render() {
-    const { workspaces, current } = this.props;
+    const { workspaces, current, toggleWorkspaces } = this.props;
     return (
       <WorkspaceNavUI
         goToDashboard={this.goToDashboard}
@@ -76,18 +71,11 @@ const workspaceSelector = createSelector(
   workspaces => workspaces,
 );
 
-const userNavSelector = createSelector(
-  state => state.userNavigation,
-  userNavigation => userNavigation,
-);
-
 
 const mapStateToProps = createSelector(
   workspaceSelector,
-  userNavSelector,
-  (workspaces, userNavigation) => ({
+  workspaces => ({
     workspaces,
-    userNavigation
   }),
 );
 
@@ -120,8 +108,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace(),
     openDashBoard: () => dispatchProps.openDashBoard(),
-    userNavigation: stateProps.userNavigation,
-    toggleWorkspaces: toggleWorkspaces
   });
 };
 
