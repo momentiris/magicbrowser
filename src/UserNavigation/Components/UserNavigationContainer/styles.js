@@ -9,13 +9,6 @@ export const Container = styled.div`
   background: ${props => props.theme.lightergrey};
 `;
 
-export const PageNavigationContainer = styled.div`
-  width: 130px;
-  height: 32px;
-  border: 1px solid black;
-  flex-shrink: 0;
-`;
-
 export const UrlBarContainer = styled.div`
   pointer-events: ${props => props.show ? 'none' : 'default'};
   display: flex;
@@ -74,7 +67,24 @@ export const ReadListNavSettingsWrap = styled.div`
   background: ${props => props.theme.lightergrey};
 
 `;
+export const GoToDashboardButtonWrap = styled.div`
+  display: flex;
+  position: absolute;
+  right: 126px;
+  z-index: 50;
+  transform: translatex(${props => props.toggle === 'true' ? 0 : '95%'});
+  transition: opacity .3s ease, transform 200ms ease, margin-right .2s ease ${props => props.toggle === 'true' ? '0s' : '.2s'};
+  opacity: ${props => props.toggle === 'true' ? 1 : 0};
+  margin-right: 8px;
 
+  height: 32px;
+  align-items: center;
+
+  &>svg {
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+`;
 export const GoToDashboardButton = styled(Link)`
   width: 134px;
   height: 32px;
@@ -86,13 +96,9 @@ export const GoToDashboardButton = styled(Link)`
   justify-content: center;
   color: white;
   text-decoration: none;
-  position: absolute;
-  right: 126px;
-  transform: translatex(${props => props.toggle === 'true' ? 0 : '95%'});
-  z-index: 50;
-  margin-right: 8px;
-  transition: opacity .3s ease, transform 200ms ease, margin-right .2s ease ${props => props.toggle === 'true' ? '0s' : '.2s'};
-  opacity: ${props => props.toggle === 'true' ? 1 : 0};
+
+
+
   :hover {
     background: ${props => props.theme.bluebuttonhover};
   }

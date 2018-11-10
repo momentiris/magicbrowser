@@ -125,15 +125,19 @@ class NavNewWs extends Component {
       }
     });
 
-    this.props.addWorkspace(this.state.newWorkspace);
-
+    await this.props.addWorkspace(this.state.newWorkspace);
+    await this.props.measureWsRestContainer();
 
     this.resetToggleClean();
   }
 
   render() {
     const {  toggleDropdown, overflow, newWsColorInput  } = this.state;
-    const { isWsToggleActive, workspaces, userNavigation } = this.props;
+    const {
+      isWsToggleActive,
+      workspaces,
+      userNavigation,
+    } = this.props;
 
     return (
 

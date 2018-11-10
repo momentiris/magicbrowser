@@ -7,6 +7,7 @@ import NavNewWs from '../NavNewWs/NavNewWs';
 import {
   DotIcon,
 } from '../../../common/assets/icons';
+
 import {
   WorkspaceToggleWrap,
   WsItem,
@@ -21,7 +22,6 @@ import {
   handleToggleNewWorkspace,
   handleToggleNewWorkspaceOverflow,
 } from '../../../UserNavigation/actions';
-
 
 class WorkspaceNavUI extends Component {
   constructor(props) {
@@ -58,7 +58,6 @@ class WorkspaceNavUI extends Component {
 
   handleToggle = async () => {
     await this.props.handleToggleWorkspaces();
-    console.log();
     const {
       toggleWorkspaces,
       toggleDropdown,
@@ -69,6 +68,7 @@ class WorkspaceNavUI extends Component {
     await this.setState({
       width: toggleWorkspaces ? this.WsRestContainer.current.clientWidth + this.state.startwidth : this.state.startwidth,
     });
+
     toggleDropdown && this.props.handleToggleDropdown(false);
     toggleNewWorkspace && this.props.handleToggleNewWorkspace();
     toggleNewWorkspaceOverflow && this.props.handleToggleNewWorkspaceOverflow();
@@ -77,7 +77,7 @@ class WorkspaceNavUI extends Component {
   }
 
   measureWsRestContainer = () => {
-    console.log(this.WsRestContainer.current.clientWidth);
+    console.log(this.WsRestContainer.current);
   }
 
   toggleOverflow = async () => {
@@ -122,7 +122,7 @@ class WorkspaceNavUI extends Component {
       ));
 
     const restInst = workspaces
-      .filter((inst,i) => inst[0] !== current )
+      .filter((inst,i) => inst[0] !== current)
       .map((inst,i) => (
         <WsItem
           onClick={({ target }) => this.handleSwitchWorkspace(inst[0], target)}
@@ -132,14 +132,13 @@ class WorkspaceNavUI extends Component {
           <span>{inst[0]}</span>
         </WsItem>
       ));
-console.log( this.WsRestContainer.current && this.WsRestContainer.current.clientWidth);
-    return (
 
+    return (
       <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width + 'px'}>
         { firstInst }
         { this.state.restActive && (
           <WsRestContainer ref={this.WsRestContainer}>
-            {restInst}
+            { restInst }
             <NavNewWs
               handleToggleNewWorkspace={handleToggleNewWorkspace}
               handleToggleNewWorkspaceOverflow={handleToggleNewWorkspaceOverflow}
@@ -151,6 +150,7 @@ console.log( this.WsRestContainer.current && this.WsRestContainer.current.client
               open={overflow}
               handleToggleDropdown={handleToggleDropdown}
               handleToggleWorkspaces={handleToggleWorkspaces}
+              measureWsRestContainer={this.measureWsRestContainer}
             />
           </WsRestContainer>
         ) }

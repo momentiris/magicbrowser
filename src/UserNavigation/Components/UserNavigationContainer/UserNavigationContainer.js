@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import UrlBar from '../UrlBar/UrlBar';
 import WorkspaceHandler from '../../../Workspace/WorkspaceHandler';
+import PageNavigationContainer from '../PageNavigation/PageNavigationContainer';
 import {
   AddTabIcon,
   ReadingListIcon,
   NavSettingsIcon,
-  DashboardIcon
+  DashboardIcon,
+  ToDashboardIcon,
+  UpdateTabIcon,
+  TabNavigationArrowIcon
 } from '../../../common/assets/icons.js';
 import {
   Container,
-  PageNavigationContainer,
   UrlBarContainer,
   AddToReadingListButton,
   ReadingListButton,
   NavSettingsButton,
   GoToDashboardButton,
-  ReadListNavSettingsWrap
+  ReadListNavSettingsWrap,
+  GoToDashboardButtonWrap
 } from './styles';
 
 
@@ -44,11 +48,13 @@ class UserNavigationContainer extends Component {
             <AddTabIcon/>
           </AddToReadingListButton>
         </UrlBarContainer>
-
-        <GoToDashboardButton toggle={toggleWorkspaces ? 'true' : 'false' } to="/dashboard">
-          <DashboardIcon />
-          <span>Dashboard</span>
-        </GoToDashboardButton>
+        <GoToDashboardButtonWrap toggle={toggleWorkspaces ? 'true' : 'false' }>
+          <ToDashboardIcon/>
+          <GoToDashboardButton  to="/dashboard">
+            <DashboardIcon />
+            <span>Dashboard</span>
+          </GoToDashboardButton>
+        </GoToDashboardButtonWrap>
         <ReadListNavSettingsWrap>
           <ReadingListButton>
             <ReadingListIcon />
