@@ -1,13 +1,15 @@
 import {
   TOGGLE_WORKSPACES,
   TOGGLE_DROPDOWN,
-  TOGGLE_NEW_WORKSPACE
+  TOGGLE_NEW_WORKSPACE,
+  TOGGLE_NEW_WORKSPACE_OVERFLOW
 } from './types';
 
 const initialState = {
   toggleWorkspaces: false,
   toggleDropdown: false,
   toggleNewWorkspace: false,
+  toggleNewWorkspaceOverflow: false
 };
 
 export const userNavigationReducer = (state = initialState, { type, payload }) => {
@@ -31,6 +33,14 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
       return Object.assign({}, {
         ...state,
         toggleNewWorkspace: !state.toggleNewWorkspace,
+      });
+
+      break;
+
+    case TOGGLE_NEW_WORKSPACE_OVERFLOW:
+      return Object.assign({}, {
+        ...state,
+        toggleNewWorkspaceOverflow: !state.toggleNewWorkspaceOverflow,
       });
 
       break;

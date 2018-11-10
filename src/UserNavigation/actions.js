@@ -2,7 +2,8 @@ import {
   NAVIGATE_TO_URL,
   TOGGLE_WORKSPACES,
   TOGGLE_DROPDOWN,
-  TOGGLE_NEW_WORKSPACE
+  TOGGLE_NEW_WORKSPACE,
+  TOGGLE_NEW_WORKSPACE_OVERFLOW
 } from './types';
 
 export function navigateToUrl(url) {
@@ -33,6 +34,14 @@ export const handleToggleNewWorkspace = () => {
   return (dispatch, getState) => {
     return dispatch({
       type: TOGGLE_NEW_WORKSPACE,
+    }, getState);
+  };
+};
+
+export const handleToggleNewWorkspaceOverflow = () => {
+  return (dispatch, getState) => {
+    return dispatch({
+      type: TOGGLE_NEW_WORKSPACE_OVERFLOW,
     }, getState);
   };
 };

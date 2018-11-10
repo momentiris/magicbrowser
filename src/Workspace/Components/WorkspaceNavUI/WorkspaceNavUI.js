@@ -19,6 +19,7 @@ import {
   handleToggleWorkspaces,
   handleToggleDropdown,
   handleToggleNewWorkspace,
+  handleToggleNewWorkspaceOverflow,
 } from '../../../UserNavigation/actions';
 
 
@@ -57,11 +58,13 @@ class WorkspaceNavUI extends Component {
 
   handleToggle = async () => {
     await this.props.handleToggleWorkspaces();
-    const { toggleWorkspaces, toggleDropdown } = this.props.userNavigation;
+    const { toggleWorkspaces, toggleDropdown, toggleNewWorkspace, toggleNewWorkspaceOverflow } = this.props.userNavigation;
     await this.setState({
       width: toggleWorkspaces ? '100%' : this.state.startwidth,
     });
     toggleDropdown && this.props.handleToggleDropdown(false);
+    toggleNewWorkspace && this.props.handleToggleNewWorkspace();
+    toggleNewWorkspaceOverflow && this.props.handleToggleNewWorkspaceOverflow();
     await this.toggleOverflow();
     this.measureWsRestContainer();
   }
@@ -89,7 +92,8 @@ class WorkspaceNavUI extends Component {
       addWorkspace,
       handleToggleDropdown,
       userNavigation,
-      handleToggleNewWorkspace
+      handleToggleNewWorkspace,
+      handleToggleNewWorkspaceOverflow,
     } = this.props;
 
     const { overflow, width } = this.state;
@@ -129,6 +133,7 @@ class WorkspaceNavUI extends Component {
             {restInst}
             <NavNewWs
               handleToggleNewWorkspace={handleToggleNewWorkspace}
+              handleToggleNewWorkspaceOverflow={handleToggleNewWorkspaceOverflow}
               userNavigation={userNavigation}
               workspaces={workspaces}
               handleToggle={this.handleToggle}
@@ -160,7 +165,8 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     handleToggleWorkspaces: handleToggleWorkspaces,
     handleToggleDropdown: handleToggleDropdown,
-    handleToggleNewWorkspace: handleToggleNewWorkspace
+    handleToggleNewWorkspace: handleToggleNewWorkspace,
+    handleToggleNewWorkspaceOverflow: handleToggleNewWorkspaceOverflow
   }, dispatch);
 };
 
@@ -170,6 +176,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleToggleWorkspaces: dispatchProps.handleToggleWorkspaces,
     handleToggleDropdown: arg => dispatchProps.handleToggleDropdown(arg),
     handleToggleNewWorkspace: dispatchProps.handleToggleNewWorkspace,
+    handleToggleNewWorkspaceOverflow: dispatchProps.handleToggleNewWorkspaceOverflow
   });
 };
 

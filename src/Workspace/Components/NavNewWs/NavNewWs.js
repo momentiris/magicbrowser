@@ -62,9 +62,9 @@ class NavNewWs extends Component {
   }
 
   toggleOverflow = all => {
-    setTimeout(() => this.setState({
-      overflow: !this.state.overflow
-    }), !this.state.overflow ? 100 : 0);
+    const { toggleNewWorkspaceOverflow } = this.props.userNavigation;
+    setTimeout(() => this.props.handleToggleNewWorkspaceOverflow(),
+      toggleNewWorkspaceOverflow ? 50 : 0);
   }
 
   handleNewWsImport = ({ target }) => {
@@ -139,7 +139,11 @@ class NavNewWs extends Component {
 
     return (
 
-      <NewWsContainer open={overflow} toggleOpen={userNavigation.toggleNewWorkspace} onKeyDown={this.handlePressEnter}>
+      <NewWsContainer
+        open={userNavigation.toggleNewWorkspaceOverflow}
+        toggleOpen={userNavigation.toggleNewWorkspace}
+        onKeyDown={this.handlePressEnter}
+      >
         <InnerNewWsContainer >
           <NewWsButtonContainer onClick={this.handleToggleNewWorkspace}>
             <AddTabIcon tilt={userNavigation.toggleNewWorkspace}/>
