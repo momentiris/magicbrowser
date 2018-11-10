@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { navigateToUrl } from './actions';
-import UrlBar from './UrlBar/UrlBar';
+import UrlBar from './Components/UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
 import UserNavigationContainer from './Components/UserNavigationContainer/UserNavigationContainer';

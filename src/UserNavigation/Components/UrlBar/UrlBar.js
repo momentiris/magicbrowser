@@ -7,7 +7,7 @@ import {
   UrlBarInput
 } from './styles';
 
-import KeyCodes from '../../common/keyCodes';
+import KeyCodes from '../../../common/keyCodes';
 
 class UrlBar extends Component {
   constructor (props) {

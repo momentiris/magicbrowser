@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UrlBar from '../../UrlBar/UrlBar';
+import UrlBar from '../UrlBar/UrlBar';
 import WorkspaceHandler from '../../../Workspace/WorkspaceHandler';
 import {
   Container,
@@ -13,7 +13,7 @@ class UserNavigationContainer extends Component {
       userNavigation,
       navigateToUrl
     } = this.props;
-    
+
     return (
       <Container>
         <PageNavigationContainer/>
