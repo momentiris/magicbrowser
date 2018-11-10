@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const UserNavigationContainer = styled.div`
+export const Container = styled.div`
   height: 40px;
   display: flex;
   align-items: center;

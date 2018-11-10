@@ -54,7 +54,6 @@ class NavNewWs extends Component {
         import: this.state.newWorkspace.import,
       }
     });
-
   }
 
   handleToggleDropdown = arg => {
@@ -87,9 +86,8 @@ class NavNewWs extends Component {
       }
     });
 
-    this.handleToggleDropdown();
-    this.handleToggleNewWorkspace();
-
+    // strange below, why need?
+    this.props.handleToggleWorkspaces();
   }
 
   handlePressEnter = ({ keyCode }) => {

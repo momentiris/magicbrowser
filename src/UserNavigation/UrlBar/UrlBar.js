@@ -7,7 +7,7 @@ import {
   UrlBarInput
 } from './styles';
 
-const KeyCodes = require('../../common/keyCodes');
+import KeyCodes from '../../common/keyCodes';
 
 class UrlBar extends Component {
   constructor (props) {
@@ -48,8 +48,11 @@ class UrlBar extends Component {
   }
 
   render() {
+    const { toggleWorkspaces } = this.props.userNavigation;
+
     return (
       <UrlBarInput
+        show={toggleWorkspaces}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}

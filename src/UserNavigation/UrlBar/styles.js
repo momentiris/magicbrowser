@@ -10,7 +10,8 @@ export const UrlBarInput = styled.input`
   padding: 0;
   margin: 0 8px 0 8px;
   padding-left: 16px;
-
+  transition: opacity 200ms ease 100ms;
+  opacity: ${props => props.show ? 0 : 1};
   &:focus {
     outline: none;
   }

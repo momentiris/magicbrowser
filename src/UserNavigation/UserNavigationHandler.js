@@ -6,11 +6,7 @@ import { navigateToUrl } from './actions';
 import UrlBar from './UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
-
-import {
-  UserNavigationContainer,
-  PageNavigationContainer,
-} from './styles';
+import UserNavigationContainer from './Components/UserNavigationContainer/UserNavigationContainer';
 
 
 // todo:
@@ -26,7 +22,6 @@ class NavigationHandler extends Component {
 
   }
   componentDidMount() {
-
   }
 
   navigateForwards = webview => {
@@ -45,14 +40,19 @@ class NavigationHandler extends Component {
 
   };
   render() {
-    const { navigateToUrl } = this.props;
-    return (
-      <UserNavigationContainer>
-        <PageNavigationContainer/>
-        <WorkspaceHandler/>
-        <UrlBar navigateToUrl={navigateToUrl}/>
+    const {
+      navigateToUrl,
+      userNavigation
+    } = this.props;
 
-      </UserNavigationContainer>
+    return (
+      <UserNavigationContainer
+        navigateToUrl={navigateToUrl}
+        userNavigation={userNavigation}
+      />
+
+
+
     );
   }
 
@@ -63,11 +63,18 @@ const workspacesSelector = createSelector(
   workspaces => workspaces
 );
 
+const userNavigationSelector = createSelector(
+  state => state.userNavigation,
+  userNavigation => userNavigation
+);
+
 
 const mapStateToProps = createSelector(
   workspacesSelector,
-  workspaces => ({
-    workspaces
+  userNavigationSelector,
+  (workspaces, userNavigation) => ({
+    workspaces,
+    userNavigation
   })
 );
 
@@ -80,6 +87,7 @@ const mapActionsToProps = (dispatch, props) => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     searchQuery: stateProps.searchQuery,
+    userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg)
   });
 };
