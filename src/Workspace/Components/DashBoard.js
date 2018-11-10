@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
+import { DragDropContext } from 'react-beautiful-dnd';
 // import WsHover from './WorkSpaceButton/wshover';
 import {
   Container,
@@ -45,9 +46,12 @@ import {
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.workspaceInput = React.createRef();
+    this.onToggle = this.onToggle.bind(this);
     this.state = {
       toggle: false,
       workspaceToggle: false,
+      editWorkspaceToggle: false,
       isActive: true,
       wsButtonColor: '',
       newWorkspace: {
@@ -57,12 +61,31 @@ class Dashboard extends Component {
     };
   }
 
+  onDragStart = () => {
+
+  };
+  onDragUpdate = () => {
+
+  };
+  onDragEnd = () => {
+
+  };
+
+
   componentDidMount(){
-    console.log(this.props);
+
   }
 
   onToggle = () => {
     this.setState({ workspaceToggle: !this.state.workspaceToggle });
+    // this.workspaceInput.focus();
+    this.workspaceInput.current.focus();
+  }
+
+  editWorkspace = (e) => {
+    console.log(e.target.value);
+    this.switchWorkspaces(e.target.value);
+    // this.setState({ editWorkspaceToggle: !this.state.editWorkspaceToggle });
   }
 
   switchWorkspaces = value => {
@@ -70,12 +93,12 @@ class Dashboard extends Component {
   }
 
   handleClick = (e) => {
+    console.log(e.target.value);
     this.switchWorkspaces(e.target.value);
   }
 
   addWorkspace = e => {
     e.preventDefault();
-    console.log(this.state.newWorkspace);
     this.props.addWorkspace(this.state.newWorkspace);
     // this.setState({ toggle: !this.state.toggle });
   }
@@ -116,8 +139,8 @@ class Dashboard extends Component {
   //       complete the edit/rename workspace dropdown
 
   render() {
-    const tabs = this.props.tabs;
-    const workspaces = this.props.workspaces;
+    const { tabs } = this.props;
+    const { workspaces } = this.props;
     return (
       <Container>
         <AddNewWs>
@@ -134,6 +157,7 @@ class Dashboard extends Component {
                 <RightArrowNewWs />
               </NewWsHover>
               <Input
+                ref={this.workspaceInput}
                 onChange={this.handleInputChange}
                 active={this.state.isActive}
                 type="text"
@@ -152,8 +176,24 @@ class Dashboard extends Component {
                   <Button onClick={this.handleClick} value={ws[0]}>
                     <Hover color={ws[1].color || '#5C4EFF'}> <RightArrow /> </Hover>
                     {ws[0]}
-                    <RenameEdit />
                   </Button>
+                  <RenameEdit type="button" onClick={this.editWorkspace} value={ws[0]} />
+                  <AnimateForm isActive={this.state.editWorkspaceToggle}>
+                    <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
+                      <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                        <RightArrowNewWs />
+                      </NewWsHover>
+                      <Input
+                        ref={this.workspaceInput}
+                        onChange={this.handleInputChange}
+                        active={this.state.isActive}
+                        type="text"
+                        placeholder="Name your workspace"/>
+                      <WsColor updateWsColor={this.updateWsColor}/>
+                      <CreateButton onClick={this.onToggle} type="submit">Save</CreateButton>
+                      <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
+                    </form>
+                  </AnimateForm>
                   <br />
                   <TabLength>
                     {`${ws[1].tabs.length} ${ws[1].tabs.length > 1 ? 'Tabs' : 'Tab'}`}
@@ -183,6 +223,14 @@ class Dashboard extends Component {
             <SavedLinksWrapper>
               <SavedLinksHeader>
                 Saved Links
+                <DragDropContext
+                  onDragStart={this.onDragStart}
+                  onDragUpdate={this.onDragUpdate}
+                  onDragEnd={this.onDragEnd}
+                >
+                  <div>Hello world</div>
+                </DragDropContext>
+
               </SavedLinksHeader>
             </SavedLinksWrapper>
           </Column>

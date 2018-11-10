@@ -239,7 +239,7 @@ export const Button = styled.button`
 
 `;
 
-export const RenameEdit = styled.svg`
+export const RenameEdit = styled.button`
   background-image: url(${renameoreditsvg});
   background-repeat: no-repeat;
   background-size: contain;
@@ -250,7 +250,7 @@ export const RenameEdit = styled.svg`
   margin: 0 0 0 0;
   transition: all .2s cubic-bezier(0,.72,.5,.99);
   &:hover {
-    transform: scale(1.5);
+    transform: scale(1.15);
   }
 `;
 
