@@ -38,8 +38,8 @@ class WorkspaceNavUI extends Component {
   componentDidMount() {
     const { toggleWorkspaces } = this.props.userNavigation;
     this.setState({
-      startwidth: this.workspacetoggle.current.clientWidth + 'px',
-      width: this.workspacetoggle.current.clientWidth + 'px',
+      startwidth: this.workspacetoggle.current.clientWidth ,
+      width: this.workspacetoggle.current.clientWidth,
     });
 
     setTimeout(this.setState({
@@ -50,15 +50,15 @@ class WorkspaceNavUI extends Component {
   handleSwitchWorkspace = async (ws, elem) => {
     this.props.switchWorkspaces(ws);
     await this.setState({
-      startwidth: elem.clientWidth + 'px',
-      width: elem.clientWidth + 'px',
+      startwidth: elem.clientWidth,
+      width: elem.clientWidth,
     });
     await this.handleToggle();
   }
 
   handleToggle = async () => {
     await this.props.handleToggleWorkspaces();
-
+    console.log();
     const {
       toggleWorkspaces,
       toggleDropdown,
@@ -67,7 +67,7 @@ class WorkspaceNavUI extends Component {
     } = this.props.userNavigation;
 
     await this.setState({
-      width: toggleWorkspaces ? '100%' : this.state.startwidth,
+      width: toggleWorkspaces ? this.WsRestContainer.current.clientWidth + this.state.startwidth : this.state.startwidth,
     });
     toggleDropdown && this.props.handleToggleDropdown(false);
     toggleNewWorkspace && this.props.handleToggleNewWorkspace();
@@ -110,6 +110,7 @@ class WorkspaceNavUI extends Component {
       .filter((inst,i) => inst[0] === current)
       .map((inst,i) => (
         <WsItem
+          width={width + 'px'}
           onClick={this.handleToggle}
           current
           clicked={userNavigation.toggleWorkspaces}
@@ -131,10 +132,10 @@ class WorkspaceNavUI extends Component {
           <span>{inst[0]}</span>
         </WsItem>
       ));
-
+console.log( this.WsRestContainer.current && this.WsRestContainer.current.clientWidth);
     return (
 
-      <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width}>
+      <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width + 'px'}>
         { firstInst }
         { this.state.restActive && (
           <WsRestContainer ref={this.WsRestContainer}>

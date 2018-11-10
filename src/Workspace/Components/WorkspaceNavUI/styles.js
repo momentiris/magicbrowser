@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const WorkspaceToggleWrap = styled.div`
   height: 32px;
   overflow-x: ${props => !props.open ? 'hidden' : 'visible'};
-  transition: width 300ms ease;
+  transition: width 200ms ease;
   background: ${props => props.theme.mediumdarkgrey};
   border-radius: ${props => props.theme.br};
   display: flex;
@@ -15,6 +15,7 @@ export const WorkspaceToggleWrap = styled.div`
 
 export const WsRestContainer = styled.div`
   display: flex;
+
 
 `;
 

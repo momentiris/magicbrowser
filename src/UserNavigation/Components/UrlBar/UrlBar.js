@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import {
-  UrlBarInput
+  UrlBarInput,
+
 } from './styles';
 
 import KeyCodes from '../../../common/keyCodes';
@@ -48,18 +49,14 @@ class UrlBar extends Component {
   }
 
   render() {
-    const { toggleWorkspaces } = this.props.userNavigation;
-
+    const { userNavigation } = this.props;
     return (
       <UrlBarInput
-        show={toggleWorkspaces}
+        disable={userNavigation.toggleWorkspaces}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}
-      >
-
-
-      </UrlBarInput>
+      />
     );
   }
 }
