@@ -28,21 +28,26 @@ class UserNavigationContainer extends Component {
   render() {
     const {
       userNavigation,
-      navigateToUrl
+      navigateToUrl,
+      handleToggleUrlBarFocus
     } = this.props;
 
-    const { toggleWorkspaces } = userNavigation;
-
+    const {
+      toggleWorkspaces,
+      toggleUrlBarFocus
+    } = userNavigation;
     return (
       <Container>
         <PageNavigationContainer/>
         <WorkspaceHandler/>
         <UrlBarContainer
+          clicked={toggleUrlBarFocus}
           show={toggleWorkspaces}
         >
           <UrlBar
             userNavigation={userNavigation}
             navigateToUrl={navigateToUrl}
+            handleToggleUrlBarFocus={handleToggleUrlBarFocus}
           />
           <AddToReadingListButton>
             <AddTabIcon/>
@@ -50,7 +55,7 @@ class UserNavigationContainer extends Component {
         </UrlBarContainer>
         <GoToDashboardButtonWrap toggle={toggleWorkspaces ? 'true' : 'false' }>
           <ToDashboardIcon/>
-          <GoToDashboardButton  to="/dashboard">
+          <GoToDashboardButton to="/dashboard">
             <DashboardIcon />
             <span>Dashboard</span>
           </GoToDashboardButton>

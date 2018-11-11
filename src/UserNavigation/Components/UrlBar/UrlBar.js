@@ -49,9 +49,15 @@ class UrlBar extends Component {
   }
 
   render() {
-    const { userNavigation } = this.props;
+    const {
+      userNavigation,
+      handleToggleUrlBarFocus
+    } = this.props;
+
     return (
       <UrlBarInput
+        onFocus={handleToggleUrlBarFocus}
+        onBlur={handleToggleUrlBarFocus}
         disable={userNavigation.toggleWorkspaces}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}

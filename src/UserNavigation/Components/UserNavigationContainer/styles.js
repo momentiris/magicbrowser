@@ -15,22 +15,23 @@ export const UrlBarContainer = styled.div`
   border: none;
   height: 32px;
   width: 100%;
-  background: ${props => props.theme.lightgrey};
+  background: ${props => props.clicked ? 'white' : props.theme.lightgrey};
   font-size: 16px;
   border-radius: ${props => props.theme.br};
   padding: 0;
   margin: 0 8px 0 8px;
-
-  transition: opacity 100ms ease ${props => !props.show ? '100ms' : '0ms'};
+  transition: opacity 100ms ease ${props => !props.show ? '0ms' : '75ms'};
   opacity: ${props => props.show ? 0 : 1};
   align-items: center;
+  :hover {
+    background: ${props => props.clicked ? 'white' : props.theme.greybuttonhover};
+  }
 `;
 
 export const AddToReadingListButton = styled(Button)`
   margin-right: 8px;
   width: 24px;
   height: 24px;
-  overflow: hidden;
   :hover {
     background: ${props => props.theme.mediumgrey};
   }
@@ -52,7 +53,7 @@ export const ReadingListButton = styled(Button)`
 export const NavSettingsButton = styled(Button)`
   width: 24px;
   height: 32px;
-  background: ${props => props.theme.lightgrey};
+  background: ${props => props.theme.lightergrey};
   margin-right: 5px;
   overflow: hidden;
   :hover {
@@ -72,15 +73,14 @@ export const GoToDashboardButtonWrap = styled.div`
   position: absolute;
   right: 126px;
   z-index: 50;
-  transform: translatex(${props => props.toggle === 'true' ? 0 : '95%'});
-  transition: opacity .3s ease, transform 200ms ease, margin-right .2s ease ${props => props.toggle === 'true' ? '0s' : '.2s'};
+  transform: translatex(${props => props.toggle === 'true' ? 0 : '70%'});
+  transition: opacity 200ms ease, transform 150ms ease;
   opacity: ${props => props.toggle === 'true' ? 1 : 0};
+  pointer-events: ${props => props.toggle === 'true' ? 'auto' : 'none'};
   margin-right: 8px;
-
   height: 32px;
   align-items: center;
-
-  &>svg {
+  & > svg {
     flex-shrink: 0;
     margin-right: 8px;
   }
@@ -96,9 +96,6 @@ export const GoToDashboardButton = styled(Link)`
   justify-content: center;
   color: white;
   text-decoration: none;
-
-
-
   :hover {
     background: ${props => props.theme.bluebuttonhover};
   }

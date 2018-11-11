@@ -2,7 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { navigateToUrl } from './actions';
+import {
+  navigateToUrl,
+  handleToggleUrlBarFocus
+} from './actions';
 import UrlBar from './Components/UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
@@ -42,20 +45,18 @@ class NavigationHandler extends Component {
   render() {
     const {
       navigateToUrl,
-      userNavigation
+      userNavigation,
+      handleToggleUrlBarFocus
     } = this.props;
 
     return (
       <UserNavigationContainer
         navigateToUrl={navigateToUrl}
         userNavigation={userNavigation}
+        handleToggleUrlBarFocus={handleToggleUrlBarFocus}
       />
-
-
-
     );
   }
-
 }
 
 const workspacesSelector = createSelector(
@@ -81,6 +82,7 @@ const mapStateToProps = createSelector(
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     navigateToUrl: navigateToUrl,
+    handleToggleUrlBarFocus: handleToggleUrlBarFocus
   }, dispatch);
 };
 
@@ -88,7 +90,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
-    navigateToUrl: arg => dispatchProps.navigateToUrl(arg)
+    navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
+    handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus
   });
 };
 

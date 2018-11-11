@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../common/stylesheet';
 
 export const Mainwrap = styled.section`
   min-height: 38px;
@@ -18,11 +19,11 @@ export const SingleTabContainer = styled.div`
   align-items: center;
   position: relative;
   border-radius: 5px 5px 0 0;
-  background: ${props => props.isActive ? props.theme.lightgrey : 'none'};
+  background: ${props => props.isActive ? props.theme.lightergrey : 'none'};
 
   ${props => !props.isActive && `
     &:hover {
-      background: rgba(234,234,234, 0.5);
+      background: rgba(234,234,234, 1);
     }
   `}
 
@@ -63,5 +64,17 @@ export const CloseButton = styled.button`
   }
   &:focus {
     outline: none;
+  }
+`;
+
+export const AddTabButton = styled(Button)`
+  width: 24px;
+  height: 24px;
+  margin-bottom: 3px;
+  :hover {
+    background: ${props => props.theme.greybuttonhover};
+  }
+  :active {
+    background: ${props => props.theme.greybuttonactive};
   }
 `;
