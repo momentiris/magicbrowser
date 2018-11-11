@@ -35,6 +35,9 @@ export const AddToReadingListButton = styled(Button)`
   :hover {
     background: ${props => props.theme.mediumgrey};
   }
+  :active {
+    background: ${props => props.theme.greybuttonactive};
+  }
 `;
 
 export const ReadingListButton = styled(Button)`
@@ -48,6 +51,9 @@ export const ReadingListButton = styled(Button)`
   :hover {
     background: ${props => props.theme.mediumgrey};
   }
+  :active {
+    background: ${props => props.theme.greybuttonactive};
+  }
 `;
 
 export const NavSettingsButton = styled(Button)`
@@ -58,6 +64,9 @@ export const NavSettingsButton = styled(Button)`
   overflow: hidden;
   :hover {
     background: ${props => props.theme.mediumgrey};
+  }
+  :active {
+    background: ${props => props.theme.greybuttonactive};
   }
 `;
 

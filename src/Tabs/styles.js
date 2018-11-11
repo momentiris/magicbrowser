@@ -20,14 +20,17 @@ export const SingleTabContainer = styled.div`
   position: relative;
   border-radius: 5px 5px 0 0;
   background: ${props => props.isActive ? props.theme.lightergrey : 'none'};
-
   ${props => !props.isActive && `
-    &:hover {
+    :hover {
       background: rgba(234,234,234, 1);
+      button {
+        ::after {
+          background: linear-gradient( to right, rgba(255,255,255,0) 0%, rgba(234,234,234, 1) 89%, rgba(234,234,234, 1) 100%);
+        }
+      }
     }
   `}
-
-  &:after {
+  &::after {
     content: "";
     display: block;
     position: absolute;
@@ -41,7 +44,13 @@ export const SingleTabContainer = styled.div`
 
 export const TabTitle = styled.span`
   font-size: 12px;
-  margin: auto 0 auto auto;
+  user-select: none;
+  white-space: nowrap;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+
+
 `;
 
 export const FavIcon = styled.img`
@@ -49,32 +58,64 @@ export const FavIcon = styled.img`
   min-width: 17px;
   height: 17px;
   margin-left: 8px;
+  margin-right: 8px;
 `;
 
-export const CloseButton = styled.button`
+export const CloseTabButton = styled(Button)`
+  width: 14px;
+  height: 14px;
   margin-left: auto;
-  margin-right: 8px;
-  background: none;
-  border: none;
-  padding: 0;
-  &:after {
-    content: "X";
-    display: block;
-    color: black;
+  margin-right: 4px;
+  margin-top: 2px;
+  position: relative;
+  :hover {
+    background: ${props => props.theme.greybuttonhover};
+
   }
-  &:focus {
-    outline: none;
+  :active {
+    background: ${props => props.theme.greybuttonactive};
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0) 0%,
+      ${props => props.isActive ?
+    props.theme.lightergrey :
+    props.theme.mediumgrey} 89%,
+    ${props => props.isActive ?
+    props.theme.lightergrey :
+    props.theme.mediumgrey} 100%);
+    pointer-events: none;
   }
 `;
+
 
 export const AddTabButton = styled(Button)`
   width: 24px;
   height: 24px;
   margin-bottom: 3px;
+  margin-left: 4px;
+  margin-right: 5px;
+  position: relative;
   :hover {
     background: ${props => props.theme.greybuttonhover};
   }
   :active {
     background: ${props => props.theme.greybuttonactive};
   }
+  ${'' /* &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -4px;
+    border-left: 1px solid ${props => props.theme.lightgrey};
+    height: 24px;
+    vertical-align: center;
+  } */}
 `;
