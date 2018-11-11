@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {  } from './styles';
+import { Container, TabItems, TabWrapper, Column, Header2 } from './styles';
 
 class ActiveDashboard extends Component {
 
@@ -8,9 +8,37 @@ class ActiveDashboard extends Component {
   }
 
   render() {
+    const { tabs } = this.props;
+    const { workspaces } = this.props;
     return (
-      <div>
-      </div>
+      <Container>
+        <Column>
+          {
+            workspaces.map((ws, i) =>
+              <BorderBottom>
+                <Header2
+                  key={i}
+                >
+                  {ws[0]}
+                </Header2>
+              </BorderBottom>
+            )
+          }
+          <TabWrapper>
+            {
+              tabs.map((tab, i) =>
+                <TabItems
+                  key={i}
+                  id={i}
+                >
+                  {tab.src}
+                </TabItems>
+              )
+            }
+            <AddNewTab />
+          </TabWrapper>
+        </Column>
+      </Container>
     );
   }
 }

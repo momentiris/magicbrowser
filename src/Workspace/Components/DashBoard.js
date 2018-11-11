@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
-import { DragDropContext } from 'react-beautiful-dnd';
+// import Drop from './droppable/Droppable.js';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import WsHover from './WorkSpaceButton/wshover';
 import {
   Container,
@@ -61,7 +62,7 @@ class Dashboard extends Component {
     };
   }
 
-  onDragStart = () => {
+  onDragStart = (e) => {
 
   };
   onDragUpdate = () => {
@@ -73,7 +74,7 @@ class Dashboard extends Component {
 
 
   componentDidMount(){
-
+    console.log(JSON.stringify(this.props.tabs[0]));
   }
 
   onToggle = () => {
@@ -139,6 +140,7 @@ class Dashboard extends Component {
   //       complete the edit/rename workspace dropdown
 
   render() {
+    const dragable = JSON.stringify(this.props.tabs[0]);
     const { tabs } = this.props;
     const { workspaces } = this.props;
     return (
@@ -222,15 +224,37 @@ class Dashboard extends Component {
           <Column>
             <SavedLinksWrapper>
               <SavedLinksHeader>
-                Saved Links
-                <DragDropContext
-                  onDragStart={this.onDragStart}
-                  onDragUpdate={this.onDragUpdate}
-                  onDragEnd={this.onDragEnd}
-                >
-                  <div>Hello world</div>
-                </DragDropContext>
-
+                {
+                  tabs.map((tab, i) =>
+                    <DragDropContext onDragEnd={this.onDragEnd} key={i}>
+                      <Droppable droppableId={dragable}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                          >
+                            <Draggable draggableId={dragable} index={i}>
+                              {(provided) => (
+                                <div
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  ref={provided.innerRed}
+                                  id={i}
+                                  index={i}
+                                  key={i}>
+                                  {tab.src}
+                                  <button onClick={() => this.removeSelectedTab(i)} />
+                                </div>
+                              )}
+                            </Draggable>
+                          )}
+                            {provided.placeholder}
+                          </div >
+                        )}
+                      </Droppable>
+                    </DragDropContext>
+                  )
+                }
               </SavedLinksHeader>
             </SavedLinksWrapper>
           </Column>

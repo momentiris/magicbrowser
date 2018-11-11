@@ -13,6 +13,7 @@ import Webview from './GuestInstance/Webview';
 
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 import Dashboard from './Workspace/Components/DashBoard';
+import Droppable from './Workspace/Components/droppable/Droppable.js';
 import ActiveDashboard from './Workspace/Components/ActiveDashboard/ActiveDashboard';
 
 const electron = window.electron;
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path="/" component={GuestInstanceHandler}/>
           <Route exact path="/dashboard/:id" component={ActiveDashboard}/>
           <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path="/droppbale" component={Droppable}/>
         </>
         </Router>
       </div>
