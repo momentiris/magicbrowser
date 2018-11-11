@@ -19,7 +19,8 @@ import {
   NavSettingsButton,
   GoToDashboardButton,
   ReadListNavSettingsWrap,
-  GoToDashboardButtonWrap
+  GoToDashboardButtonWrap,
+  PreToDashBoardButton
 } from './styles';
 
 
@@ -54,7 +55,9 @@ class UserNavigationContainer extends Component {
           </AddToReadingListButton>
         </UrlBarContainer>
         <GoToDashboardButtonWrap toggle={toggleWorkspaces ? 'true' : 'false' }>
-          <ToDashboardIcon/>
+          <PreToDashBoardButton>
+            <ToDashboardIcon/>
+          </PreToDashBoardButton>
           <GoToDashboardButton to="/dashboard">
             <DashboardIcon />
             <span>Dashboard</span>

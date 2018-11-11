@@ -35,7 +35,7 @@ export const SingleTabContainer = styled.div`
     display: block;
     position: absolute;
     left: 0;
-    border-left: ${props => !props.isActive && props.id != 0 ? '1px solid' + props.theme.lightgrey : 'none'};
+    border-left: ${props => !props.isActive && props.id != 0 ? '1px solid' + props.theme.darkgrey : 'none'};
 
     height: 24px;
     vertical-align: center;
@@ -48,16 +48,14 @@ export const TabTitle = styled.span`
   white-space: nowrap;
   overflow-x: hidden;
   position: relative;
-  width: 100%;
-
-
+  margin-left: auto;
 `;
 
 export const FavIcon = styled.img`
   display: inline;
   min-width: 17px;
   height: 17px;
-  margin-left: 8px;
+  margin-left: 12px;
   margin-right: 8px;
 `;
 
@@ -65,7 +63,7 @@ export const CloseTabButton = styled(Button)`
   width: 14px;
   height: 14px;
   margin-left: auto;
-  margin-right: 4px;
+  margin-right: 8px;
   margin-top: 2px;
   position: relative;
   :hover {

@@ -94,6 +94,18 @@ export const GoToDashboardButtonWrap = styled.div`
     margin-right: 8px;
   }
 `;
+export const PreToDashBoardButton = styled(Button)`
+  width: 24px;
+  height: 32px;
+  margin-right: 7px;
+  :hover {
+    background: ${props => props.theme.mediumgrey};
+  }
+  :active {
+    background: ${props => props.theme.greybuttonactive};
+  }
+
+`;
 export const GoToDashboardButton = styled(Link)`
   width: 134px;
   height: 32px;

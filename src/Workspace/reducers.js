@@ -78,6 +78,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       return newObject;
 
     case SWITCH_WORKSPACES:
+
       return Object.assign({}, state, {
         current: payload
       });
@@ -138,6 +139,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       };
 
     case UPDATE_TAB_META:
+
       return {
         ...state,
         [state.current]: {

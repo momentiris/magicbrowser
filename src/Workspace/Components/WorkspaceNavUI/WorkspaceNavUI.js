@@ -53,7 +53,7 @@ class WorkspaceNavUI extends Component {
       startwidth: elem.clientWidth,
       width: elem.clientWidth,
     });
-    await this.handleToggle();
+    this.handleToggle();
   }
 
   handleToggle = async () => {
@@ -73,11 +73,11 @@ class WorkspaceNavUI extends Component {
     toggleNewWorkspace && this.props.handleToggleNewWorkspace();
     toggleNewWorkspaceOverflow && this.props.handleToggleNewWorkspaceOverflow();
     await this.toggleOverflow();
-    this.measureWsRestContainer();
+    // this.measureWsRestContainer();
   }
 
   measureWsRestContainer = () => {
-    console.log(this.WsRestContainer.current);
+
   }
 
   toggleOverflow = async () => {

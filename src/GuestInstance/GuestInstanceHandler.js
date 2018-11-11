@@ -35,17 +35,19 @@ class GuestInstanceHandler extends Component {
     },
 
     onWillNavigate: e => {
-      this.props.addOneTab({src: e.url});
+      // this.props.addOneTab({src: e.url});
+      e.target.loadURL(e.url);
     },
 
-    onPageFaviconUpdated: ({ favicons, target: { dataset: { id } }}) => {
-
+    onPageFaviconUpdated: ({ favicons, target, target: { dataset: { id } }}) => {
       this.props.updateTabMeta({
         type: 'favicon',
         data: favicons[0],
         id
       });
+      target.removeEventListener('page-favicon-updated', this.eventHandlers.onPageFaviconUpdated);
     }
+
   }
 
   addEvents = webview => {

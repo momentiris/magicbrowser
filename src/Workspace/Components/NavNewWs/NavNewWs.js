@@ -87,6 +87,7 @@ class NavNewWs extends Component {
     });
 
     // strange below, why need?
+  
     this.props.handleToggleWorkspaces();
   }
 
