@@ -44,8 +44,9 @@ export const TabWrapper = styled.div`
 
 export const TabItems = styled.div`
   display: flex;
+
   flex-direction: row;
-  width: 193px
+  width: 193px;
   height: 109px;
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
@@ -53,9 +54,7 @@ export const TabItems = styled.div`
   /* transition: all .1s ease; */
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
+  
 `;
 
 export const AddNewTab = styled.div`

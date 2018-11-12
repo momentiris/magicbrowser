@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import './sortableHelperStyles.css';
 // import Drop from './droppable/Droppable.js';
 // import WsHover from './WorkSpaceButton/wshover';
 import {
@@ -45,17 +46,14 @@ import {
   handleDragDashBoardTab,
 } from '../actions';
 
-const SortableItem = SortableElement(({value}) => <TabItems className="box">{value}</TabItems>);
-const SortableList = SortableContainer(({items}) => {
-  console.log(items);
-    return (
-      <TabWrapper className="container">
-        {items.map((item, index) => {
-          return <SortableItem key={`item-${index}`} index={index} value={item.src} />;
-        })}
-      </TabWrapper>
-    );
-});
+const SortableItem = SortableElement(({value, style}) => <TabItems hideSortableGhost="false" className="TabItems" >{value}</TabItems>);
+const SortableList = SortableContainer(({items}) => (
+  <TabWrapper className="container" >
+    {items.map((item, index) => {
+      return <SortableItem key={`item-${index}`} index={index} value={item.src} />;
+    })}
+  </TabWrapper>
+));
 
 class Dashboard extends Component {
   constructor(props) {
@@ -136,7 +134,10 @@ class Dashboard extends Component {
     console.log(color);
   }
 
-  onSortEnd({oldIndex, newIndex}) {
+  onSortEnd({oldIndex, newIndex}, { target }) {
+    if (target.dataset.ws) {
+      console.log(target.dataset.ws);
+    }
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
     this.props.handleDragDashBoardTab(newTabs);
   }
@@ -181,8 +182,8 @@ class Dashboard extends Component {
           <Ul name="workspaces">
             {
               workspaces.map((ws, i) => (
-                <Li key={i}>
-                  <Button onClick={this.handleClick} value={ws[0]}>
+                <Li key={i} data-ws={i}>
+                  <Button data-ws={i} onClick={this.handleClick} value={ws[0]}>
                     <Hover color={ws[1].color || '#5C4EFF'}> <RightArrow /> </Hover>
                     {ws[0]}
                   </Button>
