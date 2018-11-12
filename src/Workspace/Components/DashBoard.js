@@ -80,33 +80,33 @@ class Dashboard extends Component {
 
   };
   onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
-
-    if (!destination) {
-      return;
-    }
-
-    if (
-      destination.droppableId === source.droppableId && destination.index === source.index
-    ) {
-      return;
-    }
-
-    const column = this.state.columns[source.droppableId];
-    const newTaskIds = Array.from(column.taskIds);
-    newTaskIds.splice(source.index, 1);
-    newTaskIds.splice(destination.index, 0, draggableId);
-
-    const newColumn = {
-      ...column,
-      taskIds: newTaskIds,
-    };
-    const newState = {
-      ...this.state,
-      columns: {
-        ...this.state.column,
-      }
-    };
+    // const { destination, source, draggableId } = result;
+    //
+    // if (!destination) {
+    //   return;
+    // }
+    //
+    // if (
+    //   destination.droppableId === source.droppableId && destination.index === source.index
+    // ) {
+    //   return;
+    // }
+    //
+    // const column = this.state.columns[source.droppableId];
+    // const newTaskIds = Array.from(column.taskIds);
+    // newTaskIds.splice(source.index, 1);
+    // newTaskIds.splice(destination.index, 0, draggableId);
+    //
+    // const newColumn = {
+    //   ...column,
+    //   taskIds: newTaskIds,
+    // };
+    // const newState = {
+    //   ...this.state,
+    //   columns: {
+    //     ...this.state.column,
+    //   }
+    // };
   };
 
 
@@ -242,12 +242,11 @@ class Dashboard extends Component {
             }
           </Ul>
           <TabWrapper>
-            {
-              tabs.map((tab, i) =>
-                <DragDropContext
-                  onDragEnd={this.onDragEnd}
-                  key={i}
-                >
+            <DragDropContext
+              onDragEnd={this.onDragEnd}
+            >
+              {
+                tabs.map((tab, i) =>
                   <Droppable droppableId={JSON.stringify(i)} key={i}>
                     {provided => (
                       <div
@@ -272,9 +271,9 @@ class Dashboard extends Component {
                       </div>
                     )}
                   </Droppable>
-                </DragDropContext>
-              )
-            }
+                )
+              }
+            </DragDropContext>
             <AddNewTab onClick={this.addOneTab}>
               <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
             </AddNewTab>
