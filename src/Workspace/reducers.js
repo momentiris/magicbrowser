@@ -156,11 +156,10 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       };
 
     case DRAG_DASHBOARD_TAB:
-      console.log(payload);
       return {
         ...state,
         [state.current]: {
-          tabs: [...state[state.current].tabs].splice(payload.source.index, 1).splice(payload.destination.index, 0, payload.source.index)
+          tabs: 
         }
       };
       break;
