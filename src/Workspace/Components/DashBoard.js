@@ -80,38 +80,43 @@ class Dashboard extends Component {
 
   };
   onDragEnd = (result) => {
+    console.log(result);
     const { destination, source, draggableId } = result;
-
+    //
     if (!destination) {
       return;
     }
-
+    //
     if (
       destination.droppableId === source.droppableId && destination.index === source.index
     ) {
       return;
     }
-
-    const column = this.state.columns[source.droppableId];
-    const newTaskIds = Array.from(column.taskIds);
+    //
+    const column = this.props.tabs[source.droppableId];
+    console.log(column);
+    const newTaskIds = Array.from(column);
     newTaskIds.splice(source.index, 1);
     newTaskIds.splice(destination.index, 0, draggableId);
 
     const newColumn = {
       ...column,
-      taskIds: newTaskIds,
+      column: newTaskIds,
     };
     const newState = {
-      ...this.state,
+      ...this.props,
       columns: {
-        ...this.state.column,
-      }
+        ...this.props.tabs,
+        [newColumn.id]: newColumn,
+      },
     };
+    console.log(newState);
+    this.setState(newState);
   };
 
 
   componentDidMount(){
-    console.log(this.props.tabs[0]);
+    console.log(this.props.tabs);
   }
 
   onToggle = () => {
@@ -242,27 +247,25 @@ class Dashboard extends Component {
             }
           </Ul>
           <TabWrapper>
-            {
-              tabs.map((tab, i) =>
-                <DragDropContext
-                  onDragEnd={this.onDragEnd}
-                  key={i}
-                >
-                  <Droppable droppableId={JSON.stringify(i)} key={i}>
+            <DragDropContext
+              onDragEnd={this.onDragEnd}
+            >
+              {
+                tabs.map((tab, i) =>
+                  <Droppable droppableId={JSON.stringify(i)} key={i} direction="horizontal vertical">
                     {provided => (
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                       >
-                        <Draggable draggableId={JSON.stringify(i)} key={i}>
+                        <Draggable draggableId={JSON.stringify(i)} key={i} index={i}>
                           {provided => (
                             <TabItems
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                               ref={provided.innerRef}
                               id={i}
-                              key={i}
-                              draggableId={JSON.stringify(i)}>
+                              key={i}>
                               {tab.src}
                               <Close onClick={() => this.removeSelectedTab(i)} />
                             </TabItems>
@@ -272,9 +275,9 @@ class Dashboard extends Component {
                       </div>
                     )}
                   </Droppable>
-                </DragDropContext>
-              )
-            }
+                )
+              }
+            </DragDropContext>
             <AddNewTab onClick={this.addOneTab}>
               <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
             </AddNewTab>
