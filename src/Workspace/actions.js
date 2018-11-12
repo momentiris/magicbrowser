@@ -7,7 +7,8 @@ import {
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
   OPEN_DASHBOARD,
-  UPDATE_TAB_META
+  UPDATE_TAB_META,
+  DRAG_DASHBOARD_TAB
 } from './types';
 
 export const initEmptyWorkspace = () => {
@@ -73,5 +74,12 @@ export const updateTabMeta = data => {
   return {
     type: UPDATE_TAB_META,
     payload: data
+  };
+};
+
+export const handleDragDashBoardTab = (payload) => {
+  return {
+    type: DRAG_DASHBOARD_TAB,
+    payload: payload
   };
 };

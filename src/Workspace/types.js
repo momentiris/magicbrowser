@@ -11,3 +11,5 @@ export const UPDATE_TAB_META = 'tabs:updateMeta';
 
 export const NAVIGATE_TO_URL = 'navigation:navigateToUrl';
 export const OPEN_DASHBOARD = 'dashboard:openDashboard';
+
+export const DRAG_DASHBOARD_TAB = 'tabs:dragDashBoardTab';

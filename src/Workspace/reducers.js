@@ -9,7 +9,8 @@ import {
   SET_TAB_ACTIVE,
   NAVIGATE_TO_URL,
   OPEN_DASHBOARD,
-  UPDATE_TAB_META
+  UPDATE_TAB_META,
+  DRAG_DASHBOARD_TAB
 } from './types';
 
 const initialState = {
@@ -153,6 +154,16 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           color: state[state.current].color
         }
       };
+
+    case DRAG_DASHBOARD_TAB:
+      console.log(payload);
+      return {
+        ...state,
+        [state.current]: {
+          tabs: [...state[state.current].tabs].splice(payload.source.index, 1).splice(payload.destination.index, 0, payload.source.index)
+        }
+      };
+      break;
 
     default:
       return state;

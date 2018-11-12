@@ -41,7 +41,8 @@ import {
   switchWorkspaces,
   initEmptyWorkspace,
   addOneTab,
-  removeSelectedTab
+  removeSelectedTab,
+  handleDragDashBoardTab,
 } from '../actions';
 
 class Dashboard extends Component {
@@ -80,43 +81,49 @@ class Dashboard extends Component {
 
   };
   onDragEnd = (result) => {
-    console.log(result);
     const { destination, source, draggableId } = result;
-    //
-    if (!destination) {
-      return;
-    }
-    //
-    if (
-      destination.droppableId === source.droppableId && destination.index === source.index
-    ) {
-      return;
-    }
-    //
-    const column = this.props.tabs[source.droppableId];
-    console.log(column);
-    const newTaskIds = Array.from(column);
-    newTaskIds.splice(source.index, 1);
-    newTaskIds.splice(destination.index, 0, draggableId);
 
-    const newColumn = {
-      ...column,
-      column: newTaskIds,
-    };
-    const newState = {
-      ...this.props,
-      columns: {
-        ...this.props.tabs,
-        [newColumn.id]: newColumn,
-      },
-    };
-    console.log(newState);
-    this.setState(newState);
+    this.props.handleDragDashBoardTab({
+      destination,
+      source,
+      draggableId,
+    });
+    // console.log(result);
+    // //
+    // if (!destination) {
+    //   return;
+    // }
+    // //
+    // if (
+    //   destination.droppableId === source.droppableId && destination.index === source.index
+    // ) {
+    //   return;
+    // }
+    // //
+    // const column = this.props.tabs[source.droppableId];
+    // console.log(column);
+    // const newTaskIds = Array.from(column);
+    // newTaskIds.splice(source.index, 1);
+    // newTaskIds.splice(destination.index, 0, draggableId);
+    //
+    // const newColumn = {
+    //   ...column,
+    //   column: newTaskIds,
+    // };
+    // const newState = {
+    //   ...this.props,
+    //   columns: {
+    //     ...this.props.tabs,
+    //     [newColumn.id]: newColumn,
+    //   },
+    // };
+    // console.log(newState);
+    // this.setState(newState);
   };
 
 
   componentDidMount(){
-    console.log(this.props.tabs);
+
   }
 
   onToggle = () => {
@@ -126,7 +133,6 @@ class Dashboard extends Component {
   }
 
   editWorkspace = (e) => {
-    console.log(e.target.value);
     this.switchWorkspaces(e.target.value);
     // this.setState({ editWorkspaceToggle: !this.state.editWorkspaceToggle });
   }
@@ -136,7 +142,6 @@ class Dashboard extends Component {
   }
 
   handleClick = (e) => {
-    console.log(e.target.value);
     this.switchWorkspaces(e.target.value);
   }
 
@@ -252,7 +257,7 @@ class Dashboard extends Component {
             >
               {
                 tabs.map((tab, i) =>
-                  <Droppable droppableId={JSON.stringify(i)} key={i} direction="horizontal vertical">
+                  <Droppable droppableId={JSON.stringify(i)} key={i} direction="horizontal vertical" index={i}>
                     {provided => (
                       <div
                         ref={provided.innerRef}
@@ -314,6 +319,7 @@ const mapActionsToProps = (dispatch, props) => {
     addWorkspace: addWorkspace,
     addOneTab: addOneTab,
     removeSelectedTab: removeSelectedTab,
+    handleDragDashBoardTab: handleDragDashBoardTab,
   }, dispatch);
 };
 
@@ -334,6 +340,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
+    handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
   });
 };
 
