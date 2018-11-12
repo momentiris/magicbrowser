@@ -9,8 +9,6 @@ import storage from 'redux-persist/lib/storage';
 import { workspacesReducer as workspaces } from '../Workspace/reducers';
 import { userNavigationReducer as userNavigation } from '../UserNavigation/reducers';
 
-
-
 const persistConfig = {
   key: 'root',
   storage,

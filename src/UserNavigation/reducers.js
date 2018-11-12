@@ -52,10 +52,10 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         ...state,
         toggleUrlBarFocus: !state.toggleUrlBarFocus,
       });
-
+      
       break;
     default:
-      return initialState;
+      return state;
 
   }
 
