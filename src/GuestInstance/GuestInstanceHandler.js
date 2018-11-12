@@ -45,6 +45,7 @@ class GuestInstanceHandler extends Component {
         data: favicons[0],
         id
       });
+      
       target.removeEventListener('page-favicon-updated', this.eventHandlers.onPageFaviconUpdated);
     }
 
