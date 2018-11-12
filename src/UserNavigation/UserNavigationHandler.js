@@ -2,15 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
-import { navigateToUrl } from './actions';
-import UrlBar from './UrlBar/UrlBar';
+import {
+  navigateToUrl,
+  handleToggleUrlBarFocus
+} from './actions';
+import UrlBar from './Components/UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
-
-import {
-  UserNavigationContainer,
-  PageNavigationContainer,
-} from './styles';
+import UserNavigationContainer from './Components/UserNavigationContainer/UserNavigationContainer';
 
 
 // todo:
@@ -26,7 +25,6 @@ class NavigationHandler extends Component {
 
   }
   componentDidMount() {
-
   }
 
   navigateForwards = webview => {
@@ -45,17 +43,20 @@ class NavigationHandler extends Component {
 
   };
   render() {
-    const { navigateToUrl } = this.props;
-    return (
-      <UserNavigationContainer>
-        <PageNavigationContainer/>
-        <WorkspaceHandler/>
-        <UrlBar navigateToUrl={navigateToUrl}/>
+    const {
+      navigateToUrl,
+      userNavigation,
+      handleToggleUrlBarFocus
+    } = this.props;
 
-      </UserNavigationContainer>
+    return (
+      <UserNavigationContainer
+        navigateToUrl={navigateToUrl}
+        userNavigation={userNavigation}
+        handleToggleUrlBarFocus={handleToggleUrlBarFocus}
+      />
     );
   }
-
 }
 
 const workspacesSelector = createSelector(
@@ -63,24 +64,34 @@ const workspacesSelector = createSelector(
   workspaces => workspaces
 );
 
+const userNavigationSelector = createSelector(
+  state => state.userNavigation,
+  userNavigation => userNavigation
+);
+
 
 const mapStateToProps = createSelector(
   workspacesSelector,
-  workspaces => ({
-    workspaces
+  userNavigationSelector,
+  (workspaces, userNavigation) => ({
+    workspaces,
+    userNavigation
   })
 );
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     navigateToUrl: navigateToUrl,
+    handleToggleUrlBarFocus: handleToggleUrlBarFocus
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     searchQuery: stateProps.searchQuery,
-    navigateToUrl: arg => dispatchProps.navigateToUrl(arg)
+    userNavigation: stateProps.userNavigation,
+    navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
+    handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus
   });
 };
 

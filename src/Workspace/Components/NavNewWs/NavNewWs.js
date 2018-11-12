@@ -54,7 +54,6 @@ class NavNewWs extends Component {
         import: this.state.newWorkspace.import,
       }
     });
-
   }
 
   handleToggleDropdown = arg => {
@@ -62,9 +61,9 @@ class NavNewWs extends Component {
   }
 
   toggleOverflow = all => {
-    setTimeout(() => this.setState({
-      overflow: !this.state.overflow
-    }), !this.state.overflow ? 100 : 0);
+    const { toggleNewWorkspaceOverflow } = this.props.userNavigation;
+    setTimeout(() => this.props.handleToggleNewWorkspaceOverflow(),
+      toggleNewWorkspaceOverflow ? 50 : 0);
   }
 
   handleNewWsImport = ({ target }) => {
@@ -87,9 +86,9 @@ class NavNewWs extends Component {
       }
     });
 
-    this.handleToggleDropdown();
-    this.handleToggleNewWorkspace();
-
+    // strange below, why need?
+  
+    this.props.handleToggleWorkspaces();
   }
 
   handlePressEnter = ({ keyCode }) => {
@@ -127,19 +126,27 @@ class NavNewWs extends Component {
       }
     });
 
-    this.props.addWorkspace(this.state.newWorkspace);
-
+    await this.props.addWorkspace(this.state.newWorkspace);
+    await this.props.measureWsRestContainer();
 
     this.resetToggleClean();
   }
 
   render() {
     const {  toggleDropdown, overflow, newWsColorInput  } = this.state;
-    const { isWsToggleActive, workspaces, userNavigation } = this.props;
+    const {
+      isWsToggleActive,
+      workspaces,
+      userNavigation,
+    } = this.props;
 
     return (
 
-      <NewWsContainer open={overflow} toggleOpen={userNavigation.toggleNewWorkspace} onKeyDown={this.handlePressEnter}>
+      <NewWsContainer
+        open={userNavigation.toggleNewWorkspaceOverflow}
+        toggleOpen={userNavigation.toggleNewWorkspace}
+        onKeyDown={this.handlePressEnter}
+      >
         <InnerNewWsContainer >
           <NewWsButtonContainer onClick={this.handleToggleNewWorkspace}>
             <AddTabIcon tilt={userNavigation.toggleNewWorkspace}/>

@@ -7,6 +7,7 @@ import NavNewWs from '../NavNewWs/NavNewWs';
 import {
   DotIcon,
 } from '../../../common/assets/icons';
+
 import {
   WorkspaceToggleWrap,
   WsItem,
@@ -19,8 +20,8 @@ import {
   handleToggleWorkspaces,
   handleToggleDropdown,
   handleToggleNewWorkspace,
+  handleToggleNewWorkspaceOverflow,
 } from '../../../UserNavigation/actions';
-
 
 class WorkspaceNavUI extends Component {
   constructor(props) {
@@ -37,8 +38,8 @@ class WorkspaceNavUI extends Component {
   componentDidMount() {
     const { toggleWorkspaces } = this.props.userNavigation;
     this.setState({
-      startwidth: this.workspacetoggle.current.clientWidth + 'px',
-      width: this.workspacetoggle.current.clientWidth + 'px',
+      startwidth: this.workspacetoggle.current.clientWidth ,
+      width: this.workspacetoggle.current.clientWidth,
     });
 
     setTimeout(this.setState({
@@ -49,25 +50,34 @@ class WorkspaceNavUI extends Component {
   handleSwitchWorkspace = async (ws, elem) => {
     this.props.switchWorkspaces(ws);
     await this.setState({
-      startwidth: elem.clientWidth + 'px',
-      width: elem.clientWidth + 'px',
+      startwidth: elem.clientWidth,
+      width: elem.clientWidth,
     });
-    await this.handleToggle();
+    this.handleToggle();
   }
 
   handleToggle = async () => {
     await this.props.handleToggleWorkspaces();
-    const { toggleWorkspaces, toggleDropdown } = this.props.userNavigation;
+    const {
+      toggleWorkspaces,
+      toggleDropdown,
+      toggleNewWorkspace,
+      toggleNewWorkspaceOverflow
+    } = this.props.userNavigation;
+
     await this.setState({
-      width: toggleWorkspaces ? '100%' : this.state.startwidth,
+      width: toggleWorkspaces ? this.WsRestContainer.current.clientWidth + this.state.startwidth : this.state.startwidth,
     });
+
     toggleDropdown && this.props.handleToggleDropdown(false);
+    toggleNewWorkspace && this.props.handleToggleNewWorkspace();
+    toggleNewWorkspaceOverflow && this.props.handleToggleNewWorkspaceOverflow();
     await this.toggleOverflow();
-    this.measureWsRestContainer();
+    // this.measureWsRestContainer();
   }
 
   measureWsRestContainer = () => {
-    console.log(this.WsRestContainer.current.clientWidth);
+
   }
 
   toggleOverflow = async () => {
@@ -89,7 +99,9 @@ class WorkspaceNavUI extends Component {
       addWorkspace,
       handleToggleDropdown,
       userNavigation,
-      handleToggleNewWorkspace
+      handleToggleNewWorkspace,
+      handleToggleNewWorkspaceOverflow,
+      handleToggleWorkspaces
     } = this.props;
 
     const { overflow, width } = this.state;
@@ -98,9 +110,10 @@ class WorkspaceNavUI extends Component {
       .filter((inst,i) => inst[0] === current)
       .map((inst,i) => (
         <WsItem
+          width={width + 'px'}
           onClick={this.handleToggle}
           current
-          clicked={userNavigation.toggleNewWorkspace}
+          clicked={userNavigation.toggleWorkspaces}
           key={i}
         >
           <DotIcon color={inst[1].color}/>
@@ -109,7 +122,7 @@ class WorkspaceNavUI extends Component {
       ));
 
     const restInst = workspaces
-      .filter((inst,i) => inst[0] !== current )
+      .filter((inst,i) => inst[0] !== current)
       .map((inst,i) => (
         <WsItem
           onClick={({ target }) => this.handleSwitchWorkspace(inst[0], target)}
@@ -121,14 +134,14 @@ class WorkspaceNavUI extends Component {
       ));
 
     return (
-
-      <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width}>
+      <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width + 'px'}>
         { firstInst }
         { this.state.restActive && (
           <WsRestContainer ref={this.WsRestContainer}>
-            {restInst}
+            { restInst }
             <NavNewWs
               handleToggleNewWorkspace={handleToggleNewWorkspace}
+              handleToggleNewWorkspaceOverflow={handleToggleNewWorkspaceOverflow}
               userNavigation={userNavigation}
               workspaces={workspaces}
               handleToggle={this.handleToggle}
@@ -136,6 +149,8 @@ class WorkspaceNavUI extends Component {
               addWorkspace={addWorkspace}
               open={overflow}
               handleToggleDropdown={handleToggleDropdown}
+              handleToggleWorkspaces={handleToggleWorkspaces}
+              measureWsRestContainer={this.measureWsRestContainer}
             />
           </WsRestContainer>
         ) }
@@ -160,7 +175,8 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     handleToggleWorkspaces: handleToggleWorkspaces,
     handleToggleDropdown: handleToggleDropdown,
-    handleToggleNewWorkspace: handleToggleNewWorkspace
+    handleToggleNewWorkspace: handleToggleNewWorkspace,
+    handleToggleNewWorkspaceOverflow: handleToggleNewWorkspaceOverflow
   }, dispatch);
 };
 
@@ -170,6 +186,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleToggleWorkspaces: dispatchProps.handleToggleWorkspaces,
     handleToggleDropdown: arg => dispatchProps.handleToggleDropdown(arg),
     handleToggleNewWorkspace: dispatchProps.handleToggleNewWorkspace,
+    handleToggleNewWorkspaceOverflow: dispatchProps.handleToggleNewWorkspaceOverflow
   });
 };
 

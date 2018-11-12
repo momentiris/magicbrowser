@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 export const stylesheet = {
   // Colors
   darkgrey: '#CDD0D6',
@@ -46,3 +47,18 @@ export const iconColors = [
   '#1E40F2',
   '#1EF28C',
 ];
+
+export const Button = styled.button`
+  background: none;
+  border: none;
+  border-radius: ${props => props.theme.br};
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  :focus {
+    outline: none;
+  }
+`;

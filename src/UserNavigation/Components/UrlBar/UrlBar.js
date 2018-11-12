@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import {
-  UrlBarInput
+  UrlBarInput,
+
 } from './styles';
 
-const KeyCodes = require('../../common/keyCodes');
+import KeyCodes from '../../../common/keyCodes';
 
 class UrlBar extends Component {
   constructor (props) {
@@ -48,15 +49,20 @@ class UrlBar extends Component {
   }
 
   render() {
+    const {
+      userNavigation,
+      handleToggleUrlBarFocus
+    } = this.props;
+
     return (
       <UrlBarInput
+        onFocus={handleToggleUrlBarFocus}
+        onBlur={handleToggleUrlBarFocus}
+        disable={userNavigation.toggleWorkspaces}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}
-      >
-
-
-      </UrlBarInput>
+      />
     );
   }
 }

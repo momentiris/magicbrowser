@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Tab from './Tab';
-import { Mainwrap } from './styles';
+import {
+  Mainwrap,
+  AddTabButton
+} from './styles';
 import { Link } from 'react-router-dom';
+import { AddTabIcon } from '../common/assets/icons';
 
 const TabContainer = ({ tabs, removeSelectedTab, addOneTab, setActive, active }) => {
 
@@ -24,7 +28,9 @@ const TabContainer = ({ tabs, removeSelectedTab, addOneTab, setActive, active })
           ) ;
         })
       }
-      <button onClick={addOneTab}>Add one tab</button>
+      <AddTabButton onClick={addOneTab}>
+        <AddTabIcon />
+      </AddTabButton>
     </Mainwrap>
   );
 
