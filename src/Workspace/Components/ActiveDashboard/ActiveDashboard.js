@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Container, TabItems, TabWrapper, Column, Header2 } from './styles';
+import { Container, TabItems, TabWrapper, Column, Header2, BorderBottom, AddNewTab } from './styles';
 
 class ActiveDashboard extends Component {
 

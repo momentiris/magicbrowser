@@ -58,7 +58,18 @@ class Dashboard extends Component {
       newWorkspace: {
         name: '',
         color: ''
-      }
+      },
+      draggableId: 'task-1',
+      type: 'TYPE',
+      reason: 'DROP',
+      source: {
+        droppableId: 'column-1',
+        index: 0,
+      },
+      destination: {
+        droppableId: 'column-1',
+        index: 1,
+      },
     };
   }
 
@@ -68,13 +79,39 @@ class Dashboard extends Component {
   onDragUpdate = () => {
 
   };
-  onDragEnd = () => {
+  onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
 
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId && destination.index === source.index
+    ) {
+      return;
+    }
+
+    const column = this.state.columns[source.droppableId];
+    const newTaskIds = Array.from(column.taskIds);
+    newTaskIds.splice(source.index, 1);
+    newTaskIds.splice(destination.index, 0, draggableId);
+
+    const newColumn = {
+      ...column,
+      taskIds: newTaskIds,
+    };
+    const newState = {
+      ...this.state,
+      columns: {
+        ...this.state.column,
+      }
+    };
   };
 
 
   componentDidMount(){
-    console.log(JSON.stringify(this.props.tabs[0]));
+    console.log(this.props.tabs[0]);
   }
 
   onToggle = () => {
@@ -140,8 +177,8 @@ class Dashboard extends Component {
   //       complete the edit/rename workspace dropdown
 
   render() {
-    const dragable = JSON.stringify(this.props.tabs[0]);
     const { tabs } = this.props;
+    // const dragable = tabs.map((tab, i) => );
     const { workspaces } = this.props;
     return (
       <Container>
@@ -204,15 +241,38 @@ class Dashboard extends Component {
               ))
             }
           </Ul>
-          <TabWrapper >
+          <TabWrapper>
             {
               tabs.map((tab, i) =>
-                <TabItems
-                  id={i}
-                  key={i}>
-                  {tab.src}
-                  <Close onClick={() => this.removeSelectedTab(i)} />
-                </TabItems>
+                <DragDropContext
+                  onDragEnd={this.onDragEnd}
+                  key={i}
+                >
+                  <Droppable droppableId={JSON.stringify(i)} key={i}>
+                    {provided => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                      >
+                        <Draggable draggableId={JSON.stringify(i)} key={i}>
+                          {provided => (
+                            <TabItems
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                              id={i}
+                              key={i}
+                              draggableId={JSON.stringify(i)}>
+                              {tab.src}
+                              <Close onClick={() => this.removeSelectedTab(i)} />
+                            </TabItems>
+                          )}
+                        </Draggable>
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </DragDropContext>
               )
             }
             <AddNewTab onClick={this.addOneTab}>
@@ -224,37 +284,6 @@ class Dashboard extends Component {
           <Column>
             <SavedLinksWrapper>
               <SavedLinksHeader>
-                {
-                  tabs.map((tab, i) =>
-                    <DragDropContext onDragEnd={this.onDragEnd} key={i}>
-                      <Droppable droppableId={dragable}>
-                        {provided => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                          >
-                            <Draggable draggableId={dragable} index={i}>
-                              {(provided) => (
-                                <div
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  ref={provided.innerRed}
-                                  id={i}
-                                  index={i}
-                                  key={i}>
-                                  {tab.src}
-                                  <button onClick={() => this.removeSelectedTab(i)} />
-                                </div>
-                              )}
-                            </Draggable>
-                          )}
-                            {provided.placeholder}
-                          </div >
-                        )}
-                      </Droppable>
-                    </DragDropContext>
-                  )
-                }
               </SavedLinksHeader>
             </SavedLinksWrapper>
           </Column>
@@ -305,5 +334,36 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   });
 };
 
+// {
+//   tabs.map((tab, i) =>
+//     <DragDropContext onDragEnd={this.onDragEnd} key={i}>
+//       <Droppable droppableId={dragable}>
+//         {provided => (
+//           <div
+//             ref={provided.innerRef}
+//             {...provided.droppableProps}
+//           >
+//             <Draggable draggableId={dragable} index={i}>
+//               {(provided) => (
+//                 <div
+//                   {...provided.draggableProps}
+//                   {...provided.dragHandleProps}
+//                   ref={provided.innerRed}
+//                   id={i}
+//                   index={i}
+//                   key={i}>
+//                   {tab.src}
+//                   <button onClick={() => this.removeSelectedTab(i)} />
+//                 </div>
+//               )}
+//             </Draggable>
+//           )}
+//             {provided.placeholder}
+//           </div >
+//         )}
+//       </Droppable>
+//     </DragDropContext>
+//   )
+// }
 
 export default connect(mapStateToProps, mapActionsToProps, mergeProps)(Dashboard);
