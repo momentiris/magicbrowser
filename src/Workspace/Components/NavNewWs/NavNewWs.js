@@ -87,8 +87,9 @@ class NavNewWs extends Component {
     });
 
     // strange below, why need?
-  
-    this.props.handleToggleWorkspaces();
+    this.toggleOverflow();
+    this.props.handleToggleNewWorkspace();
+    this.props.handleToggleDropdown();
   }
 
   handlePressEnter = ({ keyCode }) => {
