@@ -109,6 +109,13 @@ export const AnimateForm = styled.div`
   height: ${props => props.isActive ? '260px' : '0px'};
 `;
 
+export const AnimateEditForm = styled.div`
+  transition: all .3s cubic-bezier(0,.72,.5,.99);
+  overflow-y: hidden;
+  opacity: ${props => props.isActive.id === props.id && props.isActive.active ? '1' : '0'}
+  height: ${props => props.isActive.id === props.id && props.isActive.active ? '260px' : '0px'};
+`;
+
 export const NewWsHover = styled.div`
   display: flex;
   align-items: center;
@@ -239,7 +246,7 @@ export const Button = styled.button`
 
 `;
 
-export const RenameEdit = styled.button`
+export const RenameEdit = styled.svg`
   background-image: url(${renameoreditsvg});
   background-repeat: no-repeat;
   background-size: contain;
@@ -249,9 +256,11 @@ export const RenameEdit = styled.button`
   opacity: 0;
   margin: 0 0 0 0;
   transition: all .2s cubic-bezier(0,.72,.5,.99);
+  cursor: pointer;
   &:hover {
     transform: scale(1.15);
   }
+
 `;
 
 export const RightArrowNewWs = styled.svg`
@@ -325,7 +334,16 @@ export const Add = styled.svg`
   transition: all .3s cubic-bezier(0,.72,.5,.99);
 `;
 
-export const Close = styled.svg`
+export const AddIcon = styled.svg`
+  background-image: url(${addiconsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+`;
+
+export const Close = styled.div`
+  z-index: 9999;
   background-image: url(${closeiconsvg});
   background-repeat: no-repeat;
   background-size: contain;
