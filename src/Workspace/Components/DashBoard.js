@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
 // import Drop from './droppable/Droppable.js';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import WsHover from './WorkSpaceButton/wshover';
 import {
   Container,
@@ -60,67 +59,8 @@ class Dashboard extends Component {
         name: '',
         color: ''
       },
-      draggableId: 'task-1',
-      type: 'TYPE',
-      reason: 'DROP',
-      source: {
-        droppableId: 'column-1',
-        index: 0,
-      },
-      destination: {
-        droppableId: 'column-1',
-        index: 1,
-      },
     };
   }
-
-  onDragStart = (e) => {
-
-  };
-  onDragUpdate = () => {
-
-  };
-  onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
-
-
-    this.props.handleDragDashBoardTab({
-      destination,
-      source,
-    });
-    // console.log(result);
-    // //
-    // if (!destination) {
-    //   return;
-    // }
-    // //
-    // if (
-    //   destination.droppableId === source.droppableId && destination.index === source.index
-    // ) {
-    //   return;
-    // }
-    // //
-    // const column = this.props.tabs[source.droppableId];
-    // console.log(column);
-    // const newTaskIds = Array.from(column);
-    // newTaskIds.splice(source.index, 1);
-    // newTaskIds.splice(destination.index, 0, draggableId);
-    //
-    // const newColumn = {
-    //   ...column,
-    //   column: newTaskIds,
-    // };
-    // const newState = {
-    //   ...this.props,
-    //   columns: {
-    //     ...this.props.tabs,
-    //     [newColumn.id]: newColumn,
-    //   },
-    // };
-    // console.log(newState);
-    // this.setState(newState);
-  };
-
 
   componentDidMount(){
 
@@ -252,37 +192,18 @@ class Dashboard extends Component {
             }
           </Ul>
           <TabWrapper>
-            <DragDropContext
-              onDragEnd={this.onDragEnd}
-            >
-              {
-                tabs.map((tab, i) =>
-                  <Droppable droppableId={JSON.stringify(i)} key={i} direction="horizontal vertical" index={i}>
-                    {provided => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                      >
-                        <Draggable draggableId={JSON.stringify(i)} key={i} index={i}>
-                          {provided => (
-                            <TabItems
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              ref={provided.innerRef}
-                              id={i}
-                              key={i}>
-                              {tab.src}
-                              <Close onClick={() => this.removeSelectedTab(i)} />
-                            </TabItems>
-                          )}
-                        </Draggable>
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                )
-              }
-            </DragDropContext>
+            {
+              tabs.map((tab, i) =>
+                <TabItems
+                  id={i}
+                  key={i}>
+                  {tab.src}
+                  {tab.favicon}
+                  {tab.title}
+                  <Close onClick={() => this.removeSelectedTab(i)} />
+                </TabItems>
+              )
+            }
             <AddNewTab onClick={this.addOneTab}>
               <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
             </AddNewTab>
@@ -343,37 +264,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
   });
 };
-
-// {
-//   tabs.map((tab, i) =>
-//     <DragDropContext onDragEnd={this.onDragEnd} key={i}>
-//       <Droppable droppableId={dragable}>
-//         {provided => (
-//           <div
-//             ref={provided.innerRef}
-//             {...provided.droppableProps}
-//           >
-//             <Draggable draggableId={dragable} index={i}>
-//               {(provided) => (
-//                 <div
-//                   {...provided.draggableProps}
-//                   {...provided.dragHandleProps}
-//                   ref={provided.innerRed}
-//                   id={i}
-//                   index={i}
-//                   key={i}>
-//                   {tab.src}
-//                   <button onClick={() => this.removeSelectedTab(i)} />
-//                 </div>
-//               )}
-//             </Draggable>
-//           )}
-//             {provided.placeholder}
-//           </div >
-//         )}
-//       </Droppable>
-//     </DragDropContext>
-//   )
-// }
 
 export default connect(mapStateToProps, mapActionsToProps, mergeProps)(Dashboard);

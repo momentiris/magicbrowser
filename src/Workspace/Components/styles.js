@@ -44,13 +44,13 @@ export const TabWrapper = styled.div`
 
 export const TabItems = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   width: 193px
   height: 109px;
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;
-  transition: all .1s ease;
+  /* transition: all .1s ease; */
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
   &:hover {
