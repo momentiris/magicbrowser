@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 // import Drop from './droppable/Droppable.js';
 // import WsHover from './WorkSpaceButton/wshover';
 import {
@@ -44,6 +45,18 @@ import {
   handleDragDashBoardTab,
 } from '../actions';
 
+const SortableItem = SortableElement(({value}) => <TabItems className="box">{value}</TabItems>);
+const SortableList = SortableContainer(({items}) => {
+  console.log(items);
+    return (
+      <TabWrapper className="container">
+        {items.map((item, index) => {
+          return <SortableItem key={`item-${index}`} index={index} value={item.src} />;
+        })}
+      </TabWrapper>
+    );
+});
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +72,7 @@ class Dashboard extends Component {
         name: '',
         color: ''
       },
+      tabs: this.props.tabs
     };
   }
 
@@ -122,12 +136,18 @@ class Dashboard extends Component {
     console.log(color);
   }
 
+  onSortEnd({oldIndex, newIndex}) {
+    const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
+    this.props.handleDragDashBoardTab(newTabs);
+  }
+
   // TODO: Move the Button and hover to own components, to make different states
   //       Drag n' drop the individual tab.
   //       complete the edit/rename workspace dropdown
 
   render() {
     const { tabs } = this.props;
+
     // const dragable = tabs.map((tab, i) => );
     const { workspaces } = this.props;
     return (
@@ -191,23 +211,8 @@ class Dashboard extends Component {
               ))
             }
           </Ul>
-          <TabWrapper>
-            {
-              tabs.map((tab, i) =>
-                <TabItems
-                  id={i}
-                  key={i}>
-                  {tab.src}
-                  {tab.favicon}
-                  {tab.title}
-                  <Close onClick={() => this.removeSelectedTab(i)} />
-                </TabItems>
-              )
-            }
-            <AddNewTab onClick={this.addOneTab}>
-              <Add style={{margin: '0px', height: '35px', width: '35px',}}/>
-            </AddNewTab>
-          </TabWrapper>
+          <SortableList items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
+          </SortableList>
         </Column>
         <SavedLinks>
           <Column>
