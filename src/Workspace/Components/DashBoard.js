@@ -83,10 +83,10 @@ class Dashboard extends Component {
   onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
+
     this.props.handleDragDashBoardTab({
       destination,
       source,
-      draggableId,
     });
     // console.log(result);
     // //
