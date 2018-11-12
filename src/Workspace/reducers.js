@@ -156,12 +156,26 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       };
 
     case DRAG_DASHBOARD_TAB:
+      console.log(payload);
+      const oldTabArray = [...state[state.current].tabs];
+      const sourceIndex = payload.source.index;
+      const destinationIndex = parseInt(payload.destination.droppableId);
+
+      const sourceTab = oldTabArray.find((x,i) => i === sourceIndex);
+      const destinationTab = oldTabArray.find((x,i) => i === destinationIndex);
+
+      oldTabArray[sourceIndex] = destinationTab;
+      oldTabArray[destinationIndex] = sourceTab;
+
+
+
       return {
         ...state,
         [state.current]: {
-          tabs: 
+          tabs: oldTabArray
         }
       };
+      // return state;
       break;
 
     default:
