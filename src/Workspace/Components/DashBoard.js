@@ -157,7 +157,6 @@ class Dashboard extends Component {
   render() {
     const SortableItem = SortableElement(({value}) => <TabItems className="box"><Close onClick={this.removeSelectedTab}></Close>{value}</TabItems>);
     const SortableList = SortableContainer(({items}) => {
-      console.log(items);
       return (
         <TabWrapper>
           {items.map((item, index) => {

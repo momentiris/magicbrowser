@@ -3,7 +3,8 @@ import {
   TOGGLE_DROPDOWN,
   TOGGLE_NEW_WORKSPACE,
   TOGGLE_NEW_WORKSPACE_OVERFLOW,
-  TOGGLE_URLBAR_FOCUS
+  TOGGLE_URLBAR_FOCUS,
+  OPEN_DASHBOARD
 } from './types';
 
 const initialState = {
@@ -52,8 +53,11 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         ...state,
         toggleUrlBarFocus: !state.toggleUrlBarFocus,
       });
-      
+
       break;
+
+    
+
     default:
       return state;
 

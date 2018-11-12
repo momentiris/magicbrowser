@@ -4,7 +4,8 @@ import {
   TOGGLE_DROPDOWN,
   TOGGLE_NEW_WORKSPACE,
   TOGGLE_NEW_WORKSPACE_OVERFLOW,
-  TOGGLE_URLBAR_FOCUS
+  TOGGLE_URLBAR_FOCUS,
+  OPEN_DASHBOARD
 } from './types';
 
 export function navigateToUrl(url) {

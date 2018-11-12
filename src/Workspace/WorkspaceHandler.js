@@ -86,7 +86,6 @@ const mapActionsToProps = (dispatch, props) => {
     addWorkspace: addWorkspace,
     renameWorkspace: renameWorkspace,
     initEmptyWorkspace: initEmptyWorkspace,
-    openDashBoard: openDashBoard
 
   }, dispatch);
 };
@@ -107,7 +106,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace(),
-    openDashBoard: () => dispatchProps.openDashBoard(),
   });
 };
 

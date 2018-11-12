@@ -131,15 +131,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
 
       return test;
 
-    case OPEN_DASHBOARD:
-      return {
-        ...state,
-        [state.current]: {
-          ...state[state.current],
-          tabs: [...state[state.current].tabs, {src: 'dashboard'}]
-        }
-      };
-
     case UPDATE_TAB_META:
 
       return {
@@ -165,6 +156,45 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         }
       };
       // return state;
+      break;
+
+    case OPEN_DASHBOARD:
+
+      if (state[state.current].tabs.find(({ src }) => src === 'dashboard')) {
+        const dashboardIndex = state[state.current].tabs.findIndex(tab => tab.src === 'dashboard');
+        return {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            active: dashboardIndex
+          }
+        };
+
+      } else {
+        const newState = {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            tabs: [...state[state.current].tabs, {
+              src: 'dashboard',
+              title: 'Dashboard'
+            }]
+          }
+        };
+
+        const dashboardIndex = newState[newState.current].tabs.findIndex(tab => tab.src === 'dashboard');
+
+        return {
+          ...newState,
+          [newState.current]: {
+            ...newState[newState.current],
+            active: dashboardIndex
+          }
+        };
+      }
+
+
+
       break;
 
     default:
