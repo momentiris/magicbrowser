@@ -66,7 +66,7 @@ class GuestInstanceHandler extends Component {
   render() {
     const { tabs, active } = this.props;
     return (
-      <WebviewContainerWrap>
+      <WebviewContainerWrap className="webviewContainerWrap">
         {
           tabs.map((tab, i) => {
             return tab.src !== 'dashboard' ? (
@@ -79,7 +79,7 @@ class GuestInstanceHandler extends Component {
                 src={tab.src}
               />
             ) : (
-              <DashboardWrap key={i}>
+              <DashboardWrap className="dashboardWrap" isActive={i === active } key={i}>
                 <Dashboard id={i}/>
               </DashboardWrap>
             );

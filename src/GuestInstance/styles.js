@@ -14,5 +14,5 @@ export const WebviewContainerWrap = styled.div`
 export const DashboardWrap = styled.div`
   width: 100%;
   height: 100%;
-  display: ${props => !props.isActive ? 'block' : 'none'};
+  display: ${props => props.isActive ? 'block' : 'none'};
 `;
