@@ -1,5 +1,6 @@
 import React from 'react';
-import { SingleTabContainer,
+import {
+  SingleTabContainer,
   TabTitle,
   FavIcon,
   CloseTabButton

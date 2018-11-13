@@ -21,6 +21,8 @@ import {
   handleToggleDropdown,
   handleToggleNewWorkspace,
   handleToggleNewWorkspaceOverflow,
+  openDashBoard
+
 } from '../../../UserNavigation/actions';
 
 class WorkspaceNavUI extends Component {

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab, updateTabMeta } from '../Workspace/actions';
-import Dashboard from '../Dashboard/Dashboard';
+import Dashboard from '../Workspace/Components/DashBoard';
 
 import {
   WebviewContainerWrap,
@@ -45,7 +45,7 @@ class GuestInstanceHandler extends Component {
         data: favicons[0],
         id
       });
-      
+
       target.removeEventListener('page-favicon-updated', this.eventHandlers.onPageFaviconUpdated);
     }
 

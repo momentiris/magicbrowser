@@ -30,12 +30,14 @@ class UserNavigationContainer extends Component {
     const {
       userNavigation,
       navigateToUrl,
-      handleToggleUrlBarFocus
+      handleToggleUrlBarFocus,
+      handleOpenDashBoard,
     } = this.props;
 
     const {
       toggleWorkspaces,
       toggleUrlBarFocus
+
     } = userNavigation;
     return (
       <Container>
@@ -58,7 +60,7 @@ class UserNavigationContainer extends Component {
           <PreToDashBoardButton>
             <ToDashboardIcon/>
           </PreToDashBoardButton>
-          <GoToDashboardButton to="/dashboard">
+          <GoToDashboardButton onClick={handleOpenDashBoard} to="/dashboard">
             <DashboardIcon />
             <span>Dashboard</span>
           </GoToDashboardButton>

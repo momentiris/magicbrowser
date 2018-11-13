@@ -6,6 +6,7 @@ import {
   navigateToUrl,
   handleToggleUrlBarFocus
 } from './actions';
+import { handleOpenDashBoard } from '../Workspace/actions';
 import UrlBar from './Components/UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
@@ -25,6 +26,7 @@ class NavigationHandler extends Component {
 
   }
   componentDidMount() {
+    
   }
 
   navigateForwards = webview => {
@@ -42,15 +44,21 @@ class NavigationHandler extends Component {
   updateWebview = webview => {
 
   };
+
+  handleOpenDashBoard = (e) => {
+    e.preventDefault();
+    this.props.handleOpenDashBoard();
+  }
   render() {
     const {
       navigateToUrl,
       userNavigation,
-      handleToggleUrlBarFocus
+      handleToggleUrlBarFocus,
     } = this.props;
 
     return (
       <UserNavigationContainer
+        handleOpenDashBoard={this.handleOpenDashBoard}
         navigateToUrl={navigateToUrl}
         userNavigation={userNavigation}
         handleToggleUrlBarFocus={handleToggleUrlBarFocus}
@@ -82,7 +90,8 @@ const mapStateToProps = createSelector(
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     navigateToUrl: navigateToUrl,
-    handleToggleUrlBarFocus: handleToggleUrlBarFocus
+    handleToggleUrlBarFocus: handleToggleUrlBarFocus,
+    handleOpenDashBoard: handleOpenDashBoard
   }, dispatch);
 };
 
@@ -91,7 +100,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
-    handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus
+    handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus,
+    handleOpenDashBoard: dispatchProps.handleOpenDashBoard
   });
 };
 

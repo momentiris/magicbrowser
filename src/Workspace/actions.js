@@ -48,7 +48,7 @@ export const addOneTab = tab => {
   };
 };
 
-export const openDashBoard = () => {
+export const handleOpenDashBoard = () => {
   return {
     type: OPEN_DASHBOARD,
   };
