@@ -48,9 +48,10 @@ export const addOneTab = tab => {
   };
 };
 
-export const handleOpenDashBoard = () => {
+export const handleOpenDashBoard = data => {
   return {
     type: OPEN_DASHBOARD,
+    payload: data
   };
 };
 

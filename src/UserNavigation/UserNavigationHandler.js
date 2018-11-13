@@ -26,7 +26,7 @@ class NavigationHandler extends Component {
 
   }
   componentDidMount() {
-    
+
   }
 
   navigateForwards = webview => {
@@ -54,10 +54,12 @@ class NavigationHandler extends Component {
       navigateToUrl,
       userNavigation,
       handleToggleUrlBarFocus,
+      currentWorkspace
     } = this.props;
 
     return (
       <UserNavigationContainer
+        currentWorkspace={currentWorkspace}
         handleOpenDashBoard={this.handleOpenDashBoard}
         navigateToUrl={navigateToUrl}
         userNavigation={userNavigation}
@@ -96,12 +98,15 @@ const mapActionsToProps = (dispatch, props) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  console.log(stateProps);
   return Object.assign({}, ownProps, {
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
     handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus,
-    handleOpenDashBoard: dispatchProps.handleOpenDashBoard
+    handleOpenDashBoard: dispatchProps.handleOpenDashBoard,
+    currentWorkspace: stateProps.workspaces.current
+
   });
 };
 

@@ -6,14 +6,10 @@ import TabHandler from './Tabs/TabHandler';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
-
 import Webview from './GuestInstance/Webview';
-
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 import Dashboard from './Workspace/Components/DashBoard';
-
 import ActiveDashboard from './Workspace/Components/ActiveDashboard/ActiveDashboard';
 
 const electron = window.electron;
@@ -32,8 +28,7 @@ class App extends Component {
         <TabHandler></TabHandler>
         <UserNavigationHandler />
           <Route exact path="/" component={GuestInstanceHandler}/>
-          <Route exact path="/dashboard/:id" render={(props) => <ActiveDashboard {...props} />}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
+        
         </>
         </Router>
       </div>
