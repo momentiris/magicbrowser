@@ -119,12 +119,10 @@ class Dashboard extends Component {
 
   renameWorkspace = e => {
     e.preventDefault();
-    console.log(e);
     this.props.renameWorkspace(this.state.renameworkspace);
   }
 
   handleInputChange = e => {
-    console.log(e.target.value);
     this.setState({
       renameworkspace: e.target.value,
       workspacename: e.target.value,
@@ -135,12 +133,14 @@ class Dashboard extends Component {
     });
   }
 
+
   addOneTab = (e) => {
     this.props.addOneTab({src: 'http://facebook.com'});
   }
 
   removeSelectedTab = id => {
     this.props.removeSelectedTab(id);
+    console.log(this.props.removeSelectedTab(id));
   }
 
   updateWsColor = (color) => {
@@ -155,7 +155,6 @@ class Dashboard extends Component {
 
   onSortEnd({oldIndex, newIndex}, { target }) {
     if (target.dataset.ws) {
-      console.log(target.dataset.ws);
     }
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
     this.props.handleDragDashBoardTab(newTabs);
@@ -166,12 +165,22 @@ class Dashboard extends Component {
   //       complete the edit/rename workspace dropdown
 
   render() {
-    const SortableItem = SortableElement(({value}) => <TabItems className="box"><Close onClick={this.removeSelectedTab}></Close>{value}</TabItems>);
+    const { active } = this.props;
+    console.log(active);
+    const SortableItem = SortableElement(({value, tabindex}) => {
+      return (
+        <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
+          {value}
+          {value.id}
+          <Close onClick={() => this.removeSelectedTab(tabindex)}></Close>
+        </TabItems>
+      );
+    });
     const SortableList = SortableContainer(({items}) => {
       return (
         <TabWrapper>
           {items.map((item, index) => {
-            return <SortableItem key={`item-${index}`} index={index} value={item.src}></SortableItem>;
+            return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.src}> </SortableItem>;
           })}
           <AddNewTab onClick={this.addOneTab}>
             <AddIcon />
@@ -180,7 +189,6 @@ class Dashboard extends Component {
       );
     });
     const { tabs } = this.props;
-
     // const dragable = tabs.map((tab, i) => );
     const { workspaces } = this.props;
     return (
@@ -192,6 +200,7 @@ class Dashboard extends Component {
           <br />
           <NewWsButton onClick={this.onToggle}>
             <Add isActive={this.state.workspaceToggle}/>New space
+
           </NewWsButton>
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
@@ -221,7 +230,7 @@ class Dashboard extends Component {
                   </Button>
                   <RenameEdit onClick={() => this.editWorkspace(i)} value={ws[0]} />
                   <AnimateEditForm isActive={this.state.editWorkspaceToggle} id={i}>
-                    <form onSubmit={this.renameWorkspace} style={{height: '100%'}}>
+                    <form onSubmit={() => this.renameWorkspace(i)} style={{height: '100%'}}>
                       <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
                         <RightArrowNewWs />
                       </NewWsHover>
@@ -243,7 +252,7 @@ class Dashboard extends Component {
               ))
             }
           </Ul>
-          <SortableList items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
+          <SortableList pressDelay={200} items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
           </SortableList>
         </Column>
         <SavedLinks>
@@ -293,6 +302,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, ownProps, {
     current: stateProps.workspaces.current,
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
+    active: stateProps.workspaces[stateProps.workspaces.current].active,
     workspaces: withoutCurrent,
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     addWorkspace: arg => dispatchProps.addWorkspace(arg),
