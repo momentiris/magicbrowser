@@ -3,10 +3,11 @@ import { Button } from '../../../common/stylesheet';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  height: 40px;
+  height: 41px;
   display: flex;
   align-items: center;
   background: ${props => props.theme.lightergrey};
+  border-bottom: 1px solid ${props => props.theme.lightgrey};
 `;
 
 export const UrlBarContainer = styled.div`

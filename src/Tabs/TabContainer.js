@@ -35,7 +35,6 @@ class TabContainer extends Component {
     const SortableItem = SortableElement(({ value, tabIndex, key }) => {
       return (
         <Tab
-
           id={tabIndex}
           isActive={tabIndex === active}
           key={key}
@@ -45,7 +44,6 @@ class TabContainer extends Component {
           title={value.title}
           src={value.src}
         />
-
       );
     });
 
@@ -64,7 +62,7 @@ class TabContainer extends Component {
     });
 
     return (
-      <SortableList lockAxis="x" distance={10}items={tabs}  onSortStart={this.onSortStart} onSortEnd={this.onSortEnd} axis='x'/>
+      <SortableList lockToContainerEdges={true} lockAxis="x" distance={10} items={tabs}  onSortStart={this.onSortStart} onSortEnd={this.onSortEnd} axis='x'/>
 
     );
   }

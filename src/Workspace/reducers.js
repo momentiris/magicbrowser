@@ -157,7 +157,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           }
         };
         const dashboardIndex = newDash[newDash.current].tabs.findIndex(tab => tab.src === 'dashboard');
-
         return {
           ...newDash,
           [newDash.current]: {
@@ -180,13 +179,21 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case OPEN_DASHBOARD:
-
+      console.log(payload);
       if (state[state.current].tabs.find(({ src }) => src === 'dashboard')) {
         const dashboardIndex = state[state.current].tabs.findIndex(tab => tab.src === 'dashboard');
+        const dashboardTab = state[state.current].tabs.find(tab => tab.src === 'dashboard');
+        const withoutId = [...state[state.current].tabs];
+        withoutId[dashboardIndex] = {
+          src: 'dashboard',
+          title: 'Dashboard',
+          id: payload.id === false ? false : state.current
+        };
         return {
           ...state,
           [state.current]: {
             ...state[state.current],
+            tabs: withoutId,
             active: dashboardIndex
           }
         };
@@ -198,7 +205,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
             ...state[state.current],
             tabs: [...state[state.current].tabs, {
               src: 'dashboard',
-              title: 'Dashboard'
+              title: 'Dashboard',
+              id: state.current
             }]
           }
         };
