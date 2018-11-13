@@ -148,15 +148,34 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       };
 
     case DRAG_DASHBOARD_TAB:
+      if (payload.dashboard) {
+        const newDash = {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            tabs: payload.newTabs
+          }
+        };
+        const dashboardIndex = newDash[newDash.current].tabs.findIndex(tab => tab.src === 'dashboard');
 
-      return {
-        ...state,
-        [state.current]: {
-          ...state[state.current],
-          active: payload.newIndex,
-          tabs: payload.newTabs
-        }
-      };
+        return {
+          ...newDash,
+          [newDash.current]: {
+            ...newDash[newDash.current],
+            active: dashboardIndex
+          }
+        };
+      } else {
+        return {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            active: payload.newIndex,
+            tabs: payload.newTabs
+          }
+        };
+      }
+
       // return state;
       break;
 
@@ -194,11 +213,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           }
         };
       }
-
-
-
       break;
-
     default:
       return state;
   }

@@ -157,7 +157,11 @@ class Dashboard extends Component {
     if (target.dataset.ws) {
     }
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
-    this.props.handleDragDashBoardTab(newTabs);
+    this.props.handleDragDashBoardTab({
+      newTabs,
+      newIndex,
+      dashboard: true
+    });
   }
 
   // TODO: Move the Button and hover to own components, to make different states
