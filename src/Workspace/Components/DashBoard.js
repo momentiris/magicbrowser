@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import './sortableHelperStyles.css';
 // import Drop from './droppable/Droppable.js';
 // import WsHover from './WorkSpaceButton/wshover';
