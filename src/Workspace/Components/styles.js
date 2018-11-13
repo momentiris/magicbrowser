@@ -54,7 +54,6 @@ export const TabItems = styled.div`
   /* transition: all .1s ease; */
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
-  
 `;
 
 export const AddNewTab = styled.div`

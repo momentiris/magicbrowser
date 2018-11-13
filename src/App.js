@@ -32,7 +32,7 @@ class App extends Component {
         <TabHandler></TabHandler>
         <UserNavigationHandler />
           <Route exact path="/" component={GuestInstanceHandler}/>
-          <Route exact path="/dashboard/:id" component={ActiveDashboard}/>
+          <Route exact path="/dashboard/:id" render={(props) => <ActiveDashboard {...props} />}/>
           <Route exact path="/dashboard" component={Dashboard}/>
         </>
         </Router>
