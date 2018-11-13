@@ -46,6 +46,7 @@ import {
   addOneTab,
   removeSelectedTab,
   handleDragDashBoardTab,
+  renameWorkspace,
 } from '../actions';
 
 const SortableItem = SortableElement(({value, style}) => <TabItems hideSortableGhost="false" className="TabItems" >{value}</TabItems>);
@@ -64,6 +65,7 @@ class Dashboard extends Component {
     this.onToggle = this.onToggle.bind(this);
     this.state = {
       toggle: false,
+      toggleRename: false,
       workspaceToggle: false,
       editWorkspaceToggle: {
         active: false,
@@ -86,6 +88,10 @@ class Dashboard extends Component {
   onToggle = () => {
     this.setState({ workspaceToggle: !this.state.workspaceToggle });
     this.workspaceInput.current.focus();
+  }
+
+  onToggleRename = (i) => {
+    this.setState({ toggleRename: !this.state.toggleRename });
   }
 
   editWorkspace = (i) => {
@@ -111,9 +117,16 @@ class Dashboard extends Component {
     // this.setState({ toggle: !this.state.toggle });
   }
 
+  renameWorkspace = e => {
+    e.preventDefault();
+    console.log(e);
+    this.props.renameWorkspace(this.state.renameworkspace);
+  }
+
   handleInputChange = e => {
     console.log(e.target.value);
     this.setState({
+      renameworkspace: e.target.value,
       workspacename: e.target.value,
       newWorkspace: {
         name: e.target.value,
@@ -128,7 +141,6 @@ class Dashboard extends Component {
 
   removeSelectedTab = id => {
     this.props.removeSelectedTab(id);
-    console.log(this.props.removeSelectedTab);
   }
 
   updateWsColor = (color) => {
@@ -139,7 +151,6 @@ class Dashboard extends Component {
         name: this.state.newWorkspace.name
       }
     });
-    console.log(color);
   }
 
   onSortEnd({oldIndex, newIndex}, { target }) {
@@ -157,7 +168,6 @@ class Dashboard extends Component {
   render() {
     const SortableItem = SortableElement(({value}) => <TabItems className="box"><Close onClick={this.removeSelectedTab}></Close>{value}</TabItems>);
     const SortableList = SortableContainer(({items}) => {
-      console.log(items);
       return (
         <TabWrapper>
           {items.map((item, index) => {
@@ -211,19 +221,18 @@ class Dashboard extends Component {
                   </Button>
                   <RenameEdit onClick={() => this.editWorkspace(i)} value={ws[0]} />
                   <AnimateEditForm isActive={this.state.editWorkspaceToggle} id={i}>
-                    <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
+                    <form onSubmit={this.renameWorkspace} style={{height: '100%'}}>
                       <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
                         <RightArrowNewWs />
                       </NewWsHover>
                       <Input
-                        ref={this.workspaceInput}
                         onChange={this.handleInputChange}
                         active={this.state.isActive}
                         type="text"
                         placeholder="Name your workspace"/>
                       <WsColor updateWsColor={this.updateWsColor}/>
-                      <CreateButton onClick={this.onToggle} type="submit">Save</CreateButton>
-                      <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
+                      <CreateButton onClick={this.onToggleRename} type="submit">Save</CreateButton>
+                      <CancelButton onClick={this.onToggleRename} type="button">Cancel</CancelButton>
                     </form>
                   </AnimateEditForm>
                   <br />
@@ -267,6 +276,7 @@ const mapActionsToProps = (dispatch, props) => {
     switchWorkspaces: switchWorkspaces,
     addWorkspace: addWorkspace,
     addOneTab: addOneTab,
+    renameWorkspace: renameWorkspace,
     removeSelectedTab: removeSelectedTab,
     handleDragDashBoardTab: handleDragDashBoardTab,
   }, dispatch);
