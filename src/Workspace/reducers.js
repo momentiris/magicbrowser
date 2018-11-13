@@ -152,7 +152,9 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         [state.current]: {
-          tabs: payload
+          ...state[state.current],
+          active: payload.newIndex,
+          tabs: payload.newTabs
         }
       };
       // return state;

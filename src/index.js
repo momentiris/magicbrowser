@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
-import '../node_modules/electron-tabs/electron-tabs.css';
-import '../node_modules/dragula/dist/dragula.css';
-
 import { store, persistor } from './state/store';
 import Root from './Root';
 
 import * as serviceWorker from './serviceWorker';
-
 
 ReactDOM.render(<Root store={store} persistor={persistor}/>, document.getElementById('root'));
 

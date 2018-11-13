@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
+
+
 import {
   addOneTab,
   removeSelectedTab,
   setTabActive,
+  handleDragDashBoardTab
 } from '../Workspace/actions';
+
 
 // // Common
 // const KeyCodes = require('../common/keyCodes');
@@ -30,18 +34,26 @@ class TabHandler extends Component {
   }
 
   setActive = tab => {
-
     this.props.setTabActive(tab);
   }
+
+  handleDragDashBoardTab = tabs => {
+    this.props.handleDragDashBoardTab(tabs);
+  }
+
+
 
   render() {
     const { tabs, active } = this.props;
     return (
       <Fragment>
-        <TabContainer active={active} setActive={this.setActive}
+        <TabContainer
+          active={active}
+          setActive={this.setActive}
           tabs={tabs}
           removeSelectedTab={this.removeSelectedTab}
           addOneTab={this.addOneTab}
+          handleDragDashBoardTab={this.handleDragDashBoardTab}
         />
       </Fragment>
     );
@@ -65,10 +77,12 @@ const mapActionsToProps = (dispatch, props) => {
     addOneTab: addOneTab,
     removeSelectedTab: removeSelectedTab,
     setTabActive: setTabActive,
+    handleDragDashBoardTab: handleDragDashBoardTab
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
   return Object.assign({}, ownProps, {
     // ok wtf??
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
@@ -76,6 +90,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     setTabActive: arg => dispatchProps.setTabActive(arg),
+    handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg)
 
   });
 };

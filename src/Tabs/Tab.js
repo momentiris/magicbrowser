@@ -9,11 +9,12 @@ import {
 import {
   AddTabIcon
 } from '../common/assets/icons.js';
+import '../Workspace/Components/sortableHelperStyles.css';
 
 const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src }) => {
 
   return (
-    <SingleTabContainer id={id} isActive={isActive} onMouseDown={setActive}>
+    <SingleTabContainer className={`${!isActive && 'Showcase__style__stylizedHelper'}`} id={id} isActive={isActive} onClick={setActive}>
       <FavIcon src={favicon || 'false'}/>
       <TabTitle>{title || src}</TabTitle>
       <CloseTabButton isActive={isActive} onClick={removeSelectedTab}>

@@ -24,6 +24,3 @@ html, body {
   padding: 0;
 
 }
-.TabItems:active {
-  opacity: 0.5!important;
-}
