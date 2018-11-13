@@ -153,11 +153,11 @@ class Dashboard extends Component {
     });
   }
 
-  onSortEnd({oldIndex, newIndex}, { target }) {
+  onSortEnd = async ({oldIndex, newIndex}, { target }) => {
     if (target.dataset.ws) {
     }
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
-    this.props.handleDragDashBoardTab({
+    await this.props.handleDragDashBoardTab({
       newTabs,
       newIndex,
       dashboard: true
@@ -256,7 +256,7 @@ class Dashboard extends Component {
               ))
             }
           </Ul>
-          <SortableList pressDelay={200} items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
+          <SortableList items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
           </SortableList>
         </Column>
         <SavedLinks>
