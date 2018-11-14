@@ -204,7 +204,6 @@ class Dashboard extends Component {
           <br />
           <NewWsButton onClick={this.onToggle}>
             <Add isActive={this.state.workspaceToggle}/>New space
-
           </NewWsButton>
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>

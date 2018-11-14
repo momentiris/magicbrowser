@@ -7,6 +7,8 @@ import closeiconsvg from '../../common/assets/icons/close.svg';
 import renameoreditsvg from '../../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
+  width: 100%;
+  height: 100%;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -143,6 +145,7 @@ export const ColorItem = styled.div`
 `;
 
 export const NewWsButton = styled.button`
+  font-family: latoregular;
   background: none;
   border: none;
   color:  ${props => props.theme.semiblack};;
@@ -164,6 +167,7 @@ export const NewWsButton = styled.button`
 `;
 
 export const CreateButton = styled.button`
+  font-family: latoregular;
   background: ${props => props.theme.bluepurple};
   border: none;
   color: ${props => props.theme.white};
@@ -186,6 +190,7 @@ export const CreateButton = styled.button`
 `;
 
 export const CancelButton = styled.button`
+  font-family: latoregular;
   background: ${props => props.theme.dashboardgrey};
   color: ${props => props.theme.black};
   padding: ${props => props.theme.paddingbutton};
@@ -231,6 +236,7 @@ export const Hover = styled.div`
 export const Button = styled.button`
   background: none;
   border: none;
+  font-family: latobold;
   color: ${props => props.theme.semiblack};
   padding: 6px 0px;
   text-align: left;
@@ -241,7 +247,6 @@ export const Button = styled.button`
   cursor: pointer;
   transition: all .1s ease;
   font-size: ${props => props.theme.large};
-
 `;
 
 export const RenameEdit = styled.svg`
@@ -300,7 +305,6 @@ export const Li = styled.li`
   &:hover ${RenameEdit}{
     margin: 0 0 0 25px;
     opacity: 1;
-
   }
 `;
 
@@ -370,6 +374,7 @@ export const SavedLinksWrapper = styled.div`
 `;
 
 export const SavedLinksHeader = styled.h3`
+  font-family: latobold;
   font-style: normal;
   font-weight: normal;
   line-height: normal;
