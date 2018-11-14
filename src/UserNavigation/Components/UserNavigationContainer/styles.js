@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const UrlBarContainer = styled.div`
-  pointer-events: ${props => props.show ? 'none' : 'default'};
+  pointer-events: ${props => props.dashboardOpen ? 'auto' : props.show ? 'none' : 'auto'};
   display: flex;
   border: none;
   height: 32px;
@@ -22,7 +22,7 @@ export const UrlBarContainer = styled.div`
   padding: 0;
   margin: 0 8px 0 8px;
   transition: opacity 100ms ease ${props => !props.show ? '0ms' : '75ms'};
-  opacity: ${props => props.show ? 0 : 1};
+  opacity: ${props => props.dashboardOpen ? 1 : props.show ? 0 : 1};
   align-items: center;
   :hover {
     background: ${props => props.clicked ? 'white' : props.theme.greybuttonhover};
@@ -43,12 +43,16 @@ export const AddToReadingListButton = styled(Button)`
 
 export const ReadingListButton = styled(Button)`
   width: 91px;
+  width: ${props => props.dashboardOpen ? '0px' : '91px'};
   height: 32px;
   background: ${props => props.theme.lightgrey};
   margin-right: 5px;
   overflow: hidden;
   position: relative;
   z-index: 100;
+  transition: opacity 200ms ease, width 150ms ease;
+  opacity: ${props => props.dashboardOpen ? 0 : 1};
+
   :hover {
     background: ${props => props.theme.mediumgrey};
   }
@@ -83,10 +87,10 @@ export const GoToDashboardButtonWrap = styled.div`
   position: absolute;
   right: 126px;
   z-index: 50;
-  transform: translatex(${props => props.toggle === 'true' ? 0 : '70%'});
+  transform: translatex(${props => props.dashboardOpen ? '70%' : props.toggle === 'true' ? 0 : '70%'});
   transition: opacity 200ms ease, transform 150ms ease;
-  opacity: ${props => props.toggle === 'true' ? 1 : 0};
-  pointer-events: ${props => props.toggle === 'true' ? 'auto' : 'none'};
+  opacity: ${props => props.dashboardOpen ? 0 : props.toggle === 'true' ? 1 : 0};
+  pointer-events: ${props => props.dashboardOpen ? 'none' : props.toggle === 'true' ? 'auto' : 'none'};
   margin-right: 8px;
   height: 32px;
   align-items: center;

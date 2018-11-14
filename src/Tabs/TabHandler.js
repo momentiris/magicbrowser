@@ -9,12 +9,11 @@ import {
   addOneTab,
   removeSelectedTab,
   setTabActive,
-  handleDragDashBoardTab
+  handleDragDashBoardTab,
+  handleOpenDashBoard
 } from '../Workspace/actions';
 
-
-// // Common
-// const KeyCodes = require('../common/keyCodes');
+import { handleDashboardOpenUI } from '../UserNavigation/actions';
 
 class TabHandler extends Component {
   constructor(props) {
@@ -31,6 +30,8 @@ class TabHandler extends Component {
 
   removeSelectedTab = id => {
     this.props.removeSelectedTab(id);
+    const dashboardTabIndex = this.props.tabs.findIndex(tab => tab.src === 'dashboard');
+    dashboardTabIndex === id && this.props.handleDashboardOpenUI();
   }
 
   setActive = tab => {
@@ -77,21 +78,21 @@ const mapActionsToProps = (dispatch, props) => {
     addOneTab: addOneTab,
     removeSelectedTab: removeSelectedTab,
     setTabActive: setTabActive,
-    handleDragDashBoardTab: handleDragDashBoardTab
+    handleDragDashBoardTab: handleDragDashBoardTab,
+    handleDashboardOpenUI: handleDashboardOpenUI
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return Object.assign({}, ownProps, {
-    // ok wtf??
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     setTabActive: arg => dispatchProps.setTabActive(arg),
-    handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg)
-
+    handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
+    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI
   });
 };
 

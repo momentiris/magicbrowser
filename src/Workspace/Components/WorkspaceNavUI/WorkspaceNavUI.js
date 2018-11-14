@@ -75,10 +75,6 @@ class WorkspaceNavUI extends Component {
     toggleNewWorkspace && this.props.handleToggleNewWorkspace();
     toggleNewWorkspaceOverflow && this.props.handleToggleNewWorkspaceOverflow();
     await this.toggleOverflow();
-    // this.measureWsRestContainer();
-  }
-
-  measureWsRestContainer = () => {
 
   }
 
@@ -106,8 +102,12 @@ class WorkspaceNavUI extends Component {
       handleToggleWorkspaces
     } = this.props;
 
-    const { overflow, width } = this.state;
+    const {
+      dashboardOpen,
+      toggleWorkspaces
+    } = userNavigation;
 
+    const { overflow, width, startwidth } = this.state;
     const firstInst = workspaces
       .filter((inst,i) => inst[0] === current)
       .map((inst,i) => (
@@ -115,7 +115,7 @@ class WorkspaceNavUI extends Component {
           width={width + 'px'}
           onClick={this.handleToggle}
           current
-          clicked={userNavigation.toggleWorkspaces}
+          clicked={toggleWorkspaces}
           key={i}
         >
           <DotIcon color={inst[1].color}/>
@@ -134,28 +134,38 @@ class WorkspaceNavUI extends Component {
           <span>{inst[0]}</span>
         </WsItem>
       ));
-
+  
     return (
-      <WorkspaceToggleWrap open={overflow} ref={this.workspacetoggle} width={width + 'px'}>
+      <WorkspaceToggleWrap
+        className="workspaceToggleWrap"
+        dashboardOpen={dashboardOpen}
+        open={overflow}
+        ref={this.workspacetoggle}
+        width={dashboardOpen ? startwidth + 'px' : toggleWorkspaces ? width + 'px' : startwidth + 'px'}
+        startWidth={startwidth}
+        toggleWorkspaces={toggleWorkspaces}
+      >
         { firstInst }
-        { this.state.restActive && (
-          <WsRestContainer ref={this.WsRestContainer}>
-            { restInst }
-            <NavNewWs
-              handleToggleNewWorkspace={handleToggleNewWorkspace}
-              handleToggleNewWorkspaceOverflow={handleToggleNewWorkspaceOverflow}
-              userNavigation={userNavigation}
-              workspaces={workspaces}
-              handleToggle={this.handleToggle}
-              isWsToggleActive={userNavigation.toggleWorkspaces}
-              addWorkspace={addWorkspace}
-              open={overflow}
-              handleToggleDropdown={handleToggleDropdown}
-              handleToggleWorkspaces={handleToggleWorkspaces}
-              measureWsRestContainer={this.measureWsRestContainer}
-            />
-          </WsRestContainer>
-        ) }
+        {
+          this.state.restActive && (
+            <WsRestContainer ref={this.WsRestContainer}>
+              { restInst }
+              <NavNewWs
+                handleToggleNewWorkspace={handleToggleNewWorkspace}
+                handleToggleNewWorkspaceOverflow={handleToggleNewWorkspaceOverflow}
+                userNavigation={userNavigation}
+                workspaces={workspaces}
+                handleToggle={this.handleToggle}
+                isWsToggleActive={toggleWorkspaces}
+                addWorkspace={addWorkspace}
+                open={overflow}
+                handleToggleDropdown={handleToggleDropdown}
+                handleToggleWorkspaces={handleToggleWorkspaces}
+                measureWsRestContainer={this.measureWsRestContainer}
+              />
+            </WsRestContainer>
+          )
+        }
       </WorkspaceToggleWrap>
     );
   }

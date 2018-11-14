@@ -179,12 +179,10 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case OPEN_DASHBOARD:
-
       if (state[state.current].tabs.find(({ src }) => src === 'dashboard')) {
         const dashboardIndex = state[state.current].tabs.findIndex(tab => tab.src === 'dashboard');
         const dashboardTab = state[state.current].tabs.find(tab => tab.src === 'dashboard');
         const withoutId = [...state[state.current].tabs];
-        
         withoutId[dashboardIndex] = {
           src: 'dashboard',
           title: 'Dashboard',

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const UrlBarInput = styled.input`
-  pointer-events: ${props => props.disable ? 'none' : 'default'};
+  pointer-events: ${props => props.dashboardOpen ? 'auto' : props.disable ? 'none' : 'auto'};
   border: none;
   height: 32px;
   width: 100%;

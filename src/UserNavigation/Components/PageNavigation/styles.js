@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from '../../../common/stylesheet';
 
 export const Container = styled.div`
-  width: 130px;
+  width: 122px;
   height: 32px;
   flex-shrink: 0;
   display: flex;

@@ -4,7 +4,8 @@ import {
   TOGGLE_NEW_WORKSPACE,
   TOGGLE_NEW_WORKSPACE_OVERFLOW,
   TOGGLE_URLBAR_FOCUS,
-  OPEN_DASHBOARD
+  OPEN_DASHBOARD,
+  TOGGLE_DASHBOARD_OPEN_UI
 } from './types';
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   toggleDropdown: false,
   toggleNewWorkspace: false,
   toggleNewWorkspaceOverflow: false,
-  toggleUrlBarFocus: false
+  toggleUrlBarFocus: false,
+  dashboardOpen: false
 };
 
 export const userNavigationReducer = (state = initialState, { type, payload }) => {
@@ -29,7 +31,6 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         ...state,
         toggleDropdown: payload,
       });
-
       break;
 
     case TOGGLE_NEW_WORKSPACE:
@@ -37,7 +38,6 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         ...state,
         toggleNewWorkspace: !state.toggleNewWorkspace,
       });
-
       break;
 
     case TOGGLE_NEW_WORKSPACE_OVERFLOW:
@@ -45,7 +45,6 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         ...state,
         toggleNewWorkspaceOverflow: !state.toggleNewWorkspaceOverflow,
       });
-
       break;
 
     case TOGGLE_URLBAR_FOCUS:
@@ -53,10 +52,14 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         ...state,
         toggleUrlBarFocus: !state.toggleUrlBarFocus,
       });
-
       break;
 
-    
+    case TOGGLE_DASHBOARD_OPEN_UI:
+      return Object.assign({}, {
+        ...initialState,
+        dashboardOpen: !state.dashboardOpen,
+      });
+      break;
 
     default:
       return state;

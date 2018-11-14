@@ -5,15 +5,22 @@ import {
   TOGGLE_NEW_WORKSPACE,
   TOGGLE_NEW_WORKSPACE_OVERFLOW,
   TOGGLE_URLBAR_FOCUS,
-  OPEN_DASHBOARD
+  OPEN_DASHBOARD,
+  TOGGLE_DASHBOARD_OPEN_UI
 } from './types';
 
-export function navigateToUrl(url) {
+export const navigateToUrl = url => {
   return {
     type: NAVIGATE_TO_URL,
     payload: url
   };
-}
+};
+
+export const handleDashboardOpenUI = () => {
+  return {
+    type: TOGGLE_DASHBOARD_OPEN_UI
+  };
+};
 
 export const handleToggleWorkspaces = () => {
   return (dispatch, getState) => {

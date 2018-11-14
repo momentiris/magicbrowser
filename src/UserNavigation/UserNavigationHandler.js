@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import {
   navigateToUrl,
-  handleToggleUrlBarFocus
+  handleToggleUrlBarFocus,
+  handleDashboardOpenUI
 } from './actions';
 import { handleOpenDashBoard } from '../Workspace/actions';
 import UrlBar from './Components/UrlBar/UrlBar';
@@ -12,20 +13,10 @@ import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
 import UserNavigationContainer from './Components/UserNavigationContainer/UserNavigationContainer';
 
-
-// todo:
-// 1. target current webview
-// change url
-// change src of tab object
-// navigate backward/forward
-// update
 class NavigationHandler extends Component {
 
   constructor(props) {
     super(props);
-
-  }
-  componentDidMount() {
 
   }
 
@@ -47,7 +38,11 @@ class NavigationHandler extends Component {
 
   handleOpenDashBoard = (e) => {
     e.preventDefault();
-    this.props.handleOpenDashBoard();
+    this.props.handleOpenDashBoard({
+      id: this.props.currentWorkspace
+    });
+
+    this.props.handleDashboardOpenUI();
   }
   render() {
     const {
@@ -93,19 +88,20 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     navigateToUrl: navigateToUrl,
     handleToggleUrlBarFocus: handleToggleUrlBarFocus,
-    handleOpenDashBoard: handleOpenDashBoard
+    handleOpenDashBoard: handleOpenDashBoard,
+    handleDashboardOpenUI: handleDashboardOpenUI
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  console.log(stateProps);
   return Object.assign({}, ownProps, {
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
     handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus,
     handleOpenDashBoard: dispatchProps.handleOpenDashBoard,
-    currentWorkspace: stateProps.workspaces.current
+    currentWorkspace: stateProps.workspaces.current,
+    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI
 
   });
 };

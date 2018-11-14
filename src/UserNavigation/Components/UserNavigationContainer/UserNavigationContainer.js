@@ -37,9 +37,10 @@ class UserNavigationContainer extends Component {
 
     const {
       toggleWorkspaces,
-      toggleUrlBarFocus
-
+      toggleUrlBarFocus,
+      dashboardOpen
     } = userNavigation;
+
     return (
       <Container>
         <PageNavigationContainer/>
@@ -47,17 +48,20 @@ class UserNavigationContainer extends Component {
         <UrlBarContainer
           clicked={toggleUrlBarFocus}
           show={toggleWorkspaces}
+          dashboardOpen={dashboardOpen}
         >
           <UrlBar
             userNavigation={userNavigation}
             navigateToUrl={navigateToUrl}
             handleToggleUrlBarFocus={handleToggleUrlBarFocus}
+            dashboardOpen={dashboardOpen}
+
           />
           <AddToReadingListButton>
             <AddTabIcon/>
           </AddToReadingListButton>
         </UrlBarContainer>
-        <GoToDashboardButtonWrap toggle={toggleWorkspaces ? 'true' : 'false' }>
+        <GoToDashboardButtonWrap dashboardOpen={dashboardOpen} toggle={toggleWorkspaces ? 'true' : 'false' }>
           <PreToDashBoardButton>
             <ToDashboardIcon/>
           </PreToDashBoardButton>
@@ -67,7 +71,7 @@ class UserNavigationContainer extends Component {
           </GoToDashboardButton>
         </GoToDashboardButtonWrap>
         <ReadListNavSettingsWrap>
-          <ReadingListButton>
+          <ReadingListButton dashboardOpen={dashboardOpen} >
             <ReadingListIcon />
           </ReadingListButton>
           <NavSettingsButton>

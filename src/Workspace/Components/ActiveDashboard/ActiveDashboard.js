@@ -20,13 +20,12 @@ class ActiveDashboard extends Component {
     super(props);
   }
   componentDidMount(){
-    console.log(this.props);
   }
 
   handleClick = e => {
     this.props.handleOpenDashBoard({
       id: false
-    })
+    });
   }
 
 

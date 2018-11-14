@@ -59,6 +59,8 @@ class UrlBar extends Component {
         onFocus={handleToggleUrlBarFocus}
         onBlur={handleToggleUrlBarFocus}
         disable={userNavigation.toggleWorkspaces}
+        dashboardOpen={userNavigation.dashboardOpen}
+
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}

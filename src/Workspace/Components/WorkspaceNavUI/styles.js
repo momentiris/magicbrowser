@@ -2,21 +2,18 @@ import styled from 'styled-components';
 
 export const WorkspaceToggleWrap = styled.div`
   height: 32px;
-  overflow-x: ${props => !props.open ? 'hidden' : 'visible'};
+  overflow-x: ${props => props.dashboardOpen ? 'hidden' : !props.toggleWorkspaces ? 'hidden' : !props.open ? 'hidden' : 'visible'};
   transition: width 200ms ease;
   background: ${props => props.theme.mediumdarkgrey};
   border-radius: ${props => props.theme.br};
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  margin-left: 8px;
-  width: ${props => props.width};
+  width: ${props => props.dashboardOpen ? 0 : props.width};
 `;
 
 export const WsRestContainer = styled.div`
   display: flex;
-
-
 `;
 
 export const WsItem = styled.div`
