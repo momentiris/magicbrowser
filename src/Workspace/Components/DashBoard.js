@@ -47,6 +47,7 @@ import {
   removeSelectedTab,
   handleDragDashBoardTab,
   renameWorkspace,
+  handleOpenDashBoard
 } from '../actions';
 
 const SortableItem = SortableElement(({value, style}) => <TabItems hideSortableGhost="false" className="TabItems" >{value}</TabItems>);
@@ -164,13 +165,19 @@ class Dashboard extends Component {
     });
   }
 
+  handleGoBack = () => {
+    this.props.handleOpenDashBoard({
+      id: this.props.current
+    });
+  }
+
   // TODO: Move the Button and hover to own components, to make different states
   //       Drag n' drop the individual tab.
   //       complete the edit/rename workspace dropdown
 
   render() {
     const { active } = this.props;
-    console.log(active);
+
     const SortableItem = SortableElement(({value, tabindex}) => {
       return (
         <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
@@ -198,8 +205,9 @@ class Dashboard extends Component {
     return (
       <Container>
         <AddNewWs>
-          <NewWsButton>
-            <LeftArrow />Back
+          <NewWsButton onClick={this.handleGoBack}>
+            <LeftArrow />
+            Back
           </NewWsButton>
           <br />
           <NewWsButton onClick={this.onToggle}>
@@ -292,6 +300,7 @@ const mapActionsToProps = (dispatch, props) => {
     renameWorkspace: renameWorkspace,
     removeSelectedTab: removeSelectedTab,
     handleDragDashBoardTab: handleDragDashBoardTab,
+    handleOpenDashBoard: handleOpenDashBoard
   }, dispatch);
 };
 
@@ -314,6 +323,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
+    handleOpenDashBoard: arg => dispatchProps.handleOpenDashBoard(arg)
   });
 };
 
