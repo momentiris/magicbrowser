@@ -7,20 +7,12 @@ import { iconColors } from '../../../common/stylesheet';
 class WsColor extends Component {
   constructor(props) {
     super(props);
-    this.state = {
 
-    };
   }
 
-  componentDidMount(){
-  }
   handlePickColor = color => {
-    this.setState({
-      newWorkspace : {
-        color: color,
-      }
-    });
     this.props.updateWsColor(color);
+
   }
 
   render() {

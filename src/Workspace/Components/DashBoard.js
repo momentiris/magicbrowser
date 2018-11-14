@@ -78,6 +78,11 @@ class Dashboard extends Component {
         name: '',
         color: ''
       },
+      editWorkspace: {
+        newName: '',
+        newColor: '',
+        target: null
+      },
       tabs: this.props.tabs
     };
   }
@@ -96,7 +101,7 @@ class Dashboard extends Component {
   }
 
   editWorkspace = (i) => {
-    this.setState({ editWorkspaceToggle:
+    this.setState({editWorkspaceToggle:
       {
         active: i === this.state.editWorkspaceToggle.id ? !this.state.editWorkspaceToggle.active : true,
         id: i
@@ -119,23 +124,39 @@ class Dashboard extends Component {
   }
 
   renameWorkspace = (e, i) => {
-    console.log(e, i);
     e.preventDefault();
-    this.props.renameWorkspace({
-      name: this.state.renameworkspace,
-      key: i
-    });
+    this.props.renameWorkspace(this.state.editWorkspace);
   }
 
   handleInputChange = e => {
     this.setState({
       renameworkspace: e.target.value,
-      workspacename: e.target.value,
       newWorkspace: {
         name: e.target.value,
         color: this.state.newWorkspace.color,
       }
     });
+  }
+
+  handleInputEditName = (e, i) => {
+    this.setState({
+      editWorkspace: {
+        ...this.state.editWorkspace,
+        newName: e.target.value,
+        target: i,
+      }
+    });
+  }
+
+  handleInputEditColor = (color, i) => {
+
+    this.setState({
+      editWorkspace: {
+        ...this.state.editWorkspace,
+        newColor: color,
+      }
+    });
+
   }
 
 
@@ -240,21 +261,28 @@ class Dashboard extends Component {
               workspaces.map((ws, i) => (
                 <Li key={i} data-ws={i}>
                   <Button data-ws={i} onClick={this.handleClick} value={ws[0]}>
-                    <Hover color={ws[1].color || '#5C4EFF'}> <RightArrow /> </Hover>
-                    {ws[0]}
+                    <Hover color={
+                      this.state.editWorkspace.target === i &&
+                      this.state.editWorkspace.newColor || ws[1].color || '#5C4EFF'}>
+                      <RightArrow />
+                    </Hover>
+
+                    {
+                      ws[0]
+                    }
                   </Button>
                   <RenameEdit onClick={() => this.editWorkspace(i)} value={ws[0]} />
                   <AnimateEditForm isActive={this.state.editWorkspaceToggle} id={i}>
-                    <form onSubmit={(e) => this.renameWorkspace(e, i)} style={{height: '100%'}}>
-                      <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                    <form onSubmit={(e) => this.renameWorkspace(e)} style={{height: '100%'}}>
+                      <NewWsHover isActive={this.state.workspaceToggle} color={ws[1].color}>
                         <RightArrowNewWs />
                       </NewWsHover>
                       <Input
-                        onChange={this.handleInputChange}
+                        onChange={(e) => this.handleInputEditName(e, ws[0])}
                         active={this.state.isActive}
                         type="text"
                         placeholder="Name your workspace"/>
-                      <WsColor updateWsColor={this.updateWsColor}/>
+                      <WsColor updateWsColor={(e) => this.handleInputEditColor(e, ws[0])}/>
                       <CreateButton onClick={this.onToggleRename} type="submit">Save</CreateButton>
                       <CancelButton onClick={this.onToggleRename} type="button">Cancel</CancelButton>
                     </form>

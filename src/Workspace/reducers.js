@@ -73,10 +73,12 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       });
 
       const clone = Object.assign({}, state);
-      const newObject = renameProp(clone[payload.key], payload.name, clone);
-      newObject.current = payload;
+      const updatedWs = renameProp(payload.target, payload.newName, clone);
+      updatedWs.current = payload.newName;
+      updatedWs[updatedWs.current].color = payload.newColor;
 
-      return newObject;
+      return updatedWs;
+      // return state;
 
     case SWITCH_WORKSPACES:
 
