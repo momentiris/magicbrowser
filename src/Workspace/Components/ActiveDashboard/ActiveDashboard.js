@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import WsColor from '../WsColors/';
+// Style
 import {
   Container,
   TabItems,
@@ -22,22 +24,19 @@ import {
   InfoHover,
   AddIcon,
 } from './styles';
-
+// ReducerActions
 import {
-  addWorkspace,
-  switchWorkspaces,
   initEmptyWorkspace,
   addOneTab,
   removeSelectedTab,
   handleDragDashBoardTab,
   renameWorkspace,
 } from '../../actions';
-
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { handleOpenDashBoard } from '../../actions';
-import WsColor from '../WsColors/';
 
 class ActiveDashboard extends Component {
   constructor(props) {
@@ -91,28 +90,9 @@ class ActiveDashboard extends Component {
       <Container>
         <AddNewWs>
           <NewWsButton onClick={this.handleClick}>
-            <LeftArrow />See all spaces
+            <LeftArrow />Manage all workspaces
           </NewWsButton>
           <br />
-          <NewWsButton onClick={this.onToggle}>
-            <Add isActive={this.state.workspaceToggle}/>New space
-          </NewWsButton>
-          <AnimateForm isActive={this.state.workspaceToggle}>
-            <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-              <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
-                <RightArrowNewWs />
-              </NewWsHover>
-              <Input
-                ref={this.workspaceInput}
-                onChange={this.handleInputChange}
-                active={this.state.isActive}
-                type="text"
-                placeholder="Name your workspace"/>
-              <WsColor updateWsColor={this.updateWsColor}/>
-              <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
-              <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
-            </form>
-          </AnimateForm>
         </AddNewWs>
         <Column>
           {
@@ -165,8 +145,6 @@ const mapStateToProps = createSelector(
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    switchWorkspaces: switchWorkspaces,
-    addWorkspace: addWorkspace,
     addOneTab: addOneTab,
     renameWorkspace: renameWorkspace,
     removeSelectedTab: removeSelectedTab,
@@ -188,8 +166,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     workspaces: withoutCurrent,
-    switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
-    addWorkspace: arg => dispatchProps.addWorkspace(arg),
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),

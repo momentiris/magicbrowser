@@ -3,9 +3,10 @@ import rightarrowsvg from '../../../common/assets/icons/rightarrow.svg';
 import leftarrowsvg from '../../../common/assets/icons/leftarrow.svg';
 import addiconsvg from '../../../common/assets/icons/add.svg';
 import closeiconsvg from '../../../common/assets/icons/close.svg';
+
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -104,12 +105,15 @@ export const InfoHover = styled.div`
 export const WorkspaceInfo = styled.h4`
   font-family: latoregular;
   font-size: ${props => props.theme.medium};
-  color: ${props => props.theme.black};
+  color: ${props => props.theme.semiblack};
   margin: 0px;
   font-weight: normal;
   line-height: normal;
   position: relative;
   cursor: pointer;
+  &:hover {
+    color: ${props => props.theme.black};
+  }
 `;
 
 
@@ -119,9 +123,9 @@ export const BorderBottom = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.darkdashboardgrey};
   width: 100%;
-  height: 50px;
+  height: 58px;
   margin-bottom: 66px;
-  // padding-bottom: 32px;
+  // padding-bottom: 24px;
 `;
 
 export const AddNewWs = styled.div`
@@ -176,9 +180,10 @@ export const NewWsHover = styled.div`
 `;
 
 export const NewWsButton = styled.button`
+  font-family: latoregular;
   background: none;
   border: none;
-  color:  ${props => props.theme.semiblack};;
+  color: ${props => props.theme.semiblack};
   padding: 6px 0px;
   margin: 6px 0 6px 0;
   text-align: left;
@@ -247,7 +252,7 @@ export const Add = styled.svg`
   height: 20px;
   width: 20px;
   transform: ${props => props.isActive ? 'rotate(45deg)' : 'rotate(0deg)'};
-  margin: 0 0 0 -25px;
+  margin: 0 0 0 -43px;
   transition: all .3s cubic-bezier(0,.72,.5,.99);
 `;
 
@@ -266,7 +271,7 @@ export const LeftArrow = styled.svg`
   background-size: contain;
   height: 13px;
   width: 13px;
-  margin: 3px 0 0 -22px;
+  margin: 3px 0 0 -40px;
 `;
 
 export const RightArrowNewWs = styled.svg`

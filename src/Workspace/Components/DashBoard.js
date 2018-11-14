@@ -211,7 +211,7 @@ class Dashboard extends Component {
           </NewWsButton>
           <br />
           <NewWsButton onClick={this.onToggle}>
-            <Add isActive={this.state.workspaceToggle}/>New space
+            <Add isActive={this.state.workspaceToggle}/>New workspace
           </NewWsButton>
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
@@ -267,12 +267,13 @@ class Dashboard extends Component {
           </SortableList>
         </Column>
         <SavedLinks>
-          <Column>
-            <SavedLinksWrapper>
-              <SavedLinksHeader>
-              </SavedLinksHeader>
-            </SavedLinksWrapper>
-          </Column>
+          <Ul name="workspaces">
+            <SavedLinksHeader>
+              Saved Links
+            </SavedLinksHeader>
+          </Ul>
+          <SortableList items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
+          </SortableList>
         </SavedLinks>
       </Container>
     );

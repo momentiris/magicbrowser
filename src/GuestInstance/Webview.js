@@ -13,7 +13,7 @@ class Webview extends Component {
   componentDidMount() {
 
     const { current } = this.elem;
-    
+
     this.props.addEvents(current);
 
   }
@@ -35,7 +35,7 @@ class Webview extends Component {
 
     return (
       <WebviewContainer isActive={isActive}>
-        <webview ref={this.elem} data-id={id} autosize="on" style={{border: 'none', width: '100%', height: '90%', top: 0, right: 0, left: 0, bottom: 0}} src={this.props.src || 'https://google.se'} />
+        <webview ref={this.elem} data-id={id} autosize="on" style={{border: 'none', width: '100%', height: '100%', top: 0, right: 0, left: 0, bottom: 0}} src={this.props.src || 'https://google.se'} />
       </WebviewContainer>
     );
   }
