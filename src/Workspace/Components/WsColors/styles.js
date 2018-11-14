@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const InnerColorPickerContainer = styled.div`
-  width: 204px;
+  width: 240px;
+  margin-left: -4px;
   display: flex;
   flex-wrap: wrap;
   svg {
-    margin: 4px 4px 12px 4px;
+    margin: 4px 8px 12px 8px;
     height: 24px;
     width: 24px;
     border-radius: 50%;

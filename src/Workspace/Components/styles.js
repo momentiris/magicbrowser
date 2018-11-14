@@ -8,7 +8,6 @@ import renameoreditsvg from '../../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -53,9 +52,12 @@ export const TabItems = styled.div`
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;
-  /* transition: all .1s ease; */
+  transition: all .1s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const AddNewTab = styled.div`
@@ -311,7 +313,7 @@ export const Li = styled.li`
 export const TabLength = styled.p`
   font-size: ${props => props.theme.small};
   color: ${props => props.theme.black};
-  margin: 0;
+  margin: -22px 0px;
 `;
 
 export const LeftArrow = styled.svg`
@@ -319,9 +321,10 @@ export const LeftArrow = styled.svg`
   background-image: url(${leftarrowsvg});
   background-repeat: no-repeat;
   background-size: contain;
+  transform: rotate(180deg);
   height: 13px;
   width: 13px;
-  margin: 3px 0 0 -22px;
+  margin: 3px 0 0 -40px;
 `;
 
 export const Add = styled.svg`
@@ -332,7 +335,7 @@ export const Add = styled.svg`
   height: 20px;
   width: 20px;
   transform: ${props => props.isActive ? 'rotate(45deg)' : 'rotate(0deg)'};
-  margin: 0 0 0 -25px;
+  margin: 0 0 0 -43px;
   transition: all .3s cubic-bezier(0,.72,.5,.99);
 `;
 
@@ -361,16 +364,11 @@ export const Close = styled.div`
 
 // Saved links
 export const SavedLinks = styled.div`
+  display: flex;
+  width: 100%;
   border-top: 1px solid ${props => props.theme.darkgrey};
   padding-top: 44px;
-`;
-
-export const SavedLinksWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  width: 325px;
-  margin: 0px 100px 0px 0;
+  padding-bottom: 44px;
 `;
 
 export const SavedLinksHeader = styled.h3`

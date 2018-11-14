@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import latoBold from './assets/Lato/Lato-Regular.ttf';
 export const stylesheet = {
   // Colors
   darkgrey: '#CDD0D6',
@@ -16,8 +15,6 @@ export const stylesheet = {
   small: '12px',
   medium: '16px',
   large: '24px',
-  // Fonts
-  latobold: 'latoBold',
   // Button config
   paddingbutton: '6px 22px',
   br: '4px',
@@ -45,10 +42,6 @@ export const iconColors = [
   '#F24E1E',
   '#1E40F2',
   '#F21EC3',
-  '#F22B1E',
-  '#F2D01E',
-  '#1E40F2',
-  '#1EF28C',
 ];
 
 export const Button = styled.button`
