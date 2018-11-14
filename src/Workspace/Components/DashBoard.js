@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import './sortableHelperStyles.css';
 // import Drop from './droppable/Droppable.js';
 // import WsHover from './WorkSpaceButton/wshover';
@@ -154,11 +154,11 @@ class Dashboard extends Component {
     });
   }
 
-  onSortEnd({oldIndex, newIndex}, { target }) {
+  onSortEnd = async ({oldIndex, newIndex}, { target }) => {
     if (target.dataset.ws) {
     }
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
-    this.props.handleDragDashBoardTab({
+    await this.props.handleDragDashBoardTab({
       newTabs,
       newIndex,
       dashboard: true
@@ -212,7 +212,6 @@ class Dashboard extends Component {
           <br />
           <NewWsButton onClick={this.onToggle}>
             <Add isActive={this.state.workspaceToggle}/>New space
-
           </NewWsButton>
           <AnimateForm isActive={this.state.workspaceToggle}>
             <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
@@ -264,7 +263,7 @@ class Dashboard extends Component {
               ))
             }
           </Ul>
-          <SortableList pressDelay={200} items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
+          <SortableList items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
           </SortableList>
         </Column>
         <SavedLinks>

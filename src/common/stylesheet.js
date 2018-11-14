@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import latoBold from './assets/Lato/Lato-Regular.ttf';
 export const stylesheet = {
   // Colors
   darkgrey: '#CDD0D6',
@@ -6,6 +7,7 @@ export const stylesheet = {
   lightgrey: '#E9EBEE',
   lightergrey: '#F5F5F5',
   dashboardgrey: '#F3F4F7',
+  darkdashboardgrey: '#C4C4C4',
   bluepurple: '#4738F9',
   white: '#FFFFFF',
   black: '#000000',
@@ -14,7 +16,8 @@ export const stylesheet = {
   small: '12px',
   medium: '16px',
   large: '24px',
-
+  // Fonts
+  latobold: 'latoBold',
   // Button config
   paddingbutton: '6px 22px',
   br: '4px',

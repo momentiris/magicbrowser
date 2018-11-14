@@ -1,5 +1,28 @@
 import React, { Component, Fragment } from 'react';
-import { Container, TabItems, TabWrapper, Column, Header2, BorderBottom, AddNewTab } from './styles';
+import {
+  Container,
+  TabItems,
+  TabWrapper,
+  Column,
+  Header2,
+  BorderBottom,
+  AddNewTab,
+  AddNewWs,
+  NewWsButton,
+  LeftArrow,
+  Add,
+  AnimateForm,
+  NewWsHover,
+  RightArrowNewWs,
+  Input,
+  CreateButton,
+  CancelButton,
+  WorkspaceInfo,
+  WorkspaceInfoWrapper,
+  InfoHover,
+  AddIcon,
+} from './styles';
+
 import {
   addWorkspace,
   switchWorkspaces,
@@ -14,10 +37,28 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { handleOpenDashBoard } from '../../actions';
+import WsColor from '../WsColors/';
 
 class ActiveDashboard extends Component {
   constructor(props) {
     super(props);
+    this.workspaceInput = React.createRef();
+    this.state = {
+      toggle: false,
+      toggleRename: false,
+      workspaceToggle: false,
+      editWorkspaceToggle: {
+        active: false,
+        id: '',
+      },
+      isActive: true,
+      wsButtonColor: '',
+      newWorkspace: {
+        name: '',
+        color: ''
+      },
+      tabs: this.props.tabs
+    };
   }
   componentDidMount(){
   }
@@ -27,22 +68,66 @@ class ActiveDashboard extends Component {
       id: false
     });
   }
+  onToggle = () => {
+    this.setState({ workspaceToggle: !this.state.workspaceToggle });
+    this.workspaceInput.current.focus();
+  }
+
+  handleInputChange = e => {
+    this.setState({
+      renameworkspace: e.target.value,
+      workspacename: e.target.value,
+      newWorkspace: {
+        name: e.target.value,
+        color: this.state.newWorkspace.color,
+      }
+    });
+  }
 
 
   render() {
     const { tabs, workspaces } = this.props;
     return (
       <Container>
-        <button onClick={this.handleClick}>all workspaces</button>
+        <AddNewWs>
+          <NewWsButton onClick={this.handleClick}>
+            <LeftArrow />See all spaces
+          </NewWsButton>
+          <br />
+          <NewWsButton onClick={this.onToggle}>
+            <Add isActive={this.state.workspaceToggle}/>New space
+          </NewWsButton>
+          <AnimateForm isActive={this.state.workspaceToggle}>
+            <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
+              <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                <RightArrowNewWs />
+              </NewWsHover>
+              <Input
+                ref={this.workspaceInput}
+                onChange={this.handleInputChange}
+                active={this.state.isActive}
+                type="text"
+                placeholder="Name your workspace"/>
+              <WsColor updateWsColor={this.updateWsColor}/>
+              <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
+              <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
+            </form>
+          </AnimateForm>
+        </AddNewWs>
         <Column>
           {
             workspaces.map((ws, i) =>
               <BorderBottom key={i}>
                 <Header2
-
+                  key={i}
                 >
                   {ws[0]}
                 </Header2>
+                <WorkspaceInfoWrapper>
+                  <InfoHover><WorkspaceInfo>Tabs</WorkspaceInfo></InfoHover>
+                  <InfoHover><WorkspaceInfo>Saved Links</WorkspaceInfo></InfoHover>
+                  <InfoHover><WorkspaceInfo>History</WorkspaceInfo></InfoHover>
+                </WorkspaceInfoWrapper>
               </BorderBottom>
             )
           }
@@ -57,7 +142,9 @@ class ActiveDashboard extends Component {
                 </TabItems>
               )
             }
-            <AddNewTab />
+            <AddNewTab>
+              <AddIcon />
+            </AddNewTab>
           </TabWrapper>
         </Column>
       </Container>
