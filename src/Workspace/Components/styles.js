@@ -233,7 +233,7 @@ export const Hover = styled.div`
   height: 42px;
   border-radius: 50px;
   background: ${props => props.color};
-  transition: transform .15s ease, background .1s ease;
+  transition: transform .2s ease, background .1s ease;
   svg {
     transform: translateX(${props => props.isTarget ? '0px' : '-15px'});
   }
@@ -243,8 +243,7 @@ export const Button = styled.button`
   background: none;
   border: none;
   font-family: latobold;
-  color: ${props => props.theme.semiblack};
-
+  color: ${props => props.isTarget ? props.theme.black : props.theme.semiblack};
   padding: 6px 0px;
   text-align: left;
   text-decoration: none;
@@ -252,7 +251,7 @@ export const Button = styled.button`
   display: inline-block;
   word-break: break-all;
   cursor: pointer;
-  transition: all .1s ease;
+  transition: all .15s ease;
   font-size: ${props => props.theme.large};
 `;
 
@@ -265,12 +264,9 @@ export const RenameEdit = styled.svg`
   transform: translateX(0px);
   opacity: 0;
   margin: 0 0 0 0;
-  transition: all .2s cubic-bezier(0,.72,.5,.99);
+  ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
+  transition: all .2s ease .2s;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.15);
-  }
-
 `;
 
 export const RightArrowNewWs = styled.svg`
@@ -301,6 +297,7 @@ export const Li = styled.li`
   &:nth-child(1) {
     margin-top: 0px;
   }
+
   &:hover ${Button} {
     color: ${props => props.theme.black};
   }

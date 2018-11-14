@@ -88,11 +88,6 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.workspacestemp);
-  }
-
-
   onToggle = () => {
     this.setState({ workspaceToggle: !this.state.workspaceToggle });
     this.workspaceInput.current.focus();
@@ -115,18 +110,17 @@ class Dashboard extends Component {
     this.setState({
       currentWsUI: value,
     });
-
   }
 
   addWorkspace = e => {
     e.preventDefault();
     this.props.addWorkspace(this.state.newWorkspace);
-    // this.setState({ toggle: !this.state.toggle });
   }
 
-  renameWorkspace = (e, i) => {
+  renameWorkspace = async (e, i) => {
     e.preventDefault();
-    this.props.renameWorkspace(this.state.editWorkspace);
+    this.setState({currentWsUI: this.state.editWorkspace.newName});
+    await this.props.renameWorkspace(this.state.editWorkspace);
   }
 
   handleInputChange = e => {
@@ -181,8 +175,6 @@ class Dashboard extends Component {
   }
 
   onSortEnd = async ({oldIndex, newIndex}, { target }) => {
-    if (target.dataset.ws) {
-    }
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
     await this.props.handleDragDashBoardTab({
       newTabs,
@@ -196,10 +188,6 @@ class Dashboard extends Component {
       id: this.props.current
     });
   }
-
-  // TODO: Move the Button and hover to own components, to make different states
-  //       Drag n' drop the individual tab.
-  //       complete the edit/rename workspace dropdown
 
   render() {
     const { currentWsUI } = this.state;
@@ -250,7 +238,7 @@ class Dashboard extends Component {
                 onChange={this.handleInputChange}
                 active={this.state.isActive}
                 type="text"
-                placeholder="Rename your workspace"/>
+                placeholder="Name your workspace"/>
               <WsColor updateWsColor={this.updateWsColor}/>
               <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
               <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
@@ -261,19 +249,18 @@ class Dashboard extends Component {
           <Ul name="workspaces">
             {
               workspaces.map((ws, i) => (
-                <Li  key={i} data-ws={i}>
-                  <Button  data-ws={i} onClick={this.handleClick} value={ws[0]}>
+                <Li key={i} data-ws={i}>
+                  <Button isTarget={currentWsUI === ws[0]}  data-ws={i} onMouseDown={this.handleClick} value={ws[0]}>
                     <Hover isTarget={currentWsUI === ws[0]} color={
                       this.state.editWorkspace.target === ws[0] &&
                       this.state.editWorkspace.newColor || ws[1].color || '#5C4EFF'}>
                       <RightArrow shouldbeBlack={ws[1].color === 'white'}/>
                     </Hover>
-
                     {
                       ws[0]
                     }
                   </Button>
-                  <RenameEdit onClick={() => this.editWorkspace(i)} value={ws[0]} />
+                  <RenameEdit isTarget={currentWsUI === ws[0]} onClick={() => this.editWorkspace(i)} value={ws[0]} />
                   <AnimateEditForm isActive={this.state.editWorkspaceToggle} id={i}>
                     <form onSubmit={(e) => this.renameWorkspace(e)} style={{height: '100%'}}>
                       <NewWsHover isActive={this.state.workspaceToggle} color={ws[1].color}>
@@ -283,7 +270,7 @@ class Dashboard extends Component {
                         onChange={(e) => this.handleInputEditName(e, ws[0])}
                         active={this.state.isActive}
                         type="text"
-                        placeholder="Name your workspace"/>
+                        placeholder="Rename your workspace"/>
                       <WsColor updateWsColor={(e) => this.handleInputEditColor(e, ws[0])}/>
                       <CreateButton onClick={this.onToggleRename} type="submit">Save</CreateButton>
                       <CancelButton onClick={this.onToggleRename} type="button">Cancel</CancelButton>
