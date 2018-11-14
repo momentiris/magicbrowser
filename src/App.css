@@ -1,8 +1,10 @@
 #root {
   height: 100vh;
+  overflow: hidden;
 }
 
 .App {
   height: 100%;
+
   box-sizing: border-box;
 }

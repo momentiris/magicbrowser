@@ -27,18 +27,20 @@ const MainNavWrapPlaceholder = styled.div`
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Router>
+      <>
+      <Router>
         <>
-        <MainNavWrapPlaceholder/>
-        <MainNavWrap>
-          <TabHandler />
-          <UserNavigationHandler />
-        </MainNavWrap>
+      <MainNavWrapPlaceholder/>
+      <MainNavWrap>
+        <TabHandler />
+        <UserNavigationHandler />
+      </MainNavWrap>
+      <div className="App">
           <Route exact path="/" component={GuestInstanceHandler}/>
-        </>
-        </Router>
       </div>
+    </>
+    </Router>
+    </>
     );
   }
 }
