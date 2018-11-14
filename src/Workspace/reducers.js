@@ -89,9 +89,11 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
     case ADD_ONE_TAB:
       return {
         ...state,
-        [state.current]: {
-          ...state[state.current],
-          tabs: [...state[state.current].tabs, payload]
+        [payload.ws || state.current]: {
+          ...state[payload.ws || state.current],
+          tabs: [...state[payload.ws || state.current].tabs, {
+            src: 'http://google.se',
+          }]
         }
       };
 

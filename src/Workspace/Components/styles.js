@@ -228,12 +228,15 @@ export const Hover = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  transform: translateX(-182px);
+  transform: translateX(${props => props.isTarget ? '-152px' : '-182px'});
   width: 62px;
   height: 42px;
   border-radius: 50px;
   background: ${props => props.color};
-  transition: all .2s ease-in;
+  transition: transform .15s ease, background .1s ease;
+  svg {
+    transform: translateX(${props => props.isTarget ? '0px' : '-15px'});
+  }
 `;
 
 export const Button = styled.button`
@@ -241,6 +244,7 @@ export const Button = styled.button`
   border: none;
   font-family: latobold;
   color: ${props => props.theme.semiblack};
+
   padding: 6px 0px;
   text-align: left;
   text-decoration: none;
@@ -280,6 +284,7 @@ export const RightArrowNewWs = styled.svg`
 
 export const RightArrow = styled.svg`
   background-image: url(${rightarrowsvg});
+  //fix this so u can have black color
   background-repeat: no-repeat;
   background-size: contain;
   height: 16px;

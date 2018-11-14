@@ -83,13 +83,15 @@ class Dashboard extends Component {
         newColor: '',
         target: null
       },
-      tabs: this.props.tabs
+      tabs: this.props.tabs,
+      currentWsUI: this.props.current
     };
   }
 
-  componentDidMount(){
-
+  componentDidMount() {
+    console.log(this.props.workspacestemp);
   }
+
 
   onToggle = () => {
     this.setState({ workspaceToggle: !this.state.workspaceToggle });
@@ -101,20 +103,19 @@ class Dashboard extends Component {
   }
 
   editWorkspace = (i) => {
-    this.setState({editWorkspaceToggle:
-      {
+    this.setState({
+      editWorkspaceToggle: {
         active: i === this.state.editWorkspaceToggle.id ? !this.state.editWorkspaceToggle.active : true,
         id: i
       }
     });
   }
 
-  switchWorkspaces = value => {
-    this.props.switchWorkspaces(value);
-  }
+  handleClick = ({ target: { value } }) => {
+    this.setState({
+      currentWsUI: value,
+    });
 
-  handleClick = (e) => {
-    this.switchWorkspaces(e.target.value);
   }
 
   addWorkspace = e => {
@@ -149,19 +150,19 @@ class Dashboard extends Component {
   }
 
   handleInputEditColor = (color, i) => {
-
     this.setState({
       editWorkspace: {
         ...this.state.editWorkspace,
         newColor: color,
+        target: i
       }
     });
-
   }
 
-
-  addOneTab = (e) => {
-    this.props.addOneTab({src: 'http://facebook.com'});
+  addOneTab = ws => {
+    this.props.addOneTab({
+      ws: ws
+    });
   }
 
   removeSelectedTab = id => {
@@ -201,7 +202,10 @@ class Dashboard extends Component {
   //       complete the edit/rename workspace dropdown
 
   render() {
-    const { active } = this.props;
+    const { currentWsUI } = this.state;
+    const { active, workspaces, tabs, workspacestemp } = this.props;
+    const currentTabs = workspacestemp[currentWsUI].tabs;
+
 
     const SortableItem = SortableElement(({value, tabindex}) => {
       return (
@@ -218,15 +222,13 @@ class Dashboard extends Component {
           {items.map((item, index) => {
             return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.src}> </SortableItem>;
           })}
-          <AddNewTab onClick={this.addOneTab}>
+          <AddNewTab onClick={() => this.addOneTab(currentWsUI)}>
             <AddIcon />
           </AddNewTab>
         </TabWrapper>
       );
     });
-    const { tabs } = this.props;
-    // const dragable = tabs.map((tab, i) => );
-    const { workspaces } = this.props;
+
     return (
       <Container>
         <AddNewWs>
@@ -259,12 +261,12 @@ class Dashboard extends Component {
           <Ul name="workspaces">
             {
               workspaces.map((ws, i) => (
-                <Li key={i} data-ws={i}>
-                  <Button data-ws={i} onClick={this.handleClick} value={ws[0]}>
-                    <Hover color={
-                      this.state.editWorkspace.target === i &&
+                <Li  key={i} data-ws={i}>
+                  <Button  data-ws={i} onClick={this.handleClick} value={ws[0]}>
+                    <Hover isTarget={currentWsUI === ws[0]} color={
+                      this.state.editWorkspace.target === ws[0] &&
                       this.state.editWorkspace.newColor || ws[1].color || '#5C4EFF'}>
-                      <RightArrow />
+                      <RightArrow shouldbeBlack={ws[1].color === 'white'}/>
                     </Hover>
 
                     {
@@ -295,7 +297,7 @@ class Dashboard extends Component {
               ))
             }
           </Ul>
-          <SortableList items={tabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
+          <SortableList items={currentTabs} onSortEnd={this.onSortEnd.bind(this)} axis='xy'>
           </SortableList>
         </Column>
         <SavedLinks>
@@ -343,12 +345,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 
   const withoutCurrent = Object.entries(removeCurrent(stateProps.workspaces, 'current'));
-
+  const { current, ...withoutCurrentObj} = stateProps.workspaces;
   return Object.assign({}, ownProps, {
     current: stateProps.workspaces.current,
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     workspaces: withoutCurrent,
+    workspacestemp: withoutCurrentObj,
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     addWorkspace: arg => dispatchProps.addWorkspace(arg),
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
