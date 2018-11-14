@@ -118,9 +118,13 @@ class Dashboard extends Component {
     // this.setState({ toggle: !this.state.toggle });
   }
 
-  renameWorkspace = e => {
+  renameWorkspace = (e, i) => {
+    console.log(e, i);
     e.preventDefault();
-    this.props.renameWorkspace(this.state.renameworkspace);
+    this.props.renameWorkspace({
+      name: this.state.renameworkspace,
+      key: i
+    });
   }
 
   handleInputChange = e => {
@@ -223,7 +227,7 @@ class Dashboard extends Component {
                 onChange={this.handleInputChange}
                 active={this.state.isActive}
                 type="text"
-                placeholder="Name your workspace"/>
+                placeholder="Rename your workspace"/>
               <WsColor updateWsColor={this.updateWsColor}/>
               <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
               <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
@@ -241,7 +245,7 @@ class Dashboard extends Component {
                   </Button>
                   <RenameEdit onClick={() => this.editWorkspace(i)} value={ws[0]} />
                   <AnimateEditForm isActive={this.state.editWorkspaceToggle} id={i}>
-                    <form onSubmit={() => this.renameWorkspace(i)} style={{height: '100%'}}>
+                    <form onSubmit={(e) => this.renameWorkspace(e, i)} style={{height: '100%'}}>
                       <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
                         <RightArrowNewWs />
                       </NewWsHover>

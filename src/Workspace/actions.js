@@ -26,10 +26,10 @@ export const addWorkspace = (workspace) => {
   };
 };
 
-export const renameWorkspace = (workspace) => {
+export const renameWorkspace = (data) => {
   return {
     type: RENAME_CURRENT_WORKSPACE,
-    payload: workspace
+    payload: data
   };
 };
 
