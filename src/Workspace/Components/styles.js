@@ -8,6 +8,7 @@ import renameoreditsvg from '../../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
+  height: 100vh;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -32,7 +33,7 @@ export const ColorPickerContainer = styled.div`
 export const Column = styled.div`
   display: flex;
   width: 100%;
-  padding-bottom: 88px;
+  margin-bottom: 98px;
 `;
 
 // Tabs and items

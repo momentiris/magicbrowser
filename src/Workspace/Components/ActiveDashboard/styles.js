@@ -117,7 +117,6 @@ export const WorkspaceInfo = styled.h4`
 `;
 
 
-
 export const BorderBottom = styled.div`
   display: flex;
   justify-content: space-between;
@@ -244,6 +243,18 @@ export const CancelButton = styled.button`
     background ${props => props.theme.mediumgrey};
   }
 `;
+
+export const WorkSpaceColor = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  margin: 10px 0px 0px -40px;
+  background: ${props => props.color};
+`;
+
 export const Add = styled.svg`
   position: absolute;
   background-image: url(${addiconsvg});

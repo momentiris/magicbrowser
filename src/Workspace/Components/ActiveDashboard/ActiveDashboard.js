@@ -23,6 +23,8 @@ import {
   WorkspaceInfoWrapper,
   InfoHover,
   AddIcon,
+  WorkSpaceColor,
+  RightArrow,
 } from './styles';
 // ReducerActions
 import {
@@ -60,6 +62,7 @@ class ActiveDashboard extends Component {
     };
   }
   componentDidMount(){
+    console.log(this.props.workspaces);
   }
 
   handleClick = e => {
@@ -86,6 +89,7 @@ class ActiveDashboard extends Component {
 
   render() {
     const { tabs, workspaces } = this.props;
+    const { current } = this.props;
     return (
       <Container>
         <AddNewWs>
@@ -101,7 +105,9 @@ class ActiveDashboard extends Component {
                 <Header2
                   key={i}
                 >
+                  <WorkSpaceColor color={ws.color || '#5C4EFF'}> <RightArrow /> </WorkSpaceColor>
                   {ws[0]}
+                  {current}
                 </Header2>
                 <WorkspaceInfoWrapper>
                   <InfoHover><WorkspaceInfo>Tabs</WorkspaceInfo></InfoHover>
@@ -160,12 +166,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 
   const withoutCurrent = Object.entries(removeCurrent(stateProps.workspaces, 'current'));
-
+  console.log([stateProps.workspaces[stateProps.workspaces.current]]);
   return Object.assign({}, ownProps, {
     current: stateProps.workspaces.current,
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
-    workspaces: withoutCurrent,
+    workspaces: [stateProps.workspaces[stateProps.workspaces.current]],
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
