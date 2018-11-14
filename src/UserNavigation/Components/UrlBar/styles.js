@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const UrlBarInput = styled.input`
   pointer-events: ${props => props.dashboardOpen ? 'auto' : props.disable ? 'none' : 'auto'};
   border: none;
-  height: 32px;
+  height: 30px;
   width: 100%;
   background: inherit;
   font-size: 16px;
@@ -12,6 +12,8 @@ export const UrlBarInput = styled.input`
   padding-left: 16px;
   &:focus {
     outline: none;
-    background: white;
+
+    ${'' /* background: #F3F4F7; */}
+
   }
 `;

@@ -11,24 +11,38 @@ import Webview from './GuestInstance/Webview';
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 import Dashboard from './Workspace/Components/DashBoard';
 import ActiveDashboard from './Workspace/Components/ActiveDashboard/ActiveDashboard';
+import styled from 'styled-components';
 
 const electron = window.electron;
 const { ipcRenderer } = electron;
 
-class App extends Component {
-  componentDidMount() {
+const MainNavWrap = styled.section`
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+`;
 
-  }
+const MainNavWrapPlaceholder = styled.div`
+  height: 79px;
+  width: 100%;
+`
+
+
+class App extends Component {
 
   render() {
     return (
       <div className="App">
         <Router>
         <>
-        <TabHandler></TabHandler>
-        <UserNavigationHandler />
+        <MainNavWrapPlaceholder/>
+        <MainNavWrap>
+          <TabHandler />
+          <UserNavigationHandler />
+        </MainNavWrap>
           <Route exact path="/" component={GuestInstanceHandler}/>
-        
         </>
         </Router>
       </div>

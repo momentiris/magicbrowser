@@ -128,7 +128,6 @@ class NavNewWs extends Component {
     });
 
     await this.props.addWorkspace(this.state.newWorkspace);
-    await this.props.measureWsRestContainer();
 
     this.resetToggleClean();
   }

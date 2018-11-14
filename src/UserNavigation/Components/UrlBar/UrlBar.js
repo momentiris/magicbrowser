@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import {
   UrlBarInput,
-
 } from './styles';
 
 import KeyCodes from '../../../common/keyCodes';
@@ -16,12 +15,13 @@ class UrlBar extends Component {
     this.onKeyDown = this.onKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.state = {
+      searchValue: '',
+      data: false,
+    };
   }
 
-  state = {
-    searchValue: '',
-    data: false,
-  }
+
 
   //Change location name, remove https from visible bar
   //const hasTitle = location !== location.replace(/^https?:\/\//, '');

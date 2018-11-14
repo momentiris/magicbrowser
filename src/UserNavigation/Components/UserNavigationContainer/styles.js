@@ -16,7 +16,8 @@ export const UrlBarContainer = styled.div`
   border: none;
   height: 32px;
   width: 100%;
-  background: ${props => props.clicked ? 'white' : props.theme.lightgrey};
+  border: ${props => props.clicked ? '1px solid rgba(71, 56, 249, .3)' : 'none'};
+  background: ${props => props.clicked ? props.theme.dashboardgrey : props.theme.lightgrey};
   font-size: 16px;
   border-radius: ${props => props.theme.br};
   padding: 0;
@@ -25,7 +26,7 @@ export const UrlBarContainer = styled.div`
   opacity: ${props => props.dashboardOpen ? 1 : props.show ? 0 : 1};
   align-items: center;
   :hover {
-    background: ${props => props.clicked ? 'white' : props.theme.greybuttonhover};
+    background: ${props => props.clicked ? props.theme.dashboardgrey : props.theme.greybuttonhover};
   }
 `;
 
