@@ -6,7 +6,6 @@ import closeiconsvg from '../../../common/assets/icons/close.svg';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
