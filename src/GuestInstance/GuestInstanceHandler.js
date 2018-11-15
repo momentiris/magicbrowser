@@ -6,7 +6,6 @@ import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab, updateTabMeta } from '../Workspace/actions';
 import DashboardHandler from '../Dashboard/DashboardHandler';
-import ActiveDashboard from '../Workspace/Components/ActiveDashboard/ActiveDashboard';
 
 import {
   WebviewContainerWrap,
@@ -81,9 +80,7 @@ class GuestInstanceHandler extends Component {
               />
             ) : (
               <DashboardWrap className="dashboardWrap" isActive={i === active } key={i}>
-                {
-                  tab.id ? <ActiveDashboard id={tab.id} /> : <DashboardHandler id={i}/>
-                }
+                <DashboardHandler id={i}/>
               </DashboardWrap>
             );
           })

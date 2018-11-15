@@ -27,7 +27,8 @@ const DashboardWorkspaces = ({
   workspaceToggle,
   editWorkspaceToggle,
   onToggleRename,
-  isActive
+  isActive,
+  updateWorkspace
 }) => (
   <Ul name="workspaces">
     {
@@ -35,26 +36,26 @@ const DashboardWorkspaces = ({
         <Li key={i} data-ws={i}>
           <Button isTarget={currentWsUI === ws[0]}  data-ws={i} onMouseDown={handleClick} value={ws[0]}>
             <Hover isTarget={currentWsUI === ws[0]} color={
-              editWorkspace.target === ws[0] &&
-              editWorkspace.newColor || ws[1].color || '#5C4EFF'}>
+              updateWorkspace.target === ws[0] &&
+              updateWorkspace.newColor || ws[1].color || '#5C4EFF'}>
               <RightArrow shouldbeBlack={ws[1].color === 'white'}/>
             </Hover>
             {
               ws[0]
             }
           </Button>
-          <RenameEdit isTarget={currentWsUI === ws[0]} onClick={() => this.editWorkspace(i)} value={ws[0]} />
+          <RenameEdit isTarget={currentWsUI === ws[0]} onClick={() => editWorkspace(i)} value={ws[0]} />
           <AnimateEditForm isActive={editWorkspaceToggle} id={i}>
-            <form onSubmit={(e) => this.renameWorkspace(e)} style={{height: '100%'}}>
+            <form onSubmit={(e) => renameWorkspace(e)} style={{height: '100%'}}>
               <NewWsHover isActive={workspaceToggle} color={ws[1].color}>
                 <RightArrowNewWs />
               </NewWsHover>
               <Input
-                onChange={(e) => this.handleInputEditName(e, ws[0])}
+                onChange={(e) => handleInputEditName(e, ws[0])}
                 active={isActive}
                 type="text"
                 placeholder="Rename your workspace"/>
-              <WsColor updateWsColor={(e) => this.handleInputEditColor(e, ws[0])}/>
+              <WsColor updateWsColor={(e) => handleInputEditColor(e, ws[0])}/>
               <CreateButton onClick={onToggleRename} type="submit">Save</CreateButton>
               <CancelButton onClick={onToggleRename} type="button">Cancel</CancelButton>
             </form>

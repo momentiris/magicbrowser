@@ -116,17 +116,6 @@ export const WorkspaceInfo = styled.h4`
   }
 `;
 
-
-export const BorderBottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid ${props => props.theme.darkdashboardgrey};
-  width: 100%;
-  height: 58px;
-  margin-bottom: 66px;
-  // padding-bottom: 24px;
-`;
-
 export const AddNewWs = styled.div`
   margin: 0px;
   padding-bottom: 32px;
