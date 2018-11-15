@@ -81,9 +81,7 @@ class GuestInstanceHandler extends Component {
               />
             ) : (
               <DashboardWrap className="dashboardWrap" isActive={i === active } key={i}>
-                {
-                  tab.id ? <ActiveDashboard id={tab.id} /> : <DashboardHandler id={i}/>
-                }
+                <DashboardHandler id={i}/>
               </DashboardWrap>
             );
           })

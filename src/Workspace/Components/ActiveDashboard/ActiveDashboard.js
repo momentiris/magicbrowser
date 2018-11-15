@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import WsColor from '../WsColors/';
 // Style
 import {
   Container,

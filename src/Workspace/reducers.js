@@ -107,9 +107,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
 
         }
       });
-
+      
     case SET_TAB_ACTIVE:
-
       return {
         ...state,
         [state.current]: {
