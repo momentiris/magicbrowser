@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab, updateTabMeta } from '../Workspace/actions';
-import Dashboard from '../Workspace/Components/DashBoard';
+import DashboardHandler from '../Dashboard/DashboardHandler';
 import ActiveDashboard from '../Workspace/Components/ActiveDashboard/ActiveDashboard';
 
 import {
@@ -82,7 +82,7 @@ class GuestInstanceHandler extends Component {
             ) : (
               <DashboardWrap className="dashboardWrap" isActive={i === active } key={i}>
                 {
-                  tab.id ? <ActiveDashboard id={tab.id} /> : <Dashboard id={i}/>
+                  tab.id ? <ActiveDashboard id={tab.id} /> : <DashboardHandler id={i}/>
                 }
               </DashboardWrap>
             );

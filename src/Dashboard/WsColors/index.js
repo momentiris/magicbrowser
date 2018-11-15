@@ -2,17 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { InnerColorPickerContainer, ColorPickerContainer} from './styles';
 import {
   DotIcon,
-} from '../../../common/assets/icons';
-import { iconColors } from '../../../common/stylesheet';
+} from '../../common/assets/icons';
+import { iconColors } from '../../common/stylesheet';
+
 class WsColor extends Component {
   constructor(props) {
     super(props);
-
   }
 
   handlePickColor = color => {
     this.props.updateWsColor(color);
-
   }
 
   render() {

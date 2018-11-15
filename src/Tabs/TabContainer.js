@@ -49,7 +49,7 @@ class TabContainer extends Component {
 
     const SortableList = SortableContainer(({ items }) => {
       return (
-        <Mainwrap className="container">
+        <Mainwrap className="tabsMainWrap">
           {items.map((tab, i) => {
             return <SortableItem  value={tab} key={`index-${i}`} tabIndex={i} index={i} />;
           })}

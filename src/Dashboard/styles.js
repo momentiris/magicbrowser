@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import rightarrowsvg from '../../common/assets/icons/rightarrow.svg';
-import leftarrowsvg from '../../common/assets/icons/leftarrow.svg';
-import addiconsvg from '../../common/assets/icons/add.svg';
-import closeiconsvg from '../../common/assets/icons/close.svg';
-import renameoreditsvg from '../../common/assets/icons/renameoredit.svg';
+import rightarrowsvg from '../common/assets/icons/rightarrow.svg';
+import leftarrowsvg from '../common/assets/icons/leftarrow.svg';
+import addiconsvg from '../common/assets/icons/add.svg';
+import closeiconsvg from '../common/assets/icons/close.svg';
+import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
