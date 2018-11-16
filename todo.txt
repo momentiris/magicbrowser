@@ -1,10 +1,11 @@
 finish report
-update webviewurl on load
+update webviewurl on load and finish urlparse
 select multiple or single tabs and move to another workspace
 webview thumbnails for dashboard
 fix so rename workspace does not switch array order.
 close and reset inputs on create or cancel new dashboard and rename dashboard
-finish urlparsing
+
+drag tabs to another workspace in dashboard
 
 Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy med 3 länkar
 Markera tabbar i nav bar: Undersök hur svårt/lätt det är att göra
