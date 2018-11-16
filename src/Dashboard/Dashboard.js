@@ -37,13 +37,15 @@ import {
   Close,
   SavedLinksHeader,
   SavedLinksWrapper,
+  SavedLinksItems,
   RenameEdit,
   AnimateEditForm,
   BorderBottom,
   HistoryButton,
   WorkspaceInfoWrapper,
   WsWrapp,
-  TabsHeader
+  TabsHeader,
+  Wrapper,
 } from './styles';
 
 
@@ -211,7 +213,7 @@ class Dashboard extends Component {
           this.state.anim ? (
             <CSSTransition
               in={this.state.animatetoggle}
-              timeout={300}
+              timeout={500}
               classNames="activeDashboard"
             >
               <div>
@@ -219,7 +221,6 @@ class Dashboard extends Component {
                   <NewWsButton onClick={this.onToggle}>
                     <Add isActive={this.state.workspaceToggle}/>New workspace
                   </NewWsButton>
-
                   <AnimateForm isActive={this.state.workspaceToggle}>
                     <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
                       <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
@@ -256,7 +257,6 @@ class Dashboard extends Component {
                     onToggleRename={this.onToggleRename}
                     isActive={active}
                   />
-
                   <DashboardTabs
                     onSortEnd={this.onSortEnd}
                     active={active}
@@ -273,18 +273,16 @@ class Dashboard extends Component {
 
             <CSSTransition
               in={this.state.animateshistory}
-              timeout={300}
+              timeout={500}
               classNames="mainDashboard"
             >
               <History
                 workspace={workspace}
                 currentWsUI={currentWsUI}
-
               />
             </CSSTransition>
           )
         }
-
 
       </Container>
     );

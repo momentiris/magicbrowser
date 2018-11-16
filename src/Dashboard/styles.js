@@ -8,9 +8,14 @@ import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
-  padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
+  padding: 70px 135px 70px 135px;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -5px;
 `;
 
 export const InnerColorPickerContainer = styled.div`
@@ -38,11 +43,12 @@ export const Column = styled.div`
 // Tabs and items
 export const TabWrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   padding-top: 48px;
   padding-bottom: 48px;
+  margin-left: 113px;
   border-top: 1px solid ${props => props.theme.darkgrey};
 `;
 
@@ -222,7 +228,6 @@ export const Ul = styled.ul`
   flex-direction: column;
   padding: 0px;
   width: 325px;
-  margin: 0px 100px 0px 0;
   padding-top: 48px;
 `;
 
@@ -353,7 +358,6 @@ export const AddIcon = styled.svg`
 `;
 
 export const Close = styled.div`
-  z-index: 9999;
   background-image: url(${closeiconsvg});
   background-repeat: no-repeat;
   background-size: contain;
@@ -375,7 +379,7 @@ export const WsWrapp = styled.div`
 `;
 
 export const TabsHeader = styled.h2`
-  margin-left: 342px;
+  margin-left: 355px;
   font-family: latoregular;
   font-style: normal;
   font-weight: normal;
@@ -431,17 +435,61 @@ export const WorkspaceInfoWrapper = styled.div`
 // Saved links
 export const SavedLinks = styled.div`
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  padding-bottom: 58px;
+  padding-top: 48px;
+`;
+
+export const SavedLinksWrapper = styled.div`
   border-top: 1px solid ${props => props.theme.darkgrey};
-  margin-top: 48px;
+  padding-top: 48px;
+`;
+
+export const SavedLinksPositioning = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -6px;
 `;
 
 export const SavedLinksHeader = styled.h3`
-  font-family: latobold;
+  font-family: latoregular;
   font-style: normal;
   font-weight: normal;
   line-height: normal;
-  font-size: 24px;
+  font-size: ${props => props.theme.medium};
   margin: 0;
   color: ${props => props.theme.semiblack}
+  margin-bottom: 24px;
+`;
+
+export const SavedLinksItems = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 264px;
+  height: 110px;
+  padding: 12px;
+  box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
+  background: ${props => props.theme.white};
+  border-radius: ${props => props.theme.br};
+  margin: 6px 6px 6px 6px;
+  transition: all .1s ease;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+export const SavedLinksFavicon = styled.svg`
+  background: red;
+  height: 40px;
+  width: 40px;
+  margin-right: 12px;
+  box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.35);
+`;
+
+export const SavedLinksTitle = styled.h3`
+  max-width: 190px;
+  overflow: hidden;
+  word-break: break-all;
+  margin: 0px;
 `;

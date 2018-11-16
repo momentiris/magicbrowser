@@ -1,31 +1,31 @@
 .activeDashboard-enter {
   opacity: 0.01;
-  transform: translateY(50%);
+  transform: translateY(20%);
 }
 .activeDashboard-enter-active {
   opacity: 1;
   transform: translateY(0%);
-  transition: all 300ms ease-out;
+  transition: all 500ms ease-out;
 }
 .activeDashboard-exit {
   opacity: 0.01;
-  transform: translateY(50%);
+  transform: translateY(20%);
 }
 .activeDashboard-exit-active {
   opacity: 1;
   transform: translateY(0%);
-  transition: all 300ms ease-out;
+  transition: all 500ms ease-out;
 }
 
 
 .mainDashboard-enter {
   opacity: 0.01;
-  transform: translateY(50%);
+  transform: translateY(20%);
 }
 .mainDashboard-enter-active {
   opacity: 1;
   transform: translateY(0%);
-  transition: all 300ms ease-out;
+  transition: all 500ms ease-out;
 }
 .mainDashboard-exit {
   opacity: 1;
@@ -33,6 +33,6 @@
 }
 .mainDashboard-exit-active {
   opacity: 0.01;
-  transform: translateY(50%);
-  transition: all 300ms ease-out;
+  transform: translateY(20%);
+  transition: all 500ms ease-out;
 }
