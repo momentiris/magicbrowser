@@ -56,8 +56,7 @@ export const VisualButton = styled.button`
   background: ${props => props.theme.bluepurple};
   border: none;
   color: ${props => props.theme.white};
-  padding: ${props => props.theme.paddingbutton};
-  border-radius: ${props => props.theme.br};
+  border-radius: 4px 0px 0px 4px;
   text-decoration: none;
   outline: none;
   box-sizing: border-box;
@@ -67,9 +66,6 @@ export const VisualButton = styled.button`
   width: 103px;
   text-align: center;
   font-size: ${props => props.theme.medium};
-  &:hover{
-    background ${props => props.theme.bluebuttonhover};
-  }
   &:active{
     background ${props => props.theme.bluebuttonactive};
   }
@@ -80,11 +76,10 @@ export const VisualButton = styled.button`
 
 export const ListButton = styled.button`
   font-family: latoregular;
-  background: ${props => props.theme.white};
-  border: 1px solid ${props => props.theme.bluepurple};
+  background: ${props => props.theme.dashboardgrey};
+  border: 2px solid ${props => props.theme.bluepurple};
   color: ${props => props.theme.bluepurple};
-  padding: ${props => props.theme.paddingbutton};
-  border-radius: ${props => props.theme.br};
+  border-radius: 0px 4px 4px 0px;
   text-decoration: none;
   outline: none;
   box-sizing: border-box;
@@ -95,11 +90,11 @@ export const ListButton = styled.button`
   text-align: center;
   font-size: ${props => props.theme.medium};
   &:hover{
-    background ${props => props.theme.bluebuttonhover};
-    color: ${props => props.theme.white};
+    background ${props => props.theme.white};
   }
   &:active{
     background ${props => props.theme.bluebuttonactive};
+    color: ${props => props.theme.white};
   }
   svg {
     margin-right: 8px;

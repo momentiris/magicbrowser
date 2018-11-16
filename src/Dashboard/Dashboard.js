@@ -46,6 +46,7 @@ import {
   WsWrapp,
   TabsHeader,
   Wrapper,
+  AnimateWorkspace
 } from './styles';
 
 
@@ -74,6 +75,7 @@ class Dashboard extends Component {
       anim: true,
       animatemain: false,
       animateshistory: false,
+      animatesworkspace: false,
       editWorkspaceToggle: {
         active: false,
         id: '',
@@ -197,7 +199,12 @@ class Dashboard extends Component {
   }
 
   animate = () => {
-    this.setState({ animatemain: !this.state.animatemain, anim: !this.state.anim, animateshistory: !this.state.animateshistory});
+    this.setState({
+      animatemain: !this.state.animatemain,
+      anim: !this.state.anim,
+      animateshistory: !this.state.animateshistory,
+      animatesworkspace: !this.state.animatesworkspace
+    });
   }
 
   render() {
@@ -244,20 +251,26 @@ class Dashboard extends Component {
                 </AddNewWs>
 
                 <Column>
-                  <DashboardWorkspaces
-                    workspaces={workspaces}
-                    currentWsUI={currentWsUI}
-                    handleClick={this.handleClick}
-                    renameWorkspace={this.renameWorkspace}
-                    editWorkspace={this.editWorkspace}
-                    handleInputEditName={this.handleInputEditName}
-                    handleInputEditColor={this.handleInputEditColor}
-                    workspaceToggle={this.state.workspaceToggle}
-                    editWorkspaceToggle={this.state.editWorkspaceToggle}
-                    updateWorkspace={this.state.editWorkspace}
-                    onToggleRename={this.onToggleRename}
-                    isActive={active}
-                  />
+                  <CSSTransition
+                    in={this.state.animatesworkspace}
+                    timeout={800}
+                    classNames="workspaceDashboard"
+                  >
+                    <DashboardWorkspaces
+                      workspaces={workspaces}
+                      currentWsUI={currentWsUI}
+                      handleClick={this.handleClick}
+                      renameWorkspace={this.renameWorkspace}
+                      editWorkspace={this.editWorkspace}
+                      handleInputEditName={this.handleInputEditName}
+                      handleInputEditColor={this.handleInputEditColor}
+                      workspaceToggle={this.state.workspaceToggle}
+                      editWorkspaceToggle={this.state.editWorkspaceToggle}
+                      updateWorkspace={this.state.editWorkspace}
+                      onToggleRename={this.onToggleRename}
+                      isActive={active}
+                    />
+                  </CSSTransition>
                   <DashboardTabs
                     onSortEnd={this.onSortEnd}
                     active={active}
@@ -275,7 +288,7 @@ class Dashboard extends Component {
 
             <CSSTransition
               in={this.state.animateshistory}
-              timeout={500}
+              timeout={800}
               classNames="mainDashboard"
             >
               <History

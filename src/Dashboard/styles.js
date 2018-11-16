@@ -485,7 +485,8 @@ export const SavedLinksFavicon = styled.svg`
   height: 40px;
   width: 40px;
   margin-right: 12px;
-  box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.35);
+  box-shadow: 0px 2px 10px rgba(116, 116, 116, 0.25);
+  border-radius: ${props => props.theme.br};
 `;
 
 export const SavedLinksTitle = styled.h3`
@@ -493,4 +494,11 @@ export const SavedLinksTitle = styled.h3`
   overflow: hidden;
   word-break: break-all;
   margin: 0px;
+`;
+
+
+export const AnimateWorkspace = styled.div`
+transition: all 1s ease;
+  transform: translateX(${props => props.isActive ? '0%' : '-20%'});
+  color: ${props => props.isActive ? 'white' : 'black'};
 `;

@@ -18,6 +18,27 @@
 }
 
 
+.workspaceDashboard-enter {
+  opacity: 0.01;
+  transform: translateX(20%);
+}
+.workspaceDashboard-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 800ms ease-out;
+}
+.workspaceDashboard-exit {
+  opacity: 0.01;
+  transform: translateX(20%);
+}
+.workspaceDashboard-exit-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 800ms ease-out;
+}
+
+
+
 .mainDashboard-enter {
   opacity: 0.01;
   transform: translateY(20%);
@@ -25,7 +46,7 @@
 .mainDashboard-enter-active {
   opacity: 1;
   transform: translateY(0%);
-  transition: all 500ms ease-out;
+  transition: all 800ms ease-out;
 }
 .mainDashboard-exit {
   opacity: 1;
@@ -34,5 +55,5 @@
 .mainDashboard-exit-active {
   opacity: 0.01;
   transform: translateY(20%);
-  transition: all 500ms ease-out;
+  transition: all 800ms ease-out;
 }

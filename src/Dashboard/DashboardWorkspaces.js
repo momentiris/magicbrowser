@@ -1,5 +1,8 @@
 import React from 'react';
 import WsColor from './WsColors';
+import { CSSTransition } from 'react-transition-group';
+import './transition.css';
+
 import {
   Ul,
   Li,
@@ -28,7 +31,8 @@ const DashboardWorkspaces = ({
   editWorkspaceToggle,
   onToggleRename,
   isActive,
-  updateWorkspace
+  updateWorkspace,
+  animatetoggle,
 }) => (
   <Ul name="workspaces">
     {

@@ -26,7 +26,7 @@ const initialState = {
       }
     ],
     active: 0,
-    color: 'white'
+    color: '#949494'
   }
 };
 
