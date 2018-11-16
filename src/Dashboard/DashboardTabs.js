@@ -11,7 +11,11 @@ import {
   Ul,
   SavedLinksHeader,
   WsWrapp,
-  HistoryButton
+  HistoryButton,
+  SavedLinksItems,
+  SavedLinksTitle,
+  SavedLinksWrapper,
+  SavedLinksFavicon
 } from './styles';
 
 const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
@@ -39,6 +43,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
             <SavedLinksHeader>
               Saved Links
             </SavedLinksHeader>
+            <SavedLinksItems></SavedLinksItems>
           </Ul>
         </SavedLinks>
       </TabWrapper>

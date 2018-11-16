@@ -8,6 +8,7 @@ import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
+  height: 100%;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -32,7 +33,6 @@ export const ColorPickerContainer = styled.div`
 export const Column = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 98px;
 `;
 
 // Tabs and items
@@ -444,4 +444,19 @@ export const SavedLinksHeader = styled.h3`
   font-size: 24px;
   margin: 0;
   color: ${props => props.theme.semiblack}
+`;
+
+export const SavedLinksItems = styled.div`
+  width: 265px;
+  height: 110px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
+`;
+
+export const SavedLinksFavicon = styled.svg`
+
+`;
+
+export const SavedLinksTitle = styled.h3`
+
 `;
