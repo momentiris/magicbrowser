@@ -4,12 +4,15 @@ import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 
 import { Container,
-  Header2,
+  HeaderWrapper,
   WorkSpaceColor,
   BorderBottom,
   VisualButton,
   ListButton,
-  ButtonWrapper
+  ButtonWrapper,
+  HistoryImg,
+  Wrapper,
+  Header3,
 } from './styles';
 
 const History = ({
@@ -17,21 +20,26 @@ const History = ({
   currentWsUI
 }) => (
   <Container>
-    {
-      workspace.map((ws, i) =>
-        <Header2
-          key={i}
-        >
-        <ButtonWrapper>
-          <VisualButton>Visual</VisualButton>
-          <ListButton>List</ListButton>
-        </ButtonWrapper>
-          <WorkSpaceColor color={ws.color || '#5C4EFF'}> </WorkSpaceColor>
-          {ws[0]}
-          {currentWsUI}
-        </Header2>
-      )
-    }
+    <Wrapper>
+      {
+        workspace.map((ws, i) =>
+          <HeaderWrapper
+            key={i}
+          >
+          <Header3>
+            <WorkSpaceColor color={ws.color || '#5C4EFF'}> </WorkSpaceColor>
+            {ws[0]}
+            {currentWsUI}
+          </Header3>
+          <ButtonWrapper>
+            <VisualButton>Visual</VisualButton>
+            <ListButton>List</ListButton>
+          </ButtonWrapper>
+          </HeaderWrapper>
+        )
+      }
+    <HistoryImg />
+    </Wrapper>
   </Container>
 );
 

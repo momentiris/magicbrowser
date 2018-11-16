@@ -9,7 +9,7 @@ import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 export const Container = styled.div`
   width: 100%;
   background: ${props => props.theme.dashboardgrey};
-  padding: 70px 135px 0px 135px;
+  padding: 70px 135px 70px 135px;
 `;
 
 export const Wrapper = styled.div`

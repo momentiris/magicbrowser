@@ -1,15 +1,27 @@
 import styled from 'styled-components';
+import Historybg from '../../common/assets/imgs/history_dummy.png';
+
 
 export const Container = styled.div`
   width: 100%;
   background: ${props => props.theme.dashboardgrey};
 `;
 
+export const Wrapper = styled.div`
+  height: 100vh;
+`;
+
 export const BorderBottom = styled.div`
   width: 100%;
 `;
 
-export const Header2 = styled.h2`
+export const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid ${props => props.theme.darkgrey};
+`;
+
+export const Header3 = styled.h2 `
   font-family: latobold;
   font-size: ${props => props.theme.large};
   color: ${props => props.theme.black};
@@ -17,7 +29,7 @@ export const Header2 = styled.h2`
   line-height: 29px;
   margin: 0px;
   height: 50px;
-  border-bottom: 1px solid ${props => props.theme.darkgrey};
+
 `;
 
 export const WorkSpaceColor = styled.div`
@@ -32,9 +44,7 @@ export const WorkSpaceColor = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  position: absolute;
-  right: 44%;
-  left: 40%;
+  margin-right: 41%;
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -93,4 +103,14 @@ export const ListButton = styled.button`
   svg {
     margin-right: 8px;
   }
+`;
+
+export const HistoryImg = styled.div`
+  background: url(${Historybg});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  padding: 48px 0px 48px 0px;
 `;
