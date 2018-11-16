@@ -16,15 +16,28 @@ class UrlBar extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.state = {
-      searchValue: '',
+      searchValue: false,
       data: false,
+      defaultValue: this.props.currentURL
     };
+
   }
 
+  parseURL = url => {
+    if (!/^https?:\/\//i.test(url)) {
+      const parsedUrl = 'http://' + url;
+      console.log(parsedUrl);
 
+      this.props.navigateToUrl(parsedUrl);
+    } else {
 
-  //Change location name, remove https from visible bar
-  //const hasTitle = location !== location.replace(/^https?:\/\//, '');
+      this.props.navigateToUrl(url);
+    }
+
+    this.setState({
+      searchValue: this.props.currentURL
+    });
+  }
 
   onKeyDown = (e) => {
     const location = this.state.searchValue;
@@ -33,9 +46,8 @@ class UrlBar extends Component {
         break;
       case KeyCodes.ENTER:
         e.preventDefault();
-        this.props.navigateToUrl(`http://www.${location}.com`);
-
-        this.setState({data: !this.state.data});
+        this.parseURL(this.state.searchValue);
+        // this.setState({data: !this.state.data});
     }
   }
 
@@ -51,16 +63,22 @@ class UrlBar extends Component {
   render() {
     const {
       userNavigation,
-      handleToggleUrlBarFocus
+      handleToggleUrlBarFocus,
+      currentURL
     } = this.props;
+
+    const { toggleUrlBarFocus } = userNavigation;
+
+    const { searchValue, defaultValue } = this.state;
 
     return (
       <UrlBarInput
+        clicked={toggleUrlBarFocus}
         onFocus={handleToggleUrlBarFocus}
         onBlur={handleToggleUrlBarFocus}
         disable={userNavigation.toggleWorkspaces}
         dashboardOpen={userNavigation.dashboardOpen}
-
+        value={currentURL}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}

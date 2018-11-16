@@ -9,7 +9,7 @@ export const UrlBarInput = styled.input`
   font-size: 16px;
   border-radius: ${props => props.theme.br};
   padding: 0;
-  padding-left: 16px;
+  padding-left: ${props => props.clicked ? '15px' : '16px'};
   &:focus {
     outline: none;
 

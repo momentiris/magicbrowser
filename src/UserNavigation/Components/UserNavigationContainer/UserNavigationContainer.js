@@ -32,7 +32,8 @@ class UserNavigationContainer extends Component {
       navigateToUrl,
       handleToggleUrlBarFocus,
       handleOpenDashBoard,
-      currentWorkspace
+      currentWorkspace,
+      currentURL
     } = this.props;
 
     const {
@@ -51,6 +52,7 @@ class UserNavigationContainer extends Component {
           dashboardOpen={dashboardOpen}
         >
           <UrlBar
+            currentURL={currentURL}
             userNavigation={userNavigation}
             navigateToUrl={navigateToUrl}
             handleToggleUrlBarFocus={handleToggleUrlBarFocus}
