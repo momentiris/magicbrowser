@@ -10,19 +10,11 @@ import {
   removeSelectedTab,
   setTabActive,
   handleDragDashBoardTab,
-  handleOpenDashBoard
 } from '../Workspace/actions';
 
 import { handleDashboardOpenUI } from '../UserNavigation/actions';
 
 class TabHandler extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
 
   addOneTab = (e) => {
     this.props.addOneTab({

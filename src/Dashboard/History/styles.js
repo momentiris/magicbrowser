@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: 100vh;
+  height: 100%;
 `;
 
 export const BorderBottom = styled.div`
@@ -19,6 +19,7 @@ export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.darkgrey};
+  margin-bottom: 48px;
 `;
 
 export const Header3 = styled.h2 `
@@ -110,7 +111,7 @@ export const HistoryImg = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100%;
+  height: 620px;
   width: 100%;
-  padding: 48px 0px 48px 0px;
+  border: 0;
 `;

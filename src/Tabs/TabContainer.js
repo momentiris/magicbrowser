@@ -7,14 +7,10 @@ import {
   AddTabButton
 } from './styles';
 
-import { Link } from 'react-router-dom';
 import { AddTabIcon } from '../common/assets/icons';
 import '../Workspace/Components/sortableHelperStyles.css';
 
 class TabContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   onSortEnd = async ({oldIndex, newIndex}, { target }) => {
     if (target.dataset.ws) {

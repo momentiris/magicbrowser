@@ -1,12 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createSelector } from 'reselect';
+import React from 'react';
 
-import { Container,
+import {
+  Container,
   HeaderWrapper,
   WorkSpaceColor,
-  BorderBottom,
   VisualButton,
   ListButton,
   ButtonWrapper,

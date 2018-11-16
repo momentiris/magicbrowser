@@ -11,9 +11,7 @@ import {
 import {
   WorkspaceToggleWrap,
   WsItem,
-  WsItemIcon,
   WsRestContainer,
-  NewWsContainer
 } from './styles';
 
 import {
@@ -21,8 +19,6 @@ import {
   handleToggleDropdown,
   handleToggleNewWorkspace,
   handleToggleNewWorkspaceOverflow,
-  openDashBoard
-
 } from '../../../UserNavigation/actions';
 
 class WorkspaceNavUI extends Component {
@@ -134,7 +130,7 @@ class WorkspaceNavUI extends Component {
           <span>{inst[0]}</span>
         </WsItem>
       ));
-  
+
     return (
       <WorkspaceToggleWrap
         className="workspaceToggleWrap"

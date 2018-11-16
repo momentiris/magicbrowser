@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-left: -5px;
+  min-height: 250px;
 `;
 
 export const InnerColorPickerContainer = styled.div`
@@ -47,7 +48,6 @@ export const TabWrapper = styled.div`
   height: 100%;
   width: 100%;
   padding-top: 48px;
-  padding-bottom: 48px;
   margin-left: 113px;
   border-top: 1px solid ${props => props.theme.darkgrey};
 `;
@@ -443,6 +443,7 @@ export const SavedLinks = styled.div`
 export const SavedLinksWrapper = styled.div`
   border-top: 1px solid ${props => props.theme.darkgrey};
   padding-top: 48px;
+  min-height: 150px;
 `;
 
 export const SavedLinksPositioning = styled.div`

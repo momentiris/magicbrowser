@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
 import {
@@ -8,10 +8,7 @@ import {
   AddIcon,
   AddNewTab,
   SavedLinks,
-  Ul,
   SavedLinksHeader,
-  WsWrapp,
-  HistoryButton,
   SavedLinksItems,
   SavedLinksTitle,
   SavedLinksWrapper,
@@ -20,7 +17,7 @@ import {
   SavedLinksPositioning,
 } from './styles';
 
-const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
+const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedLinks}) => {
   const SortableItem = SortableElement(({value, tabindex}) => {
     return (
       <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
@@ -31,7 +28,28 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
     );
   });
 
-  const SortableList = SortableContainer(({items}) => {
+  // const SortableItemSavedLinks = SortableElement(({value, saveindex}) => {
+  //   return (
+  //     <SavedLinksItems key={saveindex} id={saveindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
+  //       <SavedLinksFavicon/>
+  //       <SavedLinksTitle>
+  //         {value}
+  //         {value.id}
+  //       </SavedLinksTitle>
+  //     </SavedLinksItems>
+  //
+  //
+  //     {
+  //       savedLinks.map((item, index) => {
+  //         return <SortableItemSavedLinks key={`item-${index}`} id={index} savindex={index} index={index} value={item.src}></SortableItemSavedLinks>;
+  //       })
+  //     }
+  //
+  //
+  //   );
+  // });
+
+  const SortableList = SortableContainer(({items, savedLinks}) => {
     return (
       <TabWrapper>
         <Wrapper>
@@ -48,10 +66,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
           </SavedLinksHeader>
           <SavedLinksWrapper>
             <SavedLinksPositioning>
-              <SavedLinksItems><SavedLinksFavicon/><SavedLinksTitle>asdawdawdawdawadawdawdwadawdawdadawdawdawdawdawdawdadwdawdawdwaw</SavedLinksTitle></SavedLinksItems>
-              <SavedLinksItems></SavedLinksItems>
-              <SavedLinksItems></SavedLinksItems>
-              <SavedLinksItems></SavedLinksItems>
+
             </SavedLinksPositioning>
           </SavedLinksWrapper>
         </SavedLinks>
@@ -60,7 +75,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
   });
 
   return (
-    <SortableList items={tabs} onSortEnd={onSortEnd} axis='xy' />
+    <SortableList items={tabs} savedLinks={savedLinks} onSortEnd={onSortEnd} axis='xy' />
   );
 };
 

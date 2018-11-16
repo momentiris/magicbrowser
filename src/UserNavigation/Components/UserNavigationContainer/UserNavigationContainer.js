@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import UrlBar from '../UrlBar/UrlBar';
 import WorkspaceHandler from '../../../Workspace/WorkspaceHandler';
 import PageNavigationContainer from '../PageNavigation/PageNavigationContainer';
+
 import {
   AddTabIcon,
   ReadingListIcon,
   NavSettingsIcon,
   DashboardIcon,
   ToDashboardIcon,
-  UpdateTabIcon,
-  TabNavigationArrowIcon
 } from '../../../common/assets/icons.js';
+
 import {
   Container,
   UrlBarContainer,
@@ -23,11 +23,9 @@ import {
   PreToDashBoardButton
 } from './styles';
 
-
 class UserNavigationContainer extends Component {
 
   render() {
-
     const {
       userNavigation,
       navigateToUrl,
