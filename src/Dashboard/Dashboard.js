@@ -37,6 +37,7 @@ import {
   Close,
   SavedLinksHeader,
   SavedLinksWrapper,
+  SavedLinksItems,
   RenameEdit,
   AnimateEditForm,
   BorderBottom,
@@ -257,7 +258,6 @@ class Dashboard extends Component {
                     onToggleRename={this.onToggleRename}
                     isActive={active}
                   />
-                <Wrapper>
                   <DashboardTabs
                     onSortEnd={this.onSortEnd}
                     active={active}
@@ -266,8 +266,8 @@ class Dashboard extends Component {
                     addOneTab={this.addOneTab}
                   >
                   </DashboardTabs>
-                  </Wrapper>
                 </Column>
+
               </div>
             </CSSTransition>
 
