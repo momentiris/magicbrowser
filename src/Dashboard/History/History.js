@@ -17,15 +17,15 @@ const History = ({
   currentWsUI
 }) => (
   <Container>
-    <ButtonWrapper>
-      <VisualButton>Visual</VisualButton>
-      <ListButton>List</ListButton>
-    </ButtonWrapper>
     {
       workspace.map((ws, i) =>
         <Header2
           key={i}
         >
+        <ButtonWrapper>
+          <VisualButton>Visual</VisualButton>
+          <ListButton>List</ListButton>
+        </ButtonWrapper>
           <WorkSpaceColor color={ws.color || '#5C4EFF'}> </WorkSpaceColor>
           {ws[0]}
           {currentWsUI}
