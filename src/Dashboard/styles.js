@@ -8,8 +8,14 @@ import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
-  padding: 70px 135px 0px 135px;
+  height: 100%;
   background: ${props => props.theme.dashboardgrey};
+  padding: 70px 135px 0px 135px;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const InnerColorPickerContainer = styled.div`
@@ -42,6 +48,7 @@ export const TabWrapper = styled.div`
   width: 100%;
   padding-top: 48px;
   padding-bottom: 48px;
+  margin-left: 100px;
   border-top: 1px solid ${props => props.theme.darkgrey};
 `;
 
@@ -221,7 +228,6 @@ export const Ul = styled.ul`
   flex-direction: column;
   padding: 0px;
   width: 325px;
-  margin: 0px 100px 0px 0;
   padding-top: 48px;
 `;
 
@@ -352,7 +358,6 @@ export const AddIcon = styled.svg`
 `;
 
 export const Close = styled.div`
-  z-index: 9999;
   background-image: url(${closeiconsvg});
   background-repeat: no-repeat;
   background-size: contain;
