@@ -32,7 +32,6 @@ export const ColorPickerContainer = styled.div`
 export const Column = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 98px;
 `;
 
 // Tabs and items
