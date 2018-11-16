@@ -26,6 +26,7 @@ class UrlBar extends Component {
   parseURL = url => {
     if (!/^https?:\/\//i.test(url)) {
       const parsedUrl = 'http://' + url;
+      console.log(parsedUrl);
 
       this.props.navigateToUrl(parsedUrl);
     } else {
@@ -35,7 +36,7 @@ class UrlBar extends Component {
 
     this.setState({
       searchValue: this.props.currentURL
-    })
+    });
   }
 
   onKeyDown = (e) => {
@@ -77,7 +78,7 @@ class UrlBar extends Component {
         onBlur={handleToggleUrlBarFocus}
         disable={userNavigation.toggleWorkspaces}
         dashboardOpen={userNavigation.dashboardOpen}
-        value={searchValue || defaultValue}
+        value={currentURL}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}

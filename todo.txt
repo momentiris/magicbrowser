@@ -5,6 +5,8 @@ webview thumbnails for dashboard
 fix so rename workspace does not switch array order.
 close and reset inputs on create or cancel new dashboard and rename dashboard
 
+drag tabs to another workspace in dashboard
+
 Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy med 3 länkar
 Markera tabbar i nav bar: Undersök hur svårt/lätt det är att göra
 

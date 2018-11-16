@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import Tab from './Tab';
+
 import {
   Mainwrap,
   AddTabButton
 } from './styles';
+
 import { Link } from 'react-router-dom';
 import { AddTabIcon } from '../common/assets/icons';
 import '../Workspace/Components/sortableHelperStyles.css';
@@ -21,11 +23,7 @@ class TabContainer extends Component {
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
     // await this.props.setActive(newIndex);
     await this.props.handleDragDashBoardTab({newTabs, newIndex});
-
-
   };
-
-
 
   render() {
     const { tabs, removeSelectedTab, addOneTab, setActive, active} = this.props;
@@ -42,7 +40,6 @@ class TabContainer extends Component {
         src={value.src}
       />
     ));
-
 
     const SortableList = SortableContainer(({ items }) => (
       <Mainwrap className="tabsMainWrap">
