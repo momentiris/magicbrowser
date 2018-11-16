@@ -11,31 +11,30 @@ class Webview extends Component {
   }
 
   componentDidMount() {
-
     const { current } = this.elem;
-
     this.props.addEvents(current);
-
   }
 
   componentWillUnmount() {
     const { current } = this.elem;
     this.props.removeEvents(current);
   }
-
-  componentWillUnmount() {
-    const { current } = this.elem;
-    this.props.removeEvents(current);
-  }
-
-
 
   render() {
-    const { isActive, id } = this.props;
+    const { isActive, id, favicon, title, oldSource, src } = this.props;
 
     return (
       <WebviewContainer isActive={isActive}>
-        <webview ref={this.elem} data-id={id} autosize="on" style={{border: 'none', width: '100%', height: '100%', top: 0, right: 0, left: 0, bottom: 0}} src={this.props.src || 'https://google.se'} />
+        <webview
+          data-favicon={favicon}
+          data-title={title}
+          data-oldsrc={oldSource}
+          ref={this.elem}
+          data-id={id}
+          autosize="on"
+          style={{border: 'none', width: '100%', height: '100%', top: 0, right: 0, left: 0, bottom: 0}}
+          src={src || 'https://google.se'}
+        />
       </WebviewContainer>
     );
   }
