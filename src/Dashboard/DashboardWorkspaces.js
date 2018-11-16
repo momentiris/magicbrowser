@@ -32,9 +32,9 @@ const DashboardWorkspaces = ({
   onToggleRename,
   isActive,
   updateWorkspace,
-  animatetoggle,
+  animatesworkspace,
 }) => (
-  <Ul name="workspaces">
+  <Ul name="workspaces" isActive={animatesworkspace}>
     {
       workspaces.map((ws, i) => (
         <Li key={i} data-ws={i}>

@@ -50,6 +50,11 @@ export const TabWrapper = styled.div`
   padding-top: 48px;
   margin-left: 113px;
   border-top: 1px solid ${props => props.theme.darkgrey};
+
+  opacity: ${props => props.isActive ? '0' : '1'};
+  transition: all 1s ease-out;
+  transition-delay: .2s;
+  transform: translateX(${props => props.isActive ? '100%' : '0%'});
 `;
 
 export const TabItems = styled.div`
@@ -91,6 +96,10 @@ export const AddNewTab = styled.div`
 export const AddNewWs = styled.div`
   margin: 0px;
   padding-bottom: 18px;
+  opacity: ${props => props.isActive ? '0' : '1'};
+  transition: all .2s ease-out;
+  transform: translateY(${props => props.isActive ? '-170%' : '0%'});
+
 `;
 
 export const Input = styled.input`
@@ -229,6 +238,10 @@ export const Ul = styled.ul`
   padding: 0px;
   width: 325px;
   padding-top: 48px;
+  opacity: ${props => props.isActive ? '0' : '1'}
+  transition: all .4s ease-out;
+  transition-delay: .2s;
+  transform: translateX(${props => props.isActive ? '-90%' : '0%'});
 `;
 
 export const Hover = styled.div`
@@ -497,8 +510,8 @@ export const SavedLinksTitle = styled.h3`
 `;
 
 
-export const AnimateWorkspace = styled.div`
-transition: all 1s ease;
-  transform: translateX(${props => props.isActive ? '0%' : '-20%'});
-  color: ${props => props.isActive ? 'white' : 'black'};
+export const AnimateTabs = styled.div`
+  transition: all 0.4s ease-out;
+  opacity: ${props => props.isActive ? '0' : '1'};
+  transform: translateY(${props => props.isActive ? '-95%' : '0%'});
 `;
