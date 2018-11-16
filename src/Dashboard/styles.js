@@ -8,7 +8,6 @@ import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;
@@ -409,6 +408,7 @@ export const HistoryButton = styled.button`
   cursor: pointer;
   height: 32px;
   font-size: ${props => props.theme.medium};
+  z-index: 1;
   &:hover{
     background ${props => props.theme.bluebuttonhover};
   }
