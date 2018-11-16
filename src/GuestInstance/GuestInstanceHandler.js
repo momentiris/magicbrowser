@@ -6,7 +6,6 @@ import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab, updateTabMeta } from '../Workspace/actions';
 import DashboardHandler from '../Dashboard/DashboardHandler';
-import ActiveDashboard from '../Workspace/Components/ActiveDashboard/ActiveDashboard';
 
 import {
   WebviewContainerWrap,

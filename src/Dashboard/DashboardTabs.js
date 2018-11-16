@@ -7,9 +7,14 @@ import {
   TabWrapper,
   AddIcon,
   AddNewTab,
+  SavedLinks,
+  Ul,
+  SavedLinksHeader,
+  WsWrapp,
+  HistoryButton
 } from './styles';
 
-const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd}) => {
+const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
   const SortableItem = SortableElement(({value, tabindex}) => {
     return (
       <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
@@ -19,21 +24,29 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd}) => {
       </TabItems>
     );
   });
-  
+
   const SortableList = SortableContainer(({items}) => {
     return (
       <TabWrapper>
         {items.map((item, index) => {
           return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.src}> </SortableItem>;
         })}
-        <AddNewTab onClick={() => this.addOneTab(currentWsUI)}>
+        <AddNewTab onClick={() => addOneTab(currentWsUI)}>
           <AddIcon />
         </AddNewTab>
+        <SavedLinks>
+          <Ul name="workspaces">
+            <SavedLinksHeader>
+              Saved Links
+            </SavedLinksHeader>
+          </Ul>
+        </SavedLinks>
       </TabWrapper>
     );
   });
 
   return (
+
     <SortableList items={tabs} onSortEnd={onSortEnd} axis='xy' />
   );
 };

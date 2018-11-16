@@ -6,7 +6,10 @@ import WsColor from './WsColors/';
 import {arrayMove} from 'react-sortable-hoc';
 import DashboardTabs from './DashboardTabs';
 import DashboardWorkspaces from './DashboardWorkspaces';
-
+import { HistoryIcon } from '../common/assets/icons.js';
+import History from './History/History';
+import './transition.css';
+import { CSSTransition } from 'react-transition-group';
 import {
   Container,
   Column,
@@ -36,6 +39,11 @@ import {
   SavedLinksWrapper,
   RenameEdit,
   AnimateEditForm,
+  BorderBottom,
+  HistoryButton,
+  WorkspaceInfoWrapper,
+  WsWrapp,
+  TabsHeader
 } from './styles';
 
 
@@ -61,6 +69,9 @@ class Dashboard extends Component {
       toggle: false,
       toggleRename: false,
       workspaceToggle: false,
+      anim: true,
+      animatemain: false,
+      animateshistory: false,
       editWorkspaceToggle: {
         active: false,
         id: '',
@@ -147,6 +158,7 @@ class Dashboard extends Component {
   }
 
   addOneTab = ws => {
+    console.log(ws);
     this.props.addOneTab({
       ws: ws
     });
@@ -182,72 +194,98 @@ class Dashboard extends Component {
     });
   }
 
+  animate = () => {
+    this.setState({ animatemain: !this.state.animatemain, anim: !this.state.anim, animateshistory: !this.state.animateshistory});
+  }
+
   render() {
     const { currentWsUI } = this.state;
+    const { workspace } = this.props;
     const { active, workspaces, tabs, workspacestemp } = this.props;
     const currentTabs = workspacestemp[currentWsUI].tabs;
 
     return (
       <Container>
-        <AddNewWs>
-          <NewWsButton onClick={this.handleGoBack}>
-            <LeftArrow />
-            Back
-          </NewWsButton>
-          <br />
-          <NewWsButton onClick={this.onToggle}>
-            <Add isActive={this.state.workspaceToggle}/>New workspace
-          </NewWsButton>
-          <AnimateForm isActive={this.state.workspaceToggle}>
-            <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-              <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
-                <RightArrowNewWs />
-              </NewWsHover>
-              <Input
-                ref={this.workspaceInput}
-                onChange={this.handleInputChange}
-                active={this.state.isActive}
-                type="text"
-                placeholder="Name your workspace"/>
-              <WsColor updateWsColor={this.updateWsColor}/>
-              <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
-              <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
-            </form>
-          </AnimateForm>
-        </AddNewWs>
-        <Column>
+        <HistoryButton onClick={this.animate}><HistoryIcon /> Show History</HistoryButton>
+        {
+          this.state.anim ? (
+            <CSSTransition
+              in={this.state.animatetoggle}
+              timeout={300}
+              classNames="activeDashboard"
+            >
+              <div>
+                <AddNewWs>
+                  <NewWsButton onClick={this.onToggle}>
+                    <Add isActive={this.state.workspaceToggle}/>New workspace
+                  </NewWsButton>
 
-          <DashboardWorkspaces
-            workspaces={workspaces}
-            currentWsUI={currentWsUI}
-            handleClick={this.handleClick}
-            renameWorkspace={this.renameWorkspaces}
-            editWorkspace={this.editWorkspace}
-            handleInputEditName={this.handleInputEditName}
-            handleInputEditColor={this.handleInputEditColor}
-            workspaceToggle={this.state.workspaceToggle}
-            editWorkspaceToggle={this.state.editWorkspaceToggle}
-            editWorkspace={this.state.editWorkspace}
-            onToggleRename={this.onToggleRename}
-            isActive={active}
-          />
+                  <AnimateForm isActive={this.state.workspaceToggle}>
+                    <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
+                      <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                        <RightArrowNewWs />
+                      </NewWsHover>
+                      <Input
+                        ref={this.workspaceInput}
+                        onChange={this.handleInputChange}
+                        active={this.state.isActive}
+                        type="text"
+                        placeholder="Name your workspace"/>
+                      <WsColor updateWsColor={this.updateWsColor}/>
+                      <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
+                      <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
+                    </form>
+                  </AnimateForm>
+                  <WsWrapp>
+                    <TabsHeader>Tabs</TabsHeader>
+                  </WsWrapp>
+                </AddNewWs>
 
-          <DashboardTabs
-            onSortEnd={this.onSortEnd}
-            active={active}
-            currentWsUI={currentWsUI}
-            tabs={currentTabs}
-          />
+                <Column>
+                  <DashboardWorkspaces
+                    workspaces={workspaces}
+                    currentWsUI={currentWsUI}
+                    handleClick={this.handleClick}
+                    renameWorkspace={this.renameWorkspace}
+                    editWorkspace={this.editWorkspace}
+                    handleInputEditName={this.handleInputEditName}
+                    handleInputEditColor={this.handleInputEditColor}
+                    workspaceToggle={this.state.workspaceToggle}
+                    editWorkspaceToggle={this.state.editWorkspaceToggle}
+                    updateWorkspace={this.state.editWorkspace}
+                    onToggleRename={this.onToggleRename}
+                    isActive={active}
+                  />
 
-        </Column>
-        <SavedLinks>
-          <Ul name="workspaces">
-            <SavedLinksHeader>
-              Saved Links
-            </SavedLinksHeader>
-          </Ul>
+                  <DashboardTabs
+                    onSortEnd={this.onSortEnd}
+                    active={active}
+                    currentWsUI={currentWsUI}
+                    tabs={currentTabs}
+                    addOneTab={this.addOneTab}
+                  >
+                  </DashboardTabs>
+                </Column>
+              </div>
+            </CSSTransition>
 
-        </SavedLinks>
+          ) : (
+
+            <CSSTransition
+              in={this.state.animateshistory}
+              timeout={300}
+              classNames="mainDashboard"
+            >
+              <History
+                workspace={workspace}
+                currentWsUI={currentWsUI}
+
+              />
+            </CSSTransition>
+          )
+        }
+
+
       </Container>
     );
   }

@@ -42,11 +42,13 @@ export const TabWrapper = styled.div`
   flex-wrap: wrap;
   height: 100%;
   width: 100%;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  border-top: 1px solid ${props => props.theme.darkgrey};
 `;
 
 export const TabItems = styled.div`
   display: flex;
-
   flex-direction: row;
   width: 193px;
   height: 109px;
@@ -83,7 +85,7 @@ export const AddNewTab = styled.div`
 
 export const AddNewWs = styled.div`
   margin: 0px;
-  padding-bottom: 32px;
+  padding-bottom: 18px;
 `;
 
 export const Input = styled.input`
@@ -222,6 +224,7 @@ export const Ul = styled.ul`
   padding: 0px;
   width: 325px;
   margin: 0px 100px 0px 0;
+  padding-top: 48px;
 `;
 
 export const Hover = styled.div`
@@ -364,14 +367,73 @@ export const Close = styled.div`
     transform: scale(1.4);
   }
 `;
+export const WsWrapp = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: -43px;
+  align-items: center;
+`;
+
+export const TabsHeader = styled.h2`
+  margin-left: 342px;
+  font-family: latoregular;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: ${props => props.theme.medium};
+`;
+
+export const BorderBottom = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+export const HistoryButton = styled.button`
+  position: absolute;
+  right: 135px;
+  display: flex;
+  align-items: center;
+  font-family: latoregular;
+  background: ${props => props.theme.bluepurple};
+  border: none;
+  color: ${props => props.theme.white};
+  padding: ${props => props.theme.paddingbutton};
+  border-radius: ${props => props.theme.br};
+  text-decoration: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: all .1s ease;
+  cursor: pointer;
+  height: 32px;
+  font-size: ${props => props.theme.medium};
+  &:hover{
+    background ${props => props.theme.bluebuttonhover};
+  }
+  &:active{
+    background ${props => props.theme.bluebuttonactive};
+  }
+  svg {
+    margin-right: 8px;
+  }
+`;
+
+export const WorkspaceInfoWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
+  padding: 18px 0px;
+  border-bottom: 1px solid ${props => props.theme.darkgrey};
+`;
 
 // Saved links
 export const SavedLinks = styled.div`
   display: flex;
   width: 100%;
   border-top: 1px solid ${props => props.theme.darkgrey};
-  padding-top: 44px;
-  padding-bottom: 44px;
+  margin-top: 48px;
 `;
 
 export const SavedLinksHeader = styled.h3`

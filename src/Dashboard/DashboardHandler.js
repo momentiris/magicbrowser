@@ -22,6 +22,7 @@ class DashboardHandler extends Component {
   render() {
     const {
       workspaces,
+      workspace,
       current,
       active,
       tabs,
@@ -39,6 +40,7 @@ class DashboardHandler extends Component {
 
       <Dashboard
         workspaces={workspaces}
+        workspace={workspace}
         current={current}
         active={active}
         tabs={tabs}
@@ -92,6 +94,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     current: stateProps.workspaces.current,
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
+    workspace: [stateProps.workspaces[stateProps.workspaces.current]],
     workspaces: withoutCurrent,
     workspacestemp: withoutCurrentObj,
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
