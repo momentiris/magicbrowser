@@ -7,7 +7,10 @@ import {
   handleToggleUrlBarFocus,
   handleDashboardOpenUI
 } from './actions';
-import { handleOpenDashBoard } from '../Workspace/actions';
+import {
+  handleOpenDashBoard,
+  handleUpdateCurrentTabQuery
+} from '../Workspace/actions';
 import UrlBar from './Components/UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
 import WorkspaceHandler from '../Workspace/WorkspaceHandler';
@@ -50,17 +53,21 @@ class NavigationHandler extends Component {
       userNavigation,
       handleToggleUrlBarFocus,
       currentWorkspace,
-      currentURL
+      currentURL,
+      handleUpdateCurrentTabQuery,
+      activeTab
     } = this.props;
 
     return (
       <UserNavigationContainer
+        handleUpdateCurrentTabQuery={handleUpdateCurrentTabQuery}
         currentWorkspace={currentWorkspace}
         handleOpenDashBoard={this.handleOpenDashBoard}
         navigateToUrl={navigateToUrl}
         userNavigation={userNavigation}
         handleToggleUrlBarFocus={handleToggleUrlBarFocus}
         currentURL={currentURL}
+        activeTab={activeTab}
       />
     );
   }
@@ -91,13 +98,15 @@ const mapActionsToProps = (dispatch, props) => {
     navigateToUrl: navigateToUrl,
     handleToggleUrlBarFocus: handleToggleUrlBarFocus,
     handleOpenDashBoard: handleOpenDashBoard,
-    handleDashboardOpenUI: handleDashboardOpenUI
+    handleDashboardOpenUI: handleDashboardOpenUI,
+    handleUpdateCurrentTabQuery: handleUpdateCurrentTabQuery
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return Object.assign({}, ownProps, {
+    activeTab: stateProps.workspaces[stateProps.workspaces.current].active,
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
@@ -105,7 +114,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleOpenDashBoard: dispatchProps.handleOpenDashBoard,
     currentWorkspace: stateProps.workspaces.current,
     handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
-    currentURL: stateProps.workspaces[stateProps.workspaces.current].tabs[stateProps.workspaces[stateProps.workspaces.current].active].src
+    handleUpdateCurrentTabQuery: arg => dispatchProps.handleUpdateCurrentTabQuery(arg),
+    currentURL: stateProps.workspaces[stateProps.workspaces.current]
+      .tabs[stateProps.workspaces[stateProps.workspaces.current].active].src
   });
 };
 

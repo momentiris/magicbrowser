@@ -25,7 +25,9 @@ class TabHandler extends Component {
   }
 
   addOneTab = (e) => {
-    this.props.addOneTab({src: 'http://facebook.com'});
+    this.props.addOneTab({
+      ws: false
+    });
   }
 
   removeSelectedTab = id => {

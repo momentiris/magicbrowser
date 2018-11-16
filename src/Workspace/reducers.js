@@ -10,7 +10,8 @@ import {
   NAVIGATE_TO_URL,
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
-  DRAG_DASHBOARD_TAB
+  DRAG_DASHBOARD_TAB,
+  UPDATE_CURRENT_TAB_QUERY
 } from './types';
 
 const initialState = {
@@ -21,11 +22,19 @@ const initialState = {
         src: 'http://google.se',
         title: false,
         favicon: false,
+        searchQuery: 'http://google.se'
       }
     ],
     active: 0,
     color: 'white'
   }
+};
+
+const tabTemplate = {
+  src: 'http://google.se',
+  title: false,
+  favicon: false,
+  searchQuery: 'http://google.se'
 };
 
 const workspaceTemplate = {
@@ -34,6 +43,7 @@ const workspaceTemplate = {
       src: 'http://google.se',
       title: false,
       favicon: false,
+      searchQuery: 'http://google.se'
     }
   ],
   active: 0,
@@ -71,18 +81,18 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         [newProp]: old,
         ...others,
       });
+
       const clone = Object.assign({}, state);
       const updatedWs = renameProp(payload.target, payload.newName, clone);
       updatedWs[payload.newName].color = payload.newColor;
-      console.log(updatedWs.current);
       updatedWs.current = updatedWs.current === payload.target ? payload.newName : updatedWs.current;
-      console.log(updatedWs.current);
       return updatedWs;
 
     case SWITCH_WORKSPACES:
       return Object.assign({}, state, {
         current: payload
       });
+      break;
 
     case ADD_ONE_TAB:
       return {
@@ -90,24 +100,24 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         [payload.ws || state.current]: {
           ...state[payload.ws || state.current],
           tabs: [...state[payload.ws || state.current].tabs, {
-            src: 'http://google.se',
+            ...tabTemplate
           }]
         }
       };
+      break;
 
     case REMOVE_SELECTED_TAB:
+
       return Object.assign({}, state, {
         [state.current]: {
           tabs: state[state.current].tabs
             .filter((tab, i) => i !== payload.id),
-          active: state[state.current].active >= state[state.current].tabs.length - 1 ?
-            state[state.current].active - 1 :
-            state[state.current].active,
+          active: 0,
           color: state[state.current].color
-
         }
       });
-      
+      break;
+
     case SET_TAB_ACTIVE:
       return {
         ...state,
@@ -116,13 +126,14 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           active: payload
         }
       };
+      break;
 
     case NAVIGATE_TO_URL:
-      const test = {
+      const newUrl = {
         ...state,
         [state.current]: {
           tabs: state[state.current].tabs.map((tab, i) => {
-            tab.src = state[state.current].active === i ? payload : tab.src;
+            tab.src = state[state.current].active === i ? tab.searchQuery : tab.src;
             return tab;
           }),
           active: state[state.current].active,
@@ -130,10 +141,20 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         }
       };
 
-      return test;
+      return newUrl;
+
+    case UPDATE_CURRENT_TAB_QUERY:
+      const withUpdatedQuery = { ...state };
+      console.log(withUpdatedQuery[withUpdatedQuery.current]
+        .tabs[withUpdatedQuery[withUpdatedQuery.current].active].searchQuery);
+      withUpdatedQuery[withUpdatedQuery.current]
+        .tabs[withUpdatedQuery[withUpdatedQuery.current].active]
+        .searchQuery = payload;
+
+      return withUpdatedQuery;
+      break;
 
     case UPDATE_TAB_META:
-
       return {
         ...state,
         [state.current]: {
@@ -147,6 +168,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           color: state[state.current].color
         }
       };
+      break;
 
     case DRAG_DASHBOARD_TAB:
       if (payload.dashboard) {

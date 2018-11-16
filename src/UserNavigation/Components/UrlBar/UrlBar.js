@@ -16,24 +16,29 @@ class UrlBar extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.state = {
-      searchValue: false,
+      searchValue: this.props.currentURL,
       data: false,
-      defaultValue: this.props.currentURL
+      currentTab: this.props.activeTab
     };
 
+  }
+
+  componentWillUpdate({ activeTab, currentURL }) {
+    if (activeTab === this.state.currentTab) return;
+    this.setState({
+      currentTab: activeTab,
+      searchValue: currentURL
+    });
   }
 
   parseURL = url => {
     if (!/^https?:\/\//i.test(url)) {
       const parsedUrl = 'http://' + url;
-      console.log(parsedUrl);
-
       this.props.navigateToUrl(parsedUrl);
     } else {
-
       this.props.navigateToUrl(url);
     }
-
+    
     this.setState({
       searchValue: this.props.currentURL
     });
@@ -48,6 +53,8 @@ class UrlBar extends Component {
         e.preventDefault();
         this.parseURL(this.state.searchValue);
         // this.setState({data: !this.state.data});
+      default:
+        break;
     }
   }
 
@@ -57,14 +64,21 @@ class UrlBar extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({searchValue: e.target.value});
+    this.props.handleUpdateCurrentTabQuery(e.target.value);
+    this.setState({
+      searchValue: e.target.value,
+      defaultValue: this.props.currentURL
+    });
+
+
   }
 
   render() {
     const {
       userNavigation,
       handleToggleUrlBarFocus,
-      currentURL
+      currentURL,
+
     } = this.props;
 
     const { toggleUrlBarFocus } = userNavigation;
@@ -78,7 +92,7 @@ class UrlBar extends Component {
         onBlur={handleToggleUrlBarFocus}
         disable={userNavigation.toggleWorkspaces}
         dashboardOpen={userNavigation.dashboardOpen}
-        value={currentURL}
+        value={searchValue}
         onClick={this.onClick}
         onKeyDown={this.onKeyDown}
         onChange={this.handleChange}

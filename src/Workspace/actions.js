@@ -8,7 +8,8 @@ import {
   SET_TAB_ACTIVE,
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
-  DRAG_DASHBOARD_TAB
+  DRAG_DASHBOARD_TAB,
+  UPDATE_CURRENT_TAB_QUERY
 } from './types';
 
 export const initEmptyWorkspace = () => {
@@ -81,6 +82,13 @@ export const updateTabMeta = data => {
 export const handleDragDashBoardTab = (payload) => {
   return {
     type: DRAG_DASHBOARD_TAB,
+    payload: payload
+  };
+};
+
+export const handleUpdateCurrentTabQuery = payload => {
+  return {
+    type: UPDATE_CURRENT_TAB_QUERY,
     payload: payload
   };
 };

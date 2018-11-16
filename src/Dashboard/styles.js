@@ -8,6 +8,7 @@ import renameoreditsvg from '../common/assets/icons/renameoredit.svg';
 // Common
 export const Container = styled.div`
   width: 100%;
+  height: 100%;
   padding: 70px 135px 0px 135px;
   background: ${props => props.theme.dashboardgrey};
 `;

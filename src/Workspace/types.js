@@ -10,6 +10,7 @@ export const SET_TAB_ACTIVE = 'tabs:setTabActive';
 export const UPDATE_TAB_META = 'tabs:updateMeta';
 
 export const NAVIGATE_TO_URL = 'navigation:navigateToUrl';
+export const UPDATE_CURRENT_TAB_QUERY = 'tabs:updateCurrentTabQuery';
 
 export const DRAG_DASHBOARD_TAB = 'tabs:dragDashBoardTab';
 export const OPEN_DASHBOARD = 'dashboard:openDashboard';

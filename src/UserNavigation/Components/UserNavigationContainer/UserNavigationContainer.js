@@ -27,13 +27,16 @@ import {
 class UserNavigationContainer extends Component {
 
   render() {
+
     const {
       userNavigation,
       navigateToUrl,
       handleToggleUrlBarFocus,
       handleOpenDashBoard,
       currentWorkspace,
-      currentURL
+      currentURL,
+      handleUpdateCurrentTabQuery,
+      activeTab
     } = this.props;
 
     const {
@@ -47,11 +50,14 @@ class UserNavigationContainer extends Component {
         <PageNavigationContainer/>
         <WorkspaceHandler/>
         <UrlBarContainer
+
           clicked={toggleUrlBarFocus}
           show={toggleWorkspaces}
           dashboardOpen={dashboardOpen}
         >
           <UrlBar
+            activeTab={activeTab}
+            handleUpdateCurrentTabQuery={handleUpdateCurrentTabQuery}
             currentURL={currentURL}
             userNavigation={userNavigation}
             navigateToUrl={navigateToUrl}

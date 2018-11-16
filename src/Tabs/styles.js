@@ -49,6 +49,8 @@ export const TabTitle = styled.span`
   overflow-x: hidden;
   position: relative;
   margin-left: auto;
+  width: 100%;
+  text-align: center;
 `;
 
 export const FavIcon = styled.img`

@@ -18,10 +18,10 @@ const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src, 
     id={id}
     key={key}
     isActive={isActive}
-    onClick={setActive}
+
   >
     <FavIcon src={src === 'dashboard' && dashboardTabIcon || favicon || 'false'}/>
-    <TabTitle>{title || src}</TabTitle>
+    <TabTitle onClick={setActive} >{title || src}</TabTitle>
     <CloseTabButton isActive={isActive} onClick={removeSelectedTab}>
       <AddTabIcon tilt/>
     </CloseTabButton>

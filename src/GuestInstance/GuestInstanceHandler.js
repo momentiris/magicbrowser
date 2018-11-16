@@ -23,15 +23,21 @@ class GuestInstanceHandler extends Component {
   }
 
   eventHandlers = {
-    onDomReady: ({ target, target: { dataset: { id } } }) => {
+    onDomReady: async  ({ target, target: { dataset: { id } } }) => {
+      const src = target.getURL();
       const title = target.getTitle();
-      this.props.updateTabMeta({
+      await this.props.updateTabMeta({
         type: 'title',
         data: title,
         id
       });
+      await this.props.updateTabMeta({
+        type: 'src',
+        data: src,
+        id
+      });
 
-      target.removeEventListener('dom-ready', this.eventHandlers.onDomReady);
+      // target.removeEventListener('dom-ready', this.eventHandlers.onDomReady);
     },
 
     onWillNavigate: e => {
@@ -45,8 +51,7 @@ class GuestInstanceHandler extends Component {
         data: favicons[0],
         id
       });
-
-      target.removeEventListener('page-favicon-updated', this.eventHandlers.onPageFaviconUpdated);
+      // target.removeEventListener('page-favicon-updated', this.eventHandlers.onPageFaviconUpdated);
     }
 
   }
