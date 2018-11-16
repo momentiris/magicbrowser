@@ -17,6 +17,7 @@ import {
   SavedLinksWrapper,
   SavedLinksFavicon,
   Wrapper,
+  SavedLinksPositioning,
 } from './styles';
 
 const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
@@ -34,22 +35,24 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
     return (
       <TabWrapper>
         <Wrapper>
-        {items.map((item, index) => {
-          return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.src}> </SortableItem>;
-        })}
-        <AddNewTab onClick={() => addOneTab(currentWsUI)}>
-          <AddIcon />
-        </AddNewTab>
+          {items.map((item, index) => {
+            return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.src}> </SortableItem>;
+          })}
+          <AddNewTab onClick={() => addOneTab(currentWsUI)}>
+            <AddIcon />
+          </AddNewTab>
         </Wrapper>
         <SavedLinks>
           <SavedLinksHeader>
             Saved Links
           </SavedLinksHeader>
           <SavedLinksWrapper>
-            <SavedLinksItems><SavedLinksFavicon/><SavedLinksTitle>asdaw</SavedLinksTitle></SavedLinksItems>
-            <SavedLinksItems></SavedLinksItems>
-            <SavedLinksItems></SavedLinksItems>
-            <SavedLinksItems></SavedLinksItems>
+            <SavedLinksPositioning>
+              <SavedLinksItems><SavedLinksFavicon/><SavedLinksTitle>asdawdawdawdawadawdawdwadawdawdadawdawdawdawdawdawdadwdawdawdwaw</SavedLinksTitle></SavedLinksItems>
+              <SavedLinksItems></SavedLinksItems>
+              <SavedLinksItems></SavedLinksItems>
+              <SavedLinksItems></SavedLinksItems>
+            </SavedLinksPositioning>
           </SavedLinksWrapper>
         </SavedLinks>
       </TabWrapper>
@@ -57,7 +60,6 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab}) => {
   });
 
   return (
-
     <SortableList items={tabs} onSortEnd={onSortEnd} axis='xy' />
   );
 };

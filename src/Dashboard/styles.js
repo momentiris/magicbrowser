@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-left: -5px;
 `;
 
 export const InnerColorPickerContainer = styled.div`
@@ -47,7 +48,7 @@ export const TabWrapper = styled.div`
   width: 100%;
   padding-top: 48px;
   padding-bottom: 48px;
-  margin-left: 100px;
+  margin-left: 113px;
   border-top: 1px solid ${props => props.theme.darkgrey};
 `;
 
@@ -378,7 +379,7 @@ export const WsWrapp = styled.div`
 `;
 
 export const TabsHeader = styled.h2`
-  margin-left: 342px;
+  margin-left: 355px;
   font-family: latoregular;
   font-style: normal;
   font-weight: normal;
@@ -440,10 +441,14 @@ export const SavedLinks = styled.div`
 `;
 
 export const SavedLinksWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   border-top: 1px solid ${props => props.theme.darkgrey};
   padding-top: 48px;
+`;
+
+export const SavedLinksPositioning = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -6px;
 `;
 
 export const SavedLinksHeader = styled.h3`
@@ -460,8 +465,9 @@ export const SavedLinksHeader = styled.h3`
 export const SavedLinksItems = styled.div`
   display: flex;
   flex-direction: row;
-  width: 265px;
+  width: 264px;
   height: 110px;
+  padding: 12px;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
@@ -474,10 +480,16 @@ export const SavedLinksItems = styled.div`
 `;
 
 export const SavedLinksFavicon = styled.svg`
+  background: red;
   height: 40px;
   width: 40px;
+  margin-right: 12px;
+  box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.35);
 `;
 
 export const SavedLinksTitle = styled.h3`
-
+  max-width: 190px;
+  overflow: hidden;
+  word-break: break-all;
+  margin: 0px;
 `;
