@@ -24,3 +24,6 @@ html, body {
   margin: 0;
   padding: 0;
 }
+:active .Showcase__style__stylizedHelper {
+  opacity: 1!important;
+}

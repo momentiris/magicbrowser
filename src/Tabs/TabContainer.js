@@ -25,9 +25,6 @@ class TabContainer extends Component {
 
   };
 
-  onSortStart = async ({ index }) => {
-    // this.props.setActive(index);
-  }
 
 
   render() {
@@ -62,7 +59,15 @@ class TabContainer extends Component {
     });
 
     return (
-      <SortableList lockToContainerEdges={true} lockAxis="x" distance={10} items={tabs}  onSortStart={this.onSortStart} onSortEnd={this.onSortEnd} axis='x'/>
+      <SortableList
+        lockToContainerEdges={true}
+        lockAxis="x"
+        distance={10}
+        items={tabs}
+        onSortStart={this.onSortStart}
+        onSortEnd={this.onSortEnd}
+        axis='x'
+      />
 
     );
   }

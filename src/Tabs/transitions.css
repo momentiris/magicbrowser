@@ -1,0 +1,27 @@
+.example-enter {
+  width: 0%;
+
+}
+
+.example-enter.example-enter-active {
+  width: 282px;
+
+  transition: width 200ms ease, opacity 200ms ease;
+}
+
+.example-leave {
+  width: 282px;
+
+
+}
+
+.example-leave.example-leave-active {
+  width: 0%;
+
+  transition: width 200ms ease, opacity 200ms ease;
+}
+
+.animationContainer {
+  display: flex;
+  width: 100%;
+}

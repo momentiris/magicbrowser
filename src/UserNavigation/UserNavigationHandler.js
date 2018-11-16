@@ -49,7 +49,8 @@ class NavigationHandler extends Component {
       navigateToUrl,
       userNavigation,
       handleToggleUrlBarFocus,
-      currentWorkspace
+      currentWorkspace,
+      currentURL
     } = this.props;
 
     return (
@@ -59,6 +60,7 @@ class NavigationHandler extends Component {
         navigateToUrl={navigateToUrl}
         userNavigation={userNavigation}
         handleToggleUrlBarFocus={handleToggleUrlBarFocus}
+        currentURL={currentURL}
       />
     );
   }
@@ -94,6 +96,7 @@ const mapActionsToProps = (dispatch, props) => {
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
   return Object.assign({}, ownProps, {
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
@@ -101,8 +104,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleToggleUrlBarFocus: dispatchProps.handleToggleUrlBarFocus,
     handleOpenDashBoard: dispatchProps.handleOpenDashBoard,
     currentWorkspace: stateProps.workspaces.current,
-    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI
-
+    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
+    currentURL: stateProps.workspaces[stateProps.workspaces.current].tabs[stateProps.workspaces[stateProps.workspaces.current].active].src
   });
 };
 
