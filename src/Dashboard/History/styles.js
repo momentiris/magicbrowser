@@ -4,15 +4,15 @@ import Historybg from '../../common/assets/imgs/history_dummy.png';
 
 export const Container = styled.div`
   position: absolute;
-  top: 150px;
+  top: 70px;
   left: 9%;
   max-height: 100%;
   width: 81%;
   background: ${props => props.theme.dashboardgrey};
-  transition: all 0.2s ease-out;
-  transition-delay: 0.1s;
-  opacity: ${props => props.isActive ? '1' : '0'};
-  transform: translateY(${props => props.isActive ? '0%' : '107%'});
+  transition: all 0.2s ease;
+  transition-delay: 0.2s;
+  opacity: ${props => props.isActive ? '1' : '1'};
+  transform: translateY(${props => props.isActive ? '0%' : '-115%'});
 `;
 
 export const Wrapper = styled.div`
