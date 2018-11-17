@@ -9,6 +9,7 @@ export const WebviewContainer = styled.div`
 export const WebviewContainerWrap = styled.div`
   height: 100vh;
   width: 100%;
+  position: relative;
 
 `;
 

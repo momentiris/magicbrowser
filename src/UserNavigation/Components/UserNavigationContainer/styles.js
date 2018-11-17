@@ -46,7 +46,7 @@ export const ReadingListButton = styled(Button)`
   width: 91px;
   width: ${props => props.dashboardOpen ? '0px' : '91px'};
   height: 32px;
-  background: ${props => props.theme.lightgrey};
+  background: ${props => props.savedLinksOpen ? props.theme.darkgrey : props.theme.lightgrey};
   margin-right: 5px;
   overflow: hidden;
   position: relative;
@@ -55,10 +55,10 @@ export const ReadingListButton = styled(Button)`
   opacity: ${props => props.dashboardOpen ? 0 : 1};
 
   :hover {
-    background: ${props => props.theme.mediumgrey};
+    background: ${props => props.savedLinksOpen ? props.theme.darkgrey : props.theme.mediumgrey};
   }
   :active {
-    background: ${props => props.theme.greybuttonactive};
+    background: ${props => props.savedLinksOpen ? props.theme.darkgrey : props.theme.greybuttonactive};
   }
 `;
 

@@ -15,11 +15,22 @@ import {
 } from './types';
 
 const dummySavedLinks = [
-  {src: 'https://figma.com'},
-  {src: 'https://atlantic.com'},
-  {src: 'https://tumblr.com'},
-  {src: 'https://github.com'},
-  {src: 'https://momentiris.github.com'},
+  {
+    title: 'For Sulki and Min, creative freedom is overrated and they be...',
+    src: 'itsnicethat.com',
+    img: '',
+  },
+  {
+    title: 'Cognitive models of information retrieval',
+    src: 'wikipedia.com',
+    img: '',
+  },
+  {
+    title: 'A demonstration of the first web browser, the Nexus browser',
+    src: 'youtube.com',
+    img: '',
+  },
+
 ];
 
 const initialState = {
@@ -119,6 +130,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
 
       return Object.assign({}, state, {
         [state.current]: {
+          ...state[state.current],
           tabs: state[state.current].tabs
             .filter((tab, i) => i !== payload.id),
           active: 0,

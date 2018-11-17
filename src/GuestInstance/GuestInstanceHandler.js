@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab, updateTabMeta } from '../Workspace/actions';
 import DashboardHandler from '../Dashboard/DashboardHandler';
+import SavedLinks from '../UserNavigation/Components/SavedLinks/SavedLinks';
 
 import {
   WebviewContainerWrap,
@@ -79,9 +80,16 @@ class GuestInstanceHandler extends Component {
   }
 
   render() {
-    const { tabs, active } = this.props;
+    const {
+      tabs,
+      active,
+      userNavigation,
+      savedLinks
+    } = this.props;
+
     return (
       <WebviewContainerWrap className="webviewContainerWrap">
+        <SavedLinks open={userNavigation.savedLinksOpen} savedLinks={savedLinks}/>
         {
           tabs.map((tab, i) => {
 
@@ -113,11 +121,17 @@ const tabsSelector = createSelector(
   state => state.workspaces,
   workspaces => workspaces
 );
+const userNavigationSelector = createSelector(
+  state => state.userNavigation,
+  userNavigation => userNavigation
+);
 
 const mapStateToProps = createSelector(
   tabsSelector,
-  workspaces => ({
-    workspaces
+  userNavigationSelector,
+  (workspaces, userNavigation) => ({
+    workspaces,
+    userNavigation
   })
 );
 
@@ -134,8 +148,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
     updateTabMeta: arg => dispatchProps.updateTabMeta(arg),
-    workspaces: stateProps.workspaces
-
+    workspaces: stateProps.workspaces,
+    userNavigation: stateProps.userNavigation,
+    savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
   });
 };
 

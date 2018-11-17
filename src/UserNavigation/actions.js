@@ -6,7 +6,8 @@ import {
   TOGGLE_NEW_WORKSPACE_OVERFLOW,
   TOGGLE_URLBAR_FOCUS,
   OPEN_DASHBOARD,
-  TOGGLE_DASHBOARD_OPEN_UI
+  TOGGLE_DASHBOARD_OPEN_UI,
+  TOGGLE_SAVED_LINKS_OPEN
 } from './types';
 
 export const navigateToUrl = url => {
@@ -60,5 +61,11 @@ export const handleToggleUrlBarFocus = () => {
     return dispatch({
       type: TOGGLE_URLBAR_FOCUS,
     }, getState);
+  };
+};
+
+export const toggleSavedLinksOpen = () => {
+  return {
+    type: TOGGLE_SAVED_LINKS_OPEN
   };
 };
