@@ -12,6 +12,8 @@ import {
   openDashBoard
 } from './actions';
 
+import { toggleSavedLinksOpen } from '../UserNavigation/actions';
+
 
 
 class WorkspaceHandler extends Component {
@@ -24,7 +26,8 @@ class WorkspaceHandler extends Component {
     this.props.initEmptyWorkspace();
   }
 
-  switchWorkspaces = value => {
+  switchWorkspaces = async value => {
+    await this.props.toggleSavedLinksOpen(false);
     this.props.switchWorkspaces(value);
   }
 
@@ -71,11 +74,17 @@ const workspaceSelector = createSelector(
   workspaces => workspaces,
 );
 
+const userNavigationSelector = createSelector(
+  state => state.userNavigation,
+  userNavigation => userNavigation
+);
 
 const mapStateToProps = createSelector(
   workspaceSelector,
-  workspaces => ({
+  userNavigationSelector,
+  (workspaces, userNavigation) => ({
     workspaces,
+    userNavigation
   }),
 );
 
@@ -86,7 +95,7 @@ const mapActionsToProps = (dispatch, props) => {
     addWorkspace: addWorkspace,
     renameWorkspace: renameWorkspace,
     initEmptyWorkspace: initEmptyWorkspace,
-
+    toggleSavedLinksOpen: toggleSavedLinksOpen
   }, dispatch);
 };
 
@@ -106,6 +115,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     renameWorkspace: arg => dispatchProps.renameWorkspace(arg),
     switchWorkspaces: arg => dispatchProps.switchWorkspaces(arg),
     initEmptyWorkspace: () => dispatchProps.initEmptyWorkspace(),
+    toggleSavedLinksOpen: arg => dispatchProps.toggleSavedLinksOpen(arg)
   });
 };
 

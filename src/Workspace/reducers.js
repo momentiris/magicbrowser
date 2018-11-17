@@ -14,6 +14,25 @@ import {
   UPDATE_CURRENT_TAB_QUERY
 } from './types';
 
+const dummySavedLinks = [
+  {
+    title: 'For Sulki and Min, creative freedom is overrated and they be...',
+    src: 'itsnicethat.com',
+    img: '',
+  },
+  {
+    title: 'Cognitive models of information retrieval',
+    src: 'wikipedia.com',
+    img: '',
+  },
+  {
+    title: 'A demonstration of the first web browser, the Nexus browser',
+    src: 'youtube.com',
+    img: '',
+  },
+
+];
+
 const initialState = {
   current: 'default',
   default: {
@@ -25,6 +44,7 @@ const initialState = {
         searchQuery: 'http://google.se'
       }
     ],
+    savedLinks: dummySavedLinks,
     active: 0,
     color: '#949494'
   }
@@ -110,6 +130,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
 
       return Object.assign({}, state, {
         [state.current]: {
+          ...state[state.current],
           tabs: state[state.current].tabs
             .filter((tab, i) => i !== payload.id),
           active: 0,
@@ -129,11 +150,13 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case NAVIGATE_TO_URL:
+
       const newUrl = {
         ...state,
         [state.current]: {
+          ...state[state.current],
           tabs: state[state.current].tabs.map((tab, i) => {
-            tab.src = state[state.current].active === i ? tab.searchQuery : tab.src;
+            tab.src = state[state.current].active === i ? payload : tab.src;
             return tab;
           }),
           active: state[state.current].active,
@@ -145,8 +168,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
 
     case UPDATE_CURRENT_TAB_QUERY:
       const withUpdatedQuery = { ...state };
-      console.log(withUpdatedQuery[withUpdatedQuery.current]
-        .tabs[withUpdatedQuery[withUpdatedQuery.current].active].searchQuery);
+
       withUpdatedQuery[withUpdatedQuery.current]
         .tabs[withUpdatedQuery[withUpdatedQuery.current].active]
         .searchQuery = payload;
@@ -158,6 +180,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         [state.current]: {
+          ...state[state.current],
           tabs: state[state.current].tabs.map((tab, i) => {
             tab[payload.type] = i === parseInt(payload.id) ?
               payload.data :
@@ -165,7 +188,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
             return tab;
           }),
           active: state[state.current].active,
-          color: state[state.current].color
         }
       };
       break;

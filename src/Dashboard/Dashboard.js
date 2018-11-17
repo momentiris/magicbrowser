@@ -216,10 +216,16 @@ class Dashboard extends Component {
 
   render() {
     const { currentWsUI } = this.state;
-    const { workspace } = this.props;
-    const { active, workspaces, tabs, workspacestemp } = this.props;
+    const {
+      active,
+      workspaces,
+      tabs,
+      workspacestemp,
+      workspace,
+      savedLinks
+    } = this.props;
+
     const currentTabs = workspacestemp[currentWsUI].tabs;
-    const { savedLinks } = this.props;
 
     return (
       <Container>

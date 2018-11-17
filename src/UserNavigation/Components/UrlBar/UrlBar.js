@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 import {
   UrlBarInput,
 } from './styles';
+import { parser } from './parser';
 
 import KeyCodes from '../../../common/keyCodes';
 
@@ -16,32 +17,37 @@ class UrlBar extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.state = {
+      isFocused: true,
       searchValue: this.props.currentURL,
       data: false,
       currentTab: this.props.activeTab
     };
+    this.input = React.createRef();
 
   }
 
   componentWillUpdate({ activeTab, currentURL }) {
-    if (activeTab === this.state.currentTab) return;
-    this.setState({
-      currentTab: activeTab,
-      searchValue: currentURL
-    });
+    if (activeTab === this.state.currentTab) {
+      if (this.state.searchValue !== currentURL && !this.state.isFocused) {
+        this.setState({
+          searchValue: currentURL
+        });
+      }
+      return;
+    }
+
+    if (activeTab !== this.state.currentTab) {
+      this.setState({
+        currentTab: activeTab,
+        searchValue: currentURL
+      });
+    };
+    return;
   }
 
-  parseURL = url => {
-    if (!/^https?:\/\//i.test(url)) {
-      const parsedUrl = 'http://' + url;
-      this.props.navigateToUrl(parsedUrl);
-    } else {
-      this.props.navigateToUrl(url);
-    }
-    
-    this.setState({
-      searchValue: this.props.currentURL
-    });
+  parseURL = query => {
+    const parsed = parser(query);
+    this.props.navigateToUrl(parsed);
   }
 
   onKeyDown = (e) => {
@@ -52,7 +58,8 @@ class UrlBar extends Component {
       case KeyCodes.ENTER:
         e.preventDefault();
         this.parseURL(this.state.searchValue);
-        // this.setState({data: !this.state.data});
+        this.input.current.blur();
+        this.setState({isFocused: false});
       default:
         break;
     }
@@ -69,8 +76,22 @@ class UrlBar extends Component {
       searchValue: e.target.value,
       defaultValue: this.props.currentURL
     });
+  }
 
+  handleFocus = () => {
+    this.setState({
+      isFocused: true,
+    });
+    console.log('focused');
+    this.props.handleToggleUrlBarFocus();
+  }
 
+  handleBlur = () => {
+    this.setState({
+      isFocused: false,
+    });
+    console.log('blurred');
+    this.props.handleToggleUrlBarFocus();
   }
 
   render() {
@@ -78,7 +99,6 @@ class UrlBar extends Component {
       userNavigation,
       handleToggleUrlBarFocus,
       currentURL,
-
     } = this.props;
 
     const { toggleUrlBarFocus } = userNavigation;
@@ -87,9 +107,11 @@ class UrlBar extends Component {
 
     return (
       <UrlBarInput
+
+        ref={this.input}
         clicked={toggleUrlBarFocus}
-        onFocus={handleToggleUrlBarFocus}
-        onBlur={handleToggleUrlBarFocus}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
         disable={userNavigation.toggleWorkspaces}
         dashboardOpen={userNavigation.dashboardOpen}
         value={searchValue}

@@ -19,6 +19,7 @@ import {
   handleToggleDropdown,
   handleToggleNewWorkspace,
   handleToggleNewWorkspaceOverflow,
+  handleDashboardOpenUI
 } from '../../../UserNavigation/actions';
 
 class WorkspaceNavUI extends Component {
@@ -33,12 +34,17 @@ class WorkspaceNavUI extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { toggleWorkspaces } = this.props.userNavigation;
-    this.setState({
+
+    await this.setState({
       startwidth: this.workspacetoggle.current.clientWidth ,
       width: this.workspacetoggle.current.clientWidth,
     });
+
+    if (this.props.currentURL === 'dashboard') {
+      this.props.handleDashboardOpenUI();
+    }
 
     setTimeout(this.setState({
       restActive: true,
@@ -171,11 +177,17 @@ const userNavSelector = createSelector(
   state => state.userNavigation,
   userNavigation => userNavigation,
 );
+const workspacesSelector = createSelector(
+  state => state.workspaces,
+  workspaces => workspaces
+);
 
 const mapStateToProps = createSelector(
   userNavSelector,
-  userNavigation => ({
+  workspacesSelector,
+  (userNavigation, workspaces) => ({
     userNavigation,
+    workspaces
   }),
 );
 
@@ -184,7 +196,8 @@ const mapActionsToProps = (dispatch, props) => {
     handleToggleWorkspaces: handleToggleWorkspaces,
     handleToggleDropdown: handleToggleDropdown,
     handleToggleNewWorkspace: handleToggleNewWorkspace,
-    handleToggleNewWorkspaceOverflow: handleToggleNewWorkspaceOverflow
+    handleToggleNewWorkspaceOverflow: handleToggleNewWorkspaceOverflow,
+    handleDashboardOpenUI: handleDashboardOpenUI
   }, dispatch);
 };
 
@@ -194,7 +207,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleToggleWorkspaces: dispatchProps.handleToggleWorkspaces,
     handleToggleDropdown: arg => dispatchProps.handleToggleDropdown(arg),
     handleToggleNewWorkspace: dispatchProps.handleToggleNewWorkspace,
-    handleToggleNewWorkspaceOverflow: dispatchProps.handleToggleNewWorkspaceOverflow
+    handleToggleNewWorkspaceOverflow: dispatchProps.handleToggleNewWorkspaceOverflow,
+    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
+    currentURL: stateProps.workspaces[stateProps.workspaces.current]
+      .tabs[stateProps.workspaces[stateProps.workspaces.current].active].src
   });
 };
 

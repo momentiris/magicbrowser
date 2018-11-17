@@ -17,7 +17,8 @@ import {
   SavedLinksPositioning,
 } from './styles';
 
-const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedLinks }) => {
+const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedLinks}) => {
+
   const SortableItem = SortableElement(({value, tabindex}) => {
     return (
       <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
@@ -53,8 +54,8 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
     return (
       <TabWrapper>
         <Wrapper>
-          {items.map((item, index) => {
-            return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.src}> </SortableItem>;
+          {items && items.map((item, index) => {
+            return <SortableItem key={`item-${index}`} id={index} tabindex={index} index={index} value={item.title}> </SortableItem>;
           })}
           <AddNewTab onClick={() => addOneTab(currentWsUI)}>
             <AddIcon />
@@ -66,7 +67,9 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
           </SavedLinksHeader>
           <SavedLinksWrapper>
             <SavedLinksPositioning>
-
+              {savedLinks && savedLinks.map((item, index) => {
+                return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.title}> </SortableItem>;
+              })}
             </SavedLinksPositioning>
           </SavedLinksWrapper>
         </SavedLinks>

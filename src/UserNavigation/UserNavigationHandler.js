@@ -5,7 +5,8 @@ import { createSelector } from 'reselect';
 import {
   navigateToUrl,
   handleToggleUrlBarFocus,
-  handleDashboardOpenUI
+  handleDashboardOpenUI,
+  toggleSavedLinksOpen
 } from './actions';
 import {
   handleOpenDashBoard,
@@ -47,6 +48,11 @@ class NavigationHandler extends Component {
 
     this.props.handleDashboardOpenUI();
   }
+
+  toggleSavedLinksOpen = () => {
+
+  }
+
   render() {
     const {
       navigateToUrl,
@@ -55,7 +61,8 @@ class NavigationHandler extends Component {
       currentWorkspace,
       currentURL,
       handleUpdateCurrentTabQuery,
-      activeTab
+      activeTab,
+      toggleSavedLinksOpen
     } = this.props;
 
     return (
@@ -68,6 +75,7 @@ class NavigationHandler extends Component {
         handleToggleUrlBarFocus={handleToggleUrlBarFocus}
         currentURL={currentURL}
         activeTab={activeTab}
+        toggleSavedLinksOpen={toggleSavedLinksOpen}
       />
     );
   }
@@ -99,7 +107,8 @@ const mapActionsToProps = (dispatch, props) => {
     handleToggleUrlBarFocus: handleToggleUrlBarFocus,
     handleOpenDashBoard: handleOpenDashBoard,
     handleDashboardOpenUI: handleDashboardOpenUI,
-    handleUpdateCurrentTabQuery: handleUpdateCurrentTabQuery
+    handleUpdateCurrentTabQuery: handleUpdateCurrentTabQuery,
+    toggleSavedLinksOpen: toggleSavedLinksOpen
   }, dispatch);
 };
 
@@ -107,6 +116,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return Object.assign({}, ownProps, {
     activeTab: stateProps.workspaces[stateProps.workspaces.current].active,
+    tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg),
@@ -115,6 +125,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     currentWorkspace: stateProps.workspaces.current,
     handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
     handleUpdateCurrentTabQuery: arg => dispatchProps.handleUpdateCurrentTabQuery(arg),
+    toggleSavedLinksOpen: dispatchProps.toggleSavedLinksOpen,
     currentURL: stateProps.workspaces[stateProps.workspaces.current]
       .tabs[stateProps.workspaces[stateProps.workspaces.current].active].src
   });

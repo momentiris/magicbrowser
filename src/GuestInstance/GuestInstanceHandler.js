@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 import { webviewEvents } from './webviewEvents';
 import { addOneTab, updateTabMeta } from '../Workspace/actions';
 import DashboardHandler from '../Dashboard/DashboardHandler';
+import SavedLinks from '../UserNavigation/Components/SavedLinks/SavedLinks';
 
 import {
   WebviewContainerWrap,
@@ -23,20 +24,28 @@ class GuestInstanceHandler extends Component {
   }
 
   eventHandlers = {
-    onDomReady: async  ({ target, target: { dataset: { id } } }) => {
+    onDomReady: ({ target, target: { dataset: { id } } }) => {
+
+      const currentSrc = target.dataset.oldsrc;
+      const currentTitle = target.dataset.title;
       const src = target.getURL();
       const title = target.getTitle();
-      await this.props.updateTabMeta({
-        type: 'title',
-        data: title,
-        id
-      });
-      await this.props.updateTabMeta({
-        type: 'src',
-        data: src,
-        id
-      });
 
+      if (currentSrc !== src) {
+        this.props.updateTabMeta({
+          type: 'src',
+          data: src,
+          id
+        });
+
+      }
+      if (currentTitle !== title) {
+        this.props.updateTabMeta({
+          type: 'title',
+          data: title,
+          id
+        });
+      }
       // target.removeEventListener('dom-ready', this.eventHandlers.onDomReady);
     },
 
@@ -46,6 +55,8 @@ class GuestInstanceHandler extends Component {
     },
 
     onPageFaviconUpdated: ({ favicons, target, target: { dataset: { id } }}) => {
+      const currentFavicon = target.dataset.favicon;
+      if (currentFavicon === favicons[0]) return;
       this.props.updateTabMeta({
         type: 'favicon',
         data: favicons[0],
@@ -69,13 +80,24 @@ class GuestInstanceHandler extends Component {
   }
 
   render() {
-    const { tabs, active } = this.props;
+    const {
+      tabs,
+      active,
+      userNavigation,
+      savedLinks
+    } = this.props;
+
     return (
       <WebviewContainerWrap className="webviewContainerWrap">
+        <SavedLinks open={userNavigation.savedLinksOpen} savedLinks={savedLinks}/>
         {
           tabs.map((tab, i) => {
+
             return tab.src !== 'dashboard' ? (
               <Webview
+                favicon={tab.favicon}
+                title={tab.title}
+                oldSource={tab.src}
                 id={i}
                 isActive={i === active}
                 key={i}
@@ -99,11 +121,17 @@ const tabsSelector = createSelector(
   state => state.workspaces,
   workspaces => workspaces
 );
+const userNavigationSelector = createSelector(
+  state => state.userNavigation,
+  userNavigation => userNavigation
+);
 
 const mapStateToProps = createSelector(
   tabsSelector,
-  workspaces => ({
-    workspaces
+  userNavigationSelector,
+  (workspaces, userNavigation) => ({
+    workspaces,
+    userNavigation
   })
 );
 
@@ -120,8 +148,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     active: stateProps.workspaces[stateProps.workspaces.current].active,
     addOneTab: arg => dispatchProps.addOneTab(arg),
     updateTabMeta: arg => dispatchProps.updateTabMeta(arg),
-    workspaces: stateProps.workspaces
-
+    workspaces: stateProps.workspaces,
+    userNavigation: stateProps.userNavigation,
+    savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
   });
 };
 

@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-left: -5px;
-  min-height: 250px;
+  ${'' /* min-height: 250px; */}
 `;
 
 export const InnerColorPickerContainer = styled.div`
@@ -60,6 +60,8 @@ export const TabItems = styled.div`
   flex-direction: row;
   width: 193px;
   height: 109px;
+
+
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;

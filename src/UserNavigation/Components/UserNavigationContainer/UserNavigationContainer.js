@@ -3,6 +3,7 @@ import UrlBar from '../UrlBar/UrlBar';
 import WorkspaceHandler from '../../../Workspace/WorkspaceHandler';
 import PageNavigationContainer from '../PageNavigation/PageNavigationContainer';
 
+
 import {
   AddTabIcon,
   ReadingListIcon,
@@ -34,13 +35,15 @@ class UserNavigationContainer extends Component {
       currentWorkspace,
       currentURL,
       handleUpdateCurrentTabQuery,
-      activeTab
+      activeTab,
+      toggleSavedLinksOpen
     } = this.props;
 
     const {
       toggleWorkspaces,
       toggleUrlBarFocus,
-      dashboardOpen
+      dashboardOpen,
+      savedLinksOpen
     } = userNavigation;
 
     return (
@@ -48,7 +51,6 @@ class UserNavigationContainer extends Component {
         <PageNavigationContainer/>
         <WorkspaceHandler/>
         <UrlBarContainer
-
           clicked={toggleUrlBarFocus}
           show={toggleWorkspaces}
           dashboardOpen={dashboardOpen}
@@ -77,7 +79,11 @@ class UserNavigationContainer extends Component {
           </GoToDashboardButton>
         </GoToDashboardButtonWrap>
         <ReadListNavSettingsWrap>
-          <ReadingListButton dashboardOpen={dashboardOpen} >
+          <ReadingListButton
+            savedLinksOpen={savedLinksOpen}
+            dashboardOpen={dashboardOpen}
+            onClick={toggleSavedLinksOpen}
+          >
             <ReadingListIcon />
           </ReadingListButton>
           <NavSettingsButton>

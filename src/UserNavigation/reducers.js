@@ -5,7 +5,8 @@ import {
   TOGGLE_NEW_WORKSPACE_OVERFLOW,
   TOGGLE_URLBAR_FOCUS,
   OPEN_DASHBOARD,
-  TOGGLE_DASHBOARD_OPEN_UI
+  TOGGLE_DASHBOARD_OPEN_UI,
+  TOGGLE_SAVED_LINKS_OPEN
 } from './types';
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   toggleNewWorkspace: false,
   toggleNewWorkspaceOverflow: false,
   toggleUrlBarFocus: false,
-  dashboardOpen: false
+  dashboardOpen: false,
+  savedLinksOpen: false,
 };
 
 export const userNavigationReducer = (state = initialState, { type, payload }) => {
@@ -58,6 +60,15 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
       return Object.assign({}, {
         ...initialState,
         dashboardOpen: !state.dashboardOpen,
+        savedLinksOpen: false,
+      });
+
+      break;
+
+    case TOGGLE_SAVED_LINKS_OPEN:
+      return Object.assign({}, {
+        ...state,
+        savedLinksOpen: !payload ? payload : !state.savedLinksOpen,
       });
       break;
 

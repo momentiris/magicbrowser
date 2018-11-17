@@ -1,4 +1,3 @@
-finish report
 select multiple or single tabs and move to another workspace
 webview thumbnails for dashboard
 fix so rename workspace does not switch array order.
@@ -6,14 +5,20 @@ close and reset inputs on create or cancel new dashboard and rename dashboard
 
 drag tabs to another workspace in dashboard
 
-Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy med 3 länkar
 Markera tabbar i nav bar: Undersök hur svårt/lätt det är att göra
 
-Saved links i Dashboard: Bara en dummy där det ligger några länkar
-
-
+tabs opacity on drag
+close app on last tab close
+fixa Styla dashboard
 Flikar: kolla hur det skulle vara möjligt att dra i flikar i nav bar så att när man drar dem längst till
 vänster så minimeras dem till en liten ruta så att man har ett halvpermanent bokmärke (som i safari)
+lägga in page load-animation
 
+lägga “add workspace” i nav längst till vänster
+
+//done -> Saved links i Dashboard: Bara en dummy där det ligger några länkar
+//done -> Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy med 3 länkar
+//done -> finish report
 //done -> History i Dashboard: Bara en dummy
 //done -> update webviewurl on load and finish urlparse
+//done -> snabba upp init genom att minimera antalet updatemetadispatches
