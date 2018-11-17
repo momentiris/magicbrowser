@@ -9,7 +9,7 @@ Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy
 Markera tabbar i nav bar: Undersök hur svårt/lätt det är att göra
 
 Saved links i Dashboard: Bara en dummy där det ligger några länkar
-
+tabs opacity on drag
 close app on last tab close
 
 Flikar: kolla hur det skulle vara möjligt att dra i flikar i nav bar så att när man drar dem längst till
