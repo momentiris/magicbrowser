@@ -3,12 +3,21 @@ import Historybg from '../../common/assets/imgs/history_dummy.png';
 
 
 export const Container = styled.div`
-  width: 100%;
+  position: absolute;
+  top: 150px;
+  left: 9%;
+  max-height: 100%;
+  width: 81%;
   background: ${props => props.theme.dashboardgrey};
+  transition: all 0.2s ease-out;
+  transition-delay: 0.1s;
+  opacity: ${props => props.isActive ? '1' : '0'};
+  transform: translateY(${props => props.isActive ? '0%' : '107%'});
 `;
 
 export const Wrapper = styled.div`
   height: 100%;
+
 `;
 
 export const BorderBottom = styled.div`
@@ -20,6 +29,7 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.darkgrey};
   margin-bottom: 48px;
+
 `;
 
 export const Header3 = styled.h2 `
@@ -30,6 +40,10 @@ export const Header3 = styled.h2 `
   line-height: 29px;
   margin: 0px;
   height: 50px;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.5s;
+  opacity: ${props => props.isActive ? '1' : '0'};
+  transform: translateY(${props => props.isActive ? '0%' : '-215%'});
 
 `;
 
@@ -49,6 +63,10 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.5s;
+  opacity: ${props => props.isActive ? '1' : '0'};
+  transform: translateY(${props => props.isActive ? '0%' : '-215%'});
 `;
 
 export const VisualButton = styled.button`

@@ -73,7 +73,6 @@ class Dashboard extends Component {
       toggleRename: false,
       workspaceToggle: false,
       anim: true,
-      animatemain: false,
       animateshistory: false,
       animatesworkspace: false,
       animatestabs: false,
@@ -205,6 +204,7 @@ class Dashboard extends Component {
       anim: !this.state.anim,
       animatesworkspace: !this.state.animatesworkspace,
       animatestabs: !this.state.animatestabs,
+      animateshistory: !this.state.animateshistory,
     });
   }
   shouldCancelStart = (e) => {
@@ -285,6 +285,7 @@ class Dashboard extends Component {
               <History
                 workspace={workspace}
                 currentWsUI={currentWsUI}
+                animateshistory={this.state.animateshistory}
               />
 
       </Container>

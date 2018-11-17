@@ -46,14 +46,12 @@ export const TabWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
   padding-top: 48px;
   margin-left: 113px;
   border-top: 1px solid ${props => props.theme.darkgrey};
-
   opacity: ${props => props.isActive ? '0' : '1'};
-  transition: all 1s ease-out;
-  transition-delay: .2s;
+  transition: all 0.2s ease-out;
+  transition-delay: .6s;
   transform: translateX(${props => props.isActive ? '100%' : '0%'});
 `;
 
@@ -96,9 +94,9 @@ export const AddNewTab = styled.div`
 export const AddNewWs = styled.div`
   margin: 0px;
   padding-bottom: 18px;
-  opacity: ${props => props.isActive ? '0' : '1'};
+  opacity: ${props => props.isActive ? '1' : '1'};
   transition: all .2s ease-out;
-  transform: translateY(${props => props.isActive ? '-170%' : '0%'});
+  transform: translateY(${props => props.isActive ? '-155%' : '0%'});
 
 `;
 
@@ -239,7 +237,7 @@ export const Ul = styled.ul`
   width: 325px;
   padding-top: 48px;
   opacity: ${props => props.isActive ? '0' : '1'}
-  transition: all .4s ease-out;
+  transition: all .2s ease-out;
   transition-delay: .2s;
   transform: translateX(${props => props.isActive ? '-90%' : '0%'});
 `;
