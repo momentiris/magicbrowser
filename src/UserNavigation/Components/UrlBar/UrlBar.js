@@ -31,17 +31,21 @@ class UrlBar extends Component {
     });
   }
 
-  parseURL = url => {
+  parseURL =  url => {
     if (!/^https?:\/\//i.test(url)) {
-      const parsedUrl = 'http://' + url;
+      const parsedUrl = 'https://' + url;
+
       this.props.navigateToUrl(parsedUrl);
-    } else {
-      this.props.navigateToUrl(url);
+      this.setState({
+        searchValue: this.props.currentURL
+      });
     }
-    
-    this.setState({
-      searchValue: this.props.currentURL
-    });
+    else {
+      this.props.navigateToUrl(url);
+      this.setState({
+        searchValue: this.props.currentURL
+      });
+    }
   }
 
   onKeyDown = (e) => {
