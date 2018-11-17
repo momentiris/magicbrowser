@@ -34,13 +34,14 @@ class WorkspaceNavUI extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { toggleWorkspaces } = this.props.userNavigation;
-    console.log(this.props);
-    this.setState({
+
+    await this.setState({
       startwidth: this.workspacetoggle.current.clientWidth ,
       width: this.workspacetoggle.current.clientWidth,
     });
+
     if (this.props.currentURL === 'dashboard') {
       this.props.handleDashboardOpenUI();
     }
@@ -107,7 +108,7 @@ class WorkspaceNavUI extends Component {
       dashboardOpen,
       toggleWorkspaces
     } = userNavigation;
-    console.log(dashboardOpen);
+
     const { overflow, width, startwidth } = this.state;
     const firstInst = workspaces
       .filter((inst,i) => inst[0] === current)

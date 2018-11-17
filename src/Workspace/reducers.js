@@ -154,6 +154,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       const newUrl = {
         ...state,
         [state.current]: {
+          ...state[state.current],
           tabs: state[state.current].tabs.map((tab, i) => {
             tab.src = state[state.current].active === i ? payload : tab.src;
             return tab;

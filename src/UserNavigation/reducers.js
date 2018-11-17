@@ -67,8 +67,8 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
 
     case TOGGLE_SAVED_LINKS_OPEN:
       return Object.assign({}, {
-        ...initialState,
-        savedLinksOpen: !state.savedLinksOpen,
+        ...state,
+        savedLinksOpen: !payload ? payload : !state.savedLinksOpen,
       });
       break;
 

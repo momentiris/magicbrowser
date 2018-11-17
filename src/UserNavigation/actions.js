@@ -64,8 +64,9 @@ export const handleToggleUrlBarFocus = () => {
   };
 };
 
-export const toggleSavedLinksOpen = () => {
+export const toggleSavedLinksOpen = arg => {
   return {
-    type: TOGGLE_SAVED_LINKS_OPEN
+    type: TOGGLE_SAVED_LINKS_OPEN,
+    payload: arg
   };
 };
