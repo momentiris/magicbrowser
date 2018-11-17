@@ -11,7 +11,7 @@ export const Container = styled.div`
   background: ${props => props.theme.dashboardgrey};
   transition: all 0.2s ease;
   transition-delay: 0.2s;
-  opacity: ${props => props.isActive ? '1' : '1'};
+  opacity: ${props => props.isActive ? '1' : '0'};
   transform: translateY(${props => props.isActive ? '0%' : '-115%'});
 `;
 
