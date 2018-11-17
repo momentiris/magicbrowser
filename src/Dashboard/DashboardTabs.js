@@ -17,8 +17,7 @@ import {
   SavedLinksPositioning,
 } from './styles';
 
-const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedLinks}) => {
-
+const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedLinks }) => {
   const SortableItem = SortableElement(({value, tabindex}) => {
     return (
       <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
