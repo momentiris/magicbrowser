@@ -48,6 +48,7 @@ export const TabWrapper = styled.div`
   height: 100%;
   padding-top: 48px;
   margin-left: 113px;
+  min-height: 600px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
   transition: all 1.2s ease-out;
@@ -60,8 +61,6 @@ export const TabItems = styled.div`
   flex-direction: row;
   width: 193px;
   height: 109px;
-
-
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;
@@ -457,7 +456,7 @@ export const SavedLinks = styled.div`
 export const SavedLinksWrapper = styled.div`
   border-top: 1px solid ${props => props.theme.darkgrey};
   padding-top: 48px;
-  min-height: 150px;
+  min-height: 100px;
 `;
 
 export const SavedLinksPositioning = styled.div`
