@@ -33,7 +33,8 @@ class DashboardHandler extends Component {
       addOneTab,
       removeSelectedTab,
       handleDragDashBoardTab,
-      handleOpenDashBoard
+      handleOpenDashBoard,
+      savedLinks
     } = this.props;
 
     return (
@@ -52,6 +53,7 @@ class DashboardHandler extends Component {
         removeSelectedTab={removeSelectedTab}
         handleDragDashBoardTab={handleDragDashBoardTab}
         handleOpenDashBoard={handleOpenDashBoard}
+        savedLinks={savedLinks}
       />
     );
   }
@@ -103,7 +105,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
-    handleOpenDashBoard: arg => dispatchProps.handleOpenDashBoard(arg)
+    handleOpenDashBoard: arg => dispatchProps.handleOpenDashBoard(arg),
+    savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
+
   });
 };
 

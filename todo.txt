@@ -5,10 +5,8 @@ close and reset inputs on create or cancel new dashboard and rename dashboard
 
 drag tabs to another workspace in dashboard
 
-Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy med 3 länkar
 Markera tabbar i nav bar: Undersök hur svårt/lätt det är att göra
 
-Saved links i Dashboard: Bara en dummy där det ligger några länkar
 tabs opacity on drag
 close app on last tab close
 
@@ -18,6 +16,8 @@ lägga in page load-animation
 
 lägga “add workspace” i nav längst till vänster
 
+Saved links i Dashboard: Bara en dummy där det ligger några länkar
+//done -> Saved Links: Ska gå att trycka på så att den slidar ut, men kan vara en dummy med 3 länkar
 //done -> finish report
 //done -> History i Dashboard: Bara en dummy
 //done -> update webviewurl on load and finish urlparse
