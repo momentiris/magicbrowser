@@ -46,7 +46,7 @@ import {
   WsWrapp,
   TabsHeader,
   Wrapper,
-  AnimateWorkspace
+  AnimateTabs
 } from './styles';
 
 
@@ -73,9 +73,9 @@ class Dashboard extends Component {
       toggleRename: false,
       workspaceToggle: false,
       anim: true,
-      animatemain: false,
       animateshistory: false,
       animatesworkspace: false,
+      animatestabs: false,
       editWorkspaceToggle: {
         active: false,
         id: '',
@@ -200,12 +200,19 @@ class Dashboard extends Component {
 
   animate = () => {
     this.setState({
-      animatemain: !this.state.animatemain,
+      // animatemain: !this.state.animatemain,
       anim: !this.state.anim,
+      animatesworkspace: !this.state.animatesworkspace,
+      animatestabs: !this.state.animatestabs,
       animateshistory: !this.state.animateshistory,
-      animatesworkspace: !this.state.animatesworkspace
     });
   }
+  shouldCancelStart = (e) => {
+    // Prevent sorting from being triggered if target is input or button
+    if (['input', 'button'].indexOf(e.target.tagName.toLowerCase()) !== -1) {
+      return true; // Return true to cancel sorting
+    }
+  };
 
   render() {
     const { currentWsUI } = this.state;
@@ -223,17 +230,10 @@ class Dashboard extends Component {
     return (
       <Container>
         <HistoryButton onClick={this.animate}><HistoryIcon /> Show History</HistoryButton>
-        {
-          this.state.anim ? (
-            <CSSTransition
-              in={this.state.animatetoggle}
-              timeout={500}
-              classNames="activeDashboard"
-            >
               <div>
-                <AddNewWs>
+                <AddNewWs isActive={this.state.animatesworkspace}>
                   <NewWsButton onClick={this.onToggle}>
-                    <Add isActive={this.state.workspaceToggle}/>New workspace
+                    <Add isActive={this.state.workspaceToggle}/>{this.state.animatesworkspace ? 'Tabs' : 'New workspace'}
                   </NewWsButton>
                   <AnimateForm isActive={this.state.workspaceToggle}>
                     <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
@@ -257,11 +257,7 @@ class Dashboard extends Component {
                 </AddNewWs>
 
                 <Column>
-                  <CSSTransition
-                    in={this.state.animatesworkspace}
-                    timeout={800}
-                    classNames="workspaceDashboard"
-                  >
+
                     <DashboardWorkspaces
                       workspaces={workspaces}
                       currentWsUI={currentWsUI}
@@ -275,35 +271,28 @@ class Dashboard extends Component {
                       updateWorkspace={this.state.editWorkspace}
                       onToggleRename={this.onToggleRename}
                       isActive={active}
+                      animatesworkspace={this.state.animatesworkspace}
                     />
-                  </CSSTransition>
-                  <DashboardTabs
-                    onSortEnd={this.onSortEnd}
-                    active={active}
-                    currentWsUI={currentWsUI}
-                    tabs={currentTabs}
-                    addOneTab={this.addOneTab}
-                    savedLinks={savedLinks}
-                  >
+                  <AnimateTabs isActive={this.state.animatestabs}>
+                    <DashboardTabs
+                      onSortEnd={this.onSortEnd}
+                      active={active}
+                      currentWsUI={currentWsUI}
+                      tabs={currentTabs}
+                      addOneTab={this.addOneTab}
+                      savedLinks={savedLinks}
+                    >
                   </DashboardTabs>
+                  </AnimateTabs>
                 </Column>
               </div>
-            </CSSTransition>
 
-          ) : (
 
-            <CSSTransition
-              in={this.state.animateshistory}
-              timeout={800}
-              classNames="mainDashboard"
-            >
               <History
                 workspace={workspace}
                 currentWsUI={currentWsUI}
+                animateshistory={this.state.animateshistory}
               />
-            </CSSTransition>
-          )
-        }
 
       </Container>
     );

@@ -14,28 +14,29 @@ import {
 
 const History = ({
   workspace,
-  currentWsUI
+  currentWsUI,
+  animateshistory,
 }) => (
-  <Container>
-    <Wrapper>
+  <Container isActive={animateshistory}>
+    <Wrapper >
       {
         workspace.map((ws, i) =>
           <HeaderWrapper
             key={i}
           >
-          <Header3>
+          <Header3 isActive={animateshistory}>
             <WorkSpaceColor color={ws.color || '#5C4EFF'}> </WorkSpaceColor>
             {ws[0]}
             {currentWsUI}
           </Header3>
-          <ButtonWrapper>
+          <ButtonWrapper isActive={animateshistory}>
             <VisualButton>Visual</VisualButton>
             <ListButton>List</ListButton>
           </ButtonWrapper>
           </HeaderWrapper>
         )
       }
-    <HistoryImg />
+    <HistoryImg isActive={animateshistory}/>
     </Wrapper>
   </Container>
 );
