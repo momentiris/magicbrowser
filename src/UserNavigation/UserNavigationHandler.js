@@ -116,6 +116,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   return Object.assign({}, ownProps, {
     activeTab: stateProps.workspaces[stateProps.workspaces.current].active,
+    tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     searchQuery: stateProps.searchQuery,
     userNavigation: stateProps.userNavigation,
     navigateToUrl: arg => dispatchProps.navigateToUrl(arg),

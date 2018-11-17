@@ -62,7 +62,7 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
         dashboardOpen: !state.dashboardOpen,
         savedLinksOpen: false,
       });
-      
+
       break;
 
     case TOGGLE_SAVED_LINKS_OPEN:

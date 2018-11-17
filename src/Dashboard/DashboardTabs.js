@@ -54,7 +54,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
     return (
       <TabWrapper>
         <Wrapper>
-          {items.map((item, index) => {
+          {items && items.map((item, index) => {
             return <SortableItem key={`item-${index}`} id={index} tabindex={index} index={index} value={item.title}> </SortableItem>;
           })}
           <AddNewTab onClick={() => addOneTab(currentWsUI)}>
@@ -67,7 +67,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
           </SavedLinksHeader>
           <SavedLinksWrapper>
             <SavedLinksPositioning>
-              {savedLinks.map((item, index) => {
+              {savedLinks && savedLinks.map((item, index) => {
                 return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.title}> </SortableItem>;
               })}
             </SavedLinksPositioning>
