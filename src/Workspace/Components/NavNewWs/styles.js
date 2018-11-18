@@ -42,7 +42,7 @@ export const NewWsInput = styled.input`
 `;
 
 export const NewWsButtonContainer = styled.div`
-  padding: 0 12px 0 8px;
+  padding: 0 8px 0 8px;
 `;
 
 export const NewWsArrowContainer = styled.div`

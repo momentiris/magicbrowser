@@ -5,8 +5,17 @@ require('dotenv').load();
 // const path = require('path');
 
 
-ipcMain.on('update-notify-value', function (event, arg) {
-  win.webContents.send('targetPriceVal', 'from main');
+ipcMain.on('listworkspaces', function (event, arg) {
+  // win.webContents.send('targetPriceVal', 'from main');
+  console.log(arg);
+});
+
+require('electron-context-menu')({
+  prepend: (params, browserWindow) => [{
+    label: 'Rainbow',
+    // Only show it when right-clicking images
+    visible: params.mediaType === 'image'
+  }]
 });
 
 let win;

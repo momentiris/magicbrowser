@@ -151,7 +151,7 @@ class WorkspaceNavUI extends Component {
         {
           this.state.restActive && (
             <WsRestContainer ref={this.WsRestContainer}>
-              { restInst }
+
               <NavNewWs
                 handleToggleNewWorkspace={handleToggleNewWorkspace}
                 handleToggleNewWorkspaceOverflow={handleToggleNewWorkspaceOverflow}
@@ -165,6 +165,7 @@ class WorkspaceNavUI extends Component {
                 handleToggleWorkspaces={handleToggleWorkspaces}
                 measureWsRestContainer={this.measureWsRestContainer}
               />
+              { restInst }
             </WsRestContainer>
           )
         }

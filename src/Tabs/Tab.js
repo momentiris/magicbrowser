@@ -21,7 +21,7 @@ const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src, 
 
   >
     {
-      favicon ?
+      favicon || src === 'dashboard' ?
         <FavIcon src={src === 'dashboard' && dashboardTabIcon || favicon || 'false'}/> :
         <TabLoader />
     }

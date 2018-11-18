@@ -142,7 +142,7 @@ class NavNewWs extends Component {
 
     return (
 
-      <NewWsContainer
+      <NewWsContainer className="NewWsContainer"
         open={userNavigation.toggleNewWorkspaceOverflow}
         toggleOpen={userNavigation.toggleNewWorkspace}
         onKeyDown={this.handlePressEnter}

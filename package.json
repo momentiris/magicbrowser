@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "electron-context-menu": "^0.10.1",
     "global": "^4.3.2",
     "lottie-react-web": "^2.1.4",
     "react": "^16.5.2",
