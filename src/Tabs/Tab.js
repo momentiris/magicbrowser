@@ -11,7 +11,7 @@ import {
 } from '../common/assets/icons.js';
 
 import dashboardTabIcon from '../common/assets/icons/dashboardTabIcon.svg';
-import './transitions.css';
+import TabLoader from '../common/TabLoader/TabLoader';
 
 const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src, key }) => (
   <SingleTabContainer
@@ -20,7 +20,12 @@ const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src, 
     isActive={isActive}
 
   >
-    <FavIcon src={src === 'dashboard' && dashboardTabIcon || favicon || 'false'}/>
+    {
+      favicon ?
+        <FavIcon src={src === 'dashboard' && dashboardTabIcon || favicon || 'false'}/> :
+        <TabLoader />
+    }
+
     <TabTitle onClick={setActive} >{title || src}</TabTitle>
     <CloseTabButton isActive={isActive} onClick={removeSelectedTab}>
       <AddTabIcon tilt/>
