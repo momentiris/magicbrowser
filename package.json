@@ -5,8 +5,10 @@
   "homepage": "./",
   "dependencies": {
     "global": "^4.3.2",
+    "lottie-react-web": "^2.1.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-lottie": "^1.2.3",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
