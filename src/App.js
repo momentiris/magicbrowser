@@ -8,8 +8,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import UserNavigationHandler from './UserNavigation/UserNavigationHandler';
 import GuestInstanceHandler from './GuestInstance/GuestInstanceHandler';
 
-const electron = window.electron;
-const { ipcRenderer } = electron;
 
 const MainNavWrap = styled.section`
   width: 100%;

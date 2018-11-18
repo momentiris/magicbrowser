@@ -13,17 +13,26 @@ import {
 } from './actions';
 
 import { toggleSavedLinksOpen } from '../UserNavigation/actions';
-
+const electron = window.electron;
+const { ipcRenderer } = electron;
 
 
 class WorkspaceHandler extends Component {
   constructor(props) {
     super(props);
-
   }
+
 
   componentDidMount() {
     this.props.initEmptyWorkspace();
+    this.updateMainProcess();
+  }
+
+  updateMainProcess = () => {
+    const workspaces = this.props.workspaces.map(ws => ws[0]);
+    ipcRenderer.send('listworkspaces', workspaces);
+
+
   }
 
   switchWorkspaces = async value => {

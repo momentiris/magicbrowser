@@ -3,18 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createSelector } from 'reselect';
 import TabContainer from './TabContainer';
-
-
 import {
   addOneTab,
   removeSelectedTab,
   setTabActive,
   handleDragDashBoardTab,
 } from '../Workspace/actions';
-
 import { handleDashboardOpenUI } from '../UserNavigation/actions';
 
+const electron = window.electron;
+const { ipcRenderer } = electron;
+
 class TabHandler extends Component {
+  componentDidMount() {
+    console.log(this.props);
+    ipcRenderer.send('test', 'hej');
+  }
 
   addOneTab = (e) => {
     this.props.addOneTab({
