@@ -139,7 +139,7 @@ export const NewWsHover = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 32%;
+  top: 0%;
   transform: ${props => props.isActive ? 'translateX(-152px)' : 'translateX(-235px)'};
   width: 62px;
   height: 42px;

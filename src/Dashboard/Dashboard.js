@@ -233,7 +233,7 @@ class Dashboard extends Component {
               <div>
                 <AddNewWs isActive={this.state.animatesworkspace}>
                   <NewWsButton onClick={this.onToggle}>
-                    <Add isActive={this.state.workspaceToggle}/>{this.state.animatesworkspace ? 'Tabs' : 'New workspace'}
+                    <Add isActive={this.state.workspaceToggle}/>New workspace
                   </NewWsButton>
                   <AnimateForm isActive={this.state.workspaceToggle}>
                     <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
