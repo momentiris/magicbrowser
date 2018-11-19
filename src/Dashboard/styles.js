@@ -47,8 +47,9 @@ export const TabWrapper = styled.div`
   flex-direction: column;
   height: 100%;
   padding-top: 48px;
-  margin-left: 113px;
   min-height: 600px;
+  margin-left: 112px;
+  min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
   transition: all 1.2s ease-out;
@@ -85,6 +86,9 @@ export const AddNewTab = styled.div`
   transition: all .1s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
+  &:last-child {
+    margin-right: 0px;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -392,7 +396,7 @@ export const WsWrapp = styled.div`
 `;
 
 export const TabsHeader = styled.h2`
-  margin-left: 355px;
+  margin-left: 30%;
   font-family: latoregular;
   font-style: normal;
   font-weight: normal;

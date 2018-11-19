@@ -230,69 +230,68 @@ class Dashboard extends Component {
     return (
       <Container>
         <HistoryButton onClick={this.animate}><HistoryIcon /> Show History</HistoryButton>
-              <div>
-                <AddNewWs isActive={this.state.animatesworkspace}>
-                  <NewWsButton onClick={this.onToggle}>
-                    <Add isActive={this.state.workspaceToggle}/>New workspace
-                  </NewWsButton>
-                  <AnimateForm isActive={this.state.workspaceToggle}>
-                    <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-                      <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
-                        <RightArrowNewWs />
-                      </NewWsHover>
-                      <Input
-                        ref={this.workspaceInput}
-                        onChange={this.handleInputChange}
-                        active={this.state.isActive}
-                        type="text"
-                        placeholder="Name your workspace"/>
-                      <WsColor updateWsColor={this.updateWsColor}/>
-                      <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
-                      <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
-                    </form>
-                  </AnimateForm>
-                  <WsWrapp>
-                    <TabsHeader>Tabs</TabsHeader>
-                  </WsWrapp>
-                </AddNewWs>
+        <div>
+          <AddNewWs isActive={this.state.animatesworkspace}>
+            <NewWsButton onClick={this.onToggle}>
+              <Add isActive={this.state.workspaceToggle}/>New workspace
+            </NewWsButton>
+            <AnimateForm isActive={this.state.workspaceToggle}>
+              <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
+                <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                  <RightArrowNewWs />
+                </NewWsHover>
+                <Input
+                  ref={this.workspaceInput}
+                  onChange={this.handleInputChange}
+                  active={this.state.isActive}
+                  type="text"
+                  placeholder="Name your workspace"/>
+                <WsColor updateWsColor={this.updateWsColor}/>
+                <CreateButton onClick={this.onToggle} type="submit">Create</CreateButton>
+                <CancelButton onClick={this.onToggle} type="button">Cancel</CancelButton>
+              </form>
+            </AnimateForm>
+            <WsWrapp>
+              <TabsHeader>Tabs</TabsHeader>
+            </WsWrapp>
+          </AddNewWs>
 
-                <Column>
-
-                    <DashboardWorkspaces
-                      workspaces={workspaces}
-                      currentWsUI={currentWsUI}
-                      handleClick={this.handleClick}
-                      renameWorkspace={this.renameWorkspace}
-                      editWorkspace={this.editWorkspace}
-                      handleInputEditName={this.handleInputEditName}
-                      handleInputEditColor={this.handleInputEditColor}
-                      workspaceToggle={this.state.workspaceToggle}
-                      editWorkspaceToggle={this.state.editWorkspaceToggle}
-                      updateWorkspace={this.state.editWorkspace}
-                      onToggleRename={this.onToggleRename}
-                      isActive={active}
-                      animatesworkspace={this.state.animatesworkspace}
-                    />
-                  <AnimateTabs isActive={this.state.animatestabs}>
-                    <DashboardTabs
-                      onSortEnd={this.onSortEnd}
-                      active={active}
-                      currentWsUI={currentWsUI}
-                      tabs={currentTabs}
-                      addOneTab={this.addOneTab}
-                      savedLinks={savedLinks}
-                    >
-                  </DashboardTabs>
-                  </AnimateTabs>
-                </Column>
-              </div>
-
-
-              <History
-                workspace={workspace}
+          <Column>
+            <DashboardWorkspaces
+              workspaces={workspaces}
+              currentWsUI={currentWsUI}
+              handleClick={this.handleClick}
+              renameWorkspace={this.renameWorkspace}
+              editWorkspace={this.editWorkspace}
+              handleInputEditName={this.handleInputEditName}
+              handleInputEditColor={this.handleInputEditColor}
+              workspaceToggle={this.state.workspaceToggle}
+              editWorkspaceToggle={this.state.editWorkspaceToggle}
+              updateWorkspace={this.state.editWorkspace}
+              onToggleRename={this.onToggleRename}
+              isActive={active}
+              animatesworkspace={this.state.animatesworkspace}
+            />
+            <AnimateTabs isActive={this.state.animatestabs}>
+              <DashboardTabs
+                onSortEnd={this.onSortEnd}
+                active={active}
                 currentWsUI={currentWsUI}
-                animateshistory={this.state.animateshistory}
-              />
+                tabs={currentTabs}
+                addOneTab={this.addOneTab}
+                savedLinks={savedLinks}
+              >
+              </DashboardTabs>
+            </AnimateTabs>
+          </Column>
+        </div>
+
+
+        <History
+          workspace={workspace}
+          currentWsUI={currentWsUI}
+          animateshistory={this.state.animateshistory}
+        />
 
       </Container>
     );
