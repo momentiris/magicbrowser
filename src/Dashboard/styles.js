@@ -48,8 +48,6 @@ export const TabWrapper = styled.div`
   height: 100%;
   padding-top: 48px;
   min-height: 600px;
-  margin-left: 112px;
-  min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
   transition: all 1.2s ease-out;
@@ -242,6 +240,7 @@ export const Ul = styled.ul`
   padding: 0px;
   width: 325px;
   padding-top: 48px;
+  margin-right: 110px;
   opacity: ${props => props.isActive ? '0' : '1'}
   transition: all .2s ease-out;
   transition-delay: .2s;
@@ -396,7 +395,7 @@ export const WsWrapp = styled.div`
 `;
 
 export const TabsHeader = styled.h2`
-  margin-left: 30%;
+  margin-left: 353px;
   font-family: latoregular;
   font-style: normal;
   font-weight: normal;
