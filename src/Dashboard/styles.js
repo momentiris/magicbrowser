@@ -48,6 +48,7 @@ export const TabWrapper = styled.div`
   height: 100%;
   padding-top: 48px;
   min-height: 600px;
+  min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
   transition: all 1.2s ease-out;
@@ -67,6 +68,12 @@ export const TabItems = styled.div`
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
   &:hover {
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(1.05)!important;
+  }
+  &:focus {
     transform: scale(1.05);
   }
 `;
