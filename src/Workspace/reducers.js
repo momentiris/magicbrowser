@@ -100,18 +100,35 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case RENAME_CURRENT_WORKSPACE:
-      const renameProp = (oldProp,newProp, { [oldProp]: old, ...others } ) => ({
-        [newProp]: old,
-        ...others,
-      });
 
       const clone = Object.assign({}, state);
-      const updatedWs = renameProp(payload.target, payload.newName, clone);
+      const renameObjKey = ({oldObj, oldKey, newKey}) => {
+        const keys = Object.keys(oldObj);
+        const newObj = keys.reduce((acc, val)=>{
+          if(val === oldKey){
+            acc[newKey] = oldObj[oldKey];
+          }
+          else {
+            acc[val] = oldObj[val];
+          }
+          return acc;
+        }, {});
+
+        return newObj;
+      };
+
+      const updatedWs = renameObjKey({
+        oldObj:clone,
+        oldKey: payload.target,
+        newKey: payload.newName
+      });
+
       updatedWs[payload.newName].color = payload.newColor;
       updatedWs.current = updatedWs.current === payload.target ? payload.newName : updatedWs.current;
       const withoutCurrent2 = Object.keys(updatedWs).filter(ws => ws !== 'current');
       setContextMenuWorkspaces(withoutCurrent2);
       return updatedWs;
+      break;
 
     case SWITCH_WORKSPACES:
       return Object.assign({}, state, {
