@@ -45,9 +45,8 @@ export const Column = styled.div`
 export const TabWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding-top: 48px;
-  min-height: 600px;
+  min-height: 300px;
   min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
@@ -456,7 +455,7 @@ export const WorkspaceInfoWrapper = styled.div`
 `;
 
 // Saved links
-export const SavedLinks = styled.div`
+export const SavedLinksContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 58px;

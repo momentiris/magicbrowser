@@ -13,5 +13,6 @@ export const NAVIGATE_TO_URL = 'navigation:navigateToUrl';
 export const UPDATE_CURRENT_TAB_QUERY = 'tabs:updateCurrentTabQuery';
 
 export const DRAG_DASHBOARD_TAB = 'tabs:dragDashBoardTab';
+export const DRAG_DASHBOARD_SAVEDLINKS = 'savedLinks:dragDashBoardSavedLinks';
 export const OPEN_DASHBOARD = 'dashboard:openDashboard';
 export const MOVE_TAB_TO_WORKSPACE = 'workspaces:moveTabToWorkspace';

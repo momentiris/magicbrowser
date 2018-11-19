@@ -11,6 +11,7 @@ import {
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
   DRAG_DASHBOARD_TAB,
+  DRAG_DASHBOARD_SAVEDLINKS,
   UPDATE_CURRENT_TAB_QUERY,
   MOVE_TAB_TO_WORKSPACE
 } from './types';
@@ -248,6 +249,35 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       }
 
       // return state;
+      break;
+
+    case DRAG_DASHBOARD_SAVEDLINKS:
+      if (payload.dashboard) {
+        const newDash = {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            savedLinks: payload.newTabs
+          }
+        };
+        const dashboardIndex = newDash[newDash.current].savedLinks.findIndex(savedLinks => savedLinks.src === 'dashboard');
+        return {
+          ...newDash,
+          [newDash.current]: {
+            ...newDash[newDash.current],
+            active: dashboardIndex
+          }
+        };
+      } else {
+        return {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            active: payload.newIndex,
+            savedLinks: payload.newSavedLink
+          }
+        };
+      }
       break;
 
     case OPEN_DASHBOARD:

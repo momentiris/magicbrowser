@@ -17,8 +17,8 @@ import {
   SavedLinksPositioning,
 } from './styles';
 
-const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedLinks }) => {
-  const SortableItem = SortableElement(({value, tabindex}) => {
+const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab }) => {
+  const SortableItem = SortableElement(({ value, tabindex }) => {
     return (
       <TabItems key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
         {value}
@@ -28,24 +28,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
     );
   });
 
-  const SortableItemSavedLinks = SortableElement(({value, saveindex}) => {
-    return (
-      <SavedLinksItems key={saveindex} id={saveindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
-        <SavedLinksFavicon/>
-        <SavedLinksTitle>
-          {value}
-          {value.id}
-        </SavedLinksTitle>
-      </SavedLinksItems>
-
-
-
-
-
-    );
-  });
-
-  const SortableList = SortableContainer(({items, savedLinks}) => {
+  const SortableList = SortableContainer(({ items }) => {
     return (
       <TabWrapper>
         <Wrapper>
@@ -56,26 +39,12 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
             <AddIcon />
           </AddNewTab>
         </Wrapper>
-        <SavedLinks>
-          <SavedLinksHeader>
-            Saved Links
-          </SavedLinksHeader>
-          <SavedLinksWrapper>
-            <SavedLinksPositioning>
-              {
-                savedLinks && savedLinks.map((item, index) => {
-                  return <SortableItemSavedLinks key={`item-${index}`} id={index} savindex={index} index={index} value={item.src}></SortableItemSavedLinks>;
-                })
-              }
-            </SavedLinksPositioning>
-          </SavedLinksWrapper>
-        </SavedLinks>
       </TabWrapper>
     );
   });
 
   return (
-    <SortableList items={tabs} savedLinks={savedLinks} onSortEnd={onSortEnd} axis='xy' />
+    <SortableList items={tabs} onSortEnd={onSortEnd} axis='xy' />
   );
 };
 
