@@ -124,7 +124,10 @@ export const HistoryImg = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  height: 620px;
+  transition: all .2s ease-out;
+  opacity: ${props => props.isActive ? '1' : '0'};
+  transition-delay: .1s;
+  height: ${props => props.isActive ? '620px' : '0px'};
   width: 100%;
   border: 0;
 `;
