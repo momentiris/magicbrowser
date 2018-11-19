@@ -284,16 +284,41 @@ export const Button = styled.button`
   font-size: ${props => props.theme.large};
 `;
 
-export const RenameEdit = styled.svg`
+export const RenameEdit = styled.button`
+  background: none;
+	color: inherit;
+	border: none;
+  transform: translateX(0px);
+  opacity: 0;
+  margin: 10px 0 0 0;
+  ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
+  transition: all .2s ease .2s;
+  cursor: pointer;
+`;
+
+export const RenameEditIcon = styled.svg`
   background-image: url(${renameoreditsvg});
   background-repeat: no-repeat;
   background-size: contain;
+  padding-left: 22px;
   height: 20px;
   width: 20px;
+`;
+
+export const DeleteWs = styled.button`
+  position: absolute;
+  background: ${props => props.theme.red};
+  width: 52px;
+  height: 24px;
+  box-shadow: 0px 3px 3px rgba(200, 200, 200, 0.25);
+  border-radius: ${props => props.theme.br};
   transform: translateX(0px);
+  color: ${props => props.theme.white};
+  font-size: ${props => props.theme.small};;
+  border: none;
+  text-shadow: 1px 1px 3px rgba(188, 56, 47, 0.2);
   opacity: 0;
-  margin: 0 0 0 0;
-  ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
+  margin: 10px 0 0 0;
   transition: all .2s ease .2s;
   cursor: pointer;
 `;
@@ -337,7 +362,11 @@ export const Li = styled.li`
     transform: translateX(0px);
   }
   &:hover ${RenameEdit}{
-    margin: 0 0 0 25px;
+    margin: 5px 0 0 22px;
+    opacity: 1;
+  }
+  &:hover ${DeleteWs} {
+    margin: 10px 0 0 28px;
     opacity: 1;
   }
 `;
