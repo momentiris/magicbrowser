@@ -10,6 +10,7 @@ export const WebviewContainerWrap = styled.div`
   height: 100vh;
   width: 100%;
   position: relative;
+  overflow-x: hidden;
 
 `;
 

@@ -15,13 +15,13 @@ import {
 import { toggleSavedLinksOpen } from '../UserNavigation/actions';
 const electron = window.electron;
 const { ipcRenderer } = electron;
+const Menu = electron.remote.Menu;
 
 
 class WorkspaceHandler extends Component {
   constructor(props) {
     super(props);
   }
-
 
   componentDidMount() {
     this.props.initEmptyWorkspace();
@@ -31,7 +31,6 @@ class WorkspaceHandler extends Component {
   updateMainProcess = () => {
     const workspaces = this.props.workspaces.map(ws => ws[0]);
     ipcRenderer.send('listworkspaces', workspaces);
-
 
   }
 

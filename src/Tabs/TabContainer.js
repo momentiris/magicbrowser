@@ -22,10 +22,18 @@ class TabContainer extends Component {
   };
 
   render() {
-    const { tabs, removeSelectedTab, addOneTab, setActive, active} = this.props;
+    const {
+      tabs,
+      removeSelectedTab,
+      addOneTab,
+      setActive,
+      active,
+      registerContextMenuEvents
+    } = this.props;
 
     const SortableItem = SortableElement(({ value, tabIndex, key }) => (
       <Tab
+        registerContextMenuEvents={registerContextMenuEvents}
         id={tabIndex}
         isActive={tabIndex === active}
         key={key}

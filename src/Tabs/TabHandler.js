@@ -17,7 +17,7 @@ const { ipcRenderer } = electron;
 class TabHandler extends Component {
   componentDidMount() {
     console.log(this.props);
-    ipcRenderer.send('test', 'hej');
+
   }
 
   addOneTab = (e) => {
@@ -40,7 +40,11 @@ class TabHandler extends Component {
     this.props.handleDragDashBoardTab(tabs);
   }
 
-
+  registerContextMenuEvents = elem => {
+    elem.addEventListener('contextmenu', (event) => {
+      ipcRenderer.send('selectTab', event.target.id);
+    });
+  }
 
   render() {
     const { tabs, active } = this.props;
@@ -53,6 +57,7 @@ class TabHandler extends Component {
           removeSelectedTab={this.removeSelectedTab}
           addOneTab={this.addOneTab}
           handleDragDashBoardTab={this.handleDragDashBoardTab}
+          registerContextMenuEvents={this.registerContextMenuEvents}
         />
       </Fragment>
     );

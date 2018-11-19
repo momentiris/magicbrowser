@@ -1,22 +1,35 @@
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 require('dotenv').load();
-// const url = require('url');
-// const path = require('path');
 
+let workspaces;
+let selectedTab;
+ipcMain.on('selectTab', (e, id) => {
+  selectedTab = id;
+});
+const moveTabsToWorkspace = (ws, id) => {
+  console.log({
+    ws: ws,
+    id: id
+  });
+  // win.webContents.send('targetPriceVal', 'from main');
+};
 
 ipcMain.on('listworkspaces', function (event, arg) {
-  // win.webContents.send('targetPriceVal', 'from main');
-  console.log(arg);
+  workspaces = arg;
+  require('electron-context-menu')({
+    prepend: (params, browserWindow) =>
+      workspaces.map(ws => ({
+        label: ws,
+        click() {
+          moveTabsToWorkspace(ws, id);
+        }
+      }))
+  });
 });
 
-require('electron-context-menu')({
-  prepend: (params, browserWindow) => [{
-    label: 'Rainbow',
-    // Only show it when right-clicking images
-    visible: params.mediaType === 'image'
-  }]
-});
+
+
 
 let win;
 function createWindow () {

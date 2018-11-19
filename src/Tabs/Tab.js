@@ -12,25 +12,39 @@ import {
 
 import dashboardTabIcon from '../common/assets/icons/dashboardTabIcon.svg';
 import TabLoader from '../common/TabLoader/TabLoader';
+class Tab extends React.Component {
+  constructor(props) {
+    super(props);
+    this.elem = React.createRef();
+  }
+  componentDidMount() {
 
-const Tab = ({ removeSelectedTab, setActive, isActive, favicon, title, id, src, key }) => (
-  <SingleTabContainer
-    id={id}
-    key={key}
-    isActive={isActive}
+    this.props.registerContextMenuEvents(this.elem.current);
+  }
 
-  >
-    {
-      favicon || src === 'dashboard' ?
-        <FavIcon src={src === 'dashboard' && dashboardTabIcon || favicon || 'false'}/> :
-        <TabLoader />
-    }
+  render() {
+    const { removeSelectedTab, setActive, isActive, favicon, title, id, src, key } = this.props;
+    return (
+      <SingleTabContainer
+        ref={this.elem}
+        id={id}
+        key={key}
+        isActive={isActive}
+      >
+        {
+          favicon || src === 'dashboard' ?
+            <FavIcon src={src === 'dashboard' && dashboardTabIcon || favicon || 'false'}/> :
+            <TabLoader />
+        }
 
-    <TabTitle onClick={setActive} >{title || src}</TabTitle>
-    <CloseTabButton isActive={isActive} onClick={removeSelectedTab}>
-      <AddTabIcon tilt/>
-    </CloseTabButton>
-  </SingleTabContainer>
-);
+        <TabTitle id={id} onClick={setActive} >{title || src}</TabTitle>
+        <CloseTabButton isActive={isActive} onClick={removeSelectedTab}>
+          <AddTabIcon tilt/>
+        </CloseTabButton>
+      </SingleTabContainer>
+    );
+  }
+}
+
 
 export default Tab;
