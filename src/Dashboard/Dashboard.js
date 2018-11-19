@@ -126,10 +126,22 @@ class Dashboard extends Component {
     this.props.addWorkspace(this.state.newWorkspace);
   }
 
-  renameWorkspace = async (e, i) => {
+  renameWorkspace = (e, i) => {
     e.preventDefault();
-    this.setState({currentWsUI: this.state.editWorkspace.newName});
-    await this.props.renameWorkspace(this.state.editWorkspace);
+    this.setState({
+      currentWsUI: this.state.editWorkspace.newName,
+      editWorkspace: {
+        newName: '',
+        newColor: '',
+        target: null
+      },
+      editWorkspaceToggle: {
+        active: true,
+        id: false
+      },
+    });
+
+    this.props.renameWorkspace(this.state.editWorkspace);
   }
 
   handleInputChange = e => {
@@ -171,7 +183,6 @@ class Dashboard extends Component {
 
   removeSelectedTab = id => {
     this.props.removeSelectedTab(id);
-    console.log(this.props.removeSelectedTab(id));
   }
 
   updateWsColor = (color) => {
@@ -228,7 +239,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { currentWsUI } = this.state;
+    const { currentWsUI, toggleRename, editWorkspace } = this.state;
     const {
       active,
       workspaces,
@@ -283,6 +294,7 @@ class Dashboard extends Component {
               updateWorkspace={this.state.editWorkspace}
               onToggleRename={this.onToggleRename}
               isActive={active}
+              editWorkspaceValue={editWorkspace}
               animatesworkspace={this.state.animatesworkspace}
             />
             <AnimateTabs isActive={this.state.animatestabs}>

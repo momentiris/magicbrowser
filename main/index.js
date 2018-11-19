@@ -26,6 +26,12 @@ ipcMain.on('listworkspaces', function (event, arg) {
     prepend: (params, browserWindow) =>
       [
         {
+          label: 'Close tab'
+        },
+        {
+          label: 'Duplicate tab'
+        },
+        {
           label: 'Move to workspace',
           'submenu': workspaces.map((ws, current) => ({
             label: ws,
@@ -33,7 +39,8 @@ ipcMain.on('listworkspaces', function (event, arg) {
               moveTabsToWorkspace(ws);
             }
           }))
-        }
+        },
+
       ]
   });
 });

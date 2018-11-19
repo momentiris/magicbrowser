@@ -33,6 +33,7 @@ const DashboardWorkspaces = ({
   isActive,
   updateWorkspace,
   animatesworkspace,
+  editWorkspaceValue
 }) => (
   <Ul name="workspaces" isActive={animatesworkspace}>
     {
@@ -58,10 +59,12 @@ const DashboardWorkspaces = ({
                 onChange={(e) => handleInputEditName(e, ws[0])}
                 active={isActive}
                 type="text"
-                placeholder="Rename your workspace"/>
+                placeholder="Rename your workspace"
+                value={editWorkspaceValue.newName}
+              />
               <WsColor updateWsColor={(e) => handleInputEditColor(e, ws[0])}/>
-              <CreateButton onClick={onToggleRename} type="submit">Save</CreateButton>
-              <CancelButton onClick={onToggleRename} type="button">Cancel</CancelButton>
+              <CreateButton type="submit">Save</CreateButton>
+              <CancelButton type="button">Cancel</CancelButton>
             </form>
           </AnimateEditForm>
           <br />
