@@ -9,7 +9,8 @@ import {
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
   DRAG_DASHBOARD_TAB,
-  UPDATE_CURRENT_TAB_QUERY
+  UPDATE_CURRENT_TAB_QUERY,
+  MOVE_TAB_TO_WORKSPACE
 } from './types';
 
 export const initEmptyWorkspace = () => {
@@ -31,6 +32,13 @@ export const renameWorkspace = (data) => {
   return {
     type: RENAME_CURRENT_WORKSPACE,
     payload: data
+  };
+};
+
+export const moveTabToWorkspace = data => {
+  return {
+    type: MOVE_TAB_TO_WORKSPACE,
+    payload: data,
   };
 };
 

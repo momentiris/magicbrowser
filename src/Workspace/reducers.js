@@ -11,7 +11,8 @@ import {
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
   DRAG_DASHBOARD_TAB,
-  UPDATE_CURRENT_TAB_QUERY
+  UPDATE_CURRENT_TAB_QUERY,
+  MOVE_TAB_TO_WORKSPACE
 } from './types';
 
 const dummySavedLinks = [
@@ -190,6 +191,31 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           active: state[state.current].active,
         }
       };
+      break;
+
+    case MOVE_TAB_TO_WORKSPACE:
+
+      const findtabincurrent = state[payload.current].tabs.find((tab, i) => i === parseInt(payload.id));
+      const findindexincurrent = state[payload.current].tabs.findIndex((tab, i) => i === parseInt(payload.id));
+
+      const temparr = [...state[payload.target].tabs];
+      temparr.push(findtabincurrent);
+
+
+      const test123 = {
+        ...state,
+        [payload.current]: {
+          ...state[payload.current],
+          tabs: [...state[payload.current].tabs].filter((tab, i) => i !== findindexincurrent),
+          active: findindexincurrent === 0 ? 0 : findindexincurrent - 1
+        },
+        [payload.target]: {
+          ...state[payload.target],
+          tabs: temparr
+        }
+      };
+
+      return test123;
       break;
 
     case DRAG_DASHBOARD_TAB:

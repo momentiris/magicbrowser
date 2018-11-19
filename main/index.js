@@ -4,25 +4,30 @@ require('dotenv').load();
 
 let workspaces;
 let selectedTab;
-ipcMain.on('selectTab', (e, id) => {
-  selectedTab = id;
+let currentws;
+ipcMain.on('selectTab', (e, data) => {
+  selectedTab = data.id;
+  currentws = data.currentws;
 });
-const moveTabsToWorkspace = (ws, id) => {
-  console.log({
-    ws: ws,
-    id: id
-  });
-  // win.webContents.send('targetPriceVal', 'from main');
+
+const moveTabsToWorkspace = (ws) => {
+  const payload = {
+    current: currentws,
+    target: ws,
+    id: selectedTab
+  };
+
+  win.webContents.send('moveTabs', payload);
 };
 
 ipcMain.on('listworkspaces', function (event, arg) {
   workspaces = arg;
   require('electron-context-menu')({
     prepend: (params, browserWindow) =>
-      workspaces.map(ws => ({
+      workspaces.map((ws, current) => ({
         label: ws,
         click() {
-          moveTabsToWorkspace(ws, id);
+          moveTabsToWorkspace(ws);
         }
       }))
   });

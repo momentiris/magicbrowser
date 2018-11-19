@@ -8,6 +8,7 @@ import {
   removeSelectedTab,
   setTabActive,
   handleDragDashBoardTab,
+  moveTabToWorkspace,
 } from '../Workspace/actions';
 import { handleDashboardOpenUI } from '../UserNavigation/actions';
 
@@ -17,7 +18,13 @@ const { ipcRenderer } = electron;
 class TabHandler extends Component {
   componentDidMount() {
     console.log(this.props);
+    this.handleMsgFromMain();
+  }
 
+  handleMsgFromMain = () => {
+    ipcRenderer.on('moveTabs', (event, data) => {
+      this.props.moveTabToWorkspace(data);
+    });
   }
 
   addOneTab = (e) => {
@@ -41,8 +48,12 @@ class TabHandler extends Component {
   }
 
   registerContextMenuEvents = elem => {
+    console.log(this.props.currentWorkspace);
     elem.addEventListener('contextmenu', (event) => {
-      ipcRenderer.send('selectTab', event.target.id);
+      ipcRenderer.send('selectTab', {
+        id: event.target.id,
+        currentws: this.props.currentWorkspace
+      });
     });
   }
 
@@ -82,7 +93,8 @@ const mapActionsToProps = (dispatch, props) => {
     removeSelectedTab: removeSelectedTab,
     setTabActive: setTabActive,
     handleDragDashBoardTab: handleDragDashBoardTab,
-    handleDashboardOpenUI: handleDashboardOpenUI
+    handleDashboardOpenUI: handleDashboardOpenUI,
+    moveTabToWorkspace: moveTabToWorkspace
   }, dispatch);
 };
 
@@ -95,7 +107,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     setTabActive: arg => dispatchProps.setTabActive(arg),
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
-    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI
+    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
+    currentWorkspace: stateProps.workspaces.current,
+    moveTabToWorkspace: arg => dispatchProps.moveTabToWorkspace(arg)
   });
 };
 

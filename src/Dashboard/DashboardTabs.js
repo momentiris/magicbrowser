@@ -28,26 +28,22 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
     );
   });
 
-  // const SortableItemSavedLinks = SortableElement(({value, saveindex}) => {
-  //   return (
-  //     <SavedLinksItems key={saveindex} id={saveindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
-  //       <SavedLinksFavicon/>
-  //       <SavedLinksTitle>
-  //         {value}
-  //         {value.id}
-  //       </SavedLinksTitle>
-  //     </SavedLinksItems>
-  //
-  //
-  //     {
-  //       savedLinks.map((item, index) => {
-  //         return <SortableItemSavedLinks key={`item-${index}`} id={index} savindex={index} index={index} value={item.src}></SortableItemSavedLinks>;
-  //       })
-  //     }
-  //
-  //
-  //   );
-  // });
+  const SortableItemSavedLinks = SortableElement(({value, saveindex}) => {
+    return (
+      <SavedLinksItems key={saveindex} id={saveindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
+        <SavedLinksFavicon/>
+        <SavedLinksTitle>
+          {value}
+          {value.id}
+        </SavedLinksTitle>
+      </SavedLinksItems>
+
+
+
+
+
+    );
+  });
 
   const SortableList = SortableContainer(({items, savedLinks}) => {
     return (
@@ -66,9 +62,11 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
           </SavedLinksHeader>
           <SavedLinksWrapper>
             <SavedLinksPositioning>
-              {savedLinks && savedLinks.map((item, index) => {
-                return <SortableItem  key={`item-${index}`} id={index} tabindex={index} index={index} value={item.title}> </SortableItem>;
-              })}
+              {
+                savedLinks.map((item, index) => {
+                  return <SortableItemSavedLinks key={`item-${index}`} id={index} savindex={index} index={index} value={item.src}></SortableItemSavedLinks>;
+                })
+              }
             </SavedLinksPositioning>
           </SavedLinksWrapper>
         </SavedLinks>
