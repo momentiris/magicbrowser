@@ -5,6 +5,7 @@ import {
   ADD_ONE_TAB,
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
+  DELETE_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
   NAVIGATE_TO_URL,
@@ -129,6 +130,19 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       const withoutCurrent2 = Object.keys(updatedWs).filter(ws => ws !== 'current');
       setContextMenuWorkspaces(withoutCurrent2);
       return updatedWs;
+      break;
+
+    case DELETE_CURRENT_WORKSPACE:
+      return Object.assign({}, state, {
+        [state.current]: {
+          ...state[state.current],
+          workspace: state[state.current].workspace,
+          tabs: state[state.current].tabs
+            .filter((tab, i) => i !== payload.id),
+          active: 0,
+          color: state[state.current].color
+        }
+      });
       break;
 
     case SWITCH_WORKSPACES:

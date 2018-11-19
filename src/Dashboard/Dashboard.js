@@ -59,7 +59,8 @@ import {
   handleDragDashBoardTab,
   handleDragDashBoardSavedLinks,
   renameWorkspace,
-  handleOpenDashBoard
+  handleOpenDashBoard,
+  deleteWorkspace,
 } from '../Workspace/actions';
 
 
@@ -185,6 +186,11 @@ class Dashboard extends Component {
     this.props.removeSelectedTab(id);
   }
 
+  deleteWorkspace = id => {
+    this.props.deleteWorkspace(id);
+    console.log(id);
+  }
+
   updateWsColor = (color) => {
     this.setState({
       wsButtonColor: color,
@@ -295,6 +301,7 @@ class Dashboard extends Component {
               onToggleRename={this.onToggleRename}
               isActive={active}
               editWorkspaceValue={editWorkspace}
+              deleteWorkspace={this.deleteWorkspace}
               animatesworkspace={this.state.animatesworkspace}
             />
             <AnimateTabs isActive={this.state.animatestabs}>

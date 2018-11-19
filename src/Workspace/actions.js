@@ -4,6 +4,7 @@ import {
   ADD_ONE_TAB,
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
+  DELETE_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
   OPEN_DASHBOARD,
@@ -65,6 +66,14 @@ export const handleOpenDashBoard = data => {
     payload: data
   };
 };
+
+export const deleteWorkspace = data => {
+  return {
+    type: DELETE_CURRENT_WORKSPACE,
+    payload: data
+  };
+};
+
 
 export const removeSelectedTab = id => {
   return {

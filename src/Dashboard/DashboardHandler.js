@@ -12,7 +12,8 @@ import {
   handleDragDashBoardTab,
   handleDragDashBoardSavedLinks,
   renameWorkspace,
-  handleOpenDashBoard
+  handleOpenDashBoard,
+  deleteWorkspace,
 } from '../Workspace/actions';
 
 class DashboardHandler extends Component {
@@ -57,6 +58,7 @@ class DashboardHandler extends Component {
         handleDragDashBoardSavedLinks={handleDragDashBoardSavedLinks}
         handleOpenDashBoard={handleOpenDashBoard}
         savedLinks={savedLinks}
+        deleteWorkspace={deleteWorkspace}
       />
     );
   }
@@ -84,7 +86,8 @@ const mapActionsToProps = (dispatch, props) => {
     removeSelectedTab: removeSelectedTab,
     handleDragDashBoardTab: handleDragDashBoardTab,
     handleDragDashBoardSavedLinks: handleDragDashBoardSavedLinks,
-    handleOpenDashBoard: handleOpenDashBoard
+    handleOpenDashBoard: handleOpenDashBoard,
+    deleteWorkspace: deleteWorkspace,
   }, dispatch);
 };
 
@@ -111,6 +114,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
     handleDragDashBoardSavedLinks: arg => dispatchProps.handleDragDashBoardSavedLinks(arg),
     handleOpenDashBoard: arg => dispatchProps.handleOpenDashBoard(arg),
+    deleteWorkspace: arg => dispatchProps.deleteWorkspace(arg),
     savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
 
   });

@@ -41,7 +41,7 @@ const DashboardWorkspaces = ({
   <Ul name="workspaces" isActive={animatesworkspace}>
     {
       workspaces.map((ws, i) => (
-        <Li key={i} data-ws={i}>
+        <Li key={i} data-ws={i} id={i}>
           <Button isTarget={currentWsUI === ws[0]}  data-ws={i} onMouseDown={handleClick} value={ws[0]}>
             <Hover isTarget={currentWsUI === ws[0]} color={
               updateWorkspace.target === ws[0] &&
@@ -54,7 +54,7 @@ const DashboardWorkspaces = ({
           </Button>
           <RenameEdit isTarget={currentWsUI === ws[0]} onClick={() => editWorkspace(i)} value={ws[0]}>
             <RenameEditIcon />
-            <p style={{position: 'absolute', marginLeft: '22px', top: '-5px'}}>Edit</p>
+            <p style={{position: 'absolute', marginLeft: '22px', top: '-5px', cursor: 'pointer'}}>Edit</p>
           </RenameEdit>
           <DeleteWs isTarget={currentWsUI === ws[0]} onClick={() => deleteWorkspace(i)} value={ws[0]}>Delete</DeleteWs>
           <AnimateEditForm isActive={editWorkspaceToggle} id={i}>
