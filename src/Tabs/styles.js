@@ -20,12 +20,13 @@ export const SingleTabContainer = styled.div`
   position: relative;
   border-radius: 5px 5px 0 0;
   background: ${props => props.isActive ? props.theme.lightergrey : 'none'};
+
   ${props => !props.isActive && `
     :hover {
-      background: rgba(234,234,234, 1);
+      background: #F5F5F5;
       button {
         ::after {
-          background: linear-gradient( to right, rgba(255,255,255,0) 0%, rgba(234,234,234, 1) 89%, rgba(234,234,234, 1) 100%);
+          background: linear-gradient( to right, rgba(255,255,255,0) 0%, #F5F5F5 89%, #F5F5F5 100%);
         }
       }
     }
@@ -68,6 +69,7 @@ export const CloseTabButton = styled(Button)`
   margin-right: 8px;
   margin-top: 2px;
   position: relative;
+  transition: background ${props => props.theme.navhovertransition};
   :hover {
     background: ${props => props.theme.greybuttonhover};
 
@@ -82,6 +84,7 @@ export const CloseTabButton = styled(Button)`
     left: -40px;
     width: 40px;
     height: 100%;
+
     background: linear-gradient(
       to right,
       rgba(255,255,255,0) 0%,
@@ -103,19 +106,20 @@ export const AddTabButton = styled(Button)`
   margin-left: 4px;
   margin-right: 5px;
   position: relative;
+  transition: background ${props => props.theme.navhovertransition};
   :hover {
-    background: ${props => props.theme.greybuttonhover};
+    background: ${props => props.theme.lightergrey};
   }
   :active {
-    background: ${props => props.theme.greybuttonactive};
+    background: ${props => props.theme.lightergrey};
   }
-  ${'' /* &:after {
+  &:after {
     content: "";
     display: block;
     position: absolute;
-    left: -4px;
-    border-left: 1px solid ${props => props.theme.lightgrey};
+    left: -5px;
+    border-left: 1px solid ${props => props.theme.darkgrey};
     height: 24px;
     vertical-align: center;
-  } */}
+  }
 `;

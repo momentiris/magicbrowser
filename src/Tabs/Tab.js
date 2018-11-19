@@ -26,6 +26,7 @@ class Tab extends React.Component {
     const { removeSelectedTab, setActive, isActive, favicon, title, id, src, key } = this.props;
     return (
       <SingleTabContainer
+        className="Showcase__style__stylizedHelper"
         ref={this.elem}
         id={id}
         key={key}

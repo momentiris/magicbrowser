@@ -9,6 +9,7 @@ import {
   InnerColorPickerContainer,
   NewWsColorInput,
   NewWsColorInputWrapper,
+  CreateButton
 } from './styles';
 import {
   DotIcon,
@@ -179,7 +180,7 @@ class NavNewWs extends Component {
               { workspaces.map((ws, i) => <option key={i} value={ws[0]}>{ws[0]}</option> )}
             </NewWsColorInput>
           </NewWsColorInputWrapper>
-          <span onClick={this.handleSubmit} style={{cursor: 'pointer', alignSelf: 'flex-start'}}>Create</span>
+          <CreateButton onClick={this.handleSubmit}>Create</CreateButton>
         </ColorPickerContainer>
       </NewWsContainer>
 

@@ -8,15 +8,17 @@ import {
   Src,
   MetaWrap
 } from './styles.js';
+import { parser } from '../UrlBar/parser';
 
-const SavedLinks = ({ open, savedLinks }) => {
+const SavedLinks = ({ open, savedLinks, addOneTab }) => {
+
   const SavedLink = ({img, title, src}) => (
     <Wrapper>
       <ImageWrap>
         <Image src={img}/>
       </ImageWrap>
       <MetaWrap>
-        <Title> {title} </Title>
+        <Title onClick={() => addOneTab({src: parser(src)}) }> {title} </Title>
         <Src> {src} </Src>
       </MetaWrap>
     </Wrapper>

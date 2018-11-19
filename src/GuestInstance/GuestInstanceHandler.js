@@ -18,11 +18,6 @@ class GuestInstanceHandler extends Component {
     super(props);
   }
 
-  componentDidMount() {
-
-
-  }
-
   eventHandlers = {
     onDomReady: ({ target, target: { dataset: { id } } }) => {
 
@@ -32,19 +27,18 @@ class GuestInstanceHandler extends Component {
       const title = target.getTitle();
 
       if (currentSrc !== src) {
-        this.props.updateTabMeta({
-          type: 'src',
-          data: src,
-          id
-        });
-
-      }
-      if (currentTitle !== title) {
-        this.props.updateTabMeta({
-          type: 'title',
-          data: title,
-          id
-        });
+        this.props.updateTabMeta([
+          {
+            type: 'src',
+            data: src,
+            id
+          },
+          {
+            type: 'title',
+            data: title,
+            id
+          }
+        ]);
       }
       // target.removeEventListener('dom-ready', this.eventHandlers.onDomReady);
     },
@@ -57,11 +51,11 @@ class GuestInstanceHandler extends Component {
     onPageFaviconUpdated: ({ favicons, target, target: { dataset: { id } }}) => {
       const currentFavicon = target.dataset.favicon;
       if (currentFavicon === favicons[0]) return;
-      this.props.updateTabMeta({
+      this.props.updateTabMeta([{
         type: 'favicon',
         data: favicons[0],
         id
-      });
+      }]);
       // target.removeEventListener('page-favicon-updated', this.eventHandlers.onPageFaviconUpdated);
     }
 
@@ -84,12 +78,13 @@ class GuestInstanceHandler extends Component {
       tabs,
       active,
       userNavigation,
-      savedLinks
+      savedLinks,
+      addOneTab
     } = this.props;
 
     return (
       <WebviewContainerWrap className="webviewContainerWrap">
-        <SavedLinks open={userNavigation.savedLinksOpen} savedLinks={savedLinks}/>
+        <SavedLinks addOneTab={addOneTab} open={userNavigation.savedLinksOpen} savedLinks={savedLinks}/>
         {
           tabs.map((tab, i) => {
 

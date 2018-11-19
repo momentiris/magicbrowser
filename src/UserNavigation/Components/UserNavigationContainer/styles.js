@@ -11,6 +11,7 @@ export const Container = styled.div`
 `;
 
 export const UrlBarContainer = styled.div`
+
   pointer-events: ${props => props.dashboardOpen ? 'auto' : props.show ? 'none' : 'auto'};
   display: flex;
   border: none;
@@ -22,7 +23,7 @@ export const UrlBarContainer = styled.div`
   border-radius: ${props => props.theme.br};
   padding: 0;
   margin: 0 8px 0 8px;
-  transition: opacity 100ms ease ${props => !props.show ? '0ms' : '75ms'};
+  transition: opacity 100ms ease ${props => !props.show ? '0ms' : '75ms'}, background ${props => props.theme.navhovertransition};
   opacity: ${props => props.dashboardOpen ? 1 : props.show ? 0 : 1};
   align-items: center;
   :hover {
@@ -34,8 +35,9 @@ export const AddToReadingListButton = styled(Button)`
   margin-right: 8px;
   width: 24px;
   height: 24px;
+  transition: background ${props => props.theme.navhovertransition};
   :hover {
-    background: ${props => props.theme.mediumgrey};
+    background: ${props => props.theme.lightergrey};
   }
   :active {
     background: ${props => props.theme.greybuttonactive};
@@ -46,12 +48,13 @@ export const ReadingListButton = styled(Button)`
   width: 91px;
   width: ${props => props.dashboardOpen ? '0px' : '91px'};
   height: 32px;
+
   background: ${props => props.savedLinksOpen ? props.theme.darkgrey : props.theme.lightgrey};
   margin-right: 5px;
   overflow: hidden;
   position: relative;
   z-index: 100;
-  transition: opacity 200ms ease, width 150ms ease;
+  transition: opacity 200ms ease, width 150ms ease, background ${props => props.theme.navhovertransition};
   opacity: ${props => props.dashboardOpen ? 0 : 1};
 
   :hover {
@@ -68,6 +71,7 @@ export const NavSettingsButton = styled(Button)`
   background: ${props => props.theme.lightergrey};
   margin-right: 5px;
   overflow: hidden;
+  transition: background ${props => props.theme.navhovertransition};
   :hover {
     background: ${props => props.theme.mediumgrey};
   }
@@ -123,6 +127,7 @@ export const GoToDashboardButton = styled(Link)`
   justify-content: center;
   color: white;
   text-decoration: none;
+  transition: background ${props => props.theme.navhovertransition};
   :hover {
     background: ${props => props.theme.bluebuttonhover};
   }

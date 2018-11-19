@@ -26,7 +26,8 @@ export const stylesheet = {
   greybuttonidle: '#E9EBEE',
   greybuttonhover: '#DDDFE3',
   greybuttonactive: '#CDD0D6',
-  borderradiuscolor: '#E0E0E0'
+  borderradiuscolor: '#E0E0E0',
+  navhovertransition: '200ms ease',
 };
 
 export const iconColors = [

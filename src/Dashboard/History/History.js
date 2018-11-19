@@ -16,29 +16,30 @@ const History = ({
   workspace,
   currentWsUI,
   animateshistory,
-}) => (
-  <Container isActive={animateshistory}>
-    <Wrapper >
-      {
-        workspace.map((ws, i) =>
-          <HeaderWrapper
-            key={i}
-          >
-          <Header3 isActive={animateshistory}>
-            <WorkSpaceColor color={ws.color || '#5C4EFF'}> </WorkSpaceColor>
-            {ws[0]}
-            {currentWsUI}
-          </Header3>
-          <ButtonWrapper isActive={animateshistory}>
-            <VisualButton>Visual</VisualButton>
-            <ListButton>List</ListButton>
-          </ButtonWrapper>
-          </HeaderWrapper>
-        )
-      }
-    <HistoryImg isActive={animateshistory}/>
-    </Wrapper>
-  </Container>
-);
+}) => {
+  return (
+
+    <Container isActive={animateshistory}>
+      <Wrapper >
+        {
+          workspace.map((ws, i) =>
+            <HeaderWrapper key={i}>
+              <Header3 isActive={animateshistory}>
+                <WorkSpaceColor className="workspacecolor" color={ws.color}> </WorkSpaceColor>
+                {ws[0]}
+                {currentWsUI}
+              </Header3>
+              <ButtonWrapper isActive={animateshistory}>
+                <VisualButton>Visual</VisualButton>
+                <ListButton>List</ListButton>
+              </ButtonWrapper>
+            </HeaderWrapper>
+          )
+        }
+        <HistoryImg isActive={animateshistory}/>
+      </Wrapper>
+    </Container>
+  );
+};
 
 export default History;

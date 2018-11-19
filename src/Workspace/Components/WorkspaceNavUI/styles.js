@@ -28,6 +28,7 @@ export const WsItem = styled.div`
   display: flex;
   margin-left: ${props => props.current ? 0 : '8px'};
   background: ${props => props.clicked ? props.theme.darkgrey : props.current ? props.theme.lightgrey : 'none'};
+  transition: background ${props => props.theme.navhovertransition};
   &:hover {
     background: ${props => !props.current ? props.theme.mediumgrey : props.theme.darkgrey};
   }

@@ -40,8 +40,13 @@ class TabHandler extends Component {
     dashboardTabIndex === id && this.props.handleDashboardOpenUI();
   }
 
-  setActive = tab => {
-    this.props.setTabActive(tab);
+  setActive = id => {
+
+    const dashboardTabIndex = this.props.tabs.findIndex(tab => tab.src === 'dashboard');
+    // await console.log(this.props.active);
+
+    // dashboardTabIndex === id && this.props.handleDashboardOpenUI();
+    this.props.setTabActive(id);
   }
 
   handleDragDashBoardTab = tabs => {

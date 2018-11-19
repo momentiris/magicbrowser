@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
   flex-wrap: nowrap;
   margin-bottom: 24px;
 `;
+
 export const ImageWrap = styled.div`
   width: 64px;
   height: 64px;
@@ -28,6 +29,7 @@ export const ImageWrap = styled.div`
   box-shadow: 0px 2px 10px rgba(116, 116, 116, 0.25);
   margin-right: 18px;
 `;
+
 export const Image = styled.img`
 
 `;
@@ -40,6 +42,8 @@ export const MetaWrap = styled.div`
 export const Title = styled.span`
   font-family: latobold;
   margin-bottom: 4px;
+  cursor: pointer;
+
 `;
 
 export const Src = styled.span`

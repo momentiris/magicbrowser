@@ -37,8 +37,8 @@ const dummySavedLinks = [
 ];
 
 const initialState = {
-  current: 'default',
-  default: {
+  current: 'Unsaved',
+  Unsaved: {
     tabs: [
       {
         src: 'http://google.se',
@@ -78,7 +78,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case INIT_EMPTY_WORKSPACE:
       return Object.assign({},
-        state.default ? {
+        state.Unsaved ? {
           ...state
         } : {
           ...state,
@@ -86,8 +86,10 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         });
 
     case ADD_WORKSPACE:
+
       const addedWs =  Object.assign({}, {
         ...state,
+        current: !payload.switch ? state.current : payload.name,
         [payload.name]: {
           ...workspaceTemplate,
           tabs: payload.import ? [...state[payload.import].tabs] : [...workspaceTemplate.tabs],
@@ -137,19 +139,21 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case ADD_ONE_TAB:
-      return {
+      const newTab = {
         ...state,
         [payload.ws || state.current]: {
           ...state[payload.ws || state.current],
           tabs: [...state[payload.ws || state.current].tabs, {
-            ...tabTemplate
+            ...tabTemplate,
+            src: payload.src || tabTemplate.src
           }]
         }
       };
+      newTab[newTab.current].active = newTab[newTab.current].tabs.length - 1;
+      return newTab;
       break;
 
     case REMOVE_SELECTED_TAB:
-
       return Object.assign({}, state, {
         [state.current]: {
           ...state[state.current],
@@ -179,6 +183,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           ...state[state.current],
           tabs: state[state.current].tabs.map((tab, i) => {
             tab.src = state[state.current].active === i ? payload : tab.src;
+            tab.favicon = state[state.current].active === i ? false : tab.favicon;
             return tab;
           }),
           active: state[state.current].active,
@@ -199,15 +204,19 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case UPDATE_TAB_META:
+
       return {
         ...state,
         [state.current]: {
           ...state[state.current],
           tabs: state[state.current].tabs.map((tab, i) => {
-            tab[payload.type] = i === parseInt(payload.id) ?
-              payload.data :
-              tab[payload.type];
+            payload.forEach(meta => {
+              tab[meta.type] = i === parseInt(meta.id) ?
+                meta.data :
+                tab[meta.type];
+            });
             return tab;
+
           }),
           active: state[state.current].active,
         }

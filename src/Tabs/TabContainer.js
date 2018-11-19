@@ -33,6 +33,7 @@ class TabContainer extends Component {
 
     const SortableItem = SortableElement(({ value, tabIndex, key }) => (
       <Tab
+        index={key}
         registerContextMenuEvents={registerContextMenuEvents}
         id={tabIndex}
         isActive={tabIndex === active}
@@ -60,10 +61,10 @@ class TabContainer extends Component {
     return (
       <SortableList
         lockToContainerEdges={true}
+
         lockAxis="x"
         distance={10}
         items={tabs}
-        onSortStart={this.onSortStart}
         onSortEnd={this.onSortEnd}
         axis='x'
       />

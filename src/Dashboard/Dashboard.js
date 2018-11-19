@@ -61,6 +61,8 @@ import {
   handleOpenDashBoard
 } from '../Workspace/actions';
 
+import { iconColors } from '../common/stylesheet';
+
 
 
 class Dashboard extends Component {
@@ -98,6 +100,7 @@ class Dashboard extends Component {
 
   onToggle = () => {
     this.setState({ workspaceToggle: !this.state.workspaceToggle });
+    this.setRandomSuggestedColor();
     this.workspaceInput.current.focus();
   }
 
@@ -114,6 +117,20 @@ class Dashboard extends Component {
     });
   }
 
+  setRandomSuggestedColor = () => {
+    const wsColors = this.props.workspaces.map(ws => ws[1].color);
+    const filteredColors = iconColors.filter(ic => {
+      return !wsColors.includes(ic);
+    });
+
+    this.setState({
+      newWorkspace: {
+        ...this.state.newWorkspace,
+        color: filteredColors[Math.floor(Math.random()*filteredColors.length)],
+      }
+    });
+  }
+
   handleClick = ({ target: { value } }) => {
     this.setState({
       currentWsUI: value,
@@ -122,7 +139,10 @@ class Dashboard extends Component {
 
   addWorkspace = e => {
     e.preventDefault();
-    this.props.addWorkspace(this.state.newWorkspace);
+    this.props.addWorkspace({
+      ...this.state.newWorkspace,
+      switch: false
+    });
   }
 
   renameWorkspace = (e, i) => {
@@ -248,7 +268,7 @@ class Dashboard extends Component {
             </NewWsButton>
             <AnimateForm isActive={this.state.workspaceToggle}>
               <form onSubmit={this.addWorkspace} style={{height: '100%'}}>
-                <NewWsHover isActive={this.state.workspaceToggle} color={this.state.wsButtonColor || '#5C4EFF'}>
+                <NewWsHover isActive={this.state.workspaceToggle} color={this.state.newWorkspace.color || '#5C4EFF'}>
                   <RightArrowNewWs />
                 </NewWsHover>
                 <Input

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NewWsContainer = styled.div`
   position: relative;
-  transition: width 100ms ease;
+  transition: width 100ms ease, background ${props => props.theme.navhovertransition};;
   width: ${props => props.toggleOpen ? '280px' : '26px'};
   height: 32px;
   border-radius: ${props => props.theme.br} ${props => props.theme.br} 0 0;
@@ -11,6 +11,8 @@ export const NewWsContainer = styled.div`
   display: flex;
   align-items: center;
   overflow: ${props => !props.open ? 'hidden' : 'visible'};
+  font-size: 12px;
+
   &:focus {
     outline: none;
   }
@@ -22,14 +24,17 @@ export const NewWsContainer = styled.div`
   }
 
 `;
-
+export const CreateButton = styled.span`
+  cursor: pointer;
+  align-self: flex-start;
+`;
 export const NewWsInput = styled.input`
   width: 117px;
   box-sizing: border-box;
   border: none;
   height: 20px;
   background: none;
-  font-size: 12px;
+  font-size: 16px;
   padding-left: 4px;
   padding-right: 4px;
   margin-left: 8px;
@@ -43,6 +48,14 @@ export const NewWsInput = styled.input`
 
 export const NewWsButtonContainer = styled.div`
   padding: 0 8px 0 8px;
+  margin-right: 8px;
+  cursor: pointer;
+  svg {
+    cursor: pointer;
+    path {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const NewWsArrowContainer = styled.div`
@@ -125,9 +138,9 @@ export const NewWsColorInput = styled.select`
   width: 117px;
   padding: 0;
   color: #848484;
-  height: 100%;
-  font-size: 14px;
-
+  height: 60;
+  font-size: 12px;
+  margin-left: 12px;
   &:focus {
     outline: none;
   }
@@ -141,8 +154,7 @@ export const NewWsColorInputWrapper = styled.div`
   align-items: center;
   flex-shrink: 0;
   display: flex;
-  justify-content: space-between;
-  ${'' /* margin-left: 10px;
-  margin-top: 12px; */}
+  font-size: 12px;
+
 
 `;
