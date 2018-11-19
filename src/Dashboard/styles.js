@@ -47,8 +47,8 @@ export const TabWrapper = styled.div`
   flex-direction: column;
   height: 100%;
   padding-top: 48px;
-  margin-left: 113px;
   min-height: 600px;
+  min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
   transition: all 1.2s ease-out;
@@ -70,6 +70,12 @@ export const TabItems = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+  &:active {
+    transform: scale(1.05)!important;
+  }
+  &:focus {
+    transform: scale(1.05);
+  }
 `;
 
 export const AddNewTab = styled.div`
@@ -85,6 +91,9 @@ export const AddNewTab = styled.div`
   transition: all .1s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
+  &:last-child {
+    margin-right: 0px;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -238,6 +247,7 @@ export const Ul = styled.ul`
   padding: 0px;
   width: 325px;
   padding-top: 48px;
+  margin-right: 110px;
   opacity: ${props => props.isActive ? '0' : '1'}
   transition: all .2s ease-out;
   transition-delay: .2s;
@@ -392,7 +402,7 @@ export const WsWrapp = styled.div`
 `;
 
 export const TabsHeader = styled.h2`
-  margin-left: 355px;
+  margin-left: 353px;
   font-family: latoregular;
   font-style: normal;
   font-weight: normal;
