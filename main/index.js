@@ -24,12 +24,17 @@ ipcMain.on('listworkspaces', function (event, arg) {
   workspaces = arg;
   require('electron-context-menu')({
     prepend: (params, browserWindow) =>
-      workspaces.map((ws, current) => ({
-        label: ws,
-        click() {
-          moveTabsToWorkspace(ws);
+      [
+        {
+          label: 'Move to workspace',
+          'submenu': workspaces.map((ws, current) => ({
+            label: ws,
+            click() {
+              moveTabsToWorkspace(ws);
+            }
+          }))
         }
-      }))
+      ]
   });
 });
 

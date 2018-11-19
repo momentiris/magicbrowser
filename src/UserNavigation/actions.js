@@ -10,6 +10,7 @@ import {
   TOGGLE_SAVED_LINKS_OPEN
 } from './types';
 
+
 export const navigateToUrl = url => {
   return {
     type: NAVIGATE_TO_URL,

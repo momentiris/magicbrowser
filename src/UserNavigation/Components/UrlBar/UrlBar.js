@@ -82,7 +82,7 @@ class UrlBar extends Component {
     this.setState({
       isFocused: true,
     });
-    console.log('focused');
+
     this.props.handleToggleUrlBarFocus();
   }
 
@@ -90,7 +90,7 @@ class UrlBar extends Component {
     this.setState({
       isFocused: false,
     });
-    console.log('blurred');
+
     this.props.handleToggleUrlBarFocus();
   }
 

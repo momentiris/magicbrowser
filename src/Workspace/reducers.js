@@ -15,6 +15,8 @@ import {
   MOVE_TAB_TO_WORKSPACE
 } from './types';
 
+import { setContextMenuWorkspaces } from '../common/contextmenu';
+
 const dummySavedLinks = [
   {
     title: 'For Sulki and Min, creative freedom is overrated and they be...',
@@ -84,7 +86,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         });
 
     case ADD_WORKSPACE:
-      return Object.assign({}, {
+      const addedWs =  Object.assign({}, {
         ...state,
         [payload.name]: {
           ...workspaceTemplate,
@@ -92,13 +94,13 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           color: payload.color
         }
       });
+      const withoutCurrent = Object.keys(addedWs).filter(ws => ws !== 'current');
+      setContextMenuWorkspaces(withoutCurrent);
+      return addedWs;
+      break;
 
     case RENAME_CURRENT_WORKSPACE:
-      const renameProp = (
-        oldProp,
-        newProp,
-        { [oldProp]: old, ...others }
-      ) => ({
+      const renameProp = (oldProp,newProp, { [oldProp]: old, ...others } ) => ({
         [newProp]: old,
         ...others,
       });
@@ -107,6 +109,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       const updatedWs = renameProp(payload.target, payload.newName, clone);
       updatedWs[payload.newName].color = payload.newColor;
       updatedWs.current = updatedWs.current === payload.target ? payload.newName : updatedWs.current;
+      const withoutCurrent2 = Object.keys(updatedWs).filter(ws => ws !== 'current');
+      setContextMenuWorkspaces(withoutCurrent2);
       return updatedWs;
 
     case SWITCH_WORKSPACES:
@@ -201,8 +205,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       const temparr = [...state[payload.target].tabs];
       temparr.push(findtabincurrent);
 
-
-      const test123 = {
+      return {
         ...state,
         [payload.current]: {
           ...state[payload.current],
@@ -214,8 +217,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           tabs: temparr
         }
       };
-
-      return test123;
       break;
 
     case DRAG_DASHBOARD_TAB:

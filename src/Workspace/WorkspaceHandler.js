@@ -11,6 +11,7 @@ import {
   initEmptyWorkspace,
   openDashBoard
 } from './actions';
+import { setContextMenuWorkspaces } from '../common/contextmenu';
 
 import { toggleSavedLinksOpen } from '../UserNavigation/actions';
 const electron = window.electron;
@@ -29,8 +30,9 @@ class WorkspaceHandler extends Component {
   }
 
   updateMainProcess = () => {
+
     const workspaces = this.props.workspaces.map(ws => ws[0]);
-    ipcRenderer.send('listworkspaces', workspaces);
+    setContextMenuWorkspaces(workspaces);
 
   }
 

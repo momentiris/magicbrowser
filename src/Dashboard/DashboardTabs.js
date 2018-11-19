@@ -63,7 +63,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, savedL
           <SavedLinksWrapper>
             <SavedLinksPositioning>
               {
-                savedLinks.map((item, index) => {
+                savedLinks && savedLinks.map((item, index) => {
                   return <SortableItemSavedLinks key={`item-${index}`} id={index} savindex={index} index={index} value={item.src}></SortableItemSavedLinks>;
                 })
               }

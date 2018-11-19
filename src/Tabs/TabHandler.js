@@ -11,6 +11,7 @@ import {
   moveTabToWorkspace,
 } from '../Workspace/actions';
 import { handleDashboardOpenUI } from '../UserNavigation/actions';
+import { contextMenuSetData, setContextMenuWorkspaces } from '../common/contextmenu';
 
 const electron = window.electron;
 const { ipcRenderer } = electron;
@@ -48,13 +49,7 @@ class TabHandler extends Component {
   }
 
   registerContextMenuEvents = elem => {
-    console.log(this.props.currentWorkspace);
-    elem.addEventListener('contextmenu', (event) => {
-      ipcRenderer.send('selectTab', {
-        id: event.target.id,
-        currentws: this.props.currentWorkspace
-      });
-    });
+    elem.addEventListener('contextmenu', () => contextMenuSetData(elem, this.props.currentWorkspace));
   }
 
   render() {
@@ -94,7 +89,8 @@ const mapActionsToProps = (dispatch, props) => {
     setTabActive: setTabActive,
     handleDragDashBoardTab: handleDragDashBoardTab,
     handleDashboardOpenUI: handleDashboardOpenUI,
-    moveTabToWorkspace: moveTabToWorkspace
+    moveTabToWorkspace: moveTabToWorkspace,
+
   }, dispatch);
 };
 
@@ -109,7 +105,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
     handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
     currentWorkspace: stateProps.workspaces.current,
-    moveTabToWorkspace: arg => dispatchProps.moveTabToWorkspace(arg)
+    moveTabToWorkspace: arg => dispatchProps.moveTabToWorkspace(arg),
+
   });
 };
 

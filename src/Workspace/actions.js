@@ -13,6 +13,7 @@ import {
   MOVE_TAB_TO_WORKSPACE
 } from './types';
 
+
 export const initEmptyWorkspace = () => {
   return {
     type: INIT_EMPTY_WORKSPACE
