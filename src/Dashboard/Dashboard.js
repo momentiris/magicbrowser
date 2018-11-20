@@ -6,7 +6,6 @@ import WsColor from './WsColors/';
 import {arrayMove} from 'react-sortable-hoc';
 import DashboardTabs from './DashboardTabs';
 import DashboardWorkspaces from './DashboardWorkspaces';
-import SavedLinks from './SavedLinks';
 import { HistoryIcon } from '../common/assets/icons.js';
 import History from './History/History';
 import './transition.css';
@@ -27,6 +26,7 @@ import {
   CancelButton,
   NewWsButton,
   AnimateForm,
+  SavedLinks,
   TabLength,
   RightArrow,
   RightArrowNewWs,
@@ -57,10 +57,8 @@ import {
   addOneTab,
   removeSelectedTab,
   handleDragDashBoardTab,
-  handleDragDashBoardSavedLinks,
   renameWorkspace,
-  handleOpenDashBoard,
-  deleteWorkspace,
+  handleOpenDashBoard
 } from '../Workspace/actions';
 
 import { iconColors } from '../common/stylesheet';
@@ -206,17 +204,6 @@ class Dashboard extends Component {
     this.props.removeSelectedTab(id);
   }
 
-  deleteWorkspace = id => {
-
-    const target = [id];
-    const withoutTarget = this.props.workspaces.filter((ws, i) => ws[0] !== id);
-    console.log(withoutTarget[0][0]);
-    this.setState({
-      currentWsUI: withoutTarget[0][0],
-    });
-    this.props.deleteWorkspace(id);
-  }
-
   updateWsColor = (color) => {
     this.setState({
       wsButtonColor: color,
@@ -231,18 +218,6 @@ class Dashboard extends Component {
     const newTabs = arrayMove(this.props.tabs, oldIndex, newIndex);
     await this.props.handleDragDashBoardTab({
       newTabs,
-      newIndex,
-      dashboard: true
-    });
-  }
-  componentDidMount() {
-    console.log(this.props);
-  }
-
-  onSortEndSavedLinks = async ({oldIndex, newIndex}, { target }) => {
-    const newSavedLink = arrayMove(this.props.savedLinks, oldIndex, newIndex);
-    await this.props.handleDragDashBoardSavedLinks({
-      newSavedLink,
       newIndex,
       dashboard: true
     });
@@ -271,7 +246,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { currentWsUI, toggleRename, editWorkspace } = this.state;
+    const { currentWsUI, toggleRename, editWorkspace, } = this.state;
     const {
       active,
       workspaces,
@@ -327,7 +302,6 @@ class Dashboard extends Component {
               onToggleRename={this.onToggleRename}
               isActive={active}
               editWorkspaceValue={editWorkspace}
-              deleteWorkspace={this.deleteWorkspace}
               animatesworkspace={this.state.animatesworkspace}
             />
             <AnimateTabs isActive={this.state.animatestabs}>
@@ -337,15 +311,9 @@ class Dashboard extends Component {
                 currentWsUI={currentWsUI}
                 tabs={currentTabs}
                 addOneTab={this.addOneTab}
+                savedLinks={savedLinks}
               >
               </DashboardTabs>
-              <SavedLinks
-                onSortEndSavedLinks={this.onSortEndSavedLinks}
-                active={active}
-                savedLinks={savedLinks}
-                currentWsUI={currentWsUI}
-                >
-              </SavedLinks>
             </AnimateTabs>
           </Column>
         </div>
