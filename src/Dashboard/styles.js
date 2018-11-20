@@ -115,7 +115,7 @@ export const AddNewTab = styled.div`
     margin-right: 0px;
   }
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 `;
 
@@ -309,12 +309,16 @@ export const RenameEdit = styled.button`
   background: none;
 	color: inherit;
 	border: none;
+  outline: none;
   transform: translateX(0px);
   opacity: 0;
   margin: 0 0 0 0;
   ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
-  transition: all .2s ease-in;
+  transition: all .2s ease;
   cursor: pointer;
+  :active {
+    transform: scale(.90);
+  }
 `;
 
 export const RenameEditIcon = styled.svg`
