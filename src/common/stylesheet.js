@@ -11,6 +11,7 @@ export const stylesheet = {
   white: '#FFFFFF',
   black: '#000000',
   semiblack: '#5A5A5A',
+  red: '#F74034',
   // Font sizes
   small: '12px',
   medium: '16px',

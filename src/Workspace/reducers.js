@@ -5,12 +5,14 @@ import {
   ADD_ONE_TAB,
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
+  DELETE_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
   NAVIGATE_TO_URL,
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
   DRAG_DASHBOARD_TAB,
+  DRAG_DASHBOARD_SAVEDLINKS,
   UPDATE_CURRENT_TAB_QUERY,
   MOVE_TAB_TO_WORKSPACE
 } from './types';
@@ -130,6 +132,12 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       const withoutCurrent2 = Object.keys(updatedWs).filter(ws => ws !== 'current');
       setContextMenuWorkspaces(withoutCurrent2);
       return updatedWs;
+      break;
+
+    case DELETE_CURRENT_WORKSPACE:
+      const target = [payload.id];
+      const {[target[0]]: tmp, ...rest} = state;
+      return rest;
       break;
 
     case SWITCH_WORKSPACES:
@@ -276,6 +284,35 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       }
 
       // return state;
+      break;
+
+    case DRAG_DASHBOARD_SAVEDLINKS:
+      if (payload.dashboard) {
+        const newDash = {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            savedLinks: payload.newTabs
+          }
+        };
+        const dashboardIndex = newDash[newDash.current].savedLinks.findIndex(savedLinks => savedLinks.src === 'dashboard');
+        return {
+          ...newDash,
+          [newDash.current]: {
+            ...newDash[newDash.current],
+            active: dashboardIndex
+          }
+        };
+      } else {
+        return {
+          ...state,
+          [state.current]: {
+            ...state[state.current],
+            active: payload.newIndex,
+            savedLinks: payload.newSavedLink
+          }
+        };
+      }
       break;
 
     case OPEN_DASHBOARD:

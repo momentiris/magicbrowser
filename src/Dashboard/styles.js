@@ -45,9 +45,8 @@ export const Column = styled.div`
 export const TabWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding-top: 48px;
-  min-height: 600px;
+  min-height: 300px;
   min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
@@ -285,17 +284,43 @@ export const Button = styled.button`
   font-size: ${props => props.theme.large};
 `;
 
-export const RenameEdit = styled.svg`
-  background-image: url(${renameoreditsvg});
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 20px;
-  width: 20px;
+export const RenameEdit = styled.button`
+  background: none;
+	color: inherit;
+	border: none;
   transform: translateX(0px);
   opacity: 0;
   margin: 0 0 0 0;
   ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
-  transition: all .2s ease .2s;
+  transition: all .2s ease;
+  cursor: pointer;
+`;
+
+export const RenameEditIcon = styled.svg`
+  background-image: url(${renameoreditsvg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-left: 22px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+`;
+
+export const DeleteWs = styled.button`
+  position: absolute;
+  background: ${props => props.theme.red};
+  width: 52px;
+  height: 24px;
+  box-shadow: 0px 3px 3px rgba(200, 200, 200, 0.25);
+  border-radius: ${props => props.theme.br};
+  transform: translateX(0px);
+  color: ${props => props.theme.white};
+  font-size: ${props => props.theme.small};;
+  border: none;
+  text-shadow: 1px 1px 3px rgba(188, 56, 47, 0.2);
+  opacity: 0;
+  margin: 10px 0 0 0;
+  transition: all .2s ease .1s;
   cursor: pointer;
 `;
 
@@ -338,7 +363,11 @@ export const Li = styled.li`
     transform: translateX(0px);
   }
   &:hover ${RenameEdit}{
-    margin: 0 0 0 25px;
+    margin: 5px 0 0 22px;
+    opacity: 1;
+  }
+  &:hover ${DeleteWs} {
+    margin: 10px 0 0 28px;
     opacity: 1;
   }
 `;
@@ -456,7 +485,7 @@ export const WorkspaceInfoWrapper = styled.div`
 `;
 
 // Saved links
-export const SavedLinks = styled.div`
+export const SavedLinksContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 58px;

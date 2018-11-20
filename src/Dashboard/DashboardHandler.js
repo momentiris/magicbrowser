@@ -10,8 +10,10 @@ import {
   addOneTab,
   removeSelectedTab,
   handleDragDashBoardTab,
+  handleDragDashBoardSavedLinks,
   renameWorkspace,
-  handleOpenDashBoard
+  handleOpenDashBoard,
+  deleteWorkspace,
 } from '../Workspace/actions';
 
 class DashboardHandler extends Component {
@@ -30,9 +32,11 @@ class DashboardHandler extends Component {
       switchWorkspace,
       addWorkspace,
       renameWorkspace,
+      deleteWorkspace,
       addOneTab,
       removeSelectedTab,
       handleDragDashBoardTab,
+      handleDragDashBoardSavedLinks,
       handleOpenDashBoard,
       savedLinks
     } = this.props;
@@ -52,8 +56,10 @@ class DashboardHandler extends Component {
         addOneTab={addOneTab}
         removeSelectedTab={removeSelectedTab}
         handleDragDashBoardTab={handleDragDashBoardTab}
+        handleDragDashBoardSavedLinks={handleDragDashBoardSavedLinks}
         handleOpenDashBoard={handleOpenDashBoard}
         savedLinks={savedLinks}
+        deleteWorkspace={deleteWorkspace}
       />
     );
   }
@@ -80,7 +86,9 @@ const mapActionsToProps = (dispatch, props) => {
     renameWorkspace: renameWorkspace,
     removeSelectedTab: removeSelectedTab,
     handleDragDashBoardTab: handleDragDashBoardTab,
-    handleOpenDashBoard: handleOpenDashBoard
+    handleDragDashBoardSavedLinks: handleDragDashBoardSavedLinks,
+    handleOpenDashBoard: handleOpenDashBoard,
+    deleteWorkspace: deleteWorkspace,
   }, dispatch);
 };
 
@@ -105,7 +113,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     addOneTab: arg => dispatchProps.addOneTab(arg),
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
+    handleDragDashBoardSavedLinks: arg => dispatchProps.handleDragDashBoardSavedLinks(arg),
     handleOpenDashBoard: arg => dispatchProps.handleOpenDashBoard(arg),
+    deleteWorkspace: arg => dispatchProps.deleteWorkspace(arg),
     savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
 
   });

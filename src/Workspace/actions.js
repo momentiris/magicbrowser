@@ -4,13 +4,15 @@ import {
   ADD_ONE_TAB,
   REMOVE_SELECTED_TAB,
   RENAME_CURRENT_WORKSPACE,
+  DELETE_CURRENT_WORKSPACE,
   INIT_EMPTY_WORKSPACE,
   SET_TAB_ACTIVE,
   OPEN_DASHBOARD,
   UPDATE_TAB_META,
   DRAG_DASHBOARD_TAB,
   UPDATE_CURRENT_TAB_QUERY,
-  MOVE_TAB_TO_WORKSPACE
+  MOVE_TAB_TO_WORKSPACE,
+  DRAG_DASHBOARD_SAVEDLINKS,
 } from './types';
 
 
@@ -65,6 +67,17 @@ export const handleOpenDashBoard = data => {
   };
 };
 
+export const deleteWorkspace = id => {
+  console.log('hej');
+  return {
+    type: DELETE_CURRENT_WORKSPACE,
+    payload: {
+      id: id
+    }
+  };
+};
+
+
 export const removeSelectedTab = id => {
   return {
     type: REMOVE_SELECTED_TAB,
@@ -91,6 +104,13 @@ export const updateTabMeta = data => {
 export const handleDragDashBoardTab = (payload) => {
   return {
     type: DRAG_DASHBOARD_TAB,
+    payload: payload
+  };
+};
+
+export const handleDragDashBoardSavedLinks = (payload) => {
+  return {
+    type: DRAG_DASHBOARD_SAVEDLINKS,
     payload: payload
   };
 };
