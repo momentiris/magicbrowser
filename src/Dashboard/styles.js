@@ -68,13 +68,7 @@ export const TabItems = styled.div`
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
   &:hover {
-    transform: scale(1.05);
-  }
-  &:active {
-    transform: scale(1.05)!important;
-  }
-  &:focus {
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
   }
 `;
 
