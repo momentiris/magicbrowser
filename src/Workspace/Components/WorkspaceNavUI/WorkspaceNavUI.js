@@ -43,7 +43,7 @@ class WorkspaceNavUI extends Component {
     });
 
     if (this.props.currentURL === 'dashboard') {
-      this.props.handleDashboardOpenUI();
+      this.props.handleDashboardOpenUI({hide: true});
     }
 
     setTimeout(this.setState({

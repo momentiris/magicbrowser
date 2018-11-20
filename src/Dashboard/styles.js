@@ -60,7 +60,8 @@ export const TabItems = styled.div`
   flex-direction: row;
   width: 193px;
   height: 109px;
-  background: ${props => props.theme.white};
+  background-image: url(${props => props.snapshot});
+  background-size: contain;
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;
   transition: all .1s ease;

@@ -18,9 +18,10 @@ export const navigateToUrl = url => {
   };
 };
 
-export const handleDashboardOpenUI = () => {
+export const handleDashboardOpenUI = hide => {
   return {
-    type: TOGGLE_DASHBOARD_OPEN_UI
+    type: TOGGLE_DASHBOARD_OPEN_UI,
+    payload: hide
   };
 };
 

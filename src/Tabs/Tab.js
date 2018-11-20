@@ -18,6 +18,7 @@ class Tab extends React.Component {
     this.elem = React.createRef();
   }
   componentDidMount() {
+  
 
     this.props.registerContextMenuEvents(this.elem.current);
   }

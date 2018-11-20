@@ -46,7 +46,7 @@ class NavigationHandler extends Component {
       id: this.props.currentWorkspace
     });
 
-    this.props.handleDashboardOpenUI();
+    this.props.handleDashboardOpenUI({hide: true});
   }
 
   toggleSavedLinksOpen = () => {

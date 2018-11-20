@@ -59,7 +59,7 @@ export const userNavigationReducer = (state = initialState, { type, payload }) =
     case TOGGLE_DASHBOARD_OPEN_UI:
       return Object.assign({}, {
         ...initialState,
-        dashboardOpen: !state.dashboardOpen,
+        dashboardOpen: payload.hide,
         savedLinksOpen: false,
       });
 

@@ -28,7 +28,8 @@ class TabContainer extends Component {
       addOneTab,
       setActive,
       active,
-      registerContextMenuEvents
+      registerContextMenuEvents,
+      handleDashboardOpenUI
     } = this.props;
 
     const SortableItem = SortableElement(({ value, tabIndex, key }) => (
@@ -43,6 +44,7 @@ class TabContainer extends Component {
         favicon={value.favicon}
         title={value.title}
         src={value.src}
+        handleDashboardOpenUI={handleDashboardOpenUI}
       />
     ));
 

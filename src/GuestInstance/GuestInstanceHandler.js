@@ -13,6 +13,12 @@ import {
   DashboardWrap
 } from './styles';
 
+import {
+  saveTabSnapshot
+} from '../common/contextmenu.js';
+
+import { handleDashboardOpenUI } from '../UserNavigation/actions';
+
 class GuestInstanceHandler extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +26,12 @@ class GuestInstanceHandler extends Component {
 
   eventHandlers = {
     onDomReady: ({ target, target: { dataset: { id } } }) => {
-
+      saveTabSnapshot();
       const currentSrc = target.dataset.oldsrc;
       const currentTitle = target.dataset.title;
       const src = target.getURL();
       const title = target.getTitle();
+
 
       if (currentSrc !== src) {
         this.props.updateTabMeta([
@@ -79,7 +86,8 @@ class GuestInstanceHandler extends Component {
       active,
       userNavigation,
       savedLinks,
-      addOneTab
+      addOneTab,
+      handleDashboardOpenUI
     } = this.props;
 
     return (
@@ -90,6 +98,7 @@ class GuestInstanceHandler extends Component {
 
             return tab.src !== 'dashboard' ? (
               <Webview
+                handleDashboardOpenUI={handleDashboardOpenUI}
                 favicon={tab.favicon}
                 title={tab.title}
                 oldSource={tab.src}
@@ -134,6 +143,8 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     addOneTab: addOneTab,
     updateTabMeta: updateTabMeta,
+    handleDashboardOpenUI: handleDashboardOpenUI,
+
   }, dispatch);
 };
 
@@ -145,7 +156,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     updateTabMeta: arg => dispatchProps.updateTabMeta(arg),
     workspaces: stateProps.workspaces,
     userNavigation: stateProps.userNavigation,
-    savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
+    savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks,
+    handleDashboardOpenUI: arg => dispatchProps.handleDashboardOpenUI(arg),
   });
 };
 

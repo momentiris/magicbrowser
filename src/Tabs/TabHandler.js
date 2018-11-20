@@ -37,15 +37,13 @@ class TabHandler extends Component {
   removeSelectedTab = id => {
     this.props.removeSelectedTab(id);
     const dashboardTabIndex = this.props.tabs.findIndex(tab => tab.src === 'dashboard');
-    dashboardTabIndex === id && this.props.handleDashboardOpenUI();
+    dashboardTabIndex === id && this.props.handleDashboardOpenUI({hide: false});
   }
 
   setActive = id => {
 
     const dashboardTabIndex = this.props.tabs.findIndex(tab => tab.src === 'dashboard');
-    // await console.log(this.props.active);
-
-    // dashboardTabIndex === id && this.props.handleDashboardOpenUI();
+    this.props.handleDashboardOpenUI({hide: dashboardTabIndex !== id ? false : true });
     this.props.setTabActive(id);
   }
 
@@ -108,7 +106,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     removeSelectedTab: arg => dispatchProps.removeSelectedTab(arg),
     setTabActive: arg => dispatchProps.setTabActive(arg),
     handleDragDashBoardTab: arg => dispatchProps.handleDragDashBoardTab(arg),
-    handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
+    handleDashboardOpenUI: arg => dispatchProps.handleDashboardOpenUI(arg),
     currentWorkspace: stateProps.workspaces.current,
     moveTabToWorkspace: arg => dispatchProps.moveTabToWorkspace(arg),
 

@@ -11,6 +11,10 @@ class Webview extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
+    if (this.props.isActive && this.src !== 'dashboard') {
+      this.props.handleDashboardOpenUI({hide: false});
+    }
     const { current } = this.elem;
     this.props.addEvents(current);
   }
