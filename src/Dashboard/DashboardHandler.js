@@ -100,7 +100,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
   const withoutCurrent = Object.entries(removeCurrent(stateProps.workspaces, 'current'));
   const { current, ...withoutCurrentObj} = stateProps.workspaces;
-  console.log(withoutCurrentObj);
+
   return Object.assign({}, ownProps, {
     current: stateProps.workspaces.current,
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
