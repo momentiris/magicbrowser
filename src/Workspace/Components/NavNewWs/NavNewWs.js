@@ -64,7 +64,7 @@ class NavNewWs extends Component {
   toggleOverflow = all => {
     const { toggleNewWorkspaceOverflow } = this.props.userNavigation;
     setTimeout(() => this.props.handleToggleNewWorkspaceOverflow(),
-      toggleNewWorkspaceOverflow ? 50 : 0);
+      toggleNewWorkspaceOverflow ? 0 : 100);
   }
 
   handleNewWsImport = ({ target }) => {
@@ -72,7 +72,7 @@ class NavNewWs extends Component {
       newWorkspace: {
         name: this.state.newWorkspace.name,
         color: this.state.newWorkspace.color,
-        import: target.value
+        import: target.value === 'false' ? false : target.value
       }
     });
   }
@@ -86,8 +86,6 @@ class NavNewWs extends Component {
         import: false
       }
     });
-
-    // strange below, why need?
     this.toggleOverflow();
     this.props.handleToggleNewWorkspace();
     this.props.handleToggleDropdown();
@@ -96,7 +94,6 @@ class NavNewWs extends Component {
   handlePressEnter = ({ keyCode }) => {
     if (keyCode !== 13) return;
     // this.handleSubmit();
-    console.log('submit');
   }
 
   handleNewWsNameInput = ({ target }) => {
@@ -120,14 +117,15 @@ class NavNewWs extends Component {
   }
 
   handleSubmit = async () => {
+    console.log(this.state.newWorkspace);
     await this.setState({
-      newWorkspace : {
+      newWorkspace: {
         color: this.state.newWorkspace.color,
         name: this.state.newWorkspace.name,
         import: this.state.newWorkspace.import
       }
     });
-
+    console.log(this.state.newWorkspace);
     await this.props.addWorkspace(this.state.newWorkspace);
 
     this.resetToggleClean();
@@ -160,7 +158,14 @@ class NavNewWs extends Component {
             placeholder="Name workspace..."/>
         </InnerNewWsContainer>
         <ColorPickerContainer toggleDropdown={userNavigation.toggleDropdown}>
-          <InnerColorPickerContainer>
+          <NewWsColorInputWrapper>
+            <span>Import tabs from</span>
+            <NewWsColorInput onChange={this.handleNewWsImport}>
+              <option value="false">Don't import</option>
+              { workspaces.map((ws, i) => <option key={i} value={ws[0]}>{ws[0]}</option> )}
+            </NewWsColorInput>
+          </NewWsColorInputWrapper>
+          <InnerColorPickerContainer className="innerColorPickerContainer">
             {
               iconColors && iconColors.map((c, i) =>
                 <div
@@ -171,22 +176,12 @@ class NavNewWs extends Component {
                 </div>
               )
             }
-
           </InnerColorPickerContainer>
-          <NewWsColorInputWrapper>
-            <span>Import tabs from</span>
-            <NewWsColorInput onChange={this.handleNewWsImport}>
-              <option value="false">Don't import</option>
-              { workspaces.map((ws, i) => <option key={i} value={ws[0]}>{ws[0]}</option> )}
-            </NewWsColorInput>
-          </NewWsColorInputWrapper>
           <CreateButton onClick={this.handleSubmit}>Create</CreateButton>
         </ColorPickerContainer>
       </NewWsContainer>
 
     );
   }
-
 }
-
 export default NavNewWs;

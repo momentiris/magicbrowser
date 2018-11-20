@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NewWsContainer = styled.div`
   position: relative;
-  transition: width 100ms ease, background ${props => props.theme.navhovertransition};;
+  transition: width 150ms ease, background ${props => props.theme.navhovertransition};
   width: ${props => props.toggleOpen ? '280px' : '26px'};
   height: 32px;
   border-radius: ${props => props.theme.br} ${props => props.theme.br} 0 0;
@@ -24,10 +24,28 @@ export const NewWsContainer = styled.div`
   }
 
 `;
+
 export const CreateButton = styled.span`
+  width: 224px;
+  height: 32px;
+  border-radius: ${props => props.theme.br};
+  background: ${props => props.theme.bluebuttonidle};
   cursor: pointer;
   align-self: flex-start;
+  transition: background ${props => props.theme.navhovertransition};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:16px;
+  color: white;
+  :hover {
+    background: ${props => props.theme.bluebuttonhover};
+  }
+  :active {
+    background: ${props => props.theme.bluebuttonactive};
+  }
 `;
+
 export const NewWsInput = styled.input`
   width: 117px;
   box-sizing: border-box;
@@ -59,7 +77,7 @@ export const NewWsButtonContainer = styled.div`
 `;
 
 export const NewWsArrowContainer = styled.div`
-  transition: transform 100ms ease;
+  transition: transform 159ms ease;
   height: 10px;
   width: 10px;
   display: flex;
@@ -74,13 +92,13 @@ export const NewWsArrowContainer = styled.div`
 export const ColorPickerContainer = styled.div`
   position: absolute;
   background: white;
-  height: ${props => props.toggleDropdown ? '140px' : 0};
+  height: ${props => props.toggleDropdown ? '168px' : 0};
   width: 280px;
   opacity: ${props => props.toggleDropdown ? 1 : 0};
   bottom: 0;
   border-radius: 0 0 ${props => props.theme.br} ${props => props.theme.br};
   transform: translateY(100%);
-  padding: 16px;
+  padding: 16px 28px 12px 28px;
   justify-content: center;
   align-items: center;
   background: ${props => props.theme.lightgrey};
@@ -91,7 +109,8 @@ export const ColorPickerContainer = styled.div`
   &::before {
     content: "";
     width: 97%;
-    height: 96%;
+    height: 99%;
+    top: -2px;
     position: absolute;
     background: white;
     margin: 0 auto;
@@ -101,21 +120,19 @@ export const ColorPickerContainer = styled.div`
   }
 `;
 
-
 export const InnerNewWsContainer = styled.div`
   display: flex;
   align-items: center;
-
 `;
 
-
 export const InnerColorPickerContainer = styled.div`
-width: 224px;
+width: 100%;
 flex-shrink: 0;
 height: 48px;
 display: flex;
 justify-content: space-between;
-align-items: space-between;
+align-content: space-between;
+margin-bottom: 16px;
 
 flex-flow: column wrap;
 div {
@@ -131,30 +148,24 @@ svg {
 
 `;
 
-
 export const NewWsColorInput = styled.select`
   border: 1px solid black;
   border-radius: ${props => props.theme.br};
   width: 117px;
   padding: 0;
   color: #848484;
-  height: 60;
-  font-size: 12px;
+  height: 32px;
+  font-size: 16px;
   margin-left: 12px;
   &:focus {
     outline: none;
   }
 `;
 
-
 export const NewWsColorInputWrapper = styled.div`
-  height: 32px;
-  width: 248px;
-  margin-top:16px;
   align-items: center;
   flex-shrink: 0;
   display: flex;
   font-size: 12px;
-
-
+  margin-bottom: 12px;
 `;
