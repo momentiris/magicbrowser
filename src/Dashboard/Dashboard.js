@@ -202,6 +202,7 @@ class Dashboard extends Component {
   }
 
   removeSelectedTab = id => {
+    console.log(id);
     this.props.removeSelectedTab(id);
   }
 
@@ -336,6 +337,7 @@ class Dashboard extends Component {
                 tabs={currentTabs}
                 addOneTab={this.addOneTab}
                 savedLinks={savedLinks}
+                removeSelectedTab={this.removeSelectedTab}
               >
               </DashboardTabs>
               <SavedLinks

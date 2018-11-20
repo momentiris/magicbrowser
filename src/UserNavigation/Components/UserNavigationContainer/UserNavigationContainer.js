@@ -21,11 +21,29 @@ import {
   GoToDashboardButton,
   ReadListNavSettingsWrap,
   GoToDashboardButtonWrap,
-  PreToDashBoardButton
+  PreToDashBoardButton,
+  AddIcon,
 } from './styles';
 
 class UserNavigationContainer extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      animateSavedReadingList: false,
+    };
+  }
+  handleAnimateSavedReadingList = () => {
+    console.log(this.state.animateSavedReadingList);
+    this.setState({
+      animateSavedReadingList: !this.state.animateSavedReadingList,
+    });
+    setTimeout(() => {
+      this.setState({
+        animateSavedReadingList: false,
+      });
 
+    }, 800);
+  }
   render() {
     const {
       userNavigation,
@@ -36,7 +54,7 @@ class UserNavigationContainer extends Component {
       currentURL,
       handleUpdateCurrentTabQuery,
       activeTab,
-      toggleSavedLinksOpen
+      toggleSavedLinksOpen,
     } = this.props;
 
     const {
@@ -65,8 +83,8 @@ class UserNavigationContainer extends Component {
             dashboardOpen={dashboardOpen}
 
           />
-          <AddToReadingListButton>
-            <AddTabIcon/>
+          <AddToReadingListButton onClick={this.handleAnimateSavedReadingList}>
+            <AddIcon isActive={this.state.animateSavedReadingList} style={{cursor: 'pointer'}}/>
           </AddToReadingListButton>
         </UrlBarContainer>
         <GoToDashboardButtonWrap dashboardOpen={dashboardOpen} toggle={toggleWorkspaces ? 'true' : 'false' }>
@@ -83,6 +101,7 @@ class UserNavigationContainer extends Component {
             savedLinksOpen={savedLinksOpen}
             dashboardOpen={dashboardOpen}
             onClick={toggleSavedLinksOpen}
+            isActive={this.state.animateSavedReadingList}
           >
             <ReadingListIcon />
           </ReadingListButton>

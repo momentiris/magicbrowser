@@ -18,13 +18,13 @@ import {
 } from './styles';
 import tabImage from '../common/assets/imgs/test.png';
 
-const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab }) => {
+const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, removeSelectedTab }) => {
   const SortableItem = SortableElement(({ value, tabindex }) => {
     return (
       <TabItems snapshot={tabImage}key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
         {value}
         {value.id}
-        <Close onClick={() => this.removeSelectedTab(tabindex)}></Close>
+        <Close onClick={() => removeSelectedTab(tabindex)}></Close>
       </TabItems>
     );
   });
@@ -45,7 +45,7 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab }) => {
   });
 
   return (
-    <SortableList items={tabs} onSortEnd={onSortEnd} axis='xy' />
+    <SortableList items={tabs} distance={10} onSortEnd={onSortEnd} axis='xy' lockToContainerEdges={true} />
   );
 };
 

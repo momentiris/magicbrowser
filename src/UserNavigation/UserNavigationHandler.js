@@ -21,7 +21,6 @@ class NavigationHandler extends Component {
 
   constructor(props) {
     super(props);
-
   }
 
   navigateForwards = webview => {
