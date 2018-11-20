@@ -56,7 +56,7 @@ const DashboardWorkspaces = ({
             <RenameEditIcon />
             <p style={{position: 'absolute', marginLeft: '22px', top: '-5px', cursor: 'pointer'}}>Edit</p>
           </RenameEdit>
-          <DeleteWs isTarget={currentWsUI === ws[0]} onClick={() => deleteWorkspace(i)} value={ws[0]}>Delete</DeleteWs>
+          <DeleteWs isTarget={currentWsUI === ws[0]} id={i} onClick={() => deleteWorkspace(ws[0])} value={ws[0]}>Delete</DeleteWs>
           <AnimateEditForm isActive={editWorkspaceToggle} id={i}>
             <form onSubmit={(e) => renameWorkspace(e)} style={{height: '100%'}}>
               <NewWsHover isActive={workspaceToggle} color={ws[1].color}>

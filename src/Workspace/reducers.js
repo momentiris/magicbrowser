@@ -133,16 +133,9 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case DELETE_CURRENT_WORKSPACE:
-      return Object.assign({}, state, {
-        [state.current]: {
-          ...state[state.current],
-          workspace: state[state.current].workspace,
-          tabs: state[state.current].tabs
-            .filter((tab, i) => i !== payload.id),
-          active: 0,
-          color: state[state.current].color
-        }
-      });
+      const target = [payload.id];
+      const {[target[0]]: tmp, ...rest} = state;
+      return rest;
       break;
 
     case SWITCH_WORKSPACES:

@@ -67,10 +67,13 @@ export const handleOpenDashBoard = data => {
   };
 };
 
-export const deleteWorkspace = data => {
+export const deleteWorkspace = id => {
+  console.log('hej');
   return {
     type: DELETE_CURRENT_WORKSPACE,
-    payload: data
+    payload: {
+      id: id
+    }
   };
 };
 

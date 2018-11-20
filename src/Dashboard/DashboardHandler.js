@@ -32,6 +32,7 @@ class DashboardHandler extends Component {
       switchWorkspace,
       addWorkspace,
       renameWorkspace,
+      deleteWorkspace,
       addOneTab,
       removeSelectedTab,
       handleDragDashBoardTab,
