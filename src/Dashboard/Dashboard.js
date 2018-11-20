@@ -313,6 +313,7 @@ class Dashboard extends Component {
               isActive={active}
               editWorkspaceValue={editWorkspace}
               animatesworkspace={this.state.animatesworkspace}
+              deleteWorkspace={this.deleteWorkspace}
             />
             <AnimateTabs isActive={this.state.animatestabs}>
               <DashboardTabs
