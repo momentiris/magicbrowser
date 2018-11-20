@@ -54,23 +54,38 @@ export const TabWrapper = styled.div`
   transition-delay: 0.6s;
   transform: translateX(${props => props.isActive ? '100%' : '0%'});
 `;
-
+export const Header3 = styled.h3`
+  position: relative;
+  bottom: 15px;
+  opacity: 0;
+  margin: 0px;
+  font-size: 24px;
+  transition: all .2s ease;
+  cursor: pointer;
+`;
 export const TabItems = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 193px;
   height: 109px;
   background-image: url(${props => props.snapshot});
   background-size: contain;
   border-radius: ${props => props.theme.br};
   margin: 6px 6px 6px 6px;
-  transition: all .1s ease;
+  transition: all .2s ease;
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   cursor: pointer;
+  &:hover ${Header3} {
+    opacity: 1;
+  }
   &:hover {
-    /* transform: scale(1.05); */
+    opacity: 0.6;
   }
 `;
+
+
 
 export const AddNewTab = styled.div`
   display: flex;
@@ -405,10 +420,13 @@ export const AddIcon = styled.svg`
 `;
 
 export const Close = styled.div`
+  align-self: flex-end;
+  position: relative;
+  bottom: 28px;
   background-image: url(${closeiconsvg});
   background-repeat: no-repeat;
   background-size: contain;
-  margin: 4px;
+  margin: 7px;
   height: 14px;
   width: 14px;
   transition: all .2s cubic-bezier(0,.72,.5,.99);
