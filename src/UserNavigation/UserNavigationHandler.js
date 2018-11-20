@@ -10,7 +10,8 @@ import {
 } from './actions';
 import {
   handleOpenDashBoard,
-  handleUpdateCurrentTabQuery
+  handleUpdateCurrentTabQuery,
+  handleAddToSavedLinks,
 } from '../Workspace/actions';
 import UrlBar from './Components/UrlBar/UrlBar';
 import GuestInstanceHandler from '../GuestInstance/GuestInstanceHandler';
@@ -23,22 +24,6 @@ class NavigationHandler extends Component {
     super(props);
   }
 
-  navigateForwards = webview => {
-
-  };
-
-  navigateBackwards = webview => {
-
-  };
-
-  navigateToUrl = url => {
-
-  };
-
-  updateWebview = webview => {
-
-  };
-
   handleOpenDashBoard = (e) => {
     e.preventDefault();
     this.props.handleOpenDashBoard({
@@ -46,10 +31,6 @@ class NavigationHandler extends Component {
     });
 
     this.props.handleDashboardOpenUI({hide: true});
-  }
-
-  toggleSavedLinksOpen = () => {
-
   }
 
   render() {
@@ -61,11 +42,14 @@ class NavigationHandler extends Component {
       currentURL,
       handleUpdateCurrentTabQuery,
       activeTab,
-      toggleSavedLinksOpen
+      toggleSavedLinksOpen,
+      handleAddToSavedLinks,
+      currentTitle
     } = this.props;
 
     return (
       <UserNavigationContainer
+        handleAddToSavedLinks={handleAddToSavedLinks}
         handleUpdateCurrentTabQuery={handleUpdateCurrentTabQuery}
         currentWorkspace={currentWorkspace}
         handleOpenDashBoard={this.handleOpenDashBoard}
@@ -73,6 +57,7 @@ class NavigationHandler extends Component {
         userNavigation={userNavigation}
         handleToggleUrlBarFocus={handleToggleUrlBarFocus}
         currentURL={currentURL}
+        currentTitle={currentTitle}
         activeTab={activeTab}
         toggleSavedLinksOpen={toggleSavedLinksOpen}
       />
@@ -107,7 +92,8 @@ const mapActionsToProps = (dispatch, props) => {
     handleOpenDashBoard: handleOpenDashBoard,
     handleDashboardOpenUI: handleDashboardOpenUI,
     handleUpdateCurrentTabQuery: handleUpdateCurrentTabQuery,
-    toggleSavedLinksOpen: toggleSavedLinksOpen
+    toggleSavedLinksOpen: toggleSavedLinksOpen,
+    handleAddToSavedLinks: handleAddToSavedLinks
   }, dispatch);
 };
 
@@ -123,10 +109,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleOpenDashBoard: dispatchProps.handleOpenDashBoard,
     currentWorkspace: stateProps.workspaces.current,
     handleDashboardOpenUI: dispatchProps.handleDashboardOpenUI,
+    handleAddToSavedLinks: arg => dispatchProps.handleAddToSavedLinks(arg),
     handleUpdateCurrentTabQuery: arg => dispatchProps.handleUpdateCurrentTabQuery(arg),
     toggleSavedLinksOpen: dispatchProps.toggleSavedLinksOpen,
     currentURL: stateProps.workspaces[stateProps.workspaces.current]
-      .tabs[stateProps.workspaces[stateProps.workspaces.current].active].src
+      .tabs[stateProps.workspaces[stateProps.workspaces.current].active].src,
+    currentTitle: stateProps.workspaces[stateProps.workspaces.current]
+      .tabs[stateProps.workspaces[stateProps.workspaces.current].active].title
   });
 };
 

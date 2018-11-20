@@ -32,8 +32,8 @@ class UserNavigationContainer extends Component {
       animateSavedReadingList: false,
     };
   }
+
   handleAnimateSavedReadingList = () => {
-    console.log(this.state.animateSavedReadingList);
     this.setState({
       animateSavedReadingList: !this.state.animateSavedReadingList,
     });
@@ -43,6 +43,15 @@ class UserNavigationContainer extends Component {
       });
 
     }, 800);
+  }
+
+  handleAddToReadingList = () => {
+    this.handleAnimateSavedReadingList();
+    this.props.handleAddToSavedLinks({
+      src: this.props.currentURL,
+      title: this.props.currentTitle
+    });
+
   }
   render() {
     const {
@@ -83,7 +92,7 @@ class UserNavigationContainer extends Component {
             dashboardOpen={dashboardOpen}
 
           />
-          <AddToReadingListButton onClick={this.handleAnimateSavedReadingList}>
+          <AddToReadingListButton onClick={this.handleAddToReadingList}>
             <AddIcon isActive={this.state.animateSavedReadingList} style={{cursor: 'pointer'}}/>
           </AddToReadingListButton>
         </UrlBarContainer>

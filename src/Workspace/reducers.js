@@ -14,7 +14,8 @@ import {
   DRAG_DASHBOARD_TAB,
   DRAG_DASHBOARD_SAVEDLINKS,
   UPDATE_CURRENT_TAB_QUERY,
-  MOVE_TAB_TO_WORKSPACE
+  MOVE_TAB_TO_WORKSPACE,
+  ADD_TO_SAVED_LINKS
 } from './types';
 
 import { setContextMenuWorkspaces } from '../common/contextmenu';
@@ -71,6 +72,7 @@ const workspaceTemplate = {
       searchQuery: 'http://google.se'
     }
   ],
+  savedLinks: [],
   active: 0,
   color: 'white'
 };
@@ -134,13 +136,24 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       return updatedWs;
       break;
 
+    case ADD_TO_SAVED_LINKS:
+      return {
+        ...state,
+        [state.current]: {
+          ...state[state.current],
+          savedLinks: [...state[state.current].savedLinks,  {
+            title: payload.title,
+            src: payload.src,
+            img: '',
+          }]
+        }
+      };
+      break;
+
     case DELETE_CURRENT_WORKSPACE:
       const target = [payload.id];
       const {[target[0]]: tmp, ...rest} = state;
-      // const deleted = {
-      //   ...rest,
-      //   current: target[0] === state.current ? rest[0] : state.current
-      // };
+  
       return rest;
       break;
 

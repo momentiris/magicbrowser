@@ -1,6 +1,6 @@
 
 export const parser = query => {
-  if (query.includes(' ')) {
+  if (query.includes(' ') || !query.includes('.')) {
     query = `https://google.com/search?q=${query.split(' ').join('+')}`;
     return query;
   }

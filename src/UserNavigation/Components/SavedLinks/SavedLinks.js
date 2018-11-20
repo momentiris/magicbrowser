@@ -18,8 +18,8 @@ const SavedLinks = ({ open, savedLinks, addOneTab }) => {
         <Image src={img}/>
       </ImageWrap>
       <MetaWrap>
-        <Title onClick={() => addOneTab({src: parser(src)}) }> {title} </Title>
-        <Src> {src} </Src>
+        <Title onClick={() => addOneTab({src: parser(src)}) }> {title.substr(0,30).concat('...')} </Title>
+        <Src> {src.substr(0,30).concat('...')} </Src>
       </MetaWrap>
     </Wrapper>
   );

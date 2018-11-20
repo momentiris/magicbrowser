@@ -13,6 +13,7 @@ import {
   UPDATE_CURRENT_TAB_QUERY,
   MOVE_TAB_TO_WORKSPACE,
   DRAG_DASHBOARD_SAVEDLINKS,
+  ADD_TO_SAVED_LINKS
 } from './types';
 
 
@@ -118,6 +119,13 @@ export const handleDragDashBoardSavedLinks = (payload) => {
 export const handleUpdateCurrentTabQuery = payload => {
   return {
     type: UPDATE_CURRENT_TAB_QUERY,
+    payload: payload
+  };
+};
+
+export const handleAddToSavedLinks = payload => {
+  return {
+    type: ADD_TO_SAVED_LINKS,
     payload: payload
   };
 };
