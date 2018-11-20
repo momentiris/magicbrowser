@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: 362px;
   height: 100%;
   position: absolute;
+  overflow-y: scroll;
   background: ${props => props.theme.lightergrey};
   right: 0;
   transition: transform 300ms ease;

@@ -57,10 +57,17 @@ export const TabWrapper = styled.div`
 `;
 export const Header3 = styled.h3`
   position: relative;
-  bottom: 15px;
+  min-height: 40px;
+  max-height: 55px;
+  bottom: 36px;
   opacity: 0;
   margin: 0px;
-  font-size: 24px;
+  margin: 0px 30px;
+  text-align: center;
+  word-break: break-all;
+  overflow-y: scroll;
+  font-size: ${props => props.theme.small};
+  color: ${props => props.theme.black}
   transition: all .2s ease;
   cursor: pointer;
 `;
@@ -83,6 +90,7 @@ export const TabItems = styled.div`
   }
   &:hover {
     opacity: 0.6;
+    background: transparent;
   }
 `;
 
@@ -423,11 +431,11 @@ export const AddIcon = styled.svg`
 export const Close = styled.div`
   align-self: flex-end;
   position: relative;
-  bottom: 28px;
+  bottom: 20px;
+  right: 8px;
   background-image: url(${closeiconsvg});
   background-repeat: no-repeat;
   background-size: contain;
-  margin: 7px;
   height: 14px;
   width: 14px;
   transition: all .2s cubic-bezier(0,.72,.5,.99);
