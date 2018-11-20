@@ -135,8 +135,14 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case DELETE_CURRENT_WORKSPACE:
+    console.log(payload);
       const target = [payload.id];
       const {[target[0]]: tmp, ...rest} = state;
+      // const deleted = {
+      //   ...rest,
+      //   current: target[0] === state.current ? rest[0] : state.current
+      // };
+      console.log(rest);
       return rest;
       break;
 
