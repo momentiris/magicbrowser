@@ -10,6 +10,7 @@ export const Container = styled.div`
   width: 100%;
   background: ${props => props.theme.dashboardgrey};
   padding: 70px 135px 70px 135px;
+  min-height: 100%;
 `;
 
 export const Wrapper = styled.div`

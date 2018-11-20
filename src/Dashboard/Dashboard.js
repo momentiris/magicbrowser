@@ -98,13 +98,14 @@ class Dashboard extends Component {
     };
   }
 
-  onToggle = () => {
-    this.setState({ workspaceToggle: !this.state.workspaceToggle });
-    this.setRandomSuggestedColor();
+  onToggle = async () => {
+    await this.setState({ workspaceToggle: !this.state.workspaceToggle });
+    this.state.workspaceToggle && this.setRandomSuggestedColor('newWorkspace');
     this.workspaceInput.current.focus();
   }
 
   onToggleRename = (i) => {
+    this.state.toggleRename && this.setRandomSuggestedColor('editWorkspace');
     this.setState({ toggleRename: !this.state.toggleRename });
   }
 
@@ -117,15 +118,15 @@ class Dashboard extends Component {
     });
   }
 
-  setRandomSuggestedColor = () => {
+  setRandomSuggestedColor = (type) => {
     const wsColors = this.props.workspaces.map(ws => ws[1].color);
     const filteredColors = iconColors.filter(ic => {
       return !wsColors.includes(ic);
     });
 
     this.setState({
-      newWorkspace: {
-        ...this.state.newWorkspace,
+      [type]: {
+        ...this.state[type],
         color: filteredColors[Math.floor(Math.random()*filteredColors.length)],
       }
     });
@@ -145,7 +146,7 @@ class Dashboard extends Component {
     });
   }
 
-  renameWorkspace = (e, i) => {
+  renameWorkspace = async (e, i) => {
     e.preventDefault();
     this.setState({
       currentWsUI: this.state.editWorkspace.newName,
@@ -160,7 +161,7 @@ class Dashboard extends Component {
       },
     });
 
-    this.props.renameWorkspace(this.state.editWorkspace);
+    await this.props.renameWorkspace(this.state.editWorkspace);
   }
 
   handleInputChange = e => {
@@ -232,6 +233,7 @@ class Dashboard extends Component {
       dashboard: true
     });
   }
+
   onSortEndSavedLinks = async ({oldIndex, newIndex}, { target }) => {
     const newSavedLink = arrayMove(this.props.savedLinks, oldIndex, newIndex);
     await this.props.handleDragDashBoardSavedLinks({
@@ -271,10 +273,13 @@ class Dashboard extends Component {
       tabs,
       workspacestemp,
       workspace,
-      savedLinks
+      savedLinks,
+      current
     } = this.props;
 
     const currentTabs = workspacestemp[currentWsUI].tabs;
+    const currentSavedLinks = workspacestemp[currentWsUI].savedLinks;
+    console.log(this.state.newWorkspace.color);
 
     return (
       <Container>
@@ -336,7 +341,7 @@ class Dashboard extends Component {
               <SavedLinks
                 onSortEndSavedLinks={this.onSortEndSavedLinks}
                 active={active}
-                savedLinks={savedLinks}
+                savedLinks={currentSavedLinks}
                 currentWsUI={currentWsUI}
               >
               </SavedLinks>

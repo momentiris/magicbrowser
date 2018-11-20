@@ -117,7 +117,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleDragDashBoardSavedLinks: arg => dispatchProps.handleDragDashBoardSavedLinks(arg),
     handleOpenDashBoard: arg => dispatchProps.handleOpenDashBoard(arg),
     deleteWorkspace: arg => dispatchProps.deleteWorkspace(arg),
-    savedLinks: stateProps.workspaces[stateProps.workspaces.current].savedLinks
+    savedLinks: stateProps.workspaces
 
   });
 };

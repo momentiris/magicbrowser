@@ -129,6 +129,7 @@ class WorkspaceNavUI extends Component {
       .filter((inst,i) => inst[0] !== current)
       .map((inst,i) => (
         <WsItem
+          first={i === 0}
           onClick={({ target }) => this.handleSwitchWorkspace(inst[0], target)}
           key={i + 1}
         >
