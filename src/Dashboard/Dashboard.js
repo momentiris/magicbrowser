@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 import WsColor from './WsColors/';
 import {arrayMove} from 'react-sortable-hoc';
 import DashboardTabs from './DashboardTabs';
+import SavedLinks from './SavedLinks';
 import DashboardWorkspaces from './DashboardWorkspaces';
 import { HistoryIcon } from '../common/assets/icons.js';
 import History from './History/History';
@@ -26,7 +27,6 @@ import {
   CancelButton,
   NewWsButton,
   AnimateForm,
-  SavedLinks,
   TabLength,
   RightArrow,
   RightArrowNewWs,
@@ -56,9 +56,9 @@ import {
   initEmptyWorkspace,
   addOneTab,
   removeSelectedTab,
-  handleDragDashBoardTab,
+  handleDragDashBoardSavedLinks,
   renameWorkspace,
-  handleOpenDashBoard
+  handleOpenDashBoard,
 } from '../Workspace/actions';
 
 import { iconColors } from '../common/stylesheet';
@@ -232,6 +232,14 @@ class Dashboard extends Component {
       dashboard: true
     });
   }
+  onSortEndSavedLinks = async ({oldIndex, newIndex}, { target }) => {
+    const newSavedLink = arrayMove(this.props.savedLinks, oldIndex, newIndex);
+    await this.props.handleDragDashBoardSavedLinks({
+      newSavedLink,
+      newIndex,
+      dashboard: true
+    });
+  }
 
   handleGoBack = () => {
     this.props.handleOpenDashBoard({
@@ -325,6 +333,13 @@ class Dashboard extends Component {
                 savedLinks={savedLinks}
               >
               </DashboardTabs>
+              <SavedLinks
+                onSortEndSavedLinks={this.onSortEndSavedLinks}
+                active={active}
+                savedLinks={savedLinks}
+                currentWsUI={currentWsUI}
+              >
+              </SavedLinks>
             </AnimateTabs>
           </Column>
         </div>
