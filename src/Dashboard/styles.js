@@ -48,6 +48,8 @@ export const TabWrapper = styled.div`
   flex-direction: column;
   padding-top: 48px;
   min-height: 300px;
+  max-height: 600px;
+  overflow-y: scroll;
   min-width: 816px;
   border-top: 1px solid ${props => props.theme.darkgrey};
   opacity: ${props => props.isActive ? '0' : '1'};
@@ -515,6 +517,8 @@ export const SavedLinksContainer = styled.div`
 `;
 
 export const SavedLinksWrapper = styled.div`
+  max-height: 600px;
+  overflow-y: scroll;
   border-top: 1px solid ${props => props.theme.darkgrey};
   padding-top: 48px;
   min-height: 100px;
