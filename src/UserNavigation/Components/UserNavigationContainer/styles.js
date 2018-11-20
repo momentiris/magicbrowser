@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '../../../common/stylesheet';
 import { Link } from 'react-router-dom';
+import AddIconSvg from '../../../common/assets/icons/add.svg';
 
 export const Container = styled.div`
   height: 41px;
@@ -31,10 +32,33 @@ export const UrlBarContainer = styled.div`
   }
 `;
 
+export const AddIcon = styled.div`
+  background: url(${AddIconSvg});
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  transition: all .2s ease;
+
+  animation: ${props => props.isActive ? 'myOrbit' : '' ? 'myOrbit' : false } 0.4s linear;
+  @keyframes myOrbit {
+    from {
+      transform: rotate(-120deg) translateX(0px) rotate(0deg);
+      opacity: 1;
+    }
+    to   {
+      transform: rotate(0deg) translateX(80px) rotate(180deg);
+      opacity: 0.2;
+    }
+  }
+
+`;
+
 export const AddToReadingListButton = styled(Button)`
   margin-right: 8px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
   transition: background ${props => props.theme.navhovertransition};
   :hover {
     background: ${props => props.theme.lightergrey};
@@ -63,6 +87,31 @@ export const ReadingListButton = styled(Button)`
   :active {
     background: ${props => props.savedLinksOpen ? props.theme.darkgrey : props.theme.greybuttonactive};
   }
+
+  animation: ${props => props.isActive ? 'shake' : ''} .82s cubic-bezier(.36,.07,.19,.97) both;
+  animation-delay: 300ms;
+  @keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+    background: ${props => props.isActive ? props.theme.darkgrey : props.theme.mediumgrey};
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  100%, 20% {
+    background: #58c373;
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
 `;
 
 export const NavSettingsButton = styled(Button)`
