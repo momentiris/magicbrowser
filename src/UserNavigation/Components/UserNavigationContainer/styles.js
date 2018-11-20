@@ -32,12 +32,12 @@ export const UrlBarContainer = styled.div`
   }
 `;
 
-export const AddIcon = styled.div`
+export const AddIcon = styled.svg`
   background: url(${AddIconSvg});
   background-size: contain;
   background-repeat: no-repeat;
-  height: 24px;
-  width: 24px;
+  height: 17px;
+  width: 17px;
   transition: all .2s ease;
 
   animation: ${props => props.isActive ? 'myOrbit' : '' ? 'myOrbit' : false } 0.4s linear;
@@ -54,7 +54,6 @@ export const AddIcon = styled.div`
       opacity: 0.2;
     }
     80%, 100%   {
-
       opacity: 1;
     }
   }
@@ -110,8 +109,11 @@ export const ReadingListButton = styled(Button)`
     transform: translate3d(-4px, 0, 0);
   }
 
-  100%, 20% {
-    background: #58c373;
+  20%, 80% {
+    background: ${props => props.theme.darkgrey};
+  }
+  80%, 100% {
+    background: ${props => props.theme.lightgrey};
   }
 
   40%, 60% {

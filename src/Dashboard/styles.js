@@ -57,10 +57,17 @@ export const TabWrapper = styled.div`
 `;
 export const Header3 = styled.h3`
   position: relative;
-  bottom: 15px;
+  min-height: 40px;
+  max-height: 55px;
+  bottom: 36px;
   opacity: 0;
   margin: 0px;
-  font-size: 24px;
+  margin: 0px 30px;
+  text-align: center;
+  word-break: break-all;
+  overflow-y: scroll;
+  font-size: ${props => props.theme.small};
+  color: ${props => props.theme.black}
   transition: all .2s ease;
   cursor: pointer;
 `;
@@ -83,6 +90,7 @@ export const TabItems = styled.div`
   }
   &:hover {
     opacity: 0.6;
+    background: transparent;
   }
 `;
 
@@ -303,7 +311,7 @@ export const RenameEdit = styled.button`
   opacity: 0;
   margin: 0 0 0 0;
   ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
-  transition: all .2s ease;
+  transition: all .2s ease-in;
   cursor: pointer;
 `;
 
@@ -331,7 +339,7 @@ export const DeleteWs = styled.button`
   text-shadow: 1px 1px 3px rgba(188, 56, 47, 0.2);
   opacity: 0;
   margin: 10px 0 0 0;
-  transition: all .2s ease .1s;
+  transition: all .2s ease-in .1s;
   cursor: pointer;
 `;
 
@@ -423,11 +431,11 @@ export const AddIcon = styled.svg`
 export const Close = styled.div`
   align-self: flex-end;
   position: relative;
-  bottom: 28px;
+  bottom: 20px;
+  right: 8px;
   background-image: url(${closeiconsvg});
   background-repeat: no-repeat;
   background-size: contain;
-  margin: 7px;
   height: 14px;
   width: 14px;
   transition: all .2s cubic-bezier(0,.72,.5,.99);
@@ -538,7 +546,7 @@ export const SavedLinksItems = styled.div`
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
-  margin: 6px 6px 6px 6px;
+  margin: 5px;
   transition: all .1s ease;
   cursor: pointer;
   &:hover {
@@ -547,11 +555,11 @@ export const SavedLinksItems = styled.div`
 `;
 
 export const SavedLinksFavicon = styled.svg`
-  background: red;
+
   height: 40px;
   width: 40px;
   margin-right: 12px;
-  box-shadow: 0px 2px 10px rgba(116, 116, 116, 0.25);
+  box-shadow: 0px 2px 10px rgba(116, 116, 116, 0.95);
   border-radius: ${props => props.theme.br};
 `;
 
