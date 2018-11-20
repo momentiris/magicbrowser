@@ -36,8 +36,8 @@ export const AddIcon = styled.div`
   background: url(${AddIconSvg});
   background-size: contain;
   background-repeat: no-repeat;
-  height: 24px;
-  width: 24px;
+  height: 16px;
+  width: 16px;
   transition: all .2s ease;
 
   animation: ${props => props.isActive ? 'myOrbit' : '' ? 'myOrbit' : false } 0.4s linear;

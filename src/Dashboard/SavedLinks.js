@@ -18,7 +18,6 @@ import {
 } from './styles';
 
 const SavedLinks = ({ active, currentWsUI, onSortEndSavedLinks, savedLinks }) => {
-
   const SortableItem = SortableElement(({value, saveindex}) => {
     return (
       <SavedLinksItems key={saveindex} id={saveindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>

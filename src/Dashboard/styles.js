@@ -303,7 +303,7 @@ export const RenameEdit = styled.button`
   opacity: 0;
   margin: 0 0 0 0;
   ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
-  transition: all .2s ease;
+  transition: all .2s ease-in;
   cursor: pointer;
 `;
 
@@ -331,7 +331,7 @@ export const DeleteWs = styled.button`
   text-shadow: 1px 1px 3px rgba(188, 56, 47, 0.2);
   opacity: 0;
   margin: 10px 0 0 0;
-  transition: all .2s ease .1s;
+  transition: all .2s ease-in .1s;
   cursor: pointer;
 `;
 
@@ -538,7 +538,7 @@ export const SavedLinksItems = styled.div`
   box-shadow: 0px 4px 10px rgba(200, 200, 200, 0.25);
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
-  margin: 6px 6px 6px 6px;
+  margin: 5px;
   transition: all .1s ease;
   cursor: pointer;
   &:hover {
@@ -547,11 +547,11 @@ export const SavedLinksItems = styled.div`
 `;
 
 export const SavedLinksFavicon = styled.svg`
-  background: red;
+
   height: 40px;
   width: 40px;
   margin-right: 12px;
-  box-shadow: 0px 2px 10px rgba(116, 116, 116, 0.25);
+  box-shadow: 0px 2px 10px rgba(116, 116, 116, 0.95);
   border-radius: ${props => props.theme.br};
 `;
 
