@@ -151,6 +151,8 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case ADD_ONE_TAB:
+      const currentActiveTab = state[state.current].active;
+      const isActiveTabDashboard = state[state.current].tabs.find((tab, i) => i === currentActiveTab);
       const newTab = {
         ...state,
         [payload.ws || state.current]: {
@@ -161,7 +163,11 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           }]
         }
       };
-      newTab[newTab.current].active = newTab[newTab.current].tabs.length - 1;
+
+      newTab[newTab.current].active = isActiveTabDashboard.src === 'dashboard'
+        ? newTab[newTab.current].active
+        : newTab[newTab.current].tabs.length - 1;
+
       return newTab;
       break;
 
