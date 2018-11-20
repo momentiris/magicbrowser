@@ -50,6 +50,13 @@ export const AddIcon = styled.div`
       transform: rotate(0deg) translateX(80px) rotate(180deg);
       opacity: 0.2;
     }
+    0%, 80%   {
+      opacity: 0.2;
+    }
+    80%, 100%   {
+
+      opacity: 1;
+    }
   }
 
 `;
@@ -97,7 +104,6 @@ export const ReadingListButton = styled(Button)`
 
   20%, 80% {
     transform: translate3d(2px, 0, 0);
-    background: ${props => props.isActive ? props.theme.darkgrey : props.theme.mediumgrey};
   }
 
   30%, 50%, 70% {

@@ -15,6 +15,7 @@ import {
   SavedLinksFavicon,
   Wrapper,
   SavedLinksPositioning,
+  Header3,
 } from './styles';
 import tabImage from '../common/assets/imgs/test.png';
 
@@ -22,9 +23,9 @@ const DashboardTabs = ({ tabs, active, currentWsUI, onSortEnd, addOneTab, remove
   const SortableItem = SortableElement(({ value, tabindex }) => {
     return (
       <TabItems snapshot={tabImage}key={tabindex} id={tabindex} className={`${active && 'Showcase__style__stylizedHelper'}`}>
-        {value}
         {value.id}
         <Close onClick={() => removeSelectedTab(tabindex)}></Close>
+        <Header3>{value}</Header3>
       </TabItems>
     );
   });
