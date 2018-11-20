@@ -182,8 +182,10 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         [state.current]: {
           ...state[state.current],
           tabs: state[state.current].tabs.map((tab, i) => {
-            tab.src = state[state.current].active === i ? payload : tab.src;
-            tab.favicon = state[state.current].active === i ? false : tab.favicon;
+            if (state[state.current].active === i) {
+              tab.src = payload;
+              tab.favicon = false;
+            }
             return tab;
           }),
           active: state[state.current].active,
