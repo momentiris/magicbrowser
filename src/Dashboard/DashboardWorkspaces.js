@@ -41,6 +41,8 @@ const DashboardWorkspaces = ({
   animatesworkspace,
   editWorkspaceValue,
   deleteWorkspace,
+  commonToggle,
+  toggle
 }) => (
   <Ul name="workspaces" isActive={animatesworkspace}>
     {
@@ -60,16 +62,18 @@ const DashboardWorkspaces = ({
             <RenameEditIcon />
             <p style={{position: 'absolute', marginLeft: '22px', top: '-5px', cursor: 'pointer'}}>Edit</p>
           </RenameEdit>
-          <DeleteWs>
+          <DeleteWs onClick={commonToggle} >
             Delete
-            <DeleteWsConfirmBox>
+            <DeleteWsConfirmBox isActive={toggle}>
               <DeleteWsParagraph>
                 Delete workspace?
               </DeleteWsParagraph>
-              <DeleteWsOkeyButton isTarget={currentWsUI === ws[0]} id={i} onClick={() => deleteWorkspace(ws[0])} value={ws[0]}>
+              <DeleteWsOkeyButton isActive={toggle} isTarget={currentWsUI === ws[0]} id={i} onClick={() => deleteWorkspace(ws[0])} value={ws[0]}>
                 Okey
               </DeleteWsOkeyButton>
-              <DeleteWsCancelButton type='button'>Cancel</DeleteWsCancelButton>
+              <DeleteWsCancelButton isActive={toggle} onClick={commonToggle} type='button'>
+                Cancel
+              </DeleteWsCancelButton>
             </DeleteWsConfirmBox>
           </DeleteWs>
           <AnimateEditForm isActive={editWorkspaceToggle} id={i}>
