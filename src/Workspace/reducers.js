@@ -158,10 +158,13 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       const target = [payload.id];
       const {[target[0]]: tmp, ...rest} = state;
       const withoutCurrent3 = Object.keys(rest).filter(ws => ws !== 'current');
-      setContextMenuWorkspaces(withoutCurrent3);
       const { current, ...left} = rest;
+      const isEmpty = Object.getOwnPropertyNames(left).length;
+      const anotherWorkspace = Object.keys(left);
+      setContextMenuWorkspaces(withoutCurrent3);
       return {
-        ...Object.getOwnPropertyNames(left).length ? left : initialState,
+        ...isEmpty ? rest : initialState,
+        current: isEmpty ? anotherWorkspace[0] : initialState.current
       };
 
       break;
