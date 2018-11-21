@@ -25,13 +25,14 @@ class GuestInstanceHandler extends Component {
   }
 
   eventHandlers = {
+
     onDomReady: ({ target, target: { dataset: { id } } }) => {
-      saveTabSnapshot();
+
+      // saveTabSnapshot();
       const currentSrc = target.dataset.oldsrc;
       const currentTitle = target.dataset.title;
       const src = target.getURL();
       const title = target.getTitle();
-
 
       if (currentSrc !== src) {
         this.props.updateTabMeta([
