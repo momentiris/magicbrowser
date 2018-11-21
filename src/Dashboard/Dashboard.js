@@ -70,7 +70,10 @@ class Dashboard extends Component {
     this.workspaceInput = React.createRef();
     this.onToggle = this.onToggle.bind(this);
     this.state = {
-      toggle: false,
+      toggle: {
+        active: false,
+        id: '',
+      },
       toggleRename: false,
       workspaceToggle: false,
       anim: true,
@@ -96,9 +99,13 @@ class Dashboard extends Component {
     };
   }
 
-  commonToggle = () => {
+  commonToggle = (i) => {
+    console.log(i);
     this.setState({
-      toggle: !this.state.toggle,
+      toggle: {
+        active: i === this.state.toggle.id ? !this.state.toggle.active : true,
+        id: i
+      }
     });
     console.log(this.state.toggle);
   }

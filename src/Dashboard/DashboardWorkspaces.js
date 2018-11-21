@@ -62,9 +62,9 @@ const DashboardWorkspaces = ({
             <RenameEditIcon />
             <p style={{position: 'absolute', marginLeft: '22px', top: '-5px', cursor: 'pointer'}}>Edit</p>
           </RenameEdit>
-          <DeleteWs onClick={commonToggle} >
+          <DeleteWs isTarget={currentWsUI === ws[0]} value={ws[0]} id={i} onClick={() => commonToggle(i)} >
             Delete
-            <DeleteWsConfirmBox isActive={toggle}>
+            <DeleteWsConfirmBox  isTarget={currentWsUI === ws[0]} value={ws[0]} isActive={toggle.active} id={i}>
               <DeleteWsParagraph>
                 Delete workspace?
               </DeleteWsParagraph>
