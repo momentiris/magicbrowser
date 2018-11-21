@@ -392,8 +392,11 @@ export const DeleteWsCancelButton = styled.button`
   } */
 `;
 
-export const DeleteWs = styled.button`
+export const DeleteWs = styled.div`
   position: absolute;
+  display: inline-grid;
+  align-items: center;
+  justify-content: center;
   background: ${props => props.theme.red};
   width: 52px;
   height: 24px;
