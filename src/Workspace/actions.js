@@ -13,7 +13,8 @@ import {
   UPDATE_CURRENT_TAB_QUERY,
   MOVE_TAB_TO_WORKSPACE,
   DRAG_DASHBOARD_SAVEDLINKS,
-  ADD_TO_SAVED_LINKS
+  ADD_TO_SAVED_LINKS,
+  UPDATE_CURRENT_WS_UI
 } from './types';
 
 
@@ -127,5 +128,12 @@ export const handleAddToSavedLinks = payload => {
   return {
     type: ADD_TO_SAVED_LINKS,
     payload: payload
+  };
+};
+
+export const handleCurrentWsUI = arg => {
+  return {
+    type: UPDATE_CURRENT_WS_UI,
+    payload: arg
   };
 };

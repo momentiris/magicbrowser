@@ -6,7 +6,8 @@ import {
   TOGGLE_URLBAR_FOCUS,
   OPEN_DASHBOARD,
   TOGGLE_DASHBOARD_OPEN_UI,
-  TOGGLE_SAVED_LINKS_OPEN
+  TOGGLE_SAVED_LINKS_OPEN,
+  UPDATE_CURRENT_WS_UI
 } from './types';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   toggleUrlBarFocus: false,
   dashboardOpen: false,
   savedLinksOpen: false,
+  currentWsUI: ''
 };
 
 export const userNavigationReducer = (state = initialState, { type, payload }) => {
