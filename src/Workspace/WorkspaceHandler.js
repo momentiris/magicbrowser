@@ -14,9 +14,6 @@ import {
 import { setContextMenuWorkspaces } from '../common/contextmenu';
 
 import { toggleSavedLinksOpen } from '../UserNavigation/actions';
-const electron = window.electron;
-const { ipcRenderer } = electron;
-const Menu = electron.remote.Menu;
 
 
 class WorkspaceHandler extends Component {
@@ -30,10 +27,8 @@ class WorkspaceHandler extends Component {
   }
 
   updateMainProcess = () => {
-
     const workspaces = this.props.workspaces.map(ws => ws[0]);
     setContextMenuWorkspaces(workspaces);
-
   }
 
   switchWorkspaces = async value => {

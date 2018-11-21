@@ -157,8 +157,13 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
     case DELETE_CURRENT_WORKSPACE:
       const target = [payload.id];
       const {[target[0]]: tmp, ...rest} = state;
+      const withoutCurrent3 = Object.keys(rest).filter(ws => ws !== 'current');
+      setContextMenuWorkspaces(withoutCurrent3);
+      const { current, ...left} = rest;
+      return {
+        ...Object.getOwnPropertyNames(left).length ? left : initialState,
+      };
 
-      return rest;
       break;
 
     case SWITCH_WORKSPACES:

@@ -204,7 +204,8 @@ class Dashboard extends Component {
   deleteWorkspace = id => {
     const target = [id];
     const withoutTarget = this.props.workspaces.filter((ws, i) => ws[0] !== id);
-    this.props.handleCurrentWsUI(withoutTarget[0][0]);
+
+    withoutTarget.length && this.props.handleCurrentWsUI(withoutTarget[0][0]);
     this.props.deleteWorkspace(id);
   }
 

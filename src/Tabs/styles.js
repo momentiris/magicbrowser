@@ -19,6 +19,7 @@ export const SingleTabContainer = styled.div`
   align-items: center;
   position: relative;
   border-radius: 5px 5px 0 0;
+  ${'' /* z-index: ${props => props.isActive ? 10 : 'auto'}; */}
   background: ${props => props.isActive ? props.theme.lightergrey : 'none'};
 
   ${props => !props.isActive && `
