@@ -19,6 +19,10 @@ import {
   TabLength,
   DeleteWs,
   RenameEditIcon,
+  DeleteWsConfirmBox,
+  DeleteWsOkeyButton,
+  DeleteWsCancelButton,
+  DeleteWsParagraph,
 } from './styles';
 
 const DashboardWorkspaces = ({
@@ -56,7 +60,18 @@ const DashboardWorkspaces = ({
             <RenameEditIcon />
             <p style={{position: 'absolute', marginLeft: '22px', top: '-5px', cursor: 'pointer'}}>Edit</p>
           </RenameEdit>
-          <DeleteWs isTarget={currentWsUI === ws[0]} id={i} onClick={() => deleteWorkspace(ws[0])} value={ws[0]}>Delete</DeleteWs>
+          <DeleteWs>
+            Delete
+            <DeleteWsConfirmBox>
+              <DeleteWsParagraph>
+                Delete workspace?
+              </DeleteWsParagraph>
+              <DeleteWsOkeyButton isTarget={currentWsUI === ws[0]} id={i} onClick={() => deleteWorkspace(ws[0])} value={ws[0]}>
+                Okey
+              </DeleteWsOkeyButton>
+              <DeleteWsCancelButton type='button'>Cancel</DeleteWsCancelButton>
+            </DeleteWsConfirmBox>
+          </DeleteWs>
           <AnimateEditForm isActive={editWorkspaceToggle} id={i}>
             <form onSubmit={(e) => renameWorkspace(e)} style={{height: '100%'}}>
               <NewWsHover isActive={workspaceToggle} color={ws[1].color}>
