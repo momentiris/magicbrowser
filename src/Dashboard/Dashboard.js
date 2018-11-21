@@ -9,8 +9,7 @@ import SavedLinks from './SavedLinks';
 import DashboardWorkspaces from './DashboardWorkspaces';
 import { HistoryIcon } from '../common/assets/icons.js';
 import History from './History/History';
-import './transition.css';
-import { CSSTransition } from 'react-transition-group';
+
 import {
   Container,
   Column,
@@ -94,7 +93,6 @@ class Dashboard extends Component {
         target: null
       },
       tabs: this.props.tabs,
-      currentWsUI: this.props.current
     };
   }
 
@@ -132,10 +130,8 @@ class Dashboard extends Component {
     });
   }
 
-  handleClick = ({ target: { value } }) => {
-    this.setState({
-      currentWsUI: value,
-    });
+  handleClick = async ({ target: { value } }) => {
+    await this.props.handleCurrentWsUI(value);
   }
 
   addWorkspace = e => {
@@ -149,7 +145,6 @@ class Dashboard extends Component {
   renameWorkspace = async (e, i) => {
     e.preventDefault();
     this.setState({
-      currentWsUI: this.state.editWorkspace.newName,
       editWorkspace: {
         newName: '',
         newColor: '',
@@ -209,14 +204,7 @@ class Dashboard extends Component {
   deleteWorkspace = id => {
     const target = [id];
     const withoutTarget = this.props.workspaces.filter((ws, i) => ws[0] !== id);
-    console.log(withoutTarget[0][0]);
-    this.setState({
-      currentWsUI: withoutTarget[0][0],
-      editWorkspaceToggle: {
-        active: true,
-        id: false
-      },
-    });
+    this.props.handleCurrentWsUI(withoutTarget[0][0]);
     this.props.deleteWorkspace(id);
   }
 
@@ -263,6 +251,7 @@ class Dashboard extends Component {
       animateshistory: !this.state.animateshistory,
     });
   }
+
   shouldCancelStart = (e) => {
     // Prevent sorting from being triggered if target is input or button
     if (['input', 'button'].indexOf(e.target.tagName.toLowerCase()) !== -1) {
@@ -271,7 +260,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { currentWsUI, toggleRename, editWorkspace, } = this.state;
+    const { toggleRename, editWorkspace, } = this.state;
     const {
       active,
       workspaces,
@@ -279,12 +268,12 @@ class Dashboard extends Component {
       workspacestemp,
       workspace,
       savedLinks,
-      current
+      current,
+      currentWsUI
     } = this.props;
 
-    const currentTabs = workspacestemp[currentWsUI].tabs;
-    const currentSavedLinks = workspacestemp[currentWsUI].savedLinks;
-    console.log(this.state.newWorkspace.color);
+    const currentTabs = workspacestemp[currentWsUI || current].tabs;
+    const currentSavedLinks = workspacestemp[currentWsUI || current].savedLinks;
 
     return (
       <Container>
@@ -317,8 +306,8 @@ class Dashboard extends Component {
 
           <Column>
             <DashboardWorkspaces
-              workspaces={workspaces}
               currentWsUI={currentWsUI}
+              workspaces={workspaces}
               handleClick={this.handleClick}
               renameWorkspace={this.renameWorkspace}
               editWorkspace={this.editWorkspace}

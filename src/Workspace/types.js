@@ -17,3 +17,4 @@ export const DRAG_DASHBOARD_SAVEDLINKS = 'savedLinks:dragDashBoardSavedLinks';
 export const OPEN_DASHBOARD = 'dashboard:openDashboard';
 export const MOVE_TAB_TO_WORKSPACE = 'workspaces:moveTabToWorkspace';
 export const ADD_TO_SAVED_LINKS = 'workspaces:addToSavedLinks';
+export const UPDATE_CURRENT_WS_UI = 'workspaces:updateCurrentWsUI';

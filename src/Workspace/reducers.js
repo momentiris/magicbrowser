@@ -15,7 +15,8 @@ import {
   DRAG_DASHBOARD_SAVEDLINKS,
   UPDATE_CURRENT_TAB_QUERY,
   MOVE_TAB_TO_WORKSPACE,
-  ADD_TO_SAVED_LINKS
+  ADD_TO_SAVED_LINKS,
+  UPDATE_CURRENT_WS_UI
 } from './types';
 
 import { setContextMenuWorkspaces } from '../common/contextmenu';
@@ -52,7 +53,8 @@ const initialState = {
     ],
     savedLinks: dummySavedLinks,
     active: 0,
-    color: '#949494'
+    color: '#949494',
+    currentWsUI: '',
   }
 };
 
@@ -74,7 +76,8 @@ const workspaceTemplate = {
   ],
   savedLinks: [],
   active: 0,
-  color: 'white'
+  color: 'white',
+  currentWsUI: '',
 };
 
 export const workspacesReducer = (state = initialState, { type, payload }) => {
@@ -129,8 +132,9 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
         newKey: payload.newName
       });
 
-      updatedWs[payload.newName].color = payload.newColor;
+      updatedWs[payload.newName].color = payload.newColor || updatedWs[payload.newName].color;
       updatedWs.current = updatedWs.current === payload.target ? payload.newName : updatedWs.current;
+      updatedWs[updatedWs.current].currentWsUI = payload.newName;
       const withoutCurrent2 = Object.keys(updatedWs).filter(ws => ws !== 'current');
       setContextMenuWorkspaces(withoutCurrent2);
       return updatedWs;
@@ -153,7 +157,7 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
     case DELETE_CURRENT_WORKSPACE:
       const target = [payload.id];
       const {[target[0]]: tmp, ...rest} = state;
-  
+
       return rest;
       break;
 
@@ -185,15 +189,35 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case REMOVE_SELECTED_TAB:
-      return Object.assign({}, state, {
+
+      const afterRemove = {
+        ...state,
         [state.current]: {
           ...state[state.current],
-          tabs: state[state.current].tabs
-            .filter((tab, i) => i !== payload.id),
-          active: 0,
           color: state[state.current].color
         }
-      });
+      };
+      const newTabs = afterRemove[afterRemove.current].tabs
+        .filter((tab, i) => i !== payload.id);
+
+      return {
+        ...afterRemove,
+        [afterRemove.current]: {
+          ...afterRemove[afterRemove.current],
+          tabs: newTabs,
+          active: newTabs.findIndex(tab => tab.src === 'dashboard') === afterRemove[afterRemove.current].active ? newTabs.findIndex(tab => tab.src === 'dashboard') : 0,
+
+        }
+      };
+      // return Object.assign({}, state, {
+      //   [state.current]: {
+      //     ...state[state.current],
+      //     tabs: newTabs,
+      //     active: newTabs.findIndex(tab => tab.src === 'dashboard') === state[state.current].active ? newTabs.findIndex(tab => tab.src === 'dashboard') : 0,
+      //     // active: 0,
+      //     color: state[state.current].color
+      //   }
+      // });
       break;
 
     case SET_TAB_ACTIVE:
@@ -276,6 +300,17 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
           tabs: temparr
         }
       };
+      break;
+
+    case UPDATE_CURRENT_WS_UI:
+      return {
+        ...state,
+        [state.current]: {
+          ...state[state.current],
+          currentWsUI: payload
+        }
+      };
+
       break;
 
     case DRAG_DASHBOARD_TAB:
