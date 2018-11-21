@@ -212,6 +212,10 @@ class Dashboard extends Component {
     console.log(withoutTarget[0][0]);
     this.setState({
       currentWsUI: withoutTarget[0][0],
+      editWorkspaceToggle: {
+        active: true,
+        id: false
+      },
     });
     this.props.deleteWorkspace(id);
   }

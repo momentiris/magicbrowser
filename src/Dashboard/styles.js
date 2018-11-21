@@ -314,7 +314,7 @@ export const RenameEdit = styled.button`
   opacity: 0;
   margin: 0 0 0 0;
   ${'' /* transition: all .2s cubic-bezier(0,.72,.5,.99); */}
-  transition: all .2s ease;
+  transition: all .2s ease .2s;
   cursor: pointer;
   :active {
     transform: scale(.90);
@@ -331,12 +331,74 @@ export const RenameEditIcon = styled.svg`
   cursor: pointer;
 `;
 
+export const DeleteWsConfirmBox = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 35px;
+  content: '';
+  display: block;
+  width: 145px;
+  height: 0;
+  opacity: 0;
+  padding: 0px 8px 8px 8px;
+  background: ${props => props.theme.white};
+  border-radius: ${props => props.theme.br};
+  transition: all .2s ease-in;
+`;
+
+export const DeleteWsParagraph = styled.p`
+  font-family: latoregular;
+  margin: 5px 0px 8px 3px;
+  text-align: left;
+  color: #222222;
+  text-shadow: none;
+`;
+
+export const DeleteWsOkeyButton = styled.button`
+  background: ${props => props.theme.bluepurple};
+  width: 60px;
+  height: 24px;
+  box-shadow: 0px 3px 3px rgba(200, 200, 200, 0.25);
+  outline: none;
+  border-radius: ${props => props.theme.br};
+  color: ${props => props.theme.white};
+  font-size: ${props => props.theme.small};;
+  border: none;
+  margin: 2px;
+  opacity: 0;
+  transition: all .1s ease;
+  cursor: pointer;
+  /* :hover {
+    background: ${props => props.theme.red};
+  } */
+`;
+
+export const DeleteWsCancelButton = styled.button`
+  background: ${props => props.theme.white};
+  width: 60px;
+  height: 24px;
+  box-shadow: 0px 3px 3px rgba(200, 200, 200, 0.25);
+  outline: none;
+  border-radius: ${props => props.theme.br};
+  color: ${props => props.theme.bluepurple};
+  font-size: ${props => props.theme.small};;
+  border: 1px solid ${props => props.theme.bluepurple};
+  margin: 2px;
+  opacity: 0;
+  transition: all .1s ease;
+  cursor: pointer;
+  /* :hover {
+    background: ${props => props.theme.red};
+  } */
+`;
+
 export const DeleteWs = styled.button`
   position: absolute;
   background: ${props => props.theme.red};
   width: 52px;
   height: 24px;
   box-shadow: 0px 3px 3px rgba(200, 200, 200, 0.25);
+  outline: none;
   border-radius: ${props => props.theme.br};
   transform: translateX(0px);
   color: ${props => props.theme.white};
@@ -345,8 +407,24 @@ export const DeleteWs = styled.button`
   text-shadow: 1px 1px 3px rgba(188, 56, 47, 0.2);
   opacity: 0;
   margin: 10px 0 0 0;
-  transition: all .2s ease-in .1s;
+  transition: all .2s ease-in .3s;
   cursor: pointer;
+  :hover {
+    background: ${props => props.theme.red};
+  }
+  :hover ${DeleteWsConfirmBox} {
+    opacity: 1;
+    height: 64px;
+  }
+  :hover ${DeleteWsOkeyButton} {
+    opacity: 1;
+  }
+  :hover ${DeleteWsCancelButton} {
+    opacity: 1;
+  }
+  :active {
+    background: ${props => props.theme.red};
+  }
 `;
 
 export const RightArrowNewWs = styled.svg`
@@ -388,11 +466,13 @@ export const Li = styled.li`
     transform: translateX(0px);
   }
   &:hover ${RenameEdit}{
-    margin: 5px 0 0 22px;
+    /* margin: 5px 0 0 22px; */
+    transform: translateX(18px);
     opacity: 1;
   }
   &:hover ${DeleteWs} {
-    margin: 10px 0 0 28px;
+    /* margin: 10px 0 0 28px; */
+    transform: translateX(43px);
     opacity: 1;
   }
 `;
