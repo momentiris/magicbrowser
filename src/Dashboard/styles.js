@@ -338,8 +338,8 @@ export const DeleteWsConfirmBox = styled.div`
   content: '';
   display: block;
   width: 145px;
-  height: 0;
-  opacity: 0;
+  height: ${props => props.isActive ? '64px' : '0px'};
+  opacity: ${props => props.isActive ? '1' : '0'};
   padding: 0px 8px 8px 8px;
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
@@ -365,7 +365,7 @@ export const DeleteWsOkeyButton = styled.button`
   font-size: ${props => props.theme.small};;
   border: none;
   margin: 2px;
-  opacity: 0;
+  opacity: ${props => props.isActive ? '1' : '0'};
   transition: all .1s ease;
   cursor: pointer;
   /* :hover {
@@ -384,7 +384,7 @@ export const DeleteWsCancelButton = styled.button`
   font-size: ${props => props.theme.small};;
   border: 1px solid ${props => props.theme.bluepurple};
   margin: 2px;
-  opacity: 0;
+  opacity: ${props => props.isActive ? '1' : '0'};
   transition: all .1s ease;
   cursor: pointer;
   /* :hover {
@@ -405,24 +405,11 @@ export const DeleteWs = styled.button`
   font-size: ${props => props.theme.small};;
   border: none;
   text-shadow: 1px 1px 3px rgba(188, 56, 47, 0.2);
-  opacity: 0;
+  opacity: ${props => props.isActive ? '1' : '0'};
   margin: 10px 0 0 0;
   transition: all .2s ease-in .3s;
   cursor: pointer;
   :hover {
-    background: ${props => props.theme.red};
-  }
-  :hover ${DeleteWsConfirmBox} {
-    opacity: 1;
-    height: 64px;
-  }
-  :hover ${DeleteWsOkeyButton} {
-    opacity: 1;
-  }
-  :hover ${DeleteWsCancelButton} {
-    opacity: 1;
-  }
-  :active {
     background: ${props => props.theme.red};
   }
 `;

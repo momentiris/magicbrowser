@@ -98,6 +98,13 @@ class Dashboard extends Component {
     };
   }
 
+  commonToggle = () => {
+    this.setState({
+      toggle: !this.state.toggle,
+    });
+    console.log(this.state.toggle);
+  }
+
   onToggle = async () => {
     await this.setState({ workspaceToggle: !this.state.workspaceToggle });
     this.state.workspaceToggle && this.setRandomSuggestedColor('newWorkspace');
@@ -332,6 +339,8 @@ class Dashboard extends Component {
               editWorkspaceValue={editWorkspace}
               animatesworkspace={this.state.animatesworkspace}
               deleteWorkspace={this.deleteWorkspace}
+              commonToggle={this.commonToggle}
+              toggle={this.state.toggle}
             />
             <AnimateTabs isActive={this.state.animatestabs}>
               <DashboardTabs
