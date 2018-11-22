@@ -364,6 +364,7 @@ export const DeleteWsOkeyButton = styled.button`
   border-radius: ${props => props.theme.br};
   color: ${props => props.theme.white};
   font-size: ${props => props.theme.small};;
+  display: ${props => props.isActive ? 'inline-block' : 'none'};
   border: none;
   margin: 2px;
   opacity: ${props => props.isActive ? '1' : '0'};
@@ -382,7 +383,8 @@ export const DeleteWsCancelButton = styled.button`
   outline: none;
   border-radius: ${props => props.theme.br};
   color: ${props => props.theme.bluepurple};
-  font-size: ${props => props.theme.small};;
+  font-size: ${props => props.theme.small};
+  display: ${props => props.isActive ? 'inline-block' : 'none'};
   border: 1px solid ${props => props.theme.bluepurple};
   margin: 2px;
   opacity: ${props => props.isActive ? '1' : '0'};
@@ -442,9 +444,9 @@ export const RightArrow = styled.svg`
 export const Li = styled.li`
   list-style: none;
   padding: 0px;
-  transition: all .2s ease;
-  height: ${props => props.ok ? '65px' : '30px'};
-  margin: 33px 0px 0px 0px;
+  /* transition: all .2s ease; */
+  /* height: ${props => props.disTarget ? '65px' : '30px'}; */
+  margin: 33px 0px 10px 0px;
   &:nth-child(1) {
     margin-top: 0px;
   }
