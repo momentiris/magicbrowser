@@ -10,24 +10,24 @@ let currentws;
 ipcMain.on('selectTab', (e, data) => {
   selectedTab = data.id;
   currentws = data.currentws;
-  const win_size = win.getSize();
-  const win_height = win_size[0];
-  const win_width = win_size[1];
-  setTimeout(() => {
-    let capturedPicFilePath = __dirname + '/tmptabimg';
-    console.log(win);
-    win.capturePage(
-      {
-        x: 200,
-        y: 80,
-        width: win_width,
-        height: win_height
-      },
-      (img) => {
-        fs.writeFile(capturedPicFilePath+'.png', img.toPNG(), () =>
-          console.log(`Saved ${capturedPicFilePath}`));
-      });
-  }, 500);
+  // const win_size = win.getSize();
+  // const win_height = win_size[0];
+  // const win_width = win_size[1];
+  // setTimeout(() => {
+  //   let capturedPicFilePath = __dirname + '/tmptabimg';
+  //
+  //   win.capturePage(
+  //     {
+  //       x: 200,
+  //       y: 80,
+  //       width: win_width,
+  //       height: win_height
+  //     },
+  //     (img) => {
+  //       fs.writeFile(capturedPicFilePath+'.png', img.toPNG(), () =>
+  //         console.log(`Saved ${capturedPicFilePath}`));
+  //     });
+  // }, 500);
 });
 
 const moveTabsToWorkspace = (ws) => {

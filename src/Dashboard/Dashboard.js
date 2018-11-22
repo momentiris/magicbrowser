@@ -100,14 +100,12 @@ class Dashboard extends Component {
   }
 
   commonToggle = (i) => {
-    console.log(i);
     this.setState({
       toggle: {
         active: i === this.state.toggle.id ? !this.state.toggle.active : true,
         id: i
       }
     });
-    console.log(this.state.toggle);
   }
 
   onToggle = async () => {
@@ -144,9 +142,12 @@ class Dashboard extends Component {
     });
   }
 
-  handleClick = async ({ target: { value } }) => {
+  handleClick = async value => {
     await this.props.handleCurrentWsUI(value);
   }
+  // handleClick = async ({ target: { value } }) => {
+  //   await this.props.handleCurrentWsUI(value);
+  // }
 
   addWorkspace = e => {
     e.preventDefault();
