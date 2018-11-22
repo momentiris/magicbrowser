@@ -47,8 +47,8 @@ const DashboardWorkspaces = ({
   <Ul name="workspaces" isActive={animatesworkspace}>
     {
       workspaces.map((ws, i) => (
-        <Li key={i} data-ws={i}>
-          <Button isTarget={currentWsUI === ws[0]}  data-ws={i} onMouseEnter={handleClick} value={ws[0]}>
+        <Li ok={toggle.active} key={i} disTarget={currentWsUI === ws[0]}  data-ws={i} onMouseEnter={handleClick} value={ws[0]}>
+          <Button >
             <Hover isTarget={currentWsUI === ws[0]} color={
               updateWorkspace.target === ws[0] &&
               updateWorkspace.newColor || ws[1].color || '#5C4EFF'}>

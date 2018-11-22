@@ -222,6 +222,7 @@ class Dashboard extends Component {
 
     withoutTarget.length && this.props.handleCurrentWsUI(withoutTarget[0][0]);
     this.props.deleteWorkspace(id);
+    this.setState({ toggle: false });
   }
 
   updateWsColor = (color) => {

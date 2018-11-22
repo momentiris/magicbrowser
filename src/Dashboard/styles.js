@@ -336,14 +336,15 @@ export const DeleteWsConfirmBox = styled.div`
   left: 0px;
   top: 35px;
   content: '';
-  display: block;
   width: 145px;
+  display: ${props => props.isActive ? 'inline-block' : 'none'};
   height: ${props => props.isActive ? '64px' : '0px'};
   opacity: ${props => props.isActive ? '1' : '0'};
   padding: 0px 8px 8px 8px;
   background: ${props => props.theme.white};
   border-radius: ${props => props.theme.br};
   transition: all .2s ease-in;
+
 `;
 
 export const DeleteWsParagraph = styled.p`
@@ -441,6 +442,8 @@ export const RightArrow = styled.svg`
 export const Li = styled.li`
   list-style: none;
   padding: 0px;
+  transition: all .2s ease;
+  height: ${props => props.ok ? '65px' : '30px'};
   margin: 33px 0px 0px 0px;
   &:nth-child(1) {
     margin-top: 0px;
