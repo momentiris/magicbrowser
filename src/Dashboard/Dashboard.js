@@ -142,12 +142,12 @@ class Dashboard extends Component {
     });
   }
 
-  handleClick = async value => {
-    await this.props.handleCurrentWsUI(value);
-  }
-  // handleClick = async ({ target: { value } }) => {
+  // handleClick = async value => {
   //   await this.props.handleCurrentWsUI(value);
   // }
+  handleClick = async ({ target: { value } }) => {
+    await this.props.handleCurrentWsUI(value);
+  }
 
   addWorkspace = e => {
     e.preventDefault();
