@@ -93,12 +93,10 @@ const mapActionsToProps = (dispatch, props) => {
     handleDragDashBoardTab: handleDragDashBoardTab,
     handleDashboardOpenUI: handleDashboardOpenUI,
     moveTabToWorkspace: moveTabToWorkspace,
-
   }, dispatch);
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-
   return Object.assign({}, ownProps, {
     tabs: stateProps.workspaces[stateProps.workspaces.current].tabs,
     active: stateProps.workspaces[stateProps.workspaces.current].active,
@@ -109,7 +107,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     handleDashboardOpenUI: arg => dispatchProps.handleDashboardOpenUI(arg),
     currentWorkspace: stateProps.workspaces.current,
     moveTabToWorkspace: arg => dispatchProps.moveTabToWorkspace(arg),
-
   });
 };
 

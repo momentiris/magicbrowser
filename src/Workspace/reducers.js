@@ -109,7 +109,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case RENAME_CURRENT_WORKSPACE:
-
       const clone = Object.assign({}, state);
       const renameObjKey = ({oldObj, oldKey, newKey}) => {
         const keys = Object.keys(oldObj);

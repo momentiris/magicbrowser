@@ -20,16 +20,13 @@ const allReducers = combineReducers({
   userNavigation
 });
 
-
 const persistedReducer = persistReducer(persistConfig, allReducers);
 
 const allStoreEnhancers = compose(
-  // applyMiddleware(thunk),
   applyMiddleware(thunk, logger),
   // applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export const store = createStore(persistedReducer, allStoreEnhancers);
-
 export const persistor = persistStore(store);

@@ -27,17 +27,17 @@ class App extends Component {
     return (
       <>
       <Router>
-        <>
-      <MainNavWrapPlaceholder/>
-      <MainNavWrap>
-        <TabHandler />
-        <UserNavigationHandler />
-      </MainNavWrap>
-      <div className="App">
+      <>
+        <MainNavWrapPlaceholder/>
+        <MainNavWrap>
+          <TabHandler />
+          <UserNavigationHandler />
+        </MainNavWrap>
+        <div className="App">
           <Route exact path="/" component={GuestInstanceHandler}/>
-      </div>
-    </>
-    </Router>
+        </div>
+      </>
+      </Router>
     </>
     );
   }

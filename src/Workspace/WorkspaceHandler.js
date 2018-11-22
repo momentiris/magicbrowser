@@ -32,7 +32,7 @@ class WorkspaceHandler extends Component {
   }
 
   switchWorkspaces = async value => {
-    await this.props.toggleSavedLinksOpen(false);
+    // await this.props.toggleSavedLinksOpen(false);
     this.props.switchWorkspaces(value);
   }
 
