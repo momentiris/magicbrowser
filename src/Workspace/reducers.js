@@ -268,7 +268,6 @@ export const workspacesReducer = (state = initialState, { type, payload }) => {
       break;
 
     case UPDATE_TAB_META:
-
       return {
         ...state,
         [state.current]: {
