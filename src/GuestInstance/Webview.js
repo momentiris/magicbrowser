@@ -29,6 +29,8 @@ class Webview extends Component {
     return (
       <WebviewContainer isActive={isActive}>
         <webview
+          allowpopups="true"
+          webpreferences="nativeWindowOpen=true"
           data-favicon={favicon}
           data-title={title}
           data-oldsrc={oldSource}
