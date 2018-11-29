@@ -49,6 +49,7 @@ class NavigationHandler extends Component {
 
     return (
       <UserNavigationContainer
+        
         handleAddToSavedLinks={handleAddToSavedLinks}
         handleUpdateCurrentTabQuery={handleUpdateCurrentTabQuery}
         currentWorkspace={currentWorkspace}

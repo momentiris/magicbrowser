@@ -10,6 +10,8 @@ import {
 import { AddTabIcon } from '../common/assets/icons';
 import '../Workspace/Components/sortableHelperStyles.css';
 
+
+
 class TabContainer extends Component {
 
   onSortEnd = async ({oldIndex, newIndex}, { target }) => {
